@@ -1,17 +1,12 @@
 /**
- * Main Class (Starts the service)
- *
- * @author chang794
- * @version 0.1
+ * Main class
  */
 public class Main {
     /**
-     * Main server loop/Runnable
      *
-     * @param args Commnand Line Arguments
+     * @param args
      */
     public static void main(String[] args) {
-        // Start Server
+        System.out.println("Hello World!");
     }
-
 }
