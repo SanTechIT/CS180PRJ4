@@ -2,6 +2,9 @@ import java.util.Scanner;
 
 /**
  * Main class
+ *
+ * @author chang794
+ * @version 0.1
  */
 public class Main {
     /**

@@ -17,9 +17,9 @@
 | ----------- | ----------- | ----------- | ----------- |
 | USER_LIST   | `public static List<User>` | Lists all users |  |
 | username    | `private String`  | None |  |
-| password    | `private String`  | NaN |  |
-| name        | `private String`  | -NaN | G |
-| id | `private int` | Id is same as index in list | G/S |
+| password    | `private String`  | NaN | |
+| name        | `private String`  | -NaN | G/S |
+| id | `private int` | Id is same as index in list | G |
 
 #### Constructors
 | Signature   | Parameters  | Description |
@@ -28,19 +28,43 @@
 ##### Methods
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ----------- | ----------- |
-| connect        | `public static void` | `(Scanner in)` |  Primary Loop Handler, if logged in, run loops defined in implemented subclasses |
+| connect        | `public static void` | `(Scanner in)` |  Loop Handler for login |
+| loop           | `public abstract void` | `(Scanner in)` | Primary Loop Handler |
 | createAccount  | `public static void` | `(Scanner in)` |  Creates Account and appends to account list, does not log user in |
-| modifyAccount  | `public static void` | `(Scanner in)` |  Modifies user account details, username should be unique |
+| modifyAccount  | `public static void` | `(Scanner in)` |  Modifies user account details, can only be done to self, username should be unique |
 | deleteAccount  | `public static void` | `(Scanner in)` |  Deletes the user account and sets its index in list to null |
-| canVote  | `public static boolean` | `()` |  Whether the user has permission to vote |
-| canGrade  | `public static boolean` | `()` |  Whether the user has permission to grade |
-| canPost  | `public static boolean` | `()` |  Whether the user has permission to make or reply to posts, and edit their own posts |
-| canModifyDiscussion | `public static boolean` | `()` |  Whether the user has permission to modify or delete Discussions |
-| canModifyPost | `public static boolean` | `()` | (EC) Whether the user has permission to modify or delete Posts made by others |
+| canVote  | `public abstract boolean` | `()` |  Whether the user has permission to vote |
+| canGrade  | `public abstract boolean` | `()` |  Whether the user has permission to grade |
+| canPost  | `public abstract boolean` | `()` |  Whether the user has permission to make or reply to posts, and edit their own posts |
+| canCreateCourse |`public abstract boolean` | `()` | Whether the user can create and modify courses |
+| canModifyDiscussion | `public abstract boolean` | `()` |  Whether the user has permission to modify or delete Discussions |
+| canModifyPost | `public abstract boolean` | `()` | (EC) Whether the user has permission to modify or delete Posts made by others |
+| isAdmin | `public abstract boolean` | `()` | For debugging purposes, overrides all permissions | 
 
 
-## Teacher Class (extends teacher)
-## Student Class (extends student)
+## Teacher Class (extends `User`)
+
+#### Constructors
+| Signature   | Parameters  | Description |
+| ----------- | ----------- | ----------- |
+| `public` | `(String username, String password, String name)` | Auto sets id to next id in list |
+
+#### Methods
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ----------- | ----------- |
+| loop | `public void` | `(Scanner in)` |  Primary Loop Handler |
+## Student Class (extends `User`)
+
+#### Constructors
+| Signature   | Parameters  | Description |
+| ----------- | ----------- | ----------- |
+| `public` | `(String username, String password, String name)` | Auto sets id to next id in list |
+
+#### Methods
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ----------- | ----------- |
+| loop | `public void` | `(Scanner in)` |  Primary Loop Handler |
+
 - get / store all student posts
 - view scores
 ## Course Class (Serializable)
@@ -49,10 +73,17 @@
 | ----------- | ----------- | ----------- |
 | ALL_COURSES    | `public static List<Course>` | Lists all courses |
 | id | `private int` | Id is same as index in list | G/S |
+| topic | `private String` | Course name, can only be changed by a `Teacher` | G/S |
 | creator | `private int` | Keeps track of the UID of who created this `Course` | G |
 
+#### Constructors
+| Signature   | Parameters  | Description |
+| ----------- | ----------- | ----------- |
+| `public` | `(String topic, User creator)` | Auto sets id to next id in list |
 
-### Course Discussion Class (Serializable)
+#### Methods
+
+### Discussion Class (Serializable)
 ##### Fields
 | Field      | Signature   | Description | Getter/Setter |
 | ----------- | ----------- | ----------- | ----------- |
@@ -64,6 +95,12 @@
 | timestamp | `private Date` | Keeps track of when the `Discussion` was created | G/S |
 | creator | `private int` | Keeps track of the UID of who created this `Discussion` | G |
 
+#### Constructors
+| Signature   | Parameters  | Description |
+| ----------- | ----------- | ----------- |
+| `public` | `(String topic, User creator)` | Auto sets id to next id in list |
+
+#### Methods
 - Get most popular posts
 
 ### Post Class (Serializable)
@@ -76,14 +113,22 @@ Note: posts can be under both discussions and other posts
 | posts | `private List<Post>` | List of all posts related to this `Post` | G |
 | timestamp | `private Date` | Keeps track of when the `Post` was created | G/S |
 | creator | `private int` | Keeps track of the UID of who created this `Post` | G |
+| content | `private String` | Keeps track of the contents in this `Post`, can be changed only by `creator` (EC or a `Teacher`) | G/S |
 | grade | `private int` | Keeps track of the grade of this post `Post`, Only shown if `User` is creator of `Post` or is a `Teacher` | G |
 | maxGrade | `private int` | Keeps track of the max grade of this `Post`, Only shown if `User` is creator of `Post` or is a `Teacher`  | G |
 | upvotes | `private List<Integer>` | Keeps track of all `Student` UIDs who have up-voted this post | G |
 | downvotes | `private List<Integer>` | OPTIONAL BUT COOL? | G |
 
+#### Constructors
+| Signature   | Parameters  | Description |
+| ----------- | ----------- | ----------- |
+| `public` | `(String reply, User creator)` | Auto sets id to next id in list |
+
+#### Methods
+
 ## Console Example
 ___
-Main Loop:
+### Main Loop:
 
 Welcome to [Name]! <br>
 Please type an option: <br>
@@ -94,14 +139,40 @@ exit
 Example input:<br>
 [login]
 ___
-Student Loop:
+### Student Loop:
 
 Welcome [Name]!  <br>
 Please choose a course to view:  <br>
 [1] [Course Name] <br>
 [2] [Course Name] <br>
 [3] [Course Name] <br>
-[4] [Course Name]
+[4] [Course Name] <br>
+exit
 
-Example input:<br>
-[course 3]
+Example input: <br>
+[course 3] <br>
+[exit]
+
+Welcome to [Course Name]! <br>
+Please choose a Discussion to view: <br>
+[1] [Discussion Name] <br>
+[22] [Discussion Name] <br>
+[25] [Discussion Name] <br>
+exit
+
+Example input: <br>
+[discussion 22] <br>
+[exit]
+
+[Discussion Topic] <br>
+[12] [Post Content] <br>
+[33] [Post Content] <br>
+[98] [Post Content] <br>
+[113] [Post Content] <br>
+exit
+
+Example input: <br>
+[reply 33] <br>
+[upvote 98] <br>
+[edit 12] <br>
+[exit]
