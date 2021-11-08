@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9b9f95ac-e8f1-4372-92f6-4618fd450a5a" name="Default Changelist" comment="Updated README with basics specs (in progress)">
-      <change afterPath="$PROJECT_DIR$/src/Student.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Teacher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+    <list default="true" id="9b9f95ac-e8f1-4372-92f6-4618fd450a5a" name="Default Changelist" comment="Updated README with more specs (in progress),&#10;Made basic framework">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +81,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636137011128</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Updated README with more specs (in progress),&#10;Made basic framework">
+      <created>1636144069197</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1636144069197</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -105,6 +107,7 @@
     <MESSAGE value="Brian Kwon" />
     <MESSAGE value="Deleted Test Class" />
     <MESSAGE value="Updated README with basics specs (in progress)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated README with basics specs (in progress)" />
+    <MESSAGE value="Updated README with more specs (in progress),&#10;Made basic framework" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated README with more specs (in progress),&#10;Made basic framework" />
   </component>
 </project>
