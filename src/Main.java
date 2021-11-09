@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -14,8 +15,10 @@ public class Main {
         System.out.println("Hello World!");
         Scanner scanner = new Scanner(System.in);
         // Load Course List if exits
+        Course.COURSE_LIST = new ArrayList<>();
         // make new Course object, set static vars
         // Load User List if exits
+        User.USER_LIST = new ArrayList<>();
         // make new User object, set static vars
         String input = scanner.nextLine();
         do {

@@ -30,13 +30,15 @@
 | ----------- | ----------- | ----------- | ----------- |
 | connect        | `public static void` | `(Scanner in)` |  Loop Handler for login |
 | loop           | `public abstract void` | `(Scanner in)` | Primary Loop Handler |
+| FIXME | FIXME | FIXME | FIXME |
 | createAccount  | `public static void` | `(Scanner in)` |  Creates Account and appends to account list, does not log user in |
-| modifyAccount  | `public static void` | `(Scanner in)` |  Modifies user account details, can only be done to self, username should be unique |
-| deleteAccount  | `public static void` | `(Scanner in)` |  Deletes the user account and sets its index in list to null |
+| modifyAccount  | `public void` | `(Scanner in)` |  Modifies user account details, can only be done to self, username should be unique |
+| deleteAccount  | `public void` | `(Scanner in)` |  Deletes the user account and sets its index in list to null |
 | canVote  | `public abstract boolean` | `()` |  Whether the user has permission to vote |
 | canGrade  | `public abstract boolean` | `()` |  Whether the user has permission to grade |
 | canPost  | `public abstract boolean` | `()` |  Whether the user has permission to make or reply to posts, and edit their own posts |
-| canCreateCourse |`public abstract boolean` | `()` | Whether the user can create and modify courses |
+| canCreateCourse |`public abstract boolean` | `()` | Whether the user can create courses |
+| canModifyCourse |`public abstract boolean` | `()` | Whether the user can modify courses |
 | canModifyDiscussion | `public abstract boolean` | `()` |  Whether the user has permission to modify or delete Discussions |
 | canModifyPost | `public abstract boolean` | `()` | (EC) Whether the user has permission to modify or delete Posts made by others |
 | isAdmin | `public abstract boolean` | `()` | For debugging purposes, overrides all permissions | 
@@ -71,7 +73,8 @@
 ##### Fields
 | Field      | Signature   | Description |
 | ----------- | ----------- | ----------- |
-| ALL_COURSES    | `public static List<Course>` | Lists all courses |
+| COURSE_LIST    | `public static List<Course>` | Lists all courses |
+| discussions | `private List<Discussions` | List of all `Discussion`s of `Course`|
 | id | `private int` | Id is same as index in list | G/S |
 | topic | `private String` | Course name, can only be changed by a `Teacher` | G/S |
 | creator | `private int` | Keeps track of the UID of who created this `Course` | G |
@@ -79,9 +82,12 @@
 #### Constructors
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
-| `public` | `(String topic, User creator)` | Auto sets id to next id in list |
+| `private` | `(String topic, User creator)` | Auto sets id to next id in list |
 
 #### Methods
+| Signature   | Parameters  | Description |
+| ----------- | ----------- | ----------- |
+| `public static Course` | `(String topic, User creator)` | Creates a new course, appends to list, and returns |
 
 ### Discussion Class (Serializable)
 ##### Fields
@@ -92,6 +98,7 @@
 | id | `private int` | Id is same as index in list | G |
 | topic | `private String` | Discussion Topic | G/S |
 | posts | `private List<Post>` | List of all posts related to this `Discussion` | G |
+| course | `private Course` | Parent Course | G |
 | timestamp | `private Date` | Keeps track of when the `Discussion` was created | G/S |
 | creator | `private int` | Keeps track of the UID of who created this `Discussion` | G |
 

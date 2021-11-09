@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,7 +8,7 @@ import java.util.Scanner;
  * @author [author], chang794
  * @version 0.1
  */
-public abstract class User {
+public abstract class User implements Serializable {
     public static List<User> USER_LIST;
 
     public static void connect(Scanner in) {
