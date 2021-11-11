@@ -1,4 +1,5 @@
 # [Name] Design specifications
+
 ## Notes
 - When shutting down, serialize the User List, Course List
 - Connect method in user handles all loop logic (better architecture)
@@ -11,12 +12,13 @@
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ----------- | ----------- |
 | main        | public static void | String[] args | Main Method |
+
 ## User Class (abstract) (Serializable)
 ##### Fields
 | Field      | Signature   | Description | Getter/Setter |
 | ----------- | ----------- | ----------- | ----------- |
 | USER_LIST   | `public static List<User>` | Lists all users |  |
-| username    | `private String`  | None |  |
+| username    | `private String`  | None | G  |
 | password    | `private String`  | NaN | |
 | name        | `private String`  | -NaN | G/S |
 | id | `private int` | Id is same as index in list | G |
@@ -25,6 +27,7 @@
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `public` | `(String username, String password, String name)` |  |
+
 ##### Methods
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ----------- | ----------- |
@@ -42,8 +45,6 @@
 | canModifyDiscussion | `public abstract boolean` | `()` |  Whether the user has permission to modify or delete Discussions |
 | canModifyPost | `public abstract boolean` | `()` | (EC) Whether the user has permission to modify or delete Posts made by others |
 | isAdmin | `public abstract boolean` | `()` | For debugging purposes, overrides all permissions |
-| getUsername | `public String` | `()` | Gets username since it's a private field |
-| getName   | `public String`  | `()` | Gets name since it's a private field  |
 
 ## Teacher Class (extends `User`)
 
@@ -74,6 +75,7 @@
 
 - get / store all student posts
 - view scores
+
 ## Course Class (Serializable)
 ##### Fields
 | Field      | Signature   | Description |
@@ -93,7 +95,9 @@
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `public static Course` | `(String topic, User creator)` | Creates a new course, appends to list, and returns |
-| `public static String displayCourses` | `()`  |  Displays list of all courses with id + course name (see Console Example) |
+| `public static String getCourseListString` | `()`  |  Returns list of all courses with id + course name (see Console Example) |
+|  `public static Course searchCourses` | `(int id)` | Search COURSE_LIST for course with that id, returns null if not found |
+|  `public String getDiscussionListString` | `()` | Returns list of all discussions with id + discussion topic (see Console Example) |
 
 ### Discussion Class (Serializable)
 ##### Fields
@@ -176,7 +180,7 @@ Example input: <br>
 [exit]
 
 Welcome to [Course Name]! <br>
-Please choose a Discussion to view: <br>
+Please choose a discussion to view: <br>
 [1] [Discussion Name] <br>
 [22] [Discussion Name] <br>
 [25] [Discussion Name] <br>
@@ -225,7 +229,7 @@ Example input: <br>
 [exit]
 
 Welcome to [Course Name]! <br>
-Please choose a Discussion to view: <br>
+Please choose a discussion to view: <br>
 [1] [Discussion Name] <br>
 [22] [Discussion Name] <br>
 [25] [Discussion Name] <br>
@@ -387,4 +391,35 @@ back <br>
 change username <br>
 change name <br>
 change password <br>
+exit
+
+#### Example 5 (delete account)
+
+Welcome [Name]! <br>
+Please choose a course to view: <br>
+[1] [Course Name] <br>
+[2] [Course Name] <br>
+[3] [Course Name] <br>
+[4] [Course Name] <br>
+Or, please type an option: <br>
+edit account <br>
+delete account <br>
+create course <br>
+view student <br>
+exit
+
+Example input: <br>
+[delete account]
+
+Delete Account - [Username]:
+Deleted accounts can't be recovered. Are you sure you want to do this? Type yes to confirm.
+
+Example input: <br>
+[yes]
+
+Your account has been deleted.
+Welcome to [Name]! <br>
+Please type an option: <br>
+login <br>
+create account <br>
 exit
