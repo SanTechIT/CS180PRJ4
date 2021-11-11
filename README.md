@@ -42,7 +42,8 @@
 | canModifyDiscussion | `public abstract boolean` | `()` |  Whether the user has permission to modify or delete Discussions |
 | canModifyPost | `public abstract boolean` | `()` | (EC) Whether the user has permission to modify or delete Posts made by others |
 | isAdmin | `public abstract boolean` | `()` | For debugging purposes, overrides all permissions |
-
+| getUsername | `public String` | `()` | Gets username since it's a private field |
+| getName   | `public String`  | `()` | Gets name since it's a private field  |
 
 ## Teacher Class (extends `User`)
 
@@ -55,6 +56,10 @@
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ----------- | ----------- |
 | loop | `public void` | `(Scanner in)` |  Primary Loop Handler |
+
+* methods inherited from User - the canVote, etc. have been implemented
+* private utility methods exist, have not been implemented yet - will be handled internally so shouldn't be a concern
+
 ## Student Class (extends `User`)
 
 #### Constructors
@@ -66,11 +71,9 @@
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ----------- | ----------- |
 | loop | `public void` | `(Scanner in)` |  Primary Loop Handler |
-|
 
 - get / store all student posts
 - view scores
-
 ## Course Class (Serializable)
 ##### Fields
 | Field      | Signature   | Description |
@@ -90,6 +93,7 @@
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `public static Course` | `(String topic, User creator)` | Creates a new course, appends to list, and returns |
+| `public static String displayCourses` | `()`  |  Displays list of all courses with id + course name (see Console Example) |
 
 ### Discussion Class (Serializable)
 ##### Fields
@@ -201,7 +205,7 @@ ___
 
 * The menus for the teacher loop include a "back" option.
 
-##### Example 1
+##### Example 1 (contains general commands)
 
 Welcome [Name]! <br>
 Please choose a course to view: <br>
@@ -249,7 +253,7 @@ Example input: <br>
 [grade 98] <br>
 [exit]
 
-##### Example 2
+##### Example 2 (view student dashboard & grade posts)
 
 Welcome [Name]! <br>
 Please choose a course to view: <br>
@@ -258,9 +262,9 @@ Please choose a course to view: <br>
 [3] [Course Name] <br>
 [4] [Course Name] <br>
 Or, please type an option: <br>
-back <br>
+edit account <br>
+delete account <br>
 create course <br>
-delete course <br>
 view student <br>
 exit
 
@@ -289,4 +293,98 @@ Example input: <br>
 [edit 23] <br>
 [delete 42] <br>
 [grade 35] <br>
+exit
+
+#### Example 3 (incorrect input and exiting program)
+
+Welcome [Name]! <br>
+Please choose a course to view: <br>
+[1] [Course Name] <br>
+[2] [Course Name] <br>
+[3] [Course Name] <br>
+[4] [Course Name] <br>
+Or, please type an option: <br>
+edit account <br>
+delete account <br>
+create course <br>
+view student <br>
+exit
+
+Example input: <br>
+[aklsdjflkdsanhfcl]
+
+Input Error: <br>
+Sorry, I couldn't understand what you typed. Please try again!
+
+Example input: <br>
+[exit]
+
+Exit: <br>
+Logging out... <br>
+Thank you for using our program. Goodbye! <br>
+
+#### Example 4 (edit username)
+
+Welcome [Name]! <br>
+Please choose a course to view: <br>
+[1] [Course Name] <br>
+[2] [Course Name] <br>
+[3] [Course Name] <br>
+[4] [Course Name] <br>
+Or, please type an option: <br>
+edit account <br>
+delete account <br>
+create course <br>
+view student <br>
+exit
+
+Example input: <br>
+[edit account]
+
+Editing Your Account - [Username]: <br>
+Please type an option: <br>
+back <br>
+change username <br>
+change name <br>
+change password <br>
+exit
+
+Example input: <br>
+[change username]
+
+Editing Your Account - [Username]: <br>
+Current username: [current username] <br>
+What would you like your new username to be? It can't be an already existing username.
+
+Example input: <br>
+[username that exists]
+
+Sorry! You can't use that username. <br>
+Editing Your Account - [Username]: <br>
+Please type an option: <br>
+back <br>
+change username <br>
+change name <br>
+change password <br>
+exit
+
+---
+
+Example input: <br>
+[change username]
+
+Editing Your Account - [Username]: <br>
+Current username: [current username] <br>
+What would you like your new username to be? It can't be an already existing username.
+
+Example input: <br>
+[username that DOESN'T already exist]
+
+Congratulations! You have changed your username. <br>
+Editing Your Account - [Username]: <br>
+Please type an option: <br>
+back <br>
+change username <br>
+change name <br>
+change password <br>
 exit
