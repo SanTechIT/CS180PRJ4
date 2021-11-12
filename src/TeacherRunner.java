@@ -231,7 +231,7 @@ public class TeacherRunner {
                     currentDiscussion = null;
                     break;
 
-                case "exit:
+                case "exit":
                     currentDiscussion = null;
                     currentCourse = null;
                     exitProgram = true;
@@ -339,7 +339,7 @@ public class TeacherRunner {
     private void displayBadInput() {
         System.out.println("Input Error:" +
             "\nSorry, I couldn't understand what you typed. Please try again!" +
-            "\n-");
+            "\n-----");
     }
 
     /**

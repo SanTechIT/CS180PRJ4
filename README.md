@@ -317,6 +317,7 @@ exit
 
 #### Example 3 (incorrect input and exiting program)
 
+```
 Welcome [Name]! <br>
 Please choose a course to view: <br>
 [1] [Course Name] <br>
@@ -335,7 +336,7 @@ Example input: <br>
 
 Input Error: <br>
 Sorry, I couldn't understand what you typed. Please try again!
--
+-----
 Welcome [Name]! <br>
 Please choose a course to view: <br>
 [1] [Course Name] <br>
@@ -355,6 +356,7 @@ Example input: <br>
 Exit: <br>
 Logging out... <br>
 Thank you for using our program. Goodbye! <br>
+```
 
 #### Example 4 (edit username)
 
