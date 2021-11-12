@@ -98,8 +98,8 @@
 | ----------- | ----------- | ----------- |
 | `public static Course` | `(String topic, User creator)` | Creates a new course, appends to list, and returns |
 | `public static String getCoursesString` | `()`  |  Returns list of all courses with id + course name (see Console Example) |
-|  `public static Course searchCourses` | `(int id)` | Search COURSE_LIST for course with that id, return null if not found |
-|  `public String getDiscussionsString` | `()` | Returns list of all discussions with id + discussion topic (see Console Example) |
+| `public static Course searchCourses` | `(int id)` | Search COURSE_LIST for course with that id, return null if not found |
+| `public String getDiscussionsString` | `()` | Returns list of all discussions with id + discussion topic (see Console Example) |
 | `public String searchDiscussions`  | `(int id)`  | Search `discussions` for discussion with that id, return null if not found   |
 
 ### Discussion Class (Serializable)
@@ -167,58 +167,66 @@ Note: posts can be under both discussions and other posts
 
 ## Console Example
 
-* If you're viewing this in plaintext, the <br> is for markdown formatting (line breaks) and shouldn't appear in anything.
+* *To write a new example, put 3 backticks at the start and end to make it a code block - otherwise Markdown formatting makes it weird*
 
 Suggestions:
 * Users need to be able to "create, edit, and delete" their own accounts, so those should be menu options.
 * Update the Student Loop to include stuff from the Teacher Loop (eg. additional commands and options)
 
+* When viewing posts: posts should show timestamp, user who posted it, number of upvotes, number of downvotes (or a combined vote number that's upvotes - downvotes), the grade (grade may only be visible to teacher/poster) - then contents of post
+
 ___
 ### Main Loop:
 
-Welcome to [Name]! <br>
-Please type an option: <br>
-login <br>
-create account <br>
+```
+Welcome to [Name]!
+Please type an option:
+login
+create account
 exit
 
 Example input:<br>
 [login]
+```
+
 ___
+
 ### Student Loop:
 
-Welcome [Name]!  <br>
-Please choose a course to view:  <br>
-[1] [Course Name] <br>
-[2] [Course Name] <br>
-[3] [Course Name] <br>
-[4] [Course Name] <br>
+```
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
 
-Example input: <br>
+Example input:
 [course 3]
 
-Welcome to [Course Name]! <br>
-Please choose a discussion to view: <br>
-[1] [Discussion Name] <br>
-[22] [Discussion Name] <br>
-[25] [Discussion Name] <br>
+Welcome to [Course Name]!
+Please choose a discussion to view:
+[1] [Discussion Name]
+[22] [Discussion Name]
+[25] [Discussion Name]
 
-Example input: <br>
+Example input:
 [discussion 22]
 
-[Discussion Topic] <br>
+[Discussion Topic]
 Commands: reply [num], edit [num], delete [num], grade [num], exit
 Replace [num] with the number of the post you want to interact with!
-[12] [Post Content] <br>
-[33] [Post Content] <br>
-[98] [Post Content] <br>
-[113] [Post Content] <br>
+[12] [Post Content]
+[33] [Post Content]
+[98] [Post Content]
+[113] [Post Content]
 
-Example input: <br>
-[reply 33] <br>
-[upvote 98] <br>
-[edit 12] <br>
+Example input:
+[reply 33]
+[upvote 98]
+[edit 12]
 [exit]
+```
 
 ___
 
@@ -228,229 +236,357 @@ ___
 
 ##### Example 1 (contains general commands)
 
-Welcome [Name]! <br>
-Please choose a course to view: <br>
-[1] [Course Name] <br>
-[2] [Course Name] <br>
-[3] [Course Name] <br>
-[4] [Course Name] <br>
-Or, please type an option: <br>
-edit account <br>
-delete account <br>
-create course <br>
-view student <br>
+```
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
 exit
 
-Example input: <br>
+Example input:
 [course 3]
 
-Welcome to [Course Name]! <br>
-Please choose a discussion to view: <br>
-[1] [Discussion Name] <br>
-[22] [Discussion Name] <br>
-[25] [Discussion Name] <br>
-Or, please type an option: <br>
-back <br>
-create forum <br>
-delete forum <br>
+Welcome to [Course Name]!
+Please choose a discussion to view:
+[1] [Discussion Name]
+[22] [Discussion Name]
+[25] [Discussion Name]
+Or, please type an option:
+back
+create forum
+delete forum
 exit
 
-Example input: <br>
+Example input:
 [discussion 22]
 
-[Discussion Topic] <br>
+[Discussion Topic]
 Commands: back, reply [num], edit [num], delete [num], grade [num], exit
 Replace [num] with the number of the post you want to interact with!
-[12] [Post Content] <br>
-[33] [Post Content] <br>
-[98] [Post Content] <br>
-[113] [Post Content] <br>
+[12] [Post Content]
+[33] [Post Content]
+[98] [Post Content]
+[113] [Post Content]
 
-Example input: <br>
-[reply 33] <br>
-[edit 12] <br>
-[delete 12] <br>
-[grade 98] <br>
+Example input:
+[reply 33]
+
+Reply to post 33:
+What should be the content in the new reply post?
+
+Example input:
+[contents of post]
+
+New post [114] (reply to [33]) has been created!
+-----
+[Discussion Topic]
+Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Replace [num] with the number of the post you want to interact with!
+[12] [Post Content]
+[33] [Post Content]
+[98] [Post Content]
+[113] [Post Content]
+[114] (reply to 33) [Post Content]
+
+Example input:
+[edit 12]
+
+Edit post 12:
+What should be the new content in post 12?
+
+Example input:
+[contents of post]
+
+Post [12] has been edited!
+-----
+[Discussion Topic]
+Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Replace [num] with the number of the post you want to interact with!
+[12] [Post Content]
+[33] [Post Content]
+[98] [Post Content]
+[113] [Post Content]
+[114] (reply to 33) [Post Content]
+
+Example input:
+[delete 12]
+
+Delete post 12:
+Deleted posts can't be recovered. Are you sure you want to do this? Type yes to confirm.
+
+Example input:
+[yes]
+
+Post 12 has been deleted.
+-----
+[Discussion Topic]
+Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Replace [num] with the number of the post you want to interact with!
+[33] [Post Content]
+[98] [Post Content]
+[113] [Post Content]
+[114] (reply to 33) [Post Content]
+
+Example input:
+[grade 98]
+
+Grade post 98:
+The minimum grade is 0, and the maximum grade is [max grade].
+Enter the grade to assign to post 98:
+
+Example input:
+[66]
+
+Post 98 has been assigned the grade: 66/[max grade].
+-----
+[Discussion Topic]
+Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Replace [num] with the number of the post you want to interact with!
+[33] [Post Content]
+[98] (grade: 66/[max grade]) [Post Content]
+[113] [Post Content]
+[114] (reply to 33) [Post Content]
+
+
 [exit]
+```
 
 ##### Example 2 (view student dashboard & grade posts)
 
-Welcome [Name]! <br>
-Please choose a course to view: <br>
-[1] [Course Name] <br>
-[2] [Course Name] <br>
-[3] [Course Name] <br>
-[4] [Course Name] <br>
-Or, please type an option: <br>
-edit account <br>
-delete account <br>
-create course <br>
-view student <br>
+```
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
 exit
 
-Example input: <br>
+Example input:
 [view student]
 
-View Student: <br>
-This shows all of a student's posts and lets you grade them. <br>
-Enter the name or ID of the student to view: <br>
-Or, please type an option: <br>
-back <br>
+View Student:
+This shows all of a student's posts and lets you grade them.
+Enter the name or ID of the student to view:
+Or, please type an option:
+back
 exit
 
-Example input: <br>
+Example input:
 [a valid student id]
 
-[Student Name]'s Posts <br>
+[Student Name]'s Posts
 Commands: back, reply [num], edit [num], delete [num], grade [num], exit
 Replace [num] with the number of the post you want to interact with!
-[23] [Post Content] <br>
-[35] [Post Content] <br>
-[42] [Post Content] <br>
+[23] [Post Content]
+[35] [Post Content]
+[42] [Post Content]
 exit
 
-Example input: <br>
-[edit 23] <br>
-[delete 42] <br>
-[grade 35] <br>
+Example input:
+[edit 23]
+[delete 42]
+[grade 35]
 exit
+```
 
 #### Example 3 (incorrect input and exiting program)
 
 ```
-Welcome [Name]! <br>
-Please choose a course to view: <br>
-[1] [Course Name] <br>
-[2] [Course Name] <br>
-[3] [Course Name] <br>
-[4] [Course Name] <br>
-Or, please type an option: <br>
-edit account <br>
-delete account <br>
-create course <br>
-view student <br>
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
 exit
 
-Example input: <br>
+Example input:
 [aklsdjflkdsanhfcl]
 
-Input Error: <br>
+Input Error:
 Sorry, I couldn't understand what you typed. Please try again!
 -----
-Welcome [Name]! <br>
-Please choose a course to view: <br>
-[1] [Course Name] <br>
-[2] [Course Name] <br>
-[3] [Course Name] <br>
-[4] [Course Name] <br>
-Or, please type an option: <br>
-edit account <br>
-delete account <br>
-create course <br>
-view student <br>
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
 exit
 
-Example input: <br>
+Example input:
 [exit]
 
-Exit: <br>
-Logging out... <br>
-Thank you for using our program. Goodbye! <br>
+Exit:
+Logging out...
+Thank you for using our program. Goodbye!
 ```
 
 #### Example 4 (edit username)
 
-Welcome [Name]! <br>
-Please choose a course to view: <br>
-[1] [Course Name] <br>
-[2] [Course Name] <br>
-[3] [Course Name] <br>
-[4] [Course Name] <br>
-Or, please type an option: <br>
-edit account <br>
-delete account <br>
-create course <br>
-view student <br>
+```
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
 exit
 
-Example input: <br>
+Example input:
 [edit account]
 
-Editing Your Account - [Username]: <br>
-Please type an option: <br>
-back <br>
-change username <br>
-change name <br>
-change password <br>
+Editing Your Account - [Username]:
+Please type an option:
+back
+change username
+change name
+change password
 exit
 
-Example input: <br>
+Example input:
 [change username]
 
-Editing Your Account - [Username]: <br>
-Current username: [current username] <br>
+Editing Your Account - [Username]:
+Current username: [current username]
 What would you like your new username to be? It can't be an already existing username.
 
-Example input: <br>
+Example input:
 [username that exists]
 
-Sorry! You can't use that username. <br>
-Editing Your Account - [Username]: <br>
-Please type an option: <br>
-back <br>
-change username <br>
-change name <br>
-change password <br>
+Sorry! You can't use that username.
+Editing Your Account - [Username]:
+Please type an option:
+back
+change username
+change name
+change password
 exit
+```
 
 ---
 
-Example input: <br>
+```
+Example input:
 [change username]
 
-Editing Your Account - [Username]: <br>
-Current username: [current username] <br>
+Editing Your Account - [Username]:
+Current username: [current username]
 What would you like your new username to be? It can't be an already existing username.
 
-Example input: <br>
+Example input:
 [username that DOESN'T already exist]
 
-Congratulations! You have changed your username. <br>
-Editing Your Account - [Username]: <br>
-Please type an option: <br>
-back <br>
-change username <br>
-change name <br>
-change password <br>
+Congratulations! You have changed your username.
+Editing Your Account - [Username]:
+Please type an option:
+back
+change username
+change name
+change password
 exit
+```
 
 #### Example 5 (delete account)
 
-Welcome [Name]! <br>
-Please choose a course to view: <br>
-[1] [Course Name] <br>
-[2] [Course Name] <br>
-[3] [Course Name] <br>
-[4] [Course Name] <br>
-Or, please type an option: <br>
-edit account <br>
-delete account <br>
-create course <br>
-view student <br>
+```
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
 exit
 
-Example input: <br>
+Example input:
 [delete account]
 
 Delete Account - [Username]:
 Deleted accounts can't be recovered. Are you sure you want to do this? Type yes to confirm.
 
-Example input: <br>
+Example input:
 [yes]
 
 Your account has been deleted.
-Welcome to [Name]! <br>
-Please type an option: <br>
-login <br>
-create account <br>
+Welcome to [Name]!
+Please type an option:
+login
+create account
 exit
+```
+
+#### Example 6 (create course)
+
+```
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
+exit
+
+Example input:
+[create course]
+
+Creating Course:
+Please enter the name of the new course:
+
+Example input:
+[course name]
+
+Course created successfully!
+-----
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
+[5] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
+exit
+
+```

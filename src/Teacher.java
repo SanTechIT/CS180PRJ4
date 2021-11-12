@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Represents a teacher.
  *
  * @author saraxiao0 (Sara Xiao), chang794
- * @version 0.2 - 2021-11-11
+ * @version 0.3 - 2021-11-12
  */
 public class Teacher extends User {
 
@@ -122,25 +122,29 @@ public class Teacher extends User {
     /**
      * Create course
      */
-    public boolean createCourse() {
+    public boolean createCourse(String topic) {
+        Course c = new Course(topic, this);
     }
 
     /**
      * Create discussion forum
      */
     public boolean createDiscussion(String topic, Course course) {
+        Discussion d = new Discussion(topic, course, this);
     }
 
     /**
      * Edit discussion forum
      */
-    public boolean editDiscussion(Discussion discussion) {
+    public boolean editDiscussion(Discussion discussion, String newTopic) {
+        discussion.setTopic(newTopic);
     }
 
     /**
      * Delete discussion forum
      */
     public boolean deleteDiscussion(Discussion discussion) {
+        discussion.delete(this);
     }
 
     /**
@@ -149,7 +153,8 @@ public class Teacher extends User {
      * @param parentPost parent post the new post is replying to
      * @param newContent content of new post
      */
-    public boolean makePostReply(Post parentPost, String newContent) {
+    public Post makePostReply(Post parentPost, String newContent) {
+        return new Post(parentPost, this, newContent);
     }
 
     /**
@@ -159,6 +164,7 @@ public class Teacher extends User {
      * @param newContent
      */
     public boolean editPost(Post targetPost, String newContent) {
+        targetPost.edit(this, newContent);
     }
 
     /**
@@ -167,6 +173,7 @@ public class Teacher extends User {
      * @param targetPost post to be deleted
      */
     public boolean deletePost(Post targetPost) {
+        targetPost.delete(this);
     }
 
     /**
@@ -174,5 +181,6 @@ public class Teacher extends User {
      * and assign a point value to their work."
      */
     public void gradePost(Post targetPost, int grade) {
+        targetPost.grade(this, grade);
     }
 }

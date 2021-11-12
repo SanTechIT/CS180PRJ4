@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Or copy-paste this into another class to use as a guide.
  *
  * @author saraxiao0 (Sara Xiao)
- * @version 0.1 - 2021-11-11
+ * @version 0.2 - 2021-11-12
  */
 public class TeacherRunner {
     private Teacher teacher; // Teacher who's logged in
@@ -61,7 +61,7 @@ public class TeacherRunner {
                     break;
 
                 case "create course":
-                    teacher.createCourse();
+                    menuCreateCourse(reader);
                     break;
 
                 case "view student":
@@ -90,6 +90,19 @@ public class TeacherRunner {
             }
         }
         displayExit();
+    }
+
+
+    /**
+     * Menu for creating new course (accessed from main menu)
+     */
+    private void menuCreateCourse(Scanner reader) {
+        displayCreateCourse();
+        String input = reader.nextLine();
+
+        teacher.createCourse(input);
+
+        System.out.println("Course created successfully!");
     }
 
     /**
@@ -137,11 +150,11 @@ public class TeacherRunner {
      */
     private void loopViewStudent(Scanner reader) {
         boolean continueThisMenu = true;
-        while (continueThisMenu) { // "back" sets currentCourse to null
+        while (continueThisMenu) { // back, exit set continueThisMenu = false
         // then program goes back to main loop
 
             displayViewStudent();
-            String input = reader.nextLine();
+            String input = reader.nextLine(); // user input
 
             switch (input) {
                 case "back":
@@ -149,8 +162,9 @@ public class TeacherRunner {
                     break;
 
                 case "exit":
-                    currentCourse = null;
+                    continueThisMenu = false;
                     exitProgram = true;
+                    break;
 
                 default:
                     try {
@@ -187,15 +201,16 @@ public class TeacherRunner {
             switch (input) {
                 case "back":
                     currentCourse = null;
+                    break;
 
                 case "create forum":
-                    String topic = "filler";
-                    this.teacher.createDiscussion(topic, currentCourse);
+                    menuCreateDiscussion(reader);
                     break;
 
                 case "exit":
                     currentCourse = null;
                     exitProgram = true;
+                    break;
 
                 default:
                     try {
@@ -214,6 +229,18 @@ public class TeacherRunner {
                     break;
             }
         }
+    }
+
+    /**
+     * Menu for creating new discussion forum ()
+     */
+    private void menuCreateDiscussion(Scanner reader) {
+        displayCreateDiscussion();
+        String input = reader.nextLine();
+
+        this.teacher.createDiscussion(input, currentCourse);
+
+        System.out.println("Discussion created successfully!");
     }
 
     /**
@@ -242,7 +269,7 @@ public class TeacherRunner {
                     break;
 
                 default:
-                    if (!(parse2WordInput(input))) {
+                    if (!(parse2WordInput(input, reader))) {
                         displayBadInput();
                     }
                     break;
@@ -256,7 +283,7 @@ public class TeacherRunner {
      *
      * If it is, checks which command is in input, then executes command
      */
-    private boolean parse2WordInput(String input) {
+    private boolean parse2WordInput(String input, Scanner reader) {
         if (input.split(" ").length != 2) {
             return false;
         }
@@ -282,29 +309,98 @@ public class TeacherRunner {
 
         // check command
         String inputWord1 = input.split(" ")[0];
+
+        boolean operationSuccess = false; // whether operation succeeds
+        // ONLY for if input makes sense - false is for network errors etc
+        // On the other hand, if the command itself makes no sense, the
+        // entire function returns false
+
+        // As of now, some menu functions are incapable of returning false
+        // Since they will always work, since there will always be an Internet connection
         switch (inputWord1) {
             case "reply":
-                String newContent = "filler"; // TODO
-                this.teacher.makePostReply(targetPost, newContent);
+                operationSuccess = menuPostReply(targetPost, reader);
                 break;
 
             case "edit":
-                String newContent2 = "filler 2"; // TODO
-                this.teacher.editPost(targetPost, newContent2);
+                operationSuccess = menuEditPost(targetPost, reader);
                 break;
 
             case "delete":
-                this.teacher.deletePost(targetPost);
+                operationSuccess = menuDeletePost(targetPost, reader);
                 break;
 
             case "grade":
-                int grade = 70; //TODO
-                this.teacher.gradePost(targetPost, grade);
+                operationSuccess = menuGradePost(targetPost, reader);
                 break;
 
             default:
                 return false;
         }
+
+        if (!operationSuccess) {
+            System.out.println("Sorry, there was an error in performing the command.");
+        }
+        return true;
+    }
+
+    private boolean menuPostReply(Post targetPost, Scanner reader) {
+        displayPostReply(targetPost);
+
+        String input = reader.nextLine();
+        Post newPost = this.teacher.makePostReply(targetPost, input);
+
+        System.out.println("New post " + newPost.getId() +
+            " (reply to " + targetPost.getId() + ")" +
+            "has been created!");
+        return true;
+    }
+
+    private void menuEditPost(Post targetPost, Scanner reader) {
+        displayEditPost(targetPost);
+
+        String input = reader.nextLine();
+        this.teacher.editPost(targetPost, input);
+
+        System.out.println("Post " + targetPost.getId() +
+            "has been edited!");
+        return true;
+    }
+
+    private void menuDeletePost(Post targetPost, Scanner reader) {
+        displayDeletePost(targetPost);
+
+        String input = reader.nextLine();
+        if (input.toLowerCase().equals("yes")) {
+            this.teacher.deletePost(targetPost);
+        }
+
+        System.out.println("Post " + targetPost.getId() +
+            "has been deleted.");
+        return true;
+    }
+
+    private boolean menuGradePost(Post targetPost, Scanner reader) {
+        displayGradePost(targetPost);
+
+        String input = reader.nextLine();
+        int grade = -1;
+        try {
+            grade = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        if (grade < 0 || grade > ) {
+            return false;
+        }
+
+        this.teacher.gradePost(targetPost, grade);
+
+        System.out.println("Post " + targetPost.getId() +
+            "has been assigned the grade: " + grade + "/" +
+            targetPost.getMaxGrade());
+        return true;
     }
 
     /* ----- Display methods - for displaying UI messages -----
@@ -330,7 +426,7 @@ public class TeacherRunner {
             "\nview student" +
             "\nexit");
 
-        System.out.println("> ");
+        System.out.print("> ");
     }
 
     /**
@@ -352,6 +448,16 @@ public class TeacherRunner {
     }
 
     /**
+     * Displays output for creating a course (accessed from main menu)
+     */
+    private void displayCreateCourse() {
+        System.out.println("Creating Course:" +
+            "\nPlease enter the name of the new course:");
+
+        System.out.print("> ");
+    }
+
+    /**
      * Displays output for course loop (viewing all discussions in 1 course)
      */
     private void displayCourse() {
@@ -365,7 +471,14 @@ public class TeacherRunner {
             "\ndelete forum" +
             "\nexit");
 
-        System.out.println("> ");
+        System.out.print("> ");
+    }
+
+    private void displayCreateDiscussion() {
+        System.out.println("Creating Discussion:" +
+            "\nPlease enter the name of the new discussion:");
+
+        System.out.print("> ");
     }
 
     /**
@@ -380,7 +493,54 @@ public class TeacherRunner {
 
         System.out.println(currentDiscussion.getPostsString());
 
-        System.out.println("> ");
+        System.out.print("> ");
+    }
+
+    /**
+     * Displays menu for replying to post
+     */
+    private void displayPostReply(targetPost) {
+        System.out.println("Reply to post " + targetPost.getId() + ":" +
+            "\nWhat should be the content in the new reply post?");
+
+        System.out.print("> ");
+    }
+
+    /**
+     * Displays menu for editing post
+     */
+    private void displayEditPost(targetPost) {
+        int id = targetPost.getId();
+        System.out.println("Edit post " + id + ":" +
+            "\nWhat should be the new content in post " + id +
+            "?");
+
+        System.out.print("> ");
+    }
+
+    /**
+     * Displays menu for deleting post
+     */
+    private void displayDeletePost(targetPost) {
+        System.out.println("Delete post " + targetPost.getId() + ":" +
+            "\nDeleted posts can't be recovered." +
+            "Are you sure you want to do this?" +
+            "Type yes to confirm.");
+
+        System.out.print("> ");
+    }
+
+    /**
+     * Displays menu for grading post
+     */
+    private void displayGradePost(targetPost) {
+        int id = targetPost.getId();
+        System.out.println("Grade post " + id + ":" +
+            "\nThe minimum grade is 0," +
+            "and the maximum grade is " + targetPost.getMaxGrade() + "." +
+            "\nEnter the grade to assign to post " + id + ":");
+
+        System.out.print("> ");
     }
 
     /**
@@ -395,7 +555,7 @@ public class TeacherRunner {
             "\nchange password" +
             "\nexit");
 
-        System.out.println("> ");
+        System.out.print("> ");
     }
 
     /**
