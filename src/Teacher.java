@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * Project 4 - Teacher
  *
- * Represents a teacher using the program.
+ * Represents a teacher.
  *
  * @author saraxiao0 (Sara Xiao), chang794
  * @version 0.2 - 2021-11-11
@@ -17,12 +17,15 @@ public class Teacher extends User {
     /**
      * Teacher Action Loop
      * Called by Main class, handles control flow
+     * Important: I put this & other control flow methods in a separate
+     * class for better organization.
      *
      * @param in Scanner input
      */
     @Override
     public void loop(Scanner in) {
-
+        TeacherRunner tr = new TeacherRunner(this);
+        tr.loop();
     }
 
     /* ----- canDoX methods - for permissions -----
@@ -135,8 +138,35 @@ public class Teacher extends User {
 
     /**
      * Reply to a student reponse to a discussion forum
+     *
+     * @param parentPost parent post the new post is replying to
+     * @param newContent content of new post
      */
-    private boolean makePostReply() {
+    private boolean makePostReply(Post parentPost, String newContent) {
+    }
+
+    /**
+     * Reply to a student reponse to a discussion forum
+     *
+     * @param targetPost
+     * @param newContent
+     */
+    private boolean editPost(Post targetPost, String newContent) {
+    }
+
+    /**
+     * Delete a post
+     *
+     * @param targetPost post to be deleted
+     */
+    private boolean deletePost(Post targetPost) {
+    }
+
+    /**
+     * "Teachers can view replies for a specific student on one page
+     * and assign a point value to their work."
+     */
+    private void gradePost(Post targetPost, int grade) {
     }
 
     /**
@@ -146,12 +176,5 @@ public class Teacher extends User {
      * Part of Voting Selection in handout
      */
     private void seeForumVoteDashboard() {
-    }
-
-    /**
-     * "Teachers can view replies for a specific student on one page
-     * and assign a point value to their work."
-     */
-    private void gradeStudent() {
     }
 }

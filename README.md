@@ -10,13 +10,13 @@
 
 ## Main Class
 | Method      | Signature   | Parameters | Description |
-| ----------- | ----------- | ----------- | ----------- |
+| ----------- | ----------- | ----------- | ---------- |
 | main        | public static void | String[] args | Main Method |
 
 ## User Class (abstract) (Serializable)
 ##### Fields
 | Field      | Signature   | Description | Getter/Setter |
-| ----------- | ----------- | ----------- | ----------- |
+| ---------- | ----------- | ----------- | ------------- |
 | USER_LIST   | `public static List<User>` | Lists all users |  |
 | username    | `private String`  | None | G  |
 | password    | `private String`  | NaN | |
@@ -30,7 +30,7 @@
 
 ##### Methods
 | Method      | Signature   | Parameters | Description |
-| ----------- | ----------- | ----------- | ----------- |
+| ----------- | ----------- | ---------- | ----------- |
 | connect        | `public static void` | `(Scanner in)` |  Loop Handler for login |
 | loop           | `public abstract void` | `(Scanner in)` | Primary Loop Handler |
 | FIXME | FIXME | FIXME | FIXME |
@@ -55,7 +55,7 @@
 
 #### Methods
 | Method      | Signature   | Parameters | Description |
-| ----------- | ----------- | ----------- | ----------- |
+| ----------- | ----------- | ---------- | ----------- |
 | loop | `public void` | `(Scanner in)` |  Primary Loop Handler |
 
 * methods inherited from User - the canVote, etc. have been implemented
@@ -70,7 +70,7 @@
 
 #### Methods
 | Method      | Signature   | Parameters | Description |
-| ----------- | ----------- | ----------- | ----------- |
+| ----------- | ----------- | ---------- | ----------- |
 | loop | `public void` | `(Scanner in)` |  Primary Loop Handler |
 
 - get / store all student posts
@@ -79,7 +79,7 @@
 ## Course Class (Serializable)
 ##### Fields
 | Field      | Signature   | Description |
-| ----------- | ----------- | ----------- |
+| ---------- | ----------- | ----------- |
 | COURSE_LIST    | `public static List<Course>` | Lists all courses |
 | discussions | `private List<Discussions` | List of all `Discussion`s of `Course`|
 | id | `private int` | Id is same as index in list | G/S |
@@ -95,14 +95,15 @@
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `public static Course` | `(String topic, User creator)` | Creates a new course, appends to list, and returns |
-| `public static String getCourseListString` | `()`  |  Returns list of all courses with id + course name (see Console Example) |
-|  `public static Course searchCourses` | `(int id)` | Search COURSE_LIST for course with that id, returns null if not found |
-|  `public String getDiscussionListString` | `()` | Returns list of all discussions with id + discussion topic (see Console Example) |
+| `public static String getCoursesString` | `()`  |  Returns list of all courses with id + course name (see Console Example) |
+|  `public static Course searchCourses` | `(int id)` | Search COURSE_LIST for course with that id, return null if not found |
+|  `public String getDiscussionsString` | `()` | Returns list of all discussions with id + discussion topic (see Console Example) |
+| `public String searchDiscussions`  | `(int id)`  | Search `discussions` for discussion with that id, return null if not found   |
 
 ### Discussion Class (Serializable)
 ##### Fields
 | Field      | Signature   | Description | Getter/Setter |
-| ----------- | ----------- | ----------- | ----------- |
+| ---------- | ----------- | ----------- | ------------- |
 | ALL_DISCUSSIONS   | `public static List<Discussion>` | Lists all `Discussion`s |  |
 | discussions | `private List<Discussion>` | | G/S |
 | id | `private int` | Id is same as index in list | G |
@@ -118,14 +119,22 @@
 | `public` | `(String topic, User creator)` | Auto sets id to next id in list |
 
 #### Methods
+| Signature   | Parameters | Description |
+| ----------- | ---------- | ----------- |
+| `public String getPostsString` | `()` |  Returns chronological list of all posts with id + post topic (see Console Example) |
+| `public Post searchPosts` | `(int id)` | Search `posts` for post with that id, return null if not found  |
+| `public void addPost`   | `(User poster, String newContent)` | Calls Post constructor to add new post to `posts` |
+| `public void addPost`   | `(User poster, Post parentPost, String newContent)` | Calls Post constructor to add new post (*that is a reply to an existing post*) to `posts` |
+
 - Get most popular posts
 
 ### Post Class (Serializable)
 Note: posts can be under both discussions and other posts
+
 ##### Fields
 | Field      | Signature   | Description | Getter/Setter |
-| ----------- | ----------- | ----------- | ----------- |
-| ALL_POSTS  | `public static List<Discussion>` | Lists all `Post`s |  |
+| ---------- | ----------- | ----------- | ------------- |
+| ALL_POSTS  | `public static List<Post>` | Lists all `Post`s |  |
 | id | `private int` | `id` is same as index in list | G |
 | posts | `private List<Post>` | List of all posts related to this `Post` | G |
 | timestamp | `private Date` | Keeps track of when the `Post` was created | G/S |
@@ -135,13 +144,23 @@ Note: posts can be under both discussions and other posts
 | maxGrade | `private int` | Keeps track of the max grade of this `Post`, Only shown if `User` is creator of `Post` or is a `Teacher`  | G |
 | upvotes | `private List<Integer>` | Keeps track of all `Student` UIDs who have up-voted this post | G |
 | downvotes | `private List<Integer>` | OPTIONAL BUT COOL? | G |
+| parentPost | `private Post`  | Post that this Post is a reply to; null if this Post is not a reply   | G  |
+| parentDiscussion  | `private Discussion` | Discussion that this Post is a part of  |   |
 
 #### Constructors
-| Signature   | Parameters  | Description |
-| ----------- | ----------- | ----------- |
-| `public` | `(String reply, User creator)` | Auto sets id to next id in list |
+| Parameters  | Description |
+| ----------- | ----------- |
+| `(User creator, String content)` | Auto sets id to next id in list |
+| `(Post parentPost, User creator, String content)` | New post is a reply to parentPost  |
 
 #### Methods
+| Signature   | Parameters  | Description |
+| ----------- | ----------- | ----------- |
+| `public void edit`   | `(User editor, String newContent)` | Replaces content of Post with newContent  |
+| `public void delete` | `(User deleter)` | Deletes post |
+| `public void grade` | `(User grader, int grade)` | Assigns grade |
+| `public void upvote`  | `(User upvoter)`  | Upvotes post |
+| `public void downvote`   |  `(User downvoter)`  | Downvotes post  |
 
 ## Console Example
 
@@ -149,9 +168,7 @@ Note: posts can be under both discussions and other posts
 
 Suggestions:
 * Users need to be able to "create, edit, and delete" their own accounts, so those should be menu options.
-* We should also have a 'back' option so people can go back through menus.
-* We should also have some part of the menu that tells users what commands they can type when viewing a discussion forum - eg. beneath [Discussion Topic], a line saying `Type "commands" to view possible commands.`
-* Clarify the purpose of 'exit'?
+* Update the Student Loop to include stuff from the Teacher Loop (eg. additional commands and options)
 
 ___
 ### Main Loop:
@@ -176,8 +193,7 @@ Please choose a course to view:  <br>
 exit
 
 Example input: <br>
-[course 3] <br>
-[exit]
+[course 3]
 
 Welcome to [Course Name]! <br>
 Please choose a discussion to view: <br>
@@ -187,10 +203,11 @@ Please choose a discussion to view: <br>
 exit
 
 Example input: <br>
-[discussion 22] <br>
-[exit]
+[discussion 22]
 
 [Discussion Topic] <br>
+Commands: reply [num], edit [num], delete [num], grade [num], exit
+Replace [num] with the number of the post you want to interact with!
 [12] [Post Content] <br>
 [33] [Post Content] <br>
 [98] [Post Content] <br>
@@ -225,8 +242,7 @@ view student <br>
 exit
 
 Example input: <br>
-[course 3] <br>
-[exit]
+[course 3]
 
 Welcome to [Course Name]! <br>
 Please choose a discussion to view: <br>
@@ -240,15 +256,15 @@ delete forum <br>
 exit
 
 Example input: <br>
-[discussion 22] <br>
-[exit]
+[discussion 22]
 
 [Discussion Topic] <br>
+Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Replace [num] with the number of the post you want to interact with!
 [12] [Post Content] <br>
 [33] [Post Content] <br>
 [98] [Post Content] <br>
 [113] [Post Content] <br>
-exit
 
 Example input: <br>
 [reply 33] <br>
@@ -273,8 +289,7 @@ view student <br>
 exit
 
 Example input: <br>
-[view student] <br>
-[exit]
+[view student]
 
 View Student: <br>
 This shows all of a student's posts and lets you grade them. <br>
@@ -284,8 +299,7 @@ back <br>
 exit
 
 Example input: <br>
-[student id] <br>
-[exit]
+[student id]
 
 [Student Name]'s Posts <br>
 [23] [Post Content] <br>
