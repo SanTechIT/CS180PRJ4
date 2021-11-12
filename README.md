@@ -35,7 +35,9 @@
 | loop           | `public abstract void` | `(Scanner in)` | Primary Loop Handler |
 | FIXME | FIXME | FIXME | FIXME |
 | createAccount  | `public static void` | `(Scanner in)` |  Creates Account and appends to account list, does not log user in |
-| modifyAccount  | `public void` | `(Scanner in)` |  Modifies user account details, can only be done to self, username should be unique |
+| modifyUsername  | `public void` | `(Scanner in)` |  Modifies username, can only be done to self, username should be unique |
+| modifyName | `public void` | `(Scanner in)`  | Modifies name, can only be done to self   |
+| modifyPassword  | `public void` | `(Scanner in)` | Modifies password, can only be done to self   |
 | deleteAccount  | `public void` | `(Scanner in)` |  Deletes the user account and sets its index in list to null |
 | canVote  | `public abstract boolean` | `()` |  Whether the user has permission to vote |
 | canGrade  | `public abstract boolean` | `()` |  Whether the user has permission to grade |
@@ -116,7 +118,7 @@
 #### Constructors
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
-| `public` | `(String topic, User creator)` | Auto sets id to next id in list |
+| `public` | `(String topic, Course course, User creator)` | Auto sets id to next id in list |
 
 #### Methods
 | Signature   | Parameters | Description |
@@ -124,7 +126,8 @@
 | `public String getPostsString` | `()` |  Returns chronological list of all posts with id + post topic (see Console Example) |
 | `public Post searchPosts` | `(int id)` | Search `posts` for post with that id, return null if not found  |
 | `public void addPost`   | `(User poster, String newContent)` | Calls Post constructor to add new post to `posts` |
-| `public void addPost`   | `(User poster, Post parentPost, String newContent)` | Calls Post constructor to add new post (*that is a reply to an existing post*) to `posts` |
+| `public void addPost`   | `(User poster, Post parentPost, String newContent)` | Calls Post constructor to add new post (*which is a reply to an existing post*) to `posts` |
+| `public void delete` | `(User deleter)` | Deletes this forum and all posts within it |
 
 - Get most popular posts
 
@@ -190,7 +193,6 @@ Please choose a course to view:  <br>
 [2] [Course Name] <br>
 [3] [Course Name] <br>
 [4] [Course Name] <br>
-exit
 
 Example input: <br>
 [course 3]
@@ -200,7 +202,6 @@ Please choose a discussion to view: <br>
 [1] [Discussion Name] <br>
 [22] [Discussion Name] <br>
 [25] [Discussion Name] <br>
-exit
 
 Example input: <br>
 [discussion 22]
@@ -212,7 +213,6 @@ Replace [num] with the number of the post you want to interact with!
 [33] [Post Content] <br>
 [98] [Post Content] <br>
 [113] [Post Content] <br>
-exit
 
 Example input: <br>
 [reply 33] <br>
@@ -299,9 +299,11 @@ back <br>
 exit
 
 Example input: <br>
-[student id]
+[a valid student id]
 
 [Student Name]'s Posts <br>
+Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Replace [num] with the number of the post you want to interact with!
 [23] [Post Content] <br>
 [35] [Post Content] <br>
 [42] [Post Content] <br>
@@ -333,6 +335,19 @@ Example input: <br>
 
 Input Error: <br>
 Sorry, I couldn't understand what you typed. Please try again!
+-
+Welcome [Name]! <br>
+Please choose a course to view: <br>
+[1] [Course Name] <br>
+[2] [Course Name] <br>
+[3] [Course Name] <br>
+[4] [Course Name] <br>
+Or, please type an option: <br>
+edit account <br>
+delete account <br>
+create course <br>
+view student <br>
+exit
 
 Example input: <br>
 [exit]

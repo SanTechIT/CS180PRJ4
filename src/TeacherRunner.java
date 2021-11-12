@@ -18,10 +18,13 @@ public class TeacherRunner {
     private Course currentCourse; // current course user's looking at
     private Discussion currentDiscussion; // current discussion user's looking at
 
-    private boolean exitProgram = false;
+    private boolean exitProgram = false; // whether to exit the program
+    // set to true when user inputs "exit" - then program logs off and stops
 
     /*
      * Creates new TeacherRunner
+     *
+     * @param teacher Teacher this runner is connected to and operating for
      */
     public TeacherRunner(Teacher teacher) {
         this.teacher = teacher;
@@ -49,15 +52,20 @@ public class TeacherRunner {
 
             switch(input) {
                 case "edit account":
+                    loopEditAccount(reader);
                     break;
 
+                // deleteAccount is a User method that teacher inherits
                 case "delete account":
+                    teacher.deleteAccount(reader);
                     break;
 
                 case "create course":
+                    teacher.createCourse();
                     break;
 
                 case "view student":
+                    loopViewStudent(reader);
                     break;
 
                 case "exit":
@@ -75,13 +83,95 @@ public class TeacherRunner {
                             loopCourse(reader);
                         }
 
-                    } catch (NumberFormatException) {
+                    } catch (NumberFormatException e) {
                         displayBadInput();
                     }
                     break;
             }
         }
         displayExit();
+    }
+
+    /**
+     * Loop for editing account
+     */
+    private void loopEditAccount(Scanner reader) {
+        boolean continueThisMenu = true;
+        while (continueThisMenu) {
+
+            displayEditAccount();
+            String input = reader.nextLine();
+
+            switch(input) {
+                case "back":
+                    continueThisMenu = false;
+                    break;
+
+                // modifyUsername is a User method that teacher inherits
+                case "change username":
+                    teacher.modifyUsername(reader);
+                    break;
+
+                // modifyName is a User method that teacher inherits
+                case "change name":
+                    teacher.modifyName(reader);
+                    break;
+
+                // modifyPassword is a User method that teacher inherits
+                case "change password":
+                    teacher.modifyPassword(reader);
+                    break;
+
+                case "exit":
+                    exitProgram = true;
+                    break;
+            }
+        }
+    }
+
+    /**
+     * See dashboard that lists most popular forum replies by vote
+     * "Data will appear with the student's name and vote count."
+     * "Teachers can choose to sort the dashboard."
+     * Part of Voting Selection in handout
+     */
+    private void loopViewStudent(Scanner reader) {
+        boolean continueThisMenu = true;
+        while (continueThisMenu) { // "back" sets currentCourse to null
+        // then program goes back to main loop
+
+            displayViewStudent();
+            String input = reader.nextLine();
+
+            switch (input) {
+                case "back":
+                    continueThisMenu = false;
+                    break;
+
+                case "exit":
+                    currentCourse = null;
+                    exitProgram = true;
+
+                default:
+                    try {
+                        int studentId = Integer.parseInt(input);
+
+                        // TODO
+
+                        /*
+                        currentDiscussion = Course.searchDiscussions(discussionId);
+                        if (currentDiscussion == null) {
+                            displayBadInput();
+                        } else {
+                            loopDiscussion(reader);
+                        } */
+
+                    } catch (NumberFormatException e) {
+                        displayBadInput();
+                    }
+                    break;
+            }
+        }
     }
 
     /**
@@ -99,9 +189,8 @@ public class TeacherRunner {
                     currentCourse = null;
 
                 case "create forum":
-                    break;
-
-                case "delete forum":
+                    String topic = "filler";
+                    this.teacher.createDiscussion(topic, currentCourse);
                     break;
 
                 case "exit":
@@ -116,11 +205,11 @@ public class TeacherRunner {
                         if (currentDiscussion == null) {
                             displayBadInput();
                         } else {
-                            loopDiscussion(reader);
+                            loopDiscussion(reader); // enter discussion menu with inputted discussion
                         }
 
-                    } catch (NumberFormatException) {
-                        displayBadInput();
+                    } catch (NumberFormatException e) {
+                        displayBadInput(); // error if discussion ID doesn't convert to number
                     }
                     break;
             }
@@ -135,17 +224,21 @@ public class TeacherRunner {
             displayDiscussion();
             String input = reader.nextLine();
 
-            // Input loop is different because input can be 1 or 2 words
-            // Outer switch checks 1-word input, inner switch checks 2-word input
+            // Input loop is different because input can be a static command or one that takes an argument
+            // Outer switch checks static commands, inner switch checks arguments
             switch(input) {
                 case "back":
                     currentDiscussion = null;
                     break;
 
-                case "exit":
+                case "exit:
                     currentDiscussion = null;
                     currentCourse = null;
                     exitProgram = true;
+                    break;
+
+                case "delete forum":
+                    this.teacher.deleteDiscussion(currentDiscussion);
                     break;
 
                 default:
@@ -171,13 +264,13 @@ public class TeacherRunner {
         // check if post number is valid
         int postId;
         try {
-            postId = Integer.parseInt(inputArray[1]);
+            postId = Integer.parseInt(input.split(" ")[1]);
 
             // post id can't be negative
             if (postId < 0) {
                 return false;
             }
-        } catch (NumberFormatException) {
+        } catch (NumberFormatException e) {
             return false;
         }
 
@@ -188,16 +281,16 @@ public class TeacherRunner {
         }
 
         // check command
-        inputWord1 = input.split(" ")[0];
+        String inputWord1 = input.split(" ")[0];
         switch (inputWord1) {
             case "reply":
-                String newContent = "filler";
+                String newContent = "filler"; // TODO
                 this.teacher.makePostReply(targetPost, newContent);
                 break;
 
             case "edit":
-                String newContent = "filler 2";
-                this.teacher.editPost(targetPost, newContent);
+                String newContent2 = "filler 2"; // TODO
+                this.teacher.editPost(targetPost, newContent2);
                 break;
 
             case "delete":
@@ -205,7 +298,7 @@ public class TeacherRunner {
                 break;
 
             case "grade":
-                int grade = 70;
+                int grade = 70; //TODO
                 this.teacher.gradePost(targetPost, grade);
                 break;
 
@@ -222,6 +315,9 @@ public class TeacherRunner {
      * trickier, though).
      */
 
+    /**
+     * Displays output for main loop (viewing all courses after login)
+     */
     private void displayWelcome() {
         System.out.println("Welcome " + this.getName() + "!");
 
@@ -237,17 +333,27 @@ public class TeacherRunner {
         System.out.println("> ");
     }
 
+    /**
+     * Displays output for invalid input
+     */
     private void displayBadInput() {
         System.out.println("Input Error:" +
-            "Sorry, I couldn't understand what you typed. Please try again!");
+            "\nSorry, I couldn't understand what you typed. Please try again!" +
+            "\n-");
     }
 
+    /**
+     * Displays output for program exit
+     */
     private void displayExit() {
         System.out.println("Exit:" +
             "Logging out..." +
             "Thank you for using our program. Goodbye!");
     }
 
+    /**
+     * Displays output for course loop (viewing all discussions in 1 course)
+     */
     private void displayCourse() {
         System.out.println("Welcome to " + currentCourse.getTopic() + "!");
 
@@ -262,6 +368,9 @@ public class TeacherRunner {
         System.out.println("> ");
     }
 
+    /**
+     * Displays output for discussion loop (viewing all posts in 1 discussion)
+     */
     private void displayDiscussion() {
         System.out.println("Welcome to " + currentDiscussion.getTopic() + "!" +
             "\nCommands: back, reply [num], edit [num], delete [num], " +
@@ -270,5 +379,34 @@ public class TeacherRunner {
                 "want to interact with!");
 
         System.out.println(currentDiscussion.getPostsString());
+
+        System.out.println("> ");
+    }
+
+    /**
+     * Displays output for edit account loop (an option from the main loop)
+     */
+    private void displayEditAccount() {
+        System.out.println("Editing Your Account - " + teacher.getUsername() +
+            "\nPlease type an option: " +
+            "\nback" +
+            "\nchange username" +
+            "\nchange name" +
+            "\nchange password" +
+            "\nexit");
+
+        System.out.println("> ");
+    }
+
+    /**
+     * Displays output for view student loop (option from the main loop)
+     */
+    private void displayViewStudent() {
+        System.out.println("View Student:" +
+            "\nThis shows all of a student's posts and lets you grade them." +
+            "\nEnter the name or ID of the student to view: " +
+            "\nOr, please type an option: " +
+            "\nback" +
+            "\nexit");
     }
 }

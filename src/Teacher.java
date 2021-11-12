@@ -25,7 +25,7 @@ public class Teacher extends User {
     @Override
     public void loop(Scanner in) {
         TeacherRunner tr = new TeacherRunner(this);
-        tr.loop();
+        tr.loop(in);
     }
 
     /* ----- canDoX methods - for permissions -----
@@ -106,8 +106,15 @@ public class Teacher extends User {
     }
 
     /* ----- Methods that Modify Things -----
-     * Will be called as part of Teacher's loop method.
+     * Will be called as part of TeacherRunner's loop method.
      * For now, most return a boolean representing operation success/failure.
+     *
+     * These are pseudo-private methods that will only be called by TeacherRunner
+     * They're not really public.
+     * They should be private, but Teacher and TeacherRunner are 2 separate classes..
+     *
+     * I'm not sure if these are actually necessary. You may be able to
+     * just call Post methods from TeacherRunner directly.
      *
      * WIP.
      */
@@ -115,25 +122,25 @@ public class Teacher extends User {
     /**
      * Create course
      */
-    private boolean createCourse() {
+    public boolean createCourse() {
     }
 
     /**
      * Create discussion forum
      */
-    private boolean createDiscussion() {
+    public boolean createDiscussion(String topic, Course course) {
     }
 
     /**
      * Edit discussion forum
      */
-    private boolean editDiscussion() {
+    public boolean editDiscussion(Discussion discussion) {
     }
 
     /**
      * Delete discussion forum
      */
-    private boolean deleteDiscussion() {
+    public boolean deleteDiscussion(Discussion discussion) {
     }
 
     /**
@@ -142,7 +149,7 @@ public class Teacher extends User {
      * @param parentPost parent post the new post is replying to
      * @param newContent content of new post
      */
-    private boolean makePostReply(Post parentPost, String newContent) {
+    public boolean makePostReply(Post parentPost, String newContent) {
     }
 
     /**
@@ -151,7 +158,7 @@ public class Teacher extends User {
      * @param targetPost
      * @param newContent
      */
-    private boolean editPost(Post targetPost, String newContent) {
+    public boolean editPost(Post targetPost, String newContent) {
     }
 
     /**
@@ -159,22 +166,13 @@ public class Teacher extends User {
      *
      * @param targetPost post to be deleted
      */
-    private boolean deletePost(Post targetPost) {
+    public boolean deletePost(Post targetPost) {
     }
 
     /**
      * "Teachers can view replies for a specific student on one page
      * and assign a point value to their work."
      */
-    private void gradePost(Post targetPost, int grade) {
-    }
-
-    /**
-     * See dashboard that lists most popular forum replies by vote
-     * "Data will appear with the student's name and vote count."
-     * "Teachers can choose to sort the dashboard."
-     * Part of Voting Selection in handout
-     */
-    private void seeForumVoteDashboard() {
+    public void gradePost(Post targetPost, int grade) {
     }
 }
