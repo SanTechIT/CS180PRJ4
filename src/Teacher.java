@@ -141,6 +141,8 @@ public class Teacher extends User {
         // Does permissions check for networking so people cant make random courses;
         return (Course.createCourse(topic, this) != null);
     }
+    
+    // TODO: EDIT COURSES
 
     /**
      * Create discussion forum

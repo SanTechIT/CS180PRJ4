@@ -66,6 +66,11 @@ public class Discussion {
         return topic;
     }
 
+    public String getPostsString(){
+        // TODO
+        return "";
+    }
+
     /**
      * Checks the user's permissions and tries
      * to set the topic of discussion accordingly

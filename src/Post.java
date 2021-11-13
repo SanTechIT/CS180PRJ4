@@ -141,5 +141,15 @@ public class Post {
         return maxGrade;
     }
 
+    /**
+     * Return the list of posts under this post as a string
+     *
+     * @return
+     */
+    public String getPostsString() {
+        // TODO
+        return "";
+    }
+
 
 }

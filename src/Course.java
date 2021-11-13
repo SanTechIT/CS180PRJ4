@@ -67,6 +67,14 @@ public class Course implements Serializable {
         return topic;
     }
 
+    public boolean setTopic(String topic, User user) {
+        if (!user.canModifyCourse()) {
+            return false;
+        }
+        this.topic = topic;
+        return true;
+    }
+
     /**
      * Returns the user who created this course
      *
@@ -89,8 +97,15 @@ public class Course implements Serializable {
      * @return
      */
     public String getDiscussionsString() {
-        // TODO: Reference Integer or Object
-        return "";
+        String str = "";
+        for (int i = 0; i < discussions.size(); i++) {
+            if (Discussion.DISCUSSIONS_LIST.get(i) != null) {
+                Discussion d = Discussion.DISCUSSIONS_LIST.get(i);
+                str += i + " - " + d.getTopic() + "\n";
+
+            }
+        }
+        return str;
     }
 
     /**
@@ -102,20 +117,9 @@ public class Course implements Serializable {
         String str = "";
         for (int i = 0; i < COURSE_LIST.size(); i++) {
             if (COURSE_LIST.get(i) != null) {
-                str += i + " - " + COURSE_LIST.get(i).getTopic();
+                str += i + " - " + COURSE_LIST.get(i).getTopic() + "\n";
             }
         }
         return str;
-    }
-
-    /**
-     * Sets a new topic for the class
-     *
-     * @param topic
-     */
-    public void setTopic(String topic, User user) {
-        if (user.canModifyCourse()) {
-            this.topic = topic;
-        }
     }
 }
