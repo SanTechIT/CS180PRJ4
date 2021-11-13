@@ -72,10 +72,7 @@ public abstract class User implements Serializable {
             System.out.println("Successfully Logged In!");
         }
 
-        // Get User information
-        // Find User in USER_LIST
-        // if null
-        // Call User's loop method.
+        user.loop(in);
     }
 
     public static void createAccount(Scanner in) {
