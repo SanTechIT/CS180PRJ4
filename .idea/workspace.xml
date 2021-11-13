@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b9f95ac-e8f1-4372-92f6-4618fd450a5a" name="Default Changelist" comment="Course.java class basic work, added empty Discussion.java, Post.java" />
+    <list default="true" id="9b9f95ac-e8f1-4372-92f6-4618fd450a5a" name="Default Changelist" comment="Brian Kwon">
+      <change beforePath="$PROJECT_DIR$/src/StudentRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentRunner.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +26,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -115,7 +116,21 @@
       <option name="project" value="LOCAL" />
       <updated>1636493795370</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Brian Kwon">
+      <created>1636769351023</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1636769351023</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Brian Kwon">
+      <created>1636770145386</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1636770145386</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,11 +146,11 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Brian Kwon" />
     <MESSAGE value="Deleted Test Class" />
     <MESSAGE value="Updated README with basics specs (in progress)" />
     <MESSAGE value="Updated README with more specs (in progress),&#10;Made basic framework" />
     <MESSAGE value="Course.java class basic work, added empty Discussion.java, Post.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Course.java class basic work, added empty Discussion.java, Post.java" />
+    <MESSAGE value="Brian Kwon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Brian Kwon" />
   </component>
 </project>
