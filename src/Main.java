@@ -24,15 +24,13 @@ public class Main {
         do {
             switch (input) {
                 case "login":
-                    // Login
-                    // User.connect
+                    User.connect(scanner);
                     break;
                 case "create account":
-                    // Create Account
-                    // User.createAccount
+                    User.createAccount(scanner);
                     break;
                 default:
-                    // Invalid input
+
                     break;
             }
             input = scanner.nextLine();

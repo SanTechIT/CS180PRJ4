@@ -31,6 +31,37 @@ public class Student extends User {
     public void loop(Scanner in) {
         StudentRunner sr = new StudentRunner(this);
         sr.loop(in);
+    }
 
+    public boolean canVote(){
+        return true;
+    }
+
+    public boolean canGrade(){
+        return false;
+    }
+
+    public boolean canPost(){
+        return true;
+    }
+
+    public  boolean canCreateCourse(){
+        return false;
+    }
+
+    public boolean canModifyCourse(){
+        return false;
+    }
+
+    public boolean canModifyDiscussion(){
+        return false;
+    }
+
+    public  boolean canModifyPost(){
+        return false;
+    }
+
+    public boolean isAdmins(){
+        return true;
     }
 }
