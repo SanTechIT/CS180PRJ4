@@ -57,6 +57,11 @@ public class Student extends User {
         return false;
     }
 
+    @Override
+    public boolean canCreateDiscussion() {
+        return false;
+    }
+
     public  boolean canModifyPost(){
         return false;
     }
