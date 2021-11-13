@@ -18,7 +18,7 @@ public class Tests {
         test.loop(reader);
     }
 
-    // @Test
+    @Test
     public void testOne() {
 
     }
