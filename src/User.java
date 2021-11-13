@@ -91,9 +91,13 @@ public abstract class User implements Serializable {
         System.out.println("Select if you are a [T]eacher or [S]tudent: ");
         String userType = in.nextLine();
 
-        User user = new User(name, username, password, userType);
-
-        USER_LIST.add(user);
+        if(userType.equalsIgnoreCase("T")){
+            new Teacher(username, password, name);
+        } else if(userType.equalsIgnoreCase("S")){
+            new Student(username, password, name);
+        } else {
+            System.out.println("This should not happen, an error has occurred!");
+        }
     }
 
 
