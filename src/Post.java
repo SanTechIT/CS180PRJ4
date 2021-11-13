@@ -17,6 +17,7 @@ public class Post {
     private int id;
     private String content;
     private int grade;
+    private int maxGrade;
     private Post parent;
     private List<Post> posts;
     private int creator;
@@ -30,6 +31,7 @@ public class Post {
         this.content = content;
         this.parent = parent;
         this.creator = creator;
+        this.maxGrade = 100;
         id = POST_LIST.size();
         posts = new ArrayList<>();
         POST_LIST.add(this);
@@ -128,6 +130,15 @@ public class Post {
      */
     public String getContent() {
         return content;
+    }
+
+    /**
+     * Returns the max grade
+     *
+     * @return
+     */
+    public int getMaxGrade() {
+        return maxGrade;
     }
 
 
