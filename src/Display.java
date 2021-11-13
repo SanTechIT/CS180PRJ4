@@ -9,12 +9,12 @@ public class Display {
     /**
      * Displays output for main loop (viewing all courses after login)
      */
-    public static void displayWelcome() {
-        System.out.println("Welcome " + this.getName() + "!");
+    public static void displayWelcome(User user) {
+        System.out.println("Welcome " + user.getName() + "!");
 
         System.out.println(Course.getCoursesString());
 
-        System.out.println("Or please type one of these commands: " +
+        System.out.println("Or, please type one of these commands: " +
             "\nedit account" +
             "\ndelete account" +
             "\ncreate course" +
@@ -55,12 +55,12 @@ public class Display {
     /**
      * Displays output for course loop (viewing all discussions in 1 course)
      */
-    public static void displayCourse() {
+    public static void displayCourse(Course currentCourse) {
         System.out.println("Welcome to " + currentCourse.getTopic() + "!");
 
         System.out.println(currentCourse.getDiscussionsString());
 
-        System.out.println("Or, Please type one of these commands: " +
+        System.out.println("Or, please type one of these commands: " +
             "\nback" +
             "\ncreate forum" +
             "\ndelete forum" +
@@ -79,7 +79,7 @@ public class Display {
     /**
      * Displays output for discussion loop (viewing all posts in 1 discussion)
      */
-    public static void displayDiscussion() {
+    public static void displayDiscussion(Discussion currentDiscussion) {
         System.out.println("Welcome to " + currentDiscussion.getTopic() + "!" +
             "\nCommands: back, reply [num], edit [num], delete [num], " +
                 "grade [num], exit" +
@@ -96,7 +96,8 @@ public class Display {
      */
     public static void displayPostReply(Post targetPost) {
         System.out.println("Reply to post " + targetPost.getId() + ":" +
-            "\nWhat should be the content in the new reply post?");
+            "\nYou are replying to an existing post in the discussion." +
+            "\nWhat should be the content in your new reply post?");
 
         System.out.print("> ");
     }
@@ -141,8 +142,8 @@ public class Display {
     /**
      * Displays output for edit account loop (an option from the main loop)
      */
-    public static void displayEditAccount() {
-        System.out.println("Editing Your Account - " + teacher.getUsername() +
+    public static void displayEditAccount(User user) {
+        System.out.println("Editing Your Account - " + user.getUsername() +
             "\nPlease type one of these commands: " +
             "\nback" +
             "\nchange username" +
@@ -160,7 +161,7 @@ public class Display {
         System.out.println("View Student:" +
             "\nThis shows all of a student's posts and lets you grade them." +
             "\nEnter the name or ID of the student to view: " +
-            "\nOr, Please type one of these commands: " +
+            "\nOr, please type one of these commands: " +
             "\nback" +
             "\nexit");
     }

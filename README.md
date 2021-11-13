@@ -180,7 +180,7 @@ ___
 
 ```
 Welcome to [Name]!
-Please type an option:
+Please type one of these commands:
 login
 create account
 exit
@@ -197,12 +197,12 @@ ___
 
 ```
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course
@@ -213,11 +213,11 @@ Example input:
 [3]
 
 Welcome to [Course Name]!
-Please choose a discussion to view:
+Please type the number of a discussion to view:
 [1] [Discussion Name]
 [22] [Discussion Name]
 [25] [Discussion Name]
-Or, please type an option:
+Or, please type one of these commands:
 back
 create forum
 delete forum
@@ -227,7 +227,7 @@ Example input:
 [22]
 
 [Discussion Topic]
-Commands: create post, reply [num], edit [num], delete [num], grade [num], exit
+Commands: reply to discussion, reply [num], edit [num], delete [num], grade [num], exit
 Replace [num] with the number of the post you want to interact with!
 [12] [Post Content]
 [33] [Post Content]
@@ -238,7 +238,8 @@ Example input:
 [reply 33]
 
 Reply to post 33:
-What should be the content in the new reply post?
+You are replying to an existing post in the discussion.
+What should be the content in your new reply post?
 
 Example input:
 [contents of post]
@@ -302,12 +303,12 @@ Example input:
 
 ```
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course
@@ -321,12 +322,12 @@ Input Error:
 Sorry, I couldn't understand what you typed. Please try again!
 -----
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course
@@ -345,12 +346,12 @@ Thank you for using our program. Goodbye!
 
 ```
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course
@@ -361,7 +362,7 @@ Example input:
 [edit account]
 
 Editing Your Account - [Username]:
-Please type an option:
+Please type one of these commands:
 back
 change username
 change name
@@ -380,7 +381,7 @@ Example input:
 
 Sorry! You can't use that username.
 Editing Your Account - [Username]:
-Please type an option:
+Please type one of these commands:
 back
 change username
 change name
@@ -403,7 +404,7 @@ Example input:
 
 Congratulations! You have changed your username.
 Editing Your Account - [Username]:
-Please type an option:
+Please type one of these commands:
 back
 change username
 change name
@@ -415,12 +416,12 @@ exit
 
 ```
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course
@@ -438,11 +439,13 @@ Example input:
 
 Your account has been deleted.
 Welcome to [Name]!
-Please type an option:
+Please type one of these commands:
 login
 create account
 exit
 ```
+
+##### Student Example 5 (contains
 
 ___
 
@@ -454,12 +457,12 @@ ___
 
 ```
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course
@@ -474,7 +477,7 @@ Please choose a discussion to view:
 [1] [Discussion Name]
 [22] [Discussion Name]
 [25] [Discussion Name]
-Or, please type an option:
+Or, please type one of these commands:
 back
 create forum
 delete forum
@@ -495,7 +498,8 @@ Example input:
 [reply 33]
 
 Reply to post 33:
-What should be the content in the new reply post?
+You are replying to an existing post in the discussion.
+What should be the content in your new reply post?
 
 Example input:
 [contents of post]
@@ -578,12 +582,12 @@ Replace [num] with the number of the post you want to interact with!
 
 ```
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course
@@ -596,7 +600,7 @@ Example input:
 View Student:
 This shows all of a student's posts and lets you grade them.
 Enter the name or ID of the student to view:
-Or, please type an option:
+Or, please type one of these commands:
 back
 exit
 
@@ -622,12 +626,12 @@ exit
 
 ```
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course
@@ -641,12 +645,12 @@ Input Error:
 Sorry, I couldn't understand what you typed. Please try again!
 -----
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course
@@ -665,12 +669,12 @@ Thank you for using our program. Goodbye!
 
 ```
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course
@@ -681,7 +685,7 @@ Example input:
 [edit account]
 
 Editing Your Account - [Username]:
-Please type an option:
+Please type one of these commands:
 back
 change username
 change name
@@ -700,7 +704,7 @@ Example input:
 
 Sorry! You can't use that username.
 Editing Your Account - [Username]:
-Please type an option:
+Please type one of these commands:
 back
 change username
 change name
@@ -723,7 +727,7 @@ Example input:
 
 Congratulations! You have changed your username.
 Editing Your Account - [Username]:
-Please type an option:
+Please type one of these commands:
 back
 change username
 change name
@@ -735,12 +739,12 @@ exit
 
 ```
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course
@@ -758,7 +762,7 @@ Example input:
 
 Your account has been deleted.
 Welcome to [Name]!
-Please type an option:
+Please type one of these commands:
 login
 create account
 exit
@@ -768,12 +772,12 @@ exit
 
 ```
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course
@@ -792,13 +796,13 @@ Example input:
 Course created successfully!
 -----
 Welcome [Name]!
-Please choose a course to view:
+Please type the number of a course to view:
 [1] [Course Name]
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
 [5] [Course Name]
-Or, please type an option:
+Or, please type one of these commands:
 edit account
 delete account
 create course

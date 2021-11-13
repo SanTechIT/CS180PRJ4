@@ -47,7 +47,7 @@ public class TeacherRunner {
      */
     public void loop(Scanner reader) {
         while (!exitProgram) {
-            Display.displayWelcome();
+            Display.displayWelcome(this);
             String input = reader.nextLine();
 
             switch(input) {
@@ -112,7 +112,7 @@ public class TeacherRunner {
         boolean continueThisMenu = true;
         while (continueThisMenu) {
 
-            Display.displayEditAccount();
+            Display.displayEditAccount(this);
             String input = reader.nextLine();
 
             switch(input) {
@@ -195,7 +195,7 @@ public class TeacherRunner {
         while (currentCourse != null) { // "back" sets currentCourse to null
         // then program goes back to main loop
 
-            Display.displayCourse();
+            Display.displayCourse(currentCourse);
             String input = reader.nextLine();
 
             switch (input) {
@@ -248,7 +248,7 @@ public class TeacherRunner {
      */
     private void loopDiscussion(Scanner reader) {
         while (currentDiscussion != null) {
-            Display.displayDiscussion();
+            Display.displayDiscussion(currentDiscussion);
             String input = reader.nextLine();
 
             // Input loop is different because input can be a static command or one that takes an argument
