@@ -40,7 +40,7 @@
 | modifyPassword  | `public void` | `(Scanner in)` | Modifies password, can only be done to self   |
 | deleteAccount  | `public void` | `(Scanner in)` |  Deletes the user account and sets its index in list to null |
 | canVote  | `public abstract boolean` | `()` |  Whether the user has permission to vote |
-| canGrade  | `public abstract boolean` | `()` |  Whether the user has permission to grade |
+| canGrade  | `public abstract boolean` | `()` |  Whether the u ser has permission to grade |
 | canPost  | `public abstract boolean` | `()` |  Whether the user has permission to make or reply to posts, and edit their own posts |
 | canCreateCourse |`public abstract boolean` | `()` | Whether the user can create courses |
 | canModifyCourse |`public abstract boolean` | `()` | Whether the user can modify courses |
@@ -200,21 +200,32 @@ Please choose a course to view:
 [2] [Course Name]
 [3] [Course Name]
 [4] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
+exit
 
 Example input:
-[course 3]
+[3]
 
 Welcome to [Course Name]!
 Please choose a discussion to view:
 [1] [Discussion Name]
 [22] [Discussion Name]
 [25] [Discussion Name]
+Or, please type an option:
+back
+create forum
+delete forum
+exit
 
 Example input:
-[discussion 22]
+[22]
 
 [Discussion Topic]
-Commands: reply [num], edit [num], delete [num], grade [num], exit
+Commands: create post, reply [num], edit [num], delete [num], grade [num], exit
 Replace [num] with the number of the post you want to interact with!
 [12] [Post Content]
 [33] [Post Content]
@@ -223,9 +234,66 @@ Replace [num] with the number of the post you want to interact with!
 
 Example input:
 [reply 33]
-[upvote 98]
+
+Reply to post 33:
+What should be the content in the new reply post?
+
+Example input:
+[contents of post]
+
+New post [114] (reply to [33]) has been created!
+-----
+[Discussion Topic]
+Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Replace [num] with the number of the post you want to interact with!
+[12] [Post Content]
+[33] [Post Content]
+[98] [Post Content]
+[113] [Post Content]
+[114] (reply to 33) [Post Content]
+
+Example input:
 [edit 12]
+
+Edit post 12:
+What should be the new content in post 12?
+
+Example input:
+[contents of post]
+
+Post [12] has been edited!
+-----
+[Discussion Topic]
+Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Replace [num] with the number of the post you want to interact with!
+[12] [Post Content]
+[33] [Post Content]
+[98] [Post Content]
+[113] [Post Content]
+[114] (reply to 33) [Post Content]
+
+Example input:
+[delete 12]
+
+Delete post 12:
+Deleted posts can't be recovered. Are you sure you want to do this? Type yes to confirm.
+
+Example input:
+[yes]
+
+Post 12 has been deleted.
+-----
+[Discussion Topic]
+Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Replace [num] with the number of the post you want to interact with!
+[33] [Post Content]
+[98] [Post Content]
+[113] [Post Content]
+[114] (reply to 33) [Post Content]
+
+Example input:
 [exit]
+
 ```
 
 ___
@@ -251,7 +319,7 @@ view student
 exit
 
 Example input:
-[course 3]
+[3]
 
 Welcome to [Course Name]!
 Please choose a discussion to view:
@@ -265,7 +333,7 @@ delete forum
 exit
 
 Example input:
-[discussion 22]
+[22]
 
 [Discussion Topic]
 Commands: back, reply [num], edit [num], delete [num], grade [num], exit
