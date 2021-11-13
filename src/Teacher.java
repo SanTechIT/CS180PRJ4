@@ -200,7 +200,6 @@ public class Teacher extends User {
      * and assign a point value to their work."
      */
     public boolean gradePost(Post targetPost, int grade) {
-
         return targetPost.grade(this, grade);
     }
 }

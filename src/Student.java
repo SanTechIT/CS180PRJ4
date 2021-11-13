@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ public class Student extends User {
      */
     public Student(String username, String password, String name) {
         super(username, password, name);
+        posts = new ArrayList<>();
     }
 
     /**
@@ -33,35 +35,35 @@ public class Student extends User {
         sr.loop(in);
     }
 
-    public boolean canVote(){
+    public boolean canVote() {
         return true;
     }
 
-    public boolean canGrade(){
+    public boolean canGrade() {
         return false;
     }
 
-    public boolean canPost(){
+    public boolean canPost() {
         return true;
     }
 
-    public  boolean canCreateCourse(){
+    public boolean canCreateCourse() {
         return false;
     }
 
-    public boolean canModifyCourse(){
+    public boolean canModifyCourse() {
         return false;
     }
 
-    public boolean canModifyDiscussion(){
+    public boolean canModifyDiscussion() {
         return false;
     }
 
-    public  boolean canModifyPost(){
+    public boolean canModifyPost() {
         return false;
     }
 
-    public boolean isAdmins(){
+    public boolean isAdmins() {
         return true;
     }
 }
