@@ -21,18 +21,6 @@ public abstract class User implements Serializable {
         this.password = password;
         this.name = name;
     }
-    //    private String username;
-    //    private String password;
-    //    private String name;
-    //    private int id;
-    //    private String userType;
-    //
-    //    public User(String username, String password, String name, String userType) {
-    //        this.username = username;
-    //        this.name = name;
-    //        this.password = password;
-    //        this.userType = userType;
-    //    }
 
     public void setName(String name) {
         this.name = name;
@@ -100,9 +88,11 @@ public abstract class User implements Serializable {
         System.out.println("Select if you are a [T]eacher or [S]tudent: ");
         String userType = in.nextLine();
 
-        User user = new User(name, username, password, userType);
-
-        USER_LIST.add(user);
+        if (userType.equalsIgnoreCase("T")) {
+            new Teacher(username, password, name);
+        } else if (userType.equalsIgnoreCase("S")) {
+            new Student(username, password, name);
+        }
     }
 
 
