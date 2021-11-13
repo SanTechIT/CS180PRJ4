@@ -16,13 +16,11 @@ public abstract class User implements Serializable {
     private String password;
     private String name;
     private int id;
-    private String userType;
 
-    public User(String username, String password, String name, String userType){
+    public User(String username, String password, String name){
         this.username = username;
         this.name = name;
         this.password = password;
-        this.userType = userType;
     }
 
     public void setName(String name) {
