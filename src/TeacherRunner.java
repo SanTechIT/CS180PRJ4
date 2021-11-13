@@ -47,7 +47,7 @@ public class TeacherRunner {
      */
     public void loop(Scanner reader) {
         while (!exitProgram) {
-            Display.displayWelcome(this);
+            Display.displayWelcome(this.teacher);
             String input = reader.nextLine();
 
             switch(input) {
@@ -112,7 +112,7 @@ public class TeacherRunner {
         boolean continueThisMenu = true;
         while (continueThisMenu) {
 
-            Display.displayEditAccount(this);
+            Display.displayEditAccount(this.teacher);
             String input = reader.nextLine();
 
             switch(input) {
