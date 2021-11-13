@@ -46,7 +46,6 @@
 | canModifyCourse |`public abstract boolean` | `()` | Whether the user can modify courses |
 | canModifyDiscussion | `public abstract boolean` | `()` |  Whether the user has permission to modify or delete Discussions |
 | canModifyPost | `public abstract boolean` | `()` | (EC) Whether the user has permission to modify or delete Posts made by others |
-| isAdmin | `public abstract boolean` | `()` | For debugging purposes, overrides all permissions |
 
 ## Teacher Class (extends `User`)
 
