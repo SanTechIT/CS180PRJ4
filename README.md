@@ -193,6 +193,8 @@ ___
 
 ### Student Loop:
 
+##### Student Example 1 (contains general commands)
+
 ```
 Welcome [Name]!
 Please choose a course to view:
@@ -296,13 +298,159 @@ Example input:
 
 ```
 
+#### Student Example 2 (incorrect input and exiting program)
+
+```
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
+exit
+
+Example input:
+[aklsdjflkdsanhfcl]
+
+Input Error:
+Sorry, I couldn't understand what you typed. Please try again!
+-----
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
+exit
+
+Example input:
+[exit]
+
+Exit:
+Logging out...
+Thank you for using our program. Goodbye!
+```
+
+#### Student Example 3 (edit username)
+
+```
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
+exit
+
+Example input:
+[edit account]
+
+Editing Your Account - [Username]:
+Please type an option:
+back
+change username
+change name
+change password
+exit
+
+Example input:
+[change username]
+
+Editing Your Account - [Username]:
+Current username: [current username]
+What would you like your new username to be? It can't be an already existing username.
+
+Example input:
+[username that exists]
+
+Sorry! You can't use that username.
+Editing Your Account - [Username]:
+Please type an option:
+back
+change username
+change name
+change password
+exit
+```
+
+---
+
+```
+Example input:
+[change username]
+
+Editing Your Account - [Username]:
+Current username: [current username]
+What would you like your new username to be? It can't be an already existing username.
+
+Example input:
+[username that DOESN'T already exist]
+
+Congratulations! You have changed your username.
+Editing Your Account - [Username]:
+Please type an option:
+back
+change username
+change name
+change password
+exit
+```
+
+#### Student Example 4 (delete account)
+
+```
+Welcome [Name]!
+Please choose a course to view:
+[1] [Course Name]
+[2] [Course Name]
+[3] [Course Name]
+[4] [Course Name]
+Or, please type an option:
+edit account
+delete account
+create course
+view student
+exit
+
+Example input:
+[delete account]
+
+Delete Account - [Username]:
+Deleted accounts can't be recovered. Are you sure you want to do this? Type yes to confirm.
+
+Example input:
+[yes]
+
+Your account has been deleted.
+Welcome to [Name]!
+Please type an option:
+login
+create account
+exit
+```
+
 ___
 
 ### Teacher Loop:
 
 * The menus for the teacher loop include a "back" option.
 
-##### Example 1 (contains general commands)
+##### Teacher Example 1 (contains general commands)
 
 ```
 Welcome [Name]!
@@ -426,7 +574,7 @@ Replace [num] with the number of the post you want to interact with!
 [exit]
 ```
 
-##### Example 2 (view student dashboard & grade posts)
+##### Teacher Example 2 (view student dashboard & grade posts)
 
 ```
 Welcome [Name]!
@@ -470,7 +618,7 @@ Example input:
 exit
 ```
 
-#### Example 3 (incorrect input and exiting program)
+#### Teacher Example 3 (incorrect input and exiting program)
 
 ```
 Welcome [Name]!
@@ -513,7 +661,7 @@ Logging out...
 Thank you for using our program. Goodbye!
 ```
 
-#### Example 4 (edit username)
+#### Teacher Example 4 (edit username)
 
 ```
 Welcome [Name]!
@@ -583,7 +731,7 @@ change password
 exit
 ```
 
-#### Example 5 (delete account)
+#### Teacher Example 5 (delete account)
 
 ```
 Welcome [Name]!
@@ -616,7 +764,7 @@ create account
 exit
 ```
 
-#### Example 6 (create course)
+#### Teacher Example 6 (create course)
 
 ```
 Welcome [Name]!
