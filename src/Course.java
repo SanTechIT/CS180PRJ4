@@ -29,6 +29,7 @@ public class Course implements Serializable {
     private Course(String topic, int creator) {
         this.creator = creator;
         this.topic = topic;
+        // TODO: Note to self, bad concurrency
         id = COURSE_LIST.size();
         discussions = new ArrayList<>();
         COURSE_LIST.add(this);
