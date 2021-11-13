@@ -37,7 +37,7 @@ public class TeacherRunner {
      * All loop methods are called by loop(Scanner reader) directly or indirectly
      * Each loop method represents a particular menu
      *
-     * Each loop method has a corresponding display method that displays output
+     * Each loop method has a corresponding Display.display method that Display.displays output
      * for that menu
      */
 
@@ -47,7 +47,7 @@ public class TeacherRunner {
      */
     public void loop(Scanner reader) {
         while (!exitProgram) {
-            displayWelcome();
+            Display.displayWelcome();
             String input = reader.nextLine();
 
             switch(input) {
@@ -78,18 +78,18 @@ public class TeacherRunner {
 
                         currentCourse = Course.COURSE_LIST.get(courseId);
                         if (currentCourse == null) {
-                            displayBadInput();
+                            Display.displayBadInput();
                         } else {
                             loopCourse(reader);
                         }
 
                     } catch (NumberFormatException e) {
-                        displayBadInput();
+                        Display.displayBadInput();
                     }
                     break;
             }
         }
-        displayExit();
+        Display.displayExit();
     }
 
 
@@ -97,7 +97,7 @@ public class TeacherRunner {
      * Menu for creating new course (accessed from main menu)
      */
     private void menuCreateCourse(Scanner reader) {
-        displayCreateCourse();
+        Display.displayCreateCourse();
         String input = reader.nextLine();
 
         teacher.createCourse(input);
@@ -112,7 +112,7 @@ public class TeacherRunner {
         boolean continueThisMenu = true;
         while (continueThisMenu) {
 
-            displayEditAccount();
+            Display.displayEditAccount();
             String input = reader.nextLine();
 
             switch(input) {
@@ -153,7 +153,7 @@ public class TeacherRunner {
         while (continueThisMenu) { // back, exit set continueThisMenu = false
         // then program goes back to main loop
 
-            displayViewStudent();
+            Display.displayViewStudent();
             String input = reader.nextLine(); // user input
 
             switch (input) {
@@ -175,13 +175,13 @@ public class TeacherRunner {
                         /*
                         currentDiscussion = Course.searchDiscussions(discussionId);
                         if (currentDiscussion == null) {
-                            displayBadInput();
+                            Display.displayBadInput();
                         } else {
                             loopDiscussion(reader);
                         } */
 
                     } catch (NumberFormatException e) {
-                        displayBadInput();
+                        Display.displayBadInput();
                     }
                     break;
             }
@@ -195,7 +195,7 @@ public class TeacherRunner {
         while (currentCourse != null) { // "back" sets currentCourse to null
         // then program goes back to main loop
 
-            displayCourse();
+            Display.displayCourse();
             String input = reader.nextLine();
 
             switch (input) {
@@ -218,13 +218,13 @@ public class TeacherRunner {
 
                         currentDiscussion = Discussion.DISCUSSIONS_LIST.get(discussionId);
                         if (currentDiscussion == null) {
-                            displayBadInput();
+                            Display.displayBadInput();
                         } else {
                             loopDiscussion(reader); // enter discussion menu with inputted discussion
                         }
 
                     } catch (NumberFormatException e) {
-                        displayBadInput(); // error if discussion ID doesn't convert to number
+                        Display.displayBadInput(); // error if discussion ID doesn't convert to number
                     }
                     break;
             }
@@ -235,7 +235,7 @@ public class TeacherRunner {
      * Menu for creating new discussion forum ()
      */
     private void menuCreateDiscussion(Scanner reader) {
-        displayCreateDiscussion();
+        Display.displayCreateDiscussion();
         String input = reader.nextLine();
 
         this.teacher.createDiscussion(input, currentCourse);
@@ -248,7 +248,7 @@ public class TeacherRunner {
      */
     private void loopDiscussion(Scanner reader) {
         while (currentDiscussion != null) {
-            displayDiscussion();
+            Display.displayDiscussion();
             String input = reader.nextLine();
 
             // Input loop is different because input can be a static command or one that takes an argument
@@ -270,7 +270,7 @@ public class TeacherRunner {
 
                 default:
                     if (!(parse2WordInput(input, reader))) {
-                        displayBadInput();
+                        Display.displayBadInput();
                     }
                     break;
             }
@@ -346,7 +346,7 @@ public class TeacherRunner {
     }
 
     private boolean menuPostReply(Post targetPost, Scanner reader) {
-        displayPostReply(targetPost);
+        Display.displayPostReply(targetPost);
 
         String input = reader.nextLine();
         Post newPost = this.teacher.makePostReply(targetPost, input);
@@ -358,7 +358,7 @@ public class TeacherRunner {
     }
 
     private void menuEditPost(Post targetPost, Scanner reader) {
-        displayEditPost(targetPost);
+        Display.displayEditPost(targetPost);
 
         String input = reader.nextLine();
         this.teacher.editPost(targetPost, input);
@@ -369,7 +369,7 @@ public class TeacherRunner {
     }
 
     private void menuDeletePost(Post targetPost, Scanner reader) {
-        displayDeletePost(targetPost);
+        Display.displayDeletePost(targetPost);
 
         String input = reader.nextLine();
         if (input.toLowerCase().equals("yes")) {
@@ -382,7 +382,7 @@ public class TeacherRunner {
     }
 
     private boolean menuGradePost(Post targetPost, Scanner reader) {
-        displayGradePost(targetPost);
+        Display.displayGradePost(targetPost);
 
         String input = reader.nextLine();
         int grade = -1;
