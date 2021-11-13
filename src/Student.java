@@ -35,31 +35,43 @@ public class Student extends User {
         sr.loop(in);
     }
 
+    @Override
     public boolean canVote() {
         return true;
     }
 
+    @Override
     public boolean canGrade() {
         return false;
     }
 
+    @Override
     public boolean canPost() {
         return true;
     }
 
+    @Override
     public boolean canCreateCourse() {
         return false;
     }
 
+    @Override
     public boolean canModifyCourse() {
         return false;
     }
 
+    @Override
     public boolean canModifyDiscussion() {
         return false;
     }
 
+    @Override
     public boolean canModifyPost() {
+        return false;
+    }
+
+    @Override
+    public boolean canCreateDiscussion() {
         return false;
     }
 
