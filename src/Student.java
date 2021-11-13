@@ -78,4 +78,48 @@ public class Student extends User {
     public boolean isAdmins() {
         return true;
     }
+
+    /* ----- Methods that Modify Things -----
+     * Will be called as part of TeacherRunner's loop method.
+     * For now, most return a boolean representing operation success/failure.
+     *
+     * These are pseudo-private methods that will only be called by TeacherRunner
+     * They're not really public.
+     * They should be private, but Teacher and TeacherRunner are 2 separate classes..
+     *
+     * I'm not sure if these are actually necessary. You may be able to
+     * just call Post methods from TeacherRunner directly.
+     *
+     * WIP.
+     */
+
+    /**
+     * Reply to a student reponse to a discussion forum
+     *
+     * @param parentPost parent post the new post is replying to
+     * @param newContent content of new post
+     */
+    public Post makePostReply(Post parentPost, String newContent) {
+        //        return new Post(parentPost, this, newContent);
+        return Post.createPost(newContent, parentPost, this);
+    }
+
+    /**
+     * Edit own post
+     *
+     * @param targetPost
+     * @param newContent
+     */
+    public boolean editPost(Post targetPost, String newContent) {
+        return targetPost.editPost(newContent, this);
+    }
+
+    /**
+     * Delete a post
+     *
+     * @param targetPost post to be deleted
+     */
+    public boolean deletePost(Post targetPost) {
+        return (targetPost.deletePost(this) != null);
+    }
 }
