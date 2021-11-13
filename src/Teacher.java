@@ -32,7 +32,7 @@ public class Teacher extends User {
      * All these methods return booleans showing whether the class
      * has permission to do something or not.
      *
-     * All inherited from User.
+     * All inherited from User (User has abstract methods for these)
      */
 
     /**
@@ -112,6 +112,11 @@ public class Teacher extends User {
     @Override
     public boolean canModifyPost() {
         return true;
+    }
+
+    @Override
+    public boolean isAdmin() {
+        return false;
     }
 
     /* ----- Methods that Modify Things -----
