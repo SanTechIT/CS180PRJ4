@@ -1,5 +1,4 @@
 .ds_store
 out/*
 CS180PRJ4.iml
-.idea/shelf
-.idea/workspace.xml
+.idea/*
