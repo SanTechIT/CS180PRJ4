@@ -76,7 +76,7 @@ public class TeacherRunner {
                     try {
                         int courseId = Integer.parseInt(input);
 
-                        currentCourse = Course.searchCourses(courseId);
+                        currentCourse = Course.COURSE_LIST.get(courseId);
                         if (currentCourse == null) {
                             displayBadInput();
                         } else {
@@ -216,7 +216,7 @@ public class TeacherRunner {
                     try {
                         int discussionId = Integer.parseInt(input);
 
-                        currentDiscussion = Course.searchDiscussions(discussionId);
+                        currentDiscussion = Discussion.DISCUSSIONS_LIST.get(discussionId);
                         if (currentDiscussion == null) {
                             displayBadInput();
                         } else {
@@ -302,7 +302,8 @@ public class TeacherRunner {
         }
 
         // check if post number corresponds to existing post
-        Post targetPost = currentDiscussion.searchPosts(postId);
+//        Post targetPost = currentDiscussion.searchPosts(postId);
+        Post targetPost = Post.POST_LIST.get(postId);
         if (targetPost == null) {
             return false;
         }

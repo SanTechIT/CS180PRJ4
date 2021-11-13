@@ -4,6 +4,9 @@ import java.util.List;
 
 /**
  * Course Class
+ *
+ * @author chang794
+ * @version 0.2
  */
 public class Course implements Serializable {
     public static List<Course> COURSE_LIST;
@@ -39,14 +42,11 @@ public class Course implements Serializable {
      * @return
      */
     public static Course createCourse(String topic, User user) {
-        // TODO: CHECK PERMS
-        // if(USER.CANCREATECOURSE) {
-        // TODO: USER.GETID
-        return new Course(topic, 0);
-        // } else {
-        // return null;
-        // }
-
+        if (user.canCreateCourse()) {
+            return new Course(topic, user.getId());
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -86,14 +86,36 @@ public class Course implements Serializable {
     }
 
     /**
+     * @return
+     */
+    public String getDiscussionsString() {
+        // TODO: Reference Integer or Object
+        return "";
+    }
+
+    /**
+     * Returns list of all courses with id + course name
+     *
+     * @return
+     */
+    public static String getCoursesString() {
+        String str = "";
+        for (int i = 0; i < COURSE_LIST.size(); i++) {
+            if (COURSE_LIST.get(i) != null) {
+                str += i + " - " + COURSE_LIST.get(i).getTopic();
+            }
+        }
+        return str;
+    }
+
+    /**
      * Sets a new topic for the class
      *
      * @param topic
      */
     public void setTopic(String topic, User user) {
-        // TODO: Permissions
-        //        if (user.canModifyCourse()) {
-        this.topic = topic;
-        //        }
+        if (user.canModifyCourse()) {
+            this.topic = topic;
+        }
     }
 }

@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Project 4 - Teacher
- *
+ * <p>
  * Represents a teacher.
  *
  * @author saraxiao0 (Sara Xiao), chang794
@@ -76,6 +76,15 @@ public class Teacher extends User {
     }
 
     /**
+     * Whether user can create discussions
+     *
+     * @return true since Teachers can create discussions
+     */
+    public boolean canCreateDiscussion() {
+        return true;
+    }
+
+    /**
      * Whether user can modify courses
      *
      * @return true since Teachers can modify courses
@@ -123,28 +132,32 @@ public class Teacher extends User {
      * Create course
      */
     public boolean createCourse(String topic) {
-        Course c = new Course(topic, this);
+        //        Course c = new Course(topic, this);
+        // Does permissions check for networking so people cant make random courses;
+        return (Course.createCourse(topic, this) != null);
     }
 
     /**
      * Create discussion forum
      */
     public boolean createDiscussion(String topic, Course course) {
-        Discussion d = new Discussion(topic, course, this);
+        //        Discussion d = new Discussion(topic, course, this);
+        // Does permissions check for networking so people cant make random discussions;
+        return (Discussion.createDiscussion(course, topic, this) != null);
     }
 
     /**
      * Edit discussion forum
      */
     public boolean editDiscussion(Discussion discussion, String newTopic) {
-        discussion.setTopic(newTopic);
+        return discussion.setTopic(newTopic, this);
     }
 
     /**
      * Delete discussion forum
      */
     public boolean deleteDiscussion(Discussion discussion) {
-        discussion.delete(this);
+        return (Discussion.deleteDiscussion(discussion.getId(), this) != null);
     }
 
     /**

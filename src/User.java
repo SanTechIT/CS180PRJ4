@@ -11,19 +11,28 @@ import java.util.Scanner;
  */
 public abstract class User implements Serializable {
     public static List<User> USER_LIST;
-
+    private int id;
     private String username;
     private String password;
     private String name;
-    private int id;
-    private String userType;
 
-    public User(String username, String password, String name, String userType){
+    public User(String username, String password, String name) {
         this.username = username;
-        this.name = name;
         this.password = password;
-        this.userType = userType;
+        this.name = name;
     }
+    //    private String username;
+    //    private String password;
+    //    private String name;
+    //    private int id;
+    //    private String userType;
+    //
+    //    public User(String username, String password, String name, String userType) {
+    //        this.username = username;
+    //        this.name = name;
+    //        this.password = password;
+    //        this.userType = userType;
+    //    }
 
     public void setName(String name) {
         this.name = name;
@@ -63,12 +72,12 @@ public abstract class User implements Serializable {
 
         User user = getUser(username);
 
-        if(user == null){
-           System.out.println("Wrong username or password");
-           return;
+        if (user == null) {
+            System.out.println("Wrong username or password");
+            return;
         }
 
-        if(password.equals(user.getPassword())){
+        if (password.equals(user.getPassword())) {
             System.out.println("Successfully Logged In!");
         }
 
@@ -78,7 +87,7 @@ public abstract class User implements Serializable {
         // Call User's loop method.
     }
 
-    public static void createAccount(Scanner in){
+    public static void createAccount(Scanner in) {
         System.out.println("Enter your name: ");
         String name = in.nextLine();
 
@@ -99,8 +108,8 @@ public abstract class User implements Serializable {
 
     // get user method
     private static User getUser(String username) {
-        for(User user: USER_LIST){
-            if(username.equals(user.getUsername())){
+        for (User user : USER_LIST) {
+            if (username.equals(user.getUsername())) {
                 return user;
             }
         }
@@ -109,18 +118,19 @@ public abstract class User implements Serializable {
         return null;
     }
 
-    public void modifyUsername(Scanner in){
+    public void modifyUsername(Scanner in) {
         System.out.println("Editing Your Account - " + username + ":");
 
         System.out.println("Current username: " + username);
 
-        System.out.println("What would you like your new username to be? It can't be an already existing username");
+        System.out.println(
+                "What would you like your new username to be? It can't be an already existing username");
 
         String newUsername = in.nextLine();
 
         User newUser = User.getUser(newUsername);
 
-        if(newUser == null){
+        if (newUser == null) {
             username = newUsername;
             System.out.println("Congratulations! You have changed your username.");
         } else {
@@ -128,7 +138,7 @@ public abstract class User implements Serializable {
         }
     }
 
-    public void modifyName(Scanner in){
+    public void modifyName(Scanner in) {
         System.out.println("Editing Your Account - " + username + ":");
 
         System.out.println("Current name: " + name);
@@ -142,7 +152,7 @@ public abstract class User implements Serializable {
         System.out.println("Congratulations! You have changed your name.");
     }
 
-    public void modifyPassword(Scanner in){
+    public void modifyPassword(Scanner in) {
         System.out.println("Editing Your Account - " + username + ":");
 
         System.out.println("Current password: " + password);
@@ -156,14 +166,16 @@ public abstract class User implements Serializable {
         System.out.println("Congratulations! You have changed your password.");
     }
 
-    public void deleteAccount(Scanner in){
-        System.out.println("Delete Account - " + username + ":" + "Deleted accounts can't be recovered. Are you sure you want to do this? Type yes to confirm.");
+    public void deleteAccount(Scanner in) {
+        System.out.println(
+                "Delete Account - " + username + ":" + "Deleted accounts can't be recovered. Are you sure you want to do this? Type yes to confirm.");
 
         String deleteConfirm = in.nextLine();
 
-        if(deleteConfirm.equalsIgnoreCase("yes")){
+        if (deleteConfirm.equalsIgnoreCase("yes")) {
             USER_LIST.remove(this);
-            System.out.println("Your account has been deleted. Welcome to the Learning Management Discussion Board!");
+            System.out.println(
+                    "Your account has been deleted. Welcome to the Learning Management Discussion Board!");
         }
     }
 
@@ -173,4 +185,22 @@ public abstract class User implements Serializable {
      * @param in Scanner input
      */
     public abstract void loop(Scanner in);
+
+    public abstract boolean canVote();
+
+    public abstract boolean canGrade();
+
+    public abstract boolean canPost();
+
+    public abstract boolean canCreateCourse();
+
+    public abstract boolean canCreateDiscussion();
+
+    public abstract boolean canModifyCourse();
+
+    public abstract boolean canModifyDiscussion();
+
+    public abstract boolean canModifyPost();
+
+    //    public abstract boolean isAdmin();
 }

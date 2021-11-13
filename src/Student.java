@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -7,9 +8,18 @@ import java.util.Scanner;
  * @version 0.1
  */
 public class Student extends User {
+    // Track posts?
+    private List<Integer> posts;
 
+    /**
+     * Student Constructor
+     *
+     * @param username
+     * @param password
+     * @param name
+     */
     public Student(String username, String password, String name) {
-
+        super(username, password, name);
     }
 
     /**
