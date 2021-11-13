@@ -105,7 +105,7 @@
 ##### Fields
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
-| DISCUSSIONS_LIST   | `public static List<Discussion>` | Lists all `Discussion`s |  |
+| DISCUSSION_LIST   | `public static List<Discussion>` | Lists all `Discussion`s |  |
 | discussions | `private List<Discussion>` | | G/S |
 | id | `private int` | Id is same as index in list | G |
 | topic | `private String` | Discussion Topic | G/S |

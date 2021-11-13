@@ -21,9 +21,15 @@ public class Display {
      * Displays output for User main loop (viewing all courses after login)
      */
     public static void displayWelcome(User user) {
-        System.out.println("\nWelcome " + user.getName() + "!");
+        System.out.println("\nWelcome " + user.getName() + "!" +
+            "\nPlease type the number of a course to view:");
 
-        System.out.println(Course.getCoursesString());
+        String courseList = Course.getCoursesString();
+        if (courseList.isEmpty()) {
+            System.out.println("There are no courses.");
+        } else {
+            System.out.println(courseList);
+        }
 
         System.out.println("Or, please type one of these commands: " +
             "\nedit account" +
@@ -67,9 +73,15 @@ public class Display {
      * Displays output for course loop (viewing all discussions in 1 course)
      */
     public static void displayCourse(Course currentCourse) {
-        System.out.println("\nWelcome to " + currentCourse.getTopic() + "!");
+        System.out.println("\nWelcome to " + currentCourse.getTopic() + "!" +
+            "\nPlease type the number of a discussion to view:");
 
-        System.out.println(currentCourse.getDiscussionsString());
+        String discussionList = currentCourse.getDiscussionsString();
+        if (discussionList.isEmpty()) {
+            System.out.println("There are no courses.");
+        } else {
+            System.out.println(discussionList);
+        }
 
         System.out.println("Or, please type one of these commands: " +
             "\nback" +
@@ -97,7 +109,12 @@ public class Display {
             "\nReplace [num] with the number of the post you" +
                 "want to interact with!");
 
-        System.out.println(currentDiscussion.getPostsString());
+        String postList = currentDiscussion.getPostsString());
+        if (postList.isEmpty()) {
+            System.out.println("There are no posts.");
+        } else {
+            System.out.println(postList);
+        }
 
         System.out.print("> ");
     }

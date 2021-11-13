@@ -3,7 +3,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Discussion {
-    public static List<Discussion> DISCUSSIONS_LIST;
+    public static List<Discussion> DISCUSSION_LIST;
 
     private int id;
     private String topic;
@@ -20,9 +20,9 @@ public class Discussion {
         this.topic = topic;
         this.creator = creator;
         this.course = course;
-        id = DISCUSSIONS_LIST.size();
+        id = DISCUSSION_LIST.size();
         posts = new ArrayList<>();
-        DISCUSSIONS_LIST.add(this);
+        DISCUSSION_LIST.add(this);
     }
 
     /**
@@ -45,7 +45,7 @@ public class Discussion {
         if (!user.canModifyDiscussion()){
             return null;
         }
-        return DISCUSSIONS_LIST.set(id, null);
+        return DISCUSSION_LIST.set(id, null);
     }
 
     /**

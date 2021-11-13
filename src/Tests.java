@@ -12,10 +12,7 @@ import java.util.Scanner;
 public class Tests {
 
     public static void main(String[] args) {
-        Teacher test = new Teacher("Bob", "123", "Bobby");
-
-        Scanner reader = new Scanner(System.in);
-        test.loop(reader);
+        Main.main(new String[1]);
     }
 
     // @Test
