@@ -177,6 +177,22 @@ public abstract class User implements Serializable {
      * @param in Scanner input
      */
     public abstract void loop(Scanner in);
+
+    public abstract boolean canVote();
+
+    public abstract boolean canGrade();
+
+    public abstract boolean canPost();
+
+    public abstract boolean canCreateCourse();
+
+    public abstract boolean canModifyCourse();
+
+    public abstract boolean canModifyDiscussion();
+
+    public abstract boolean canModifyPost();
+
+    public abstract boolean isAdmins();
 }
 
 
