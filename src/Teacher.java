@@ -114,10 +114,10 @@ public class Teacher extends User {
         return true;
     }
 
-    @Override
-    public boolean isAdmin() {
-        return false;
-    }
+    //    @Override
+    //    public boolean isAdmin() {
+    //        return false;
+    //    }
 
     /* ----- Methods that Modify Things -----
      * Will be called as part of TeacherRunner's loop method.
@@ -172,7 +172,8 @@ public class Teacher extends User {
      * @param newContent content of new post
      */
     public Post makePostReply(Post parentPost, String newContent) {
-        return new Post(parentPost, this, newContent);
+        //        return new Post(parentPost, this, newContent);
+        return Post.createPost(newContent, parentPost, this);
     }
 
     /**
@@ -182,7 +183,7 @@ public class Teacher extends User {
      * @param newContent
      */
     public boolean editPost(Post targetPost, String newContent) {
-        targetPost.edit(this, newContent);
+        return targetPost.editPost(newContent, this);
     }
 
     /**
@@ -191,14 +192,15 @@ public class Teacher extends User {
      * @param targetPost post to be deleted
      */
     public boolean deletePost(Post targetPost) {
-        targetPost.delete(this);
+        return (targetPost.deletePost(this) != null);
     }
 
     /**
      * "Teachers can view replies for a specific student on one page
      * and assign a point value to their work."
      */
-    public void gradePost(Post targetPost, int grade) {
-        targetPost.grade(this, grade);
+    public boolean gradePost(Post targetPost, int grade) {
+
+        return targetPost.grade(this, grade);
     }
 }
