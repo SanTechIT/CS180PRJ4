@@ -55,7 +55,7 @@ public abstract class User implements Serializable {
         System.out.println("Enter your username: ");
         String username = in.nextLine();
 
-        System.out.println("Create your password: ");
+        System.out.println("Enter your password: ");
         String password = in.nextLine();
 
         User user = getUser(username);
@@ -93,6 +93,7 @@ public abstract class User implements Serializable {
         } else if (userType.equalsIgnoreCase("S")) {
             new Student(username, password, name);
         }
+        System.out.println(USER_LIST);
     }
 
 
@@ -191,4 +192,5 @@ public abstract class User implements Serializable {
     public abstract boolean canModifyDiscussion();
 
     public abstract boolean canModifyPost();
+
 }
