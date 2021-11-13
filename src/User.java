@@ -188,9 +188,11 @@ public abstract class User implements Serializable {
 
     public abstract boolean canModifyDiscussion();
 
+    public abstract boolean canCreateDiscussion();
+
     public abstract boolean canModifyPost();
 
-    public abstract boolean isAdmins();
+//    public abstract boolean isAdmins();
 
     //    public abstract boolean isAdmin();
 }
