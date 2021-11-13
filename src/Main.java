@@ -12,7 +12,8 @@ public class Main {
      * @param args Command Line Arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Display.displayStart();
+
         Scanner scanner = new Scanner(System.in);
         // Load Course List if exits
         Course.COURSE_LIST = new ArrayList<>();
@@ -20,20 +21,26 @@ public class Main {
         // Load User List if exits
         User.USER_LIST = new ArrayList<>();
         // make new User object, set static vars
-        String input = scanner.nextLine();
+        String input;
         do {
+            input = scanner.nextLine();
             switch (input) {
                 case "login":
                     User.connect(scanner);
                     break;
+
                 case "create account":
                     User.createAccount(scanner);
                     break;
-                default:
 
+                case "exit":
+                    Display.displayExit();
+                    break;
+
+                default:
+                    Display.displayBadInput();
                     break;
             }
-            input = scanner.nextLine();
         } while (!input.equals("exit")); // Not Exit
     }
 }
