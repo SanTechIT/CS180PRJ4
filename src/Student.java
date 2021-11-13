@@ -29,6 +29,8 @@ public class Student extends User {
      */
     @Override
     public void loop(Scanner in) {
+        StudentRunner sr = new StudentRunner(this);
+        sr.loop(in);
 
     }
 }
