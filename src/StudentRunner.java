@@ -3,19 +3,21 @@ import java.util.Scanner;
 /**
  * Project 4 - Student Runner
  *
- * Runs the loop() for the Student class
+ * Runs the loop() for the Teacher class
  *
  * @author briankwon25 (Brian Kwon)
  *
  * @version 0.2 - 2021-11-12
  */
-
 public class StudentRunner {
-    private Student student;
-    private Course currentCourse;
-    private Discussion currentDiscussion;
+    private Student student; // Teacher who's logged in
+    private Course currentCourse; // current course user's looking at
+    private Discussion currentDiscussion; // current discussion user's looking at
 
-    private boolean exitProgram = false;
+    private boolean exitProgram = false; // whether to exit the program
+    // set to true when user inputs "exit" - then program logs off and stops
+
+
     public StudentRunner(Student student) {
         this.student = student;
 
@@ -25,7 +27,7 @@ public class StudentRunner {
 
     public void loop(Scanner reader) {
         while (!exitProgram) {
-            Display.displayWelcome();
+            Display.displayWelcome(this.student);
             String input = reader.nextLine();
 
             switch(input) {
@@ -36,14 +38,6 @@ public class StudentRunner {
                 // deleteAccount is a User method that teacher inherits
                 case "delete account":
                     student.deleteAccount(reader);
-                    break;
-
-                case "create course":
-                    menuCreateCourse(reader);
-                    break;
-
-                case "view student":
-                    loopViewStudent(reader);
                     break;
 
                 case "exit":
@@ -77,7 +71,7 @@ public class StudentRunner {
         boolean continueThisMenu = true;
         while (continueThisMenu) {
 
-            Display.displayEditAccount();
+            Display.displayEditAccount(this.student);
             String input = reader.nextLine();
 
             switch(input) {
@@ -107,51 +101,6 @@ public class StudentRunner {
         }
     }
 
-    /**
-     * See dashboard that lists most popular forum replies by vote
-     * "Data will appear with the student's name and vote count."
-     * "Teachers can choose to sort the dashboard."
-     * Part of Voting Selection in handout
-     */
-    private void loopViewStudent(Scanner reader) {
-        boolean continueThisMenu = true;
-        while (continueThisMenu) { // back, exit set continueThisMenu = false
-            // then program goes back to main loop
-
-            Display.displayViewStudent();
-            String input = reader.nextLine(); // user input
-
-            switch (input) {
-                case "back":
-                    continueThisMenu = false;
-                    break;
-
-                case "exit":
-                    continueThisMenu = false;
-                    exitProgram = true;
-                    break;
-
-                default:
-                    try {
-                        int studentId = Integer.parseInt(input);
-
-                        // TODO
-
-                        /*
-                        currentDiscussion = Course.searchDiscussions(discussionId);
-                        if (currentDiscussion == null) {
-                            Display.displayBadInput();
-                        } else {
-                            loopDiscussion(reader);
-                        } */
-
-                    } catch (NumberFormatException e) {
-                        Display.displayBadInput();
-                    }
-                    break;
-            }
-        }
-    }
 
     /**
      * Loop for 1 course + its discussions
@@ -160,16 +109,12 @@ public class StudentRunner {
         while (currentCourse != null) { // "back" sets currentCourse to null
             // then program goes back to main loop
 
-            Display.displayCourse();
+            Display.displayCourse(currentCourse);
             String input = reader.nextLine();
 
             switch (input) {
                 case "back":
                     currentCourse = null;
-                    break;
-
-                case "create forum":
-                    menuCreateDiscussion(reader);
                     break;
 
                 case "exit":
@@ -196,24 +141,13 @@ public class StudentRunner {
         }
     }
 
-    /**
-     * Menu for creating new discussion forum ()
-     */
-    private void menuCreateDiscussion(Scanner reader) {
-        Display.displayCreateDiscussion();
-        String input = reader.nextLine();
-
-        this.student.createDiscussion(input, currentCourse);
-
-        System.out.println("Discussion created successfully!");
-    }
 
     /**
      * Loop for 1 discussion form + its posts
      */
     private void loopDiscussion(Scanner reader) {
         while (currentDiscussion != null) {
-            Display.displayDiscussion();
+            Display.displayDiscussion(currentDiscussion);
             String input = reader.nextLine();
 
             // Input loop is different because input can be a static command or one that takes an argument
@@ -227,10 +161,6 @@ public class StudentRunner {
                     currentDiscussion = null;
                     currentCourse = null;
                     exitProgram = true;
-                    break;
-
-                case "delete forum":
-                    this.student.deleteDiscussion(currentDiscussion);
                     break;
 
                 default:
@@ -296,9 +226,6 @@ public class StudentRunner {
                 operationSuccess = menuDeletePost(targetPost, reader);
                 break;
 
-            case "grade":
-                operationSuccess = menuGradePost(targetPost, reader);
-                break;
 
             default:
                 return false;
@@ -322,7 +249,7 @@ public class StudentRunner {
         return true;
     }
 
-    private void menuEditPost(Post targetPost, Scanner reader) {
+    private boolean menuEditPost(Post targetPost, Scanner reader) {
         Display.displayEditPost(targetPost);
 
         String input = reader.nextLine();
@@ -333,7 +260,7 @@ public class StudentRunner {
         return true;
     }
 
-    private void menuDeletePost(Post targetPost, Scanner reader) {
+    private boolean menuDeletePost(Post targetPost, Scanner reader) {
         Display.displayDeletePost(targetPost);
 
         String input = reader.nextLine();
@@ -346,26 +273,4 @@ public class StudentRunner {
         return true;
     }
 
-    private boolean menuGradePost(Post targetPost, Scanner reader) {
-        Display.displayGradePost(targetPost);
-
-        String input = reader.nextLine();
-        int grade = -1;
-        try {
-            grade = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-
-        if (grade < 0 || grade > targetPost.getMaxGrade()) {
-            return false;
-        }
-
-        this.student.gradePost(targetPost, grade);
-
-        System.out.println("Post " + targetPost.getId() +
-                "has been assigned the grade: " + grade + "/" +
-                targetPost.getMaxGrade());
-        return true;
-    }
 }
