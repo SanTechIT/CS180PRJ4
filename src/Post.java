@@ -8,6 +8,7 @@ import java.util.List;
  * Post class
  *
  * @author briankwon25 (Brian Kwon)
+ *
  * @version 0.2 - 2021-11-12
  */
 

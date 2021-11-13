@@ -92,12 +92,12 @@ public class StudentRunner {
 
                 // modifyName is a User method that teacher inherits
                 case "change name":
-                    teacher.modifyName(reader);
+                    student.modifyName(reader);
                     break;
 
                 // modifyPassword is a User method that teacher inherits
                 case "change password":
-                    teacher.modifyPassword(reader);
+                    student.modifyPassword(reader);
                     break;
 
                 case "exit":
@@ -203,7 +203,7 @@ public class StudentRunner {
         Display.displayCreateDiscussion();
         String input = reader.nextLine();
 
-        this.teacher.createDiscussion(input, currentCourse);
+        this.student.createDiscussion(input, currentCourse);
 
         System.out.println("Discussion created successfully!");
     }
@@ -230,7 +230,7 @@ public class StudentRunner {
                     break;
 
                 case "delete forum":
-                    this.teacher.deleteDiscussion(currentDiscussion);
+                    this.student.deleteDiscussion(currentDiscussion);
                     break;
 
                 default:
@@ -314,7 +314,7 @@ public class StudentRunner {
         Display.displayPostReply(targetPost);
 
         String input = reader.nextLine();
-        Post newPost = this.teacher.makePostReply(targetPost, input);
+        Post newPost = this.student.makePostReply(targetPost, input);
 
         System.out.println("New post " + newPost.getId() +
                 " (reply to " + targetPost.getId() + ")" +
@@ -326,7 +326,7 @@ public class StudentRunner {
         Display.displayEditPost(targetPost);
 
         String input = reader.nextLine();
-        this.teacher.editPost(targetPost, input);
+        this.student.editPost(targetPost, input);
 
         System.out.println("Post " + targetPost.getId() +
                 "has been edited!");
@@ -338,7 +338,7 @@ public class StudentRunner {
 
         String input = reader.nextLine();
         if (input.toLowerCase().equals("yes")) {
-            this.teacher.deletePost(targetPost);
+            this.student.deletePost(targetPost);
         }
 
         System.out.println("Post " + targetPost.getId() +
@@ -361,7 +361,7 @@ public class StudentRunner {
             return false;
         }
 
-        this.teacher.gradePost(targetPost, grade);
+        this.student.gradePost(targetPost, grade);
 
         System.out.println("Post " + targetPost.getId() +
                 "has been assigned the grade: " + grade + "/" +
