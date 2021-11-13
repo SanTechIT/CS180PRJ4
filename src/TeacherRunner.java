@@ -357,7 +357,7 @@ public class TeacherRunner {
         return true;
     }
 
-    private void menuEditPost(Post targetPost, Scanner reader) {
+    private boolean menuEditPost(Post targetPost, Scanner reader) {
         Display.displayEditPost(targetPost);
 
         String input = reader.nextLine();
@@ -368,7 +368,7 @@ public class TeacherRunner {
         return true;
     }
 
-    private void menuDeletePost(Post targetPost, Scanner reader) {
+    private boolean menuDeletePost(Post targetPost, Scanner reader) {
         Display.displayDeletePost(targetPost);
 
         String input = reader.nextLine();
