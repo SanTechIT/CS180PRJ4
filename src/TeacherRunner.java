@@ -58,6 +58,7 @@ public class TeacherRunner {
                 // deleteAccount is a User method that teacher inherits
                 case "delete account":
                     teacher.deleteAccount(reader);
+                    exitProgram = true;
                     break;
 
                 case "create course":

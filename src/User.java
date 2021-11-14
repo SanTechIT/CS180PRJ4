@@ -81,7 +81,7 @@ public abstract class User implements Serializable {
 
         System.out.println("Enter your name: ");
         String name = in.nextLine();
-        
+
         System.out.println("Create your password: ");
         String password = in.nextLine();
 
@@ -158,7 +158,8 @@ public abstract class User implements Serializable {
 
     public void deleteAccount(Scanner in) {
         System.out.println(
-                "Delete Account - " + username + ":" + "Deleted accounts can't be recovered. Are you sure you want to do this? Type yes to confirm.");
+            "Delete Account - " + username + ":" +
+            "\nDeleted accounts can't be recovered. Are you sure you want to do this? Type yes to confirm.");
 
         String deleteConfirm = in.nextLine();
 

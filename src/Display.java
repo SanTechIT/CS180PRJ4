@@ -15,6 +15,8 @@ public class Display {
             "\nlogin" +
             "\ncreate account" +
             "\nexit");
+
+        System.out.print("> ");
     }
 
     /**
@@ -192,5 +194,7 @@ public class Display {
             "\nOr, please type one of these commands: " +
             "\nback" +
             "\nexit");
+
+        System.out.print("> ");
     }
 }
