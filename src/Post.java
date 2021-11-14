@@ -35,13 +35,7 @@ public class Post implements Serializable {
     private Post() {
         // Deny Instantiation
     }
-    /**
-     * Post Constructor
-     *
-     * @param content
-     * @param dicussions
-     * @param creatorId
-     */
+
     private Post(String content, Discussion discussion, Post parent, int creatorId) {
         this.content = content;
         this.parent = parent;
@@ -131,7 +125,6 @@ public class Post implements Serializable {
         String timestamp = "TIMESTAMP NOT IMPLEMENTED"; // TODO
 
         postString += "\n";
-
 
         postString += "Post ID " + getId();
         if (parent != null) {
@@ -267,7 +260,7 @@ public class Post implements Serializable {
         if (!user.canVote()) {
             return false;
         }
-        this.upvotes++;
+        this.downvotes++;
         return true;
     }
 }
