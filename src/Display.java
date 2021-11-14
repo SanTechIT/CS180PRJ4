@@ -103,11 +103,11 @@ public class Display {
 
     /**
      * Displays output for discussion loop (viewing all posts in 1 discussion)
+     * Called by displayDiscussionTeacher and displayDiscussionStudent
      */
-    public static void displayDiscussion(Discussion currentDiscussion) {
+    private static void displayDiscussion(Discussion currentDiscussion, String commands) {
         System.out.println("\nWelcome to " + currentDiscussion.getTopic() + "!" +
-            "\nCommands: back, reply [num], edit [num], delete [num], " +
-                "grade [num], exit" +
+            "\n" + commands +
             "\nReplace [num] with the number of the post you" +
                 "want to interact with!");
 
@@ -119,6 +119,20 @@ public class Display {
         }
 
         System.out.print("> ");
+    }
+
+    public static void displayDiscussionTeacher(Discussion currentDiscussion) {
+        String commands = "Commands:" +
+            "back, reply [num], edit [num], delete [num], " +
+            "grade [num], exit";
+        displayDiscussion(currentDiscussion, commands);
+    }
+
+    public static void displayDiscussionStudent(Discussion currentDiscussion) {
+        String commands = "Commands:" +
+            "back, reply to discussion, reply [num], edit [num], delete [num]," +
+            "upvote [num], downvote [num], exit";
+        displayDiscussion(currentDiscussion, commands);
     }
 
     /**

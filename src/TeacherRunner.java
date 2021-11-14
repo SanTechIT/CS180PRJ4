@@ -251,7 +251,7 @@ public class TeacherRunner {
      */
     private void loopDiscussion(Scanner reader) {
         while (currentDiscussion != null) {
-            Display.displayDiscussion(currentDiscussion);
+            Display.displayDiscussionTeacher(currentDiscussion);
             String input = reader.nextLine();
 
             // Input loop is different because input can be a static command or one that takes an argument
