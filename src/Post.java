@@ -91,14 +91,14 @@ public class Post implements Serializable {
         return new Post(content, discussion, parent, user.getId());
     }
 
-    public static Post searchPostsById(int postId) {
-        for (Post post : POST_LIST) {
-            if (post.getId() == postId) {
-                return post;
-            }
-        }
-        return null;
-    }
+//    public static Post searchPostsById(int postId) {
+//        for (Post post : POST_LIST) {
+//            if (post.getId() == postId) {
+//                return post;
+//            }
+//        }
+//        return null;
+//    }
 
     /**
      * Allows editing of the post if the user has permission to edit or if
