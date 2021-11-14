@@ -179,6 +179,13 @@ public class Student extends User implements Serializable {
         return 0;
     }
 
+    /**
+     * Determines whether upvote goes through for post
+     *
+     * @param targetPost
+     *
+     * @return
+     */
     public boolean upvotePost(Post targetPost) {
         int oldVoteValue = getPostVote(targetPost);
 
@@ -196,7 +203,7 @@ public class Student extends User implements Serializable {
 
     /**
      * Get downvote for post
-     *
+     * @param targetPost
      * @return downvote count
      */
     public boolean downvotePost(Post targetPost) {
@@ -214,7 +221,14 @@ public class Student extends User implements Serializable {
         return false;
     }
 
-    public boolean novotePost(Post targetPost) {
+    /**
+     * Removes all votes that Student has made
+     *
+     * @param targetPost
+     *
+     * @return
+     */
+    public boolean noVotePost(Post targetPost) {
         int oldVoteValue = getPostVote(targetPost);
 
         if (

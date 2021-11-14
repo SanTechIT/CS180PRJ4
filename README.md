@@ -15,7 +15,6 @@ Missing features
 Problems
 - MAJOR: (Tentative Done) Validate inputs for class/discussion/post Ids in reply/edit/delete actions
 - Ask if user wants to reply/edit/delete posts of another grouping?
-- MAJOR: Teacher can't delete discussion forums
 - non-major: teacher can't logout from ViewIndividualStudent menu, only go "back" (effect of loop design)
 - MAJOR: in ViewIndividualStudent, each of the student's posts shows up twice
 - MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash, don't know why (example below)
@@ -314,14 +313,12 @@ Exception in thread "main" java.lang.NullPointerException
 
 #### Methods
 
-| Signature   | Parameters | Description |
-| ----------- | ---------- | ----------- |
-| `public String getPostsString` | `()` |  Returns chronological list of all posts with id + post topic (see Console Example) |
-| `public Post searchPosts` | `(int id)` | Search `posts` for post with that id, return null if not found  |
-| `public void addPost`   | `(User poster, String newContent)` | Calls Post constructor to add new post to `posts` |
-| `public void addPost`   | `(User poster, Post parentPost, String newContent)` | Calls Post constructor to add new post (*
-which is a reply to an existing post*) to `posts` |
-| `public void delete` | `(User deleter)` | Deletes this forum and all posts within it |
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| createDiscussion | `public static Discussion` | `(Course course, String topic, User user)` |  Creates and returns a new Discussion object if the user has permission to |
+| deleteDiscussion | `public static Discussion` | `(int id, User user)` |  Deletes the discussion with the given id |
+| getPostsString | `public String` | `(Course course, String topic, User user)` |  Returns a string with all the posts listed |
+| sortByUpvotes | `public List<Post>` | `(Course course, String topic, User user)` |  Sorts the list by upvotes |
 
 - Get most popular posts
 
@@ -333,35 +330,67 @@ Note: posts can be under both discussions and other posts
 
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
-| ALL_POSTS  | `public static List<Post>` | Lists all `Post`s |  |
+| POST_LIST  | `public static List<Post>` | Lists all `Post`s |  |
 | id | `private int` | `id` is same as index in list | G |
 | posts | `private List<Post>` | List of all posts related to this `Post` | G |
 | timestamp | `private Date` | Keeps track of when the `Post` was created | G/S |
-| creator | `private int` | Keeps track of the UID of who created this `Post` | G |
+| creatorID | `private int` | Keeps track of the UID of who created this `Post` | G |
 | content | `private String` | Keeps track of the contents in this `Post`, can be changed only by `creator` (EC or a `Teacher`) | G/S |
 | grade | `private int` | Keeps track of the grade of this post `Post`, Only shown if `User` is creator of `Post` or is a `Teacher` | G |
 | maxGrade | `private int` | Keeps track of the max grade of this `Post`, Only shown if `User` is creator of `Post` or is a `Teacher`  | G |
-| upvotes | `private List<Integer>` | Keeps track of all `Student` UIDs who have up-voted this post | G |
-| downvotes | `private List<Integer>` | OPTIONAL BUT COOL? | G |
-| parentPost | `private Post`  | Post that this Post is a reply to; null if this Post is not a reply   | G  |
-| parentDiscussion  | `private Discussion` | Discussion that this Post is a part of  |   |
+| upvotes | `private int` | Keeps track of all `Student` UIDs who have up-voted this post | G |
+| downvotes | `private int` | OPTIONAL BUT COOL? | G |
+| parent | `private Post`  | Post that this Post is a reply to; null if this Post is not a reply   | G  |
+| discussion  | `private Discussion` | Discussion that this Post is a part of  | G |
 
 #### Constructors
 
-| Parameters  | Description |
-| ----------- | ----------- |
-| `(User creator, String content)` | Auto sets id to next id in list |
-| `(Post parentPost, User creator, String content)` | New post is a reply to parentPost  |
+| Signature   | Parameters  | Description |
+| ----------- | ----------- | ----------- |
+| `private` | `(String content, Discussion discussion, Post parent, int creatorId)` | Constructor for Post |
 
 #### Methods
 
-| Signature   | Parameters  | Description |
-| ----------- | ----------- | ----------- |
-| `public void edit`   | `(User editor, String newContent)` | Replaces content of Post with newContent  |
-| `public void delete` | `(User deleter)` | Deletes post |
-| `public void grade` | `(User grader, int grade)` | Assigns grade |
-| `public void upvote`  | `(User upvoter)`  | Upvotes post |
-| `public void downvote`   |  `(User downvoter)`  | Downvotes post  |
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| createPost | `public static`   | `(String content, Discussion discussion, User user)` | Returns a new post if the user has permission to post |
+| createPost | `public static`   | `(String content, Discussion discussion, Post parent, User user)` | Returns a new post if the user has permission to post, Post is a reply to another post |
+| editPost | `public boolean`   | `(String newContent, User user)` | Allows editing of the post if the user has permission to edit or if the user is the creatorId of the post |
+| toString | `public String`   | `()` | The toString for Post |
+| grade | `public boolean`   | `(User user, int grade)` | Grades the post if the user has permission |
+| getPostsString | `public String`   | `()` | Return the list of posts under this post as a string |
+| upvote | `public boolean`   | `(User user, int oldVote)` | Decides if the user can vote, if so, then upvotes |
+| downvote | `public boolean`   | `(User user, int oldVote)` | Decides if the user can vote, if so, then downvotes |
+| removeVote | `public boolean`   | `(int oldVote)` | removes the vote |
+
+### Display Class
+
+#### Methods
+
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| displayStart | `public static void` | `()`  |  Displays output for main login/create account loop |
+| displayWelcome | `public static void` | `(User user)`  |  Displays output for User main loop (viewing all courses after login) |
+| displayBadInput | `public static void` | `()`  |  Displays output for invalid input |
+| displayExit | `public static void` | `()`  |  Displays output for program exit |
+| displayLogout | `public static void` | `()`  |  Displays output for logging out |
+| displayCreateCourse | `public static void` | `()`  |  Displays output for creating a course (accessed from main menu) |
+| displayCourse | `public static void` | `(Course currentCourse, User user)`  |  Displays output for course loop (viewing all discussions in 1 course) |
+| displayCreateDiscussion | `public static void` | `(Course currentCourse, User user)`  |  Displays output for creating a discussion |
+| displayEditCourse | `public static void` | `()`  |  Displays output for editing a course topic |
+| displayDiscussion | `public static void` | `(Discussion currentDiscussion, User user)`  |  Displays output for discussion loop (viewing all posts in 1 discussion) |
+| displayDiscussionReply | `public static void` | `(Discussion currentDiscussion)`  |  Displays menu for replying directly to discussion (Student only) |
+| displayPostReply | `public static void` | `(Post targetPost)`  |  Displays menu for replying to post |
+| displayEditPost | `public static void` | `(Post targetPost)`  |  Displays menu for editing post |
+| displayDeletePost | `public static void` | `(Post targetPost)`  |  Displays menu for deleting post |
+| displayGradePost | `public static void` | `(Post targetPost)`  |  Displays menu for grading post |
+| displayEditAccount | `public static void` | `(User user)`  |  Displays output for edit account loop (an option from the main loop) |
+| displayModifyUsername | `public static void` | `(User user)`  |  Displays output for modifying the username |
+| displayModifyName | `public static void` | `(User user)`  |  Displays output for modifying the name |
+| displayModifyPassword | `public static void` | `(User usert)`  |  Displays output for modifying the password |
+| displayDeleteAccount | `public static void` | `(User user)`  |  Displays output for deleting an account |
+| displayViewStudent | `public static void` | `()`  |  Displays output for view student loop (option from the main loop) |
+| displayIndividualStudent | `public static void` | `(Student currentStudent)`  |  Displays output for an individual student |
 
 ## Console Example
 
