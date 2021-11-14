@@ -4,6 +4,9 @@
  *
  * For Project 5, can be modified to use GUI (handling input will be
  * trickier, though).
+ *
+ * @author Sara Xiao
+ * @version 2021-11-13
  */
 public class Display {
     /**
@@ -207,6 +210,36 @@ public class Display {
             "\nexit");
 
         System.out.print("> ");
+    }
+
+    public static void displayModifyUsername(User user) {
+        System.out.println("Editing Your Account - " + user.getUsername() + ":");
+
+        System.out.println("Current username: " + user.getUsername());
+
+        System.out.println(
+                "What would you like your new username to be? It can't be an already existing username");
+    }
+
+    public static void displayModifyName(User user) {
+        System.out.println("Editing Your Account - " + user.getUsername() + ":");
+
+        System.out.println("Current name: " + user.getName());
+
+        System.out.println("What would you like your new name to be?");
+    }
+
+    public static void displayModifyPassword(User user) {
+        System.out.println("Editing Your Account - " + user.getUsername() + ":");
+
+        System.out.println("What would you like your new password to be?");
+    }
+
+    public static void displayDeleteAccount(User user) {
+        System.out.println(
+            "Delete Account - " + user.getUsername() + ":" +
+            "\nDeleted accounts can't be recovered. Are you sure you want to do this?" +
+            " Type yes to confirm.");
     }
 
     /**

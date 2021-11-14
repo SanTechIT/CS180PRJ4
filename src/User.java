@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @version 0.1
  */
 public abstract class User implements Serializable {
-    
+
     // As per https://stackoverflow.com/
     // questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 01L;
@@ -114,12 +114,7 @@ public abstract class User implements Serializable {
     }
 
     public void modifyUsername(Scanner in) {
-        System.out.println("Editing Your Account - " + username + ":");
-
-        System.out.println("Current username: " + username);
-
-        System.out.println(
-                "What would you like your new username to be? It can't be an already existing username");
+        Display.displayModifyUsername(this);
 
         String newUsername = in.nextLine();
 
@@ -134,11 +129,7 @@ public abstract class User implements Serializable {
     }
 
     public void modifyName(Scanner in) {
-        System.out.println("Editing Your Account - " + username + ":");
-
-        System.out.println("Current name: " + name);
-
-        System.out.println("What would you like your new name to be?");
+        Display.displayModifyName(this);
 
         String newName = in.nextLine();
 
@@ -148,11 +139,7 @@ public abstract class User implements Serializable {
     }
 
     public void modifyPassword(Scanner in) {
-        System.out.println("Editing Your Account - " + username + ":");
-
-        System.out.println("Current password: " + password);
-
-        System.out.println("What would you like your new password to be?");
+        Display.displayModifyPassword(this);
 
         String newPassword = in.nextLine();
 
@@ -162,8 +149,7 @@ public abstract class User implements Serializable {
     }
 
     public void deleteAccount(Scanner in) {
-        System.out.println(
-                "Delete Account - " + username + ":" + "\nDeleted accounts can't be recovered. Are you sure you want to do this? Type yes to confirm.");
+        Display.displayDeleteAccount(this);
 
         String deleteConfirm = in.nextLine();
 
