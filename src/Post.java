@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @version 0.2 - 2021-11-12
  */
 
-public class Post {
+public class Post implements Serializable {
     public static List<Post> POST_LIST;
 
     private int id;

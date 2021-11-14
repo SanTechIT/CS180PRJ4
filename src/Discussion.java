@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Discussion {
+public class Discussion implements Serializable {
     public static List<Discussion> DISCUSSION_LIST;
 
     private int id;

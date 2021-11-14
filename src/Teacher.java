@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Scanner;
  * @author saraxiao0 (Sara Xiao), chang794
  * @version 0.3 - 2021-11-12
  */
-public class Teacher extends User {
+public class Teacher extends User implements Serializable {
 
     public Teacher(String username, String password, String name) {
         super(username, password, name); // calls User's constructor

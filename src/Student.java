@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +9,7 @@ import java.util.Scanner;
  * @author [author], chang794
  * @version 0.1
  */
-public class Student extends User {
+public class Student extends User implements Serializable {
     // Track posts?
     private List<Integer> posts;
 
