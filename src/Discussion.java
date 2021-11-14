@@ -20,6 +20,7 @@ public class Discussion {
         this.topic = topic;
         this.creator = creator;
         this.course = course;
+        course.getDiscussions().add(this);
         id = DISCUSSION_LIST.size();
         posts = new ArrayList<>();
         DISCUSSION_LIST.add(this);
