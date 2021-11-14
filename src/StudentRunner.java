@@ -6,6 +6,7 @@ import java.util.Scanner;
  * Runs the loop() for the Teacher class
  *
  * @author briankwon25 (Brian Kwon)
+ *
  * @version 0.2 - 2021-11-12
  */
 public class StudentRunner {
@@ -16,7 +17,11 @@ public class StudentRunner {
     private boolean exitProgram = false; // whether to exit the program
     // set to true when user inputs "exit" - then program logs off and stops
 
-
+    /*
+     * Creates new StudentRunner
+     *
+     * @param student Student this runner is connected to and operating for
+     */
     public StudentRunner(Student student) {
         this.student = student;
 
@@ -24,6 +29,18 @@ public class StudentRunner {
         currentDiscussion = null;
     }
 
+    /* ----- Loop methods - for handling control flow -----
+     * All loop methods are called by loop(Scanner reader) directly or indirectly
+     * Each loop method represents a particular menu
+     *
+     * Each loop method has a corresponding Display.display method that Display.displays output
+     * for that menu
+     */
+
+    /*
+     * Handles all control flow and UI interaction
+     * Called by Student's loop method, which is called by Main
+     */
     public void loop(Scanner reader) {
         while (!exitProgram) {
             Display.displayWelcome(this.student);
