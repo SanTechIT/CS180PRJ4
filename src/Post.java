@@ -36,7 +36,13 @@ public class Post implements Serializable {
     private Post() {
         // Deny Instantiation
     }
-
+    /**
+     * Post Constructor
+     *
+     * @param content
+     * @param dicussions
+     * @param creatorId
+     */
     private Post(String content, Discussion discussion, Post parent, int creatorId) {
         this.content = content;
         this.parent = parent;
@@ -126,7 +132,12 @@ public class Post implements Serializable {
         User creator = User.USER_LIST.get(creatorId);
 
         postString += "\n";
+
+
         postString += "Post ID " + getId();
+        if (parent != null) {
+            postString += " (reply to " + parent.getId() + ")";
+        }
 
         postString += "\n" + creator.getUsername() + " | " + creator.getName() + " (ID " + creatorId + ") posted";
         postString += " at time " + timestamp.toString();
