@@ -109,7 +109,6 @@ public class Display {
         } else {
             System.out.println("\nback" +
             "\ncreate forum" +
-            "\ndelete forum" +
             "\nlogout");
         }
 
@@ -136,7 +135,7 @@ public class Display {
         } else {
             commands = "Commands: " +
                 "back, reply [num], edit [num], delete [num], " +
-                "grade [num], logout";
+                "grade [num], delete forum, logout";
         }
 
         System.out.println("\nWelcome to " + currentDiscussion.getTopic() + "!" +
