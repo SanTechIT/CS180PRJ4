@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * Project 4 - Teacher Runner
  * <p>
@@ -219,6 +222,10 @@ public class TeacherRunner extends UserRunner {
      */
     protected boolean loopDiscussionOverride(Scanner reader, String input) {
         switch (input) {
+            case "view voteboard":
+                loopViewVoteboard(reader);
+                break;
+
             case "delete forum":
                 this.teacher.deleteDiscussion(getCurrentDiscussion());
                 setCurrentDiscussion(null);
@@ -228,6 +235,38 @@ public class TeacherRunner extends UserRunner {
                 return false;
         }
         return true;
+    }
+
+    private void loopViewVoteboard(Scanner reader) {
+        boolean continueThisMenu = true;
+        String currentSort = "best";
+
+        while (continueThisMenu) {
+            Display.displayViewVoteboard(getCurrentDiscussion(), currentSort);
+            String input = reader.nextLine();
+
+            switch (input) {
+                case "back":
+                    continueThisMenu = false;
+                    break;
+
+                case "sort best":
+                    currentSort = "best";
+                    break;
+
+                case "sort worst":
+                    currentSort = "worst";
+                    break;
+
+                case "sort controversial":
+                    currentSort = "controversial";
+                    break;
+
+                default:
+                    Display.displayBadInput();
+                    break;
+            }
+        }
     }
 
     /**

@@ -2,6 +2,9 @@
 
 Missing features
 * serialization/permanence
+* Teachers can view a dashboard that lists the most popular replies to each forum by votes.
+    - Data will appear with the student's name and vote count.
+    - Teachers can choose to sort the dashboard.
 * test cases
 * the report
 * comment the code
@@ -16,6 +19,7 @@ Problems
 - non-major: teacher can't logout from ViewIndividualStudent menu, only go "back" (effect of loop design)
 - MAJOR: in ViewIndividualStudent, each of the student's posts shows up twice
 - MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash, don't know why (example below)
+- MAJOR: can't upvote/downvote/novote posts that are replies to other posts
 
 TO SELF (Richard)
 - Post redesign, print grade if same user or teacher, allows for indentation

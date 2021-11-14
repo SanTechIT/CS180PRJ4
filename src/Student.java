@@ -11,8 +11,6 @@ import java.util.Scanner;
  * @version 0.1
  */
 public class Student extends User implements Serializable {
-    private List<Integer> posts; // ID of every post the Student has made
-
     // hashmap guide: https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html
     private HashMap<Integer, Integer> votedPosts; // all posts the Student has voted on
     // key: ID of post student has voted on
@@ -27,7 +25,6 @@ public class Student extends User implements Serializable {
      */
     public Student(String username, String password, String name) {
         super(username, password, name);
-        posts = new ArrayList<>();
         votedPosts = new HashMap<>();
     }
 
@@ -141,26 +138,6 @@ public class Student extends User implements Serializable {
      * WIP.
      */
 
-    /**
-     * Reply to a reply to a discussion forum
-     * Overrides because all posts a Student makes must be added to their posts field
-     *
-     * @param parentPost parent post the new post is replying to
-     * @param newContent content of new post
-     * @param parentDiscussion discussion forum that contains both posts
-     */
-    @Override
-    public Post makePostReply(Post parentPost, String newContent, Discussion parentDiscussion) {
-        Post p = Post.createPost(newContent, parentDiscussion, parentPost, this);
-
-        int postId = p.getId();
-        if (!posts.contains(postId)) {
-            posts.add(p.getId());
-        }
-
-        return p;
-    }
-
 
     /**
      * Reply DIRECTLY to a discussion forum
@@ -170,14 +147,7 @@ public class Student extends User implements Serializable {
      * @param parentDiscussion discussion forum that contains the new post
      */
     public Post makeDiscussionReply(String newContent, Discussion parentDiscussion) {
-        Post p = Post.createPost(newContent, parentDiscussion, this);
-
-        int postId = p.getId();
-        if (!posts.contains(postId)) {
-            posts.add(p.getId());
-        }
-
-        return p;
+        return super.makePostReply(null, newContent, parentDiscussion);
     }
 
     /**
@@ -187,25 +157,10 @@ public class Student extends User implements Serializable {
      */
     public String getPostsString() {
         String str = "";
-        for (int postId : posts) {
+        for (int postId : getPosts()) {
             str += Post.POST_LIST.get(postId).toString();
         }
         return str;
-    }
-
-    /**
-     * Get Vote Count
-     *
-     * @return voteCount which is the total number of upvotes and downvotes together
-     */
-    public int getVoteCount() {
-        int voteCount = 0;
-        for (int post : posts) {
-            Post p = Post.POST_LIST.get(post);
-            voteCount += p.getUpvotes();
-            voteCount -= p.getDownvotes();
-        }
-        return voteCount;
     }
 
     /**

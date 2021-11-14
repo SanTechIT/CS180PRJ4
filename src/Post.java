@@ -173,6 +173,32 @@ public class Post implements Serializable {
         return postString;
     }
 
+    public String toStringVoteboard() {
+        String postString = "";
+        User creator = User.USER_LIST.get(creatorId);
+
+        postString += "\n";
+
+        postString += "Post ID " + getId();
+        if (parent != null) {
+            postString += " (reply to " + parent.getId() + ")";
+        }
+
+        postString += "\n" + creator.getUsername() + " | " + creator.getName() + " (ID " + creatorId + ") posted";
+        postString += " at time " + timestamp.toString();
+
+        postString += "\nPoster's vote count: " + creator.getVoteCount();
+
+        postString += "\n(votes: +" + getUpvotes() + " | -" + getDownvotes() + ")";
+
+        postString += "\n(grade: " + getGrade() + "/" + getMaxGrade() + ")";
+
+        postString += "\n" + getContent();
+        postString += "\n";
+
+        return postString;
+    }
+
     /**
      * Returns the Id of the post
      *
@@ -264,6 +290,14 @@ public class Post implements Serializable {
      */
     public int getDownvotes() {
         return downvotes;
+    }
+
+    public int getVotes() {
+        return getUpvotes() - getDownvotes();
+    }
+
+    public int getControversy() {
+        return getUpvotes() + getDownvotes();
     }
 
     /**
