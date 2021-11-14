@@ -143,7 +143,16 @@ public class Teacher extends User implements Serializable {
         return (Course.createCourse(topic, this) != null);
     }
 
-    // TODO: EDIT COURSES
+    /**
+     * Edit course topic
+     *
+     * @param newTopic new topic of course
+     * @param course course to change
+     * @return whether operation succeeds (no network errors, etc)
+     */
+    public boolean editCourse(String newTopic, Course course) {
+        return course.setTopic(newTopic, this);
+    }
 
     /**
      * Create discussion forum
