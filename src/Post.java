@@ -36,7 +36,7 @@ public class Post implements Serializable {
     private Post() {
         // Deny Instantiation
     }
-    
+
     /**
      * Post Constructor
      *
@@ -267,30 +267,46 @@ public class Post implements Serializable {
     }
 
     /**
-     * Decides if the user can vote, if so, then able to upvote
+     * Decides if the user can vote, if so, then upvotes
      *
      * @param user
      *
      */
-    public boolean upvote(User user) {
+    public boolean upvote(User user, int oldVote) {
         if (!user.canVote()) {
             return false;
         }
-        this.downvotes++;
+
+        removeVote(oldVote);
+
+        this.upvotes++;
         return true;
     }
 
     /**
-     * Decides if the user can vote, if so, then able to downvote
+     * Decides if the user can vote, if so, then downvotes
      *
      * @param user
      *
      */
-    public boolean downvote(User user) {
+    public boolean downvote(User user, int oldVote) {
         if (!user.canVote()) {
             return false;
         }
+
+        removeVote(oldVote);
+
         this.downvotes++;
+        return true;
+    }
+
+    public boolean removeVote(int oldVote) {
+        if (oldVote == 1) {
+            this.upvotes--;
+        } else if (oldVote == -1) {
+            this.downvotes--;
+        }
+
         return true;
     }
 }

@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap; // for tracking voted posts
 import java.util.Scanner;
 
 /**
@@ -12,6 +13,11 @@ import java.util.Scanner;
 public class Student extends User implements Serializable {
     private List<Integer> posts; // ID of every post the Student has made
 
+    // hashmap guide: https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html
+    private HashMap<Integer, Integer> votedPosts; // all posts the Student has voted on
+    // key: ID of post student has voted on
+    // value: -1 = downvote, 1 = upvote
+
     /**
      * Student Constructor
      *
@@ -22,6 +28,7 @@ public class Student extends User implements Serializable {
     public Student(String username, String password, String name) {
         super(username, password, name);
         posts = new ArrayList<>();
+        votedPosts = new HashMap<>();
     }
 
     /**
@@ -160,11 +167,64 @@ public class Student extends User implements Serializable {
         return voteCount;
     }
 
+    /**
+     * returns whether votedPost has been upvoted or downvoted by user
+     *
+     * @param votedPost post to look at
+     * @return -1 if downvoted, 1 if upvoted, null if no vote
+     */
+    public int getPostVote(Post targetPost) {
+        int postId = targetPost.getId();
+
+        if (votedPosts.containsKey(postId)) {
+            return votedPosts.get(postId);
+        }
+
+        return 0;
+    }
+
     public boolean upvotePost(Post targetPost) {
-        return targetPost.upvote(this);
+        int oldVoteValue = getPostVote(targetPost);
+
+        if (
+            oldVoteValue != 1 // student hasn't already upvoted post
+            && targetPost.upvote(this, oldVoteValue)) { // student has permission to vote
+
+            // upvote post
+            votedPosts.put(targetPost.getId(), 1);
+            return true;
+        }
+
+        return false;
     }
 
     public boolean downvotePost(Post targetPost) {
-        return targetPost.downvote(this);
+        int oldVoteValue = getPostVote(targetPost);
+
+        if (
+            oldVoteValue != -1 // student hasn't already downvoted post
+            && targetPost.downvote(this, oldVoteValue)) { // student has permission to vote
+
+            // downvote post
+            votedPosts.put(targetPost.getId(), -1);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean novotePost(Post targetPost) {
+        int oldVoteValue = getPostVote(targetPost);
+
+        if (
+            oldVoteValue != 0 // student has voted on targetPost
+            && targetPost.removeVote(oldVoteValue)) {
+
+            // remove vote on post
+            votedPosts.remove(targetPost.getId());
+            return true;
+        }
+
+        return false;
     }
 }

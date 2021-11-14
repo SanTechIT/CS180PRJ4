@@ -8,7 +8,6 @@ Missing features
 * improve post formatting - grade should only be visible to teacher/poster
 * ungraded posts have a grade of 0 - change that to n/a? will need to keep track of whether a post has been graded
 * Teacher shouldn't be able to reply to a student's posts while viewing their student dashboard, remove that feature.
-* Teachers should be able to edit courses
 
 Problems
 - MAJOR: Validate inputs for class/discussion/post Ids in reply/edit/delete actions
@@ -132,7 +131,7 @@ Exception in thread "main" java.lang.NullPointerException
 * methods inherited from User - the canVote, etc. have been implemented
 * private utility methods exist, have not been implemented yet - will be handled internally so shouldn't be a concern
 
-## TeacherRunner Class 
+## TeacherRunner Class
 
 #### Constructors
 
