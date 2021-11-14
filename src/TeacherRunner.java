@@ -169,19 +169,53 @@ public class TeacherRunner {
 
                 default:
                     try {
-                        int studentId = Integer.parseInt(input);
+                        int userId = Integer.parseInt(input);
 
                         // TODO
-
-                        /*
-                        Student currentStudent = USER_LIST.get(studentId);
-                        if (currentDiscussion == null) {
+                        User selectedUser = User.USER_LIST.get(userId);
+                        if (selectedUser == null || !(selectedUser instanceof Student)) {
                             Display.displayBadInput();
                         } else {
-                            loopDiscussion(reader);
-                        } */
+                            Student currentStudent = (Student) selectedUser;
+                            loopIndividualStudent(reader, currentStudent);
+                        }
 
                     } catch (NumberFormatException e) {
+                        Display.displayBadInput();
+                    }
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Loop for viewing/editing all posts of 1 student
+     * Called by loopViewStudent if valid student ID is inputted
+     */
+    private void loopIndividualStudent(Scanner reader, Student currentStudent) {
+        while (currentStudent != null) {
+            Display.displayIndividualStudent(currentStudent);
+            String input = reader.nextLine();
+
+            // Input loop is different because input can be a static command or one that takes an argument
+            // Outer switch checks static commands, inner switch checks arguments
+            switch(input) {
+                case "back":
+                    currentDiscussion = null;
+                    break;
+
+                case "exit":
+                    currentDiscussion = null;
+                    currentCourse = null;
+                    exitProgram = true;
+                    break;
+
+                case "delete forum":
+                    this.teacher.deleteDiscussion(currentDiscussion);
+                    break;
+
+                default:
+                    if (!(parse2WordInput(input, reader))) {
                         Display.displayBadInput();
                     }
                     break;
@@ -305,8 +339,7 @@ public class TeacherRunner {
         }
 
         // check if post number corresponds to existing post
-//        Post targetPost = currentDiscussion.searchPosts(postId);
-        Post targetPost = Post.POST_LIST.get(postId);
+        Post targetPost = Post.searchPostsById(postId);
         if (targetPost == null) {
             return false;
         }

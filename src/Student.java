@@ -95,13 +95,25 @@ public class Student extends User implements Serializable {
      */
 
     /**
-     * Reply to a student reponse to a discussion forum
+     * Reply DIRECTLY to a discussion forum
+     * ie. make a new post that's not a reply to a previous post
+     *
+     * @param newContent content of new post
+     * @param parentDiscussion discussion forum that contains the new post
+     */
+    public Post makeDiscussionReply(String newContent, Discussion parentDiscussion) {
+        return Post.createPost(newContent, parentDiscussion, this);
+    }
+
+    /**
+     * Reply to a reply to a discussion forum
      *
      * @param parentPost parent post the new post is replying to
      * @param newContent content of new post
+     * @param parentDiscussion discussion forum that contains both posts
      */
     public Post makePostReply(Post parentPost, String newContent, Discussion parentDiscussion) {
-        //        return new Post(parentPost, this, newContent);
+        // return new Post(parentPost, this, newContent);
         return Post.createPost(newContent, parentDiscussion, parentPost, this);
     }
 
