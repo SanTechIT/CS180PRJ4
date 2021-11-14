@@ -21,6 +21,8 @@ public class Tests {
         User.USER_LIST = new ArrayList<>();
         User.USER_LIST.add(new Teacher("teacher", "teacher", "John"));
         User.USER_LIST.add(new Student("student", "student", "Alice"));
+        User.USER_LIST.add(new Student("s", "s", "s"));
+        User.USER_LIST.add(new Teacher("t", "t", "t"));
 
         Course.COURSE_LIST = new ArrayList<>();
         Course.createCourse("MA165", User.USER_LIST.get(0));
