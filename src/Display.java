@@ -139,7 +139,7 @@ public class Display {
         if (user instanceof Student) {
             commands = "Commands: " +
                 "back, reply to discussion, reply [num], edit [num], delete [num], " +
-                "upvote [num], downvote [num], logout";
+                "upvote [num], downvote [num], novote [num], logout";
         } else {
             commands = "Commands: " +
                 "back, reply [num], edit [num], delete [num], " +

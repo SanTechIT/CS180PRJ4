@@ -95,6 +95,14 @@ public class StudentRunner extends UserRunner {
                 }
                 break;
 
+            case "novote":
+                if (this.student.novotePost(targetPost)) {
+                    System.out.println("Removed your vote on this post.");
+                } else {
+                    System.out.println("Sorry, you haven't voted on this post.");
+                }
+                break;
+
             default:
                 return false;
         }
