@@ -146,6 +146,13 @@ public class Display {
         System.out.print("> ");
     }
 
+    /**
+     * Gets the posts of direct child in discussion and return as string
+     *
+     * @param discussion
+     * @param user
+     * @return
+     */
     private static String getDiscussionString(Discussion discussion, User user) {
         String postString = "";
         for (Post post : discussion.getPosts()) {
@@ -154,6 +161,14 @@ public class Display {
         return postString;
     }
 
+    /**
+     * Gets the posts and nested posts and returns a string representation
+     *
+     * @param postin
+     * @param indent
+     * @param user
+     * @return
+     */
     private static String getPostStrings(Post postin, int indent, User user) {
         String postString = "";
         postString += getPostString(postin, indent, user);
@@ -163,6 +178,14 @@ public class Display {
         return postString;
     }
 
+    /**
+     * Returns the string representation of a post
+     *
+     * @param postin
+     * @param indent
+     * @param user
+     * @return
+     */
     private static String getPostString(Post postin, int indent, User user) {
         String postString = "";
         String indentStr = " ".repeat(indent * 4);
