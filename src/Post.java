@@ -40,7 +40,8 @@ public class Post implements Serializable {
      * Post Constructor
      *
      * @param content
-     * @param dicussions
+     * @param discussion
+     * @param parent
      * @param creatorId
      */
     private Post(String content, Discussion discussion, Post parent, int creatorId) {
