@@ -174,7 +174,7 @@ public class TeacherRunner {
                         // TODO
 
                         /*
-                        currentDiscussion = Course.searchDiscussions(discussionId);
+                        Student currentStudent = USER_LIST.get(studentId);
                         if (currentDiscussion == null) {
                             Display.displayBadInput();
                         } else {
@@ -348,6 +348,12 @@ public class TeacherRunner {
         return true;
     }
 
+    /**
+     * Menu for posting reply to other post
+     *
+     * @param targetPost post to reply to
+     * @param reader Scanner for getting input
+     */
     private boolean menuPostReply(Post targetPost, Scanner reader) {
         Display.displayPostReply(targetPost);
 
@@ -360,6 +366,12 @@ public class TeacherRunner {
         return true;
     }
 
+    /**
+     * Menu for editing a post
+     *
+     * @param targetPost post to edit
+     * @param reader Scanner for getting input
+     */
     private boolean menuEditPost(Post targetPost, Scanner reader) {
         Display.displayEditPost(targetPost);
 
@@ -371,6 +383,12 @@ public class TeacherRunner {
         return true;
     }
 
+    /**
+     * Menu for deleting a post
+     *
+     * @param targetPost post to delete
+     * @param reader Scanner for getting input
+     */
     private boolean menuDeletePost(Post targetPost, Scanner reader) {
         Display.displayDeletePost(targetPost);
 
@@ -384,6 +402,12 @@ public class TeacherRunner {
         return true;
     }
 
+    /**
+     * Menu for grading a post
+     *
+     * @param targetPost post to grade
+     * @param reader Scanner for getting input
+     */
     private boolean menuGradePost(Post targetPost, Scanner reader) {
         Display.displayGradePost(targetPost);
 
