@@ -106,37 +106,6 @@ public class Student extends User implements Serializable {
     }
 
     /**
-     * Reply to a reply to a discussion forum
-     *
-     * @param parentPost parent post the new post is replying to
-     * @param newContent content of new post
-     * @param parentDiscussion discussion forum that contains both posts
-     */
-    public Post makePostReply(Post parentPost, String newContent, Discussion parentDiscussion) {
-        // return new Post(parentPost, this, newContent);
-        return Post.createPost(newContent, parentDiscussion, parentPost, this);
-    }
-
-    /**
-     * Edit own post
-     *
-     * @param targetPost
-     * @param newContent
-     */
-    public boolean editPost(Post targetPost, String newContent) {
-        return targetPost.editPost(newContent, this);
-    }
-
-    /**
-     * Delete a post
-     *
-     * @param targetPost post to be deleted
-     */
-    public boolean deletePost(Post targetPost) {
-        return (targetPost.deletePost(this) != null);
-    }
-
-    /**
      * Gets Posts String
      *
      * @return str which is the posts string

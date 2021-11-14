@@ -6,7 +6,9 @@ import java.util.Scanner;
 /**
  * User Class
  *
- * @author aarinipanzade
+ * Represents a user of the program.
+ *
+ * @author aarinipanzade, chang794, saraxiao0
  * @version 0.1
  */
 public abstract class User implements Serializable {
@@ -158,6 +160,37 @@ public abstract class User implements Serializable {
             System.out.println(
                     "Your account has been deleted. Welcome to the Learning Management Discussion Board!");
         }
+    }
+
+
+    /**
+     * Reply to a reply to a discussion forum
+     *
+     * @param parentPost parent post the new post is replying to
+     * @param newContent content of new post
+     * @param parentDiscussion discussion forum that contains both posts
+     */
+    public Post makePostReply(Post parentPost, String newContent, Discussion parentDiscussion) {
+        return Post.createPost(newContent, parentDiscussion, parentPost, this);
+    }
+
+    /**
+     * Edit a post
+     *
+     * @param targetPost post to be edited
+     * @param newContent new content of post
+     */
+    public boolean editPost(Post targetPost, String newContent) {
+        return targetPost.editPost(newContent, this);
+    }
+
+    /**
+     * Delete a post
+     *
+     * @param targetPost post to be deleted
+     */
+    public boolean deletePost(Post targetPost) {
+        return (targetPost.deletePost(this) != null);
     }
 
     /**

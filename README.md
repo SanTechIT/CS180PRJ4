@@ -5,9 +5,11 @@
 * serialization/permanence
 * test cases
 * the report
+* comment the code
 
 - Validate inputs for class/discussion/post Ids in reply/edit/delete actions
 - Ask if user wants to reply/edit/delete posts of another grouping?
+- Teacher can't delete discussion forums
 
 # [Name] Design specifications
 
@@ -680,7 +682,7 @@ Example input:
 [aklsdjflkdsanhfcl]
 
 Input Error:
-Sorry, I couldn't understand what you typed. Please try again! 
+Sorry, I couldn't understand what you typed. Please try again!
 -----
 Welcome [Name]!
 Please type the number of a course to view:
