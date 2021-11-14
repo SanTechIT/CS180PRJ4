@@ -45,6 +45,7 @@ public class Discussion {
         if (!user.canModifyDiscussion()) {
             return null;
         }
+        // TODO: Delete discussion in course
         return DISCUSSION_LIST.set(id, null);
     }
 
