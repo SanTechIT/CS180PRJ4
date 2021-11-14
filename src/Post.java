@@ -44,6 +44,7 @@ public class Post implements Serializable {
      * @param discussion
      * @param parent
      * @param creatorId
+     *
      */
     private Post(String content, Discussion discussion, Post parent, int creatorId) {
         this.content = content;
@@ -92,6 +93,13 @@ public class Post implements Serializable {
         return new Post(content, discussion, parent, user.getId());
     }
 
+    /**
+     * Searches all the posts by ID
+     *
+     * @param postId
+     *
+     * @return
+     */
     public static Post searchPostsById(int postId) {
         for (Post post : POST_LIST) {
             if (post.getId() == postId) {
@@ -117,6 +125,13 @@ public class Post implements Serializable {
         return false;
     }
 
+    /**
+     * Deletes posts in discussions / posts
+     *
+     * @param user
+     *
+     * @return
+     */
     public Post deletePost(User user) {
         // TODO: delete post in discussion / posts
         if (user.canModifyPost() || user.getId() == creatorId) {
@@ -129,6 +144,11 @@ public class Post implements Serializable {
         return null;
     }
 
+    /**
+     * toString for post
+     *
+     * @return postString
+     */
     public String toString() {
         String postString = "";
         User creator = User.USER_LIST.get(creatorId);
