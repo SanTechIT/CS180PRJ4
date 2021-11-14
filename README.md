@@ -46,7 +46,6 @@
 | canModifyCourse |`public abstract boolean` | `()` | Whether the user can modify courses |
 | canModifyDiscussion | `public abstract boolean` | `()` |  Whether the user has permission to modify or delete Discussions |
 | canModifyPost | `public abstract boolean` | `()` | (EC) Whether the user has permission to modify or delete Posts made by others |
-| isAdmin | `public abstract boolean` | `()` | For debugging purposes, overrides all permissions |
 
 ## Teacher Class (extends `User`)
 
@@ -106,7 +105,7 @@
 ##### Fields
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
-| DISCUSSIONS_LIST   | `public static List<Discussion>` | Lists all `Discussion`s |  |
+| DISCUSSION_LIST   | `public static List<Discussion>` | Lists all `Discussion`s |  |
 | discussions | `private List<Discussion>` | | G/S |
 | id | `private int` | Id is same as index in list | G |
 | topic | `private String` | Discussion Topic | G/S |
