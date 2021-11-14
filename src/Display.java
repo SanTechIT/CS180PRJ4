@@ -108,8 +108,8 @@ public class Display {
     private static void displayDiscussion(Discussion currentDiscussion, String commands) {
         System.out.println("\nWelcome to " + currentDiscussion.getTopic() + "!" +
             "\n" + commands +
-            "\nReplace [num] with the number of the post you" +
-                "want to interact with!");
+            "\nReplace [num] with the number of the post you " +
+            "want to interact with!");
 
         String postList = currentDiscussion.getPostsString();
         if (postList.isEmpty()) {
@@ -122,17 +122,28 @@ public class Display {
     }
 
     public static void displayDiscussionTeacher(Discussion currentDiscussion) {
-        String commands = "Commands:" +
+        String commands = "Commands: " +
             "back, reply [num], edit [num], delete [num], " +
             "grade [num], exit";
         displayDiscussion(currentDiscussion, commands);
     }
 
     public static void displayDiscussionStudent(Discussion currentDiscussion) {
-        String commands = "Commands:" +
-            "back, reply to discussion, reply [num], edit [num], delete [num]," +
+        String commands = "Commands: " +
+            "back, reply to discussion, reply [num], edit [num], delete [num], " +
             "upvote [num], downvote [num], exit";
         displayDiscussion(currentDiscussion, commands);
+    }
+
+    /**
+     * Displays menu for replying directly to discussion (Student only)
+     */
+    public static void displayDiscussionReply(Discussion currentDiscussion) {
+        System.out.println("\nReply to discussion " + currentDiscussion.getTopic() + ": " +
+            "\nYou are replying directly to the discussion." +
+            "\nWhat should be the content in your new post?");
+
+        System.out.print("> ");
     }
 
     /**
@@ -208,6 +219,19 @@ public class Display {
             "\nOr, please type one of these commands: " +
             "\nback" +
             "\nexit");
+
+        System.out.print("> ");
+    }
+
+    public static void displayIndividualStudent(Student currentStudent) {
+        System.out.println("\n" + currentStudent.getName() +  "'s Posts:");
+
+        String postList = currentStudent.getPostsString();
+        if (postList.isEmpty()) {
+            System.out.println("There are no posts.");
+        } else {
+            System.out.println(postList);
+        }
 
         System.out.print("> ");
     }

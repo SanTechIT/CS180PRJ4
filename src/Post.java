@@ -82,6 +82,15 @@ public class Post implements Serializable {
         return new Post(content, discussion, parent, user.getId());
     }
 
+    public static Post searchPostsById(int postId) {
+        for (Post post : POST_LIST) {
+            if (post.getId() == postId) {
+                return post;
+            }
+        }
+        return null;
+    }
+
     /**
      * Allows editing of the post if the user has permission to edit or if
      * the user is the creator of the post
@@ -229,6 +238,4 @@ public class Post implements Serializable {
         this.upvotes++;
         return true;
     }
-
-
 }

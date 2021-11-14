@@ -169,19 +169,53 @@ public class TeacherRunner {
 
                 default:
                     try {
-                        int studentId = Integer.parseInt(input);
+                        int userId = Integer.parseInt(input);
 
                         // TODO
-
-                        /*
-                        currentDiscussion = Course.searchDiscussions(discussionId);
-                        if (currentDiscussion == null) {
+                        User selectedUser = User.USER_LIST.get(userId);
+                        if (selectedUser == null || !(selectedUser instanceof Student)) {
                             Display.displayBadInput();
                         } else {
-                            loopDiscussion(reader);
-                        } */
+                            Student currentStudent = (Student) selectedUser;
+                            loopIndividualStudent(reader, currentStudent);
+                        }
 
                     } catch (NumberFormatException e) {
+                        Display.displayBadInput();
+                    }
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Loop for viewing/editing all posts of 1 student
+     * Called by loopViewStudent if valid student ID is inputted
+     */
+    private void loopIndividualStudent(Scanner reader, Student currentStudent) {
+        while (currentStudent != null) {
+            Display.displayIndividualStudent(currentStudent);
+            String input = reader.nextLine();
+
+            // Input loop is different because input can be a static command or one that takes an argument
+            // Outer switch checks static commands, inner switch checks arguments
+            switch(input) {
+                case "back":
+                    currentDiscussion = null;
+                    break;
+
+                case "exit":
+                    currentDiscussion = null;
+                    currentCourse = null;
+                    exitProgram = true;
+                    break;
+
+                case "delete forum":
+                    this.teacher.deleteDiscussion(currentDiscussion);
+                    break;
+
+                default:
+                    if (!(parse2WordInput(input, reader))) {
                         Display.displayBadInput();
                     }
                     break;
@@ -309,8 +343,7 @@ public class TeacherRunner {
         }
 
         // check if post number corresponds to existing post
-//        Post targetPost = currentDiscussion.searchPosts(postId);
-        Post targetPost = Post.POST_LIST.get(postId);
+        Post targetPost = Post.searchPostsById(postId);
         if (targetPost == null) {
             return false;
         }
@@ -352,6 +385,12 @@ public class TeacherRunner {
         return true;
     }
 
+    /**
+     * Menu for posting reply to other post
+     *
+     * @param targetPost post to reply to
+     * @param reader Scanner for getting input
+     */
     private boolean menuPostReply(Post targetPost, Scanner reader) {
         Display.displayPostReply(targetPost);
 
@@ -364,6 +403,12 @@ public class TeacherRunner {
         return true;
     }
 
+    /**
+     * Menu for editing a post
+     *
+     * @param targetPost post to edit
+     * @param reader Scanner for getting input
+     */
     private boolean menuEditPost(Post targetPost, Scanner reader) {
         Display.displayEditPost(targetPost);
 
@@ -375,6 +420,12 @@ public class TeacherRunner {
         return true;
     }
 
+    /**
+     * Menu for deleting a post
+     *
+     * @param targetPost post to delete
+     * @param reader Scanner for getting input
+     */
     private boolean menuDeletePost(Post targetPost, Scanner reader) {
         Display.displayDeletePost(targetPost);
 
@@ -388,6 +439,12 @@ public class TeacherRunner {
         return true;
     }
 
+    /**
+     * Menu for grading a post
+     *
+     * @param targetPost post to grade
+     * @param reader Scanner for getting input
+     */
     private boolean menuGradePost(Post targetPost, Scanner reader) {
         Display.displayGradePost(targetPost);
 

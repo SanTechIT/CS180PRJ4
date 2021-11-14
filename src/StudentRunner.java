@@ -184,6 +184,10 @@ public class StudentRunner {
                     exitProgram = true;
                     break;
 
+                case "reply to discussion":
+                    menuDiscussionReply(reader);
+                    break;
+
                 default:
                     if (!(parse2WordInput(input, reader))) {
                         Display.displayBadInput();
@@ -191,6 +195,17 @@ public class StudentRunner {
                     break;
             }
         }
+    }
+
+    private boolean menuDiscussionReply(Scanner reader) {
+        Display.displayDiscussionReply(currentDiscussion);
+
+        String input = reader.nextLine();
+        Post newPost = this.student.makeDiscussionReply(input, currentDiscussion);
+
+        System.out.println("New post " + newPost.getId() + " " +
+            "has been created!");
+        return true;
     }
 
     /**
@@ -218,8 +233,7 @@ public class StudentRunner {
         }
 
         // check if post number corresponds to existing post
-        //        Post targetPost = currentDiscussion.searchPosts(postId);
-        Post targetPost = Post.POST_LIST.get(postId);
+        Post targetPost = Post.searchPostsById(postId);
         if (targetPost == null) {
             return false;
         }
@@ -246,7 +260,6 @@ public class StudentRunner {
             case "delete":
                 operationSuccess = menuDeletePost(targetPost, reader);
                 break;
-
 
             default:
                 return false;
