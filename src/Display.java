@@ -1,3 +1,9 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator; // for sorting Discussion posts by votes
+// in displayViewVoteboard
+
 /* ----- Display methods - for displaying UI messages -----
  * These methods display messages to the user.
  * None of these methods change anything.
@@ -145,7 +151,7 @@ public class Display {
         } else {
             commands = "Commands: " +
                 "back, reply [num], edit [num], delete [num], " +
-                "grade [num], delete forum, logout";
+                "grade [num], view voteboard, delete forum, logout";
         }
 
         System.out.println("\nWelcome to " + currentDiscussion.getTopic() + "!" +
@@ -309,6 +315,65 @@ public class Display {
             System.out.println("There are no posts.");
         } else {
             System.out.println(postList);
+        }
+
+        System.out.print("> ");
+    }
+
+    private static void displayPostsVoteboard(List<Post> posts) {
+        String str = "\n";
+
+        for (Post p : posts) {
+            str += p.toStringVoteboard() + "\n";
+        }
+
+        System.out.println(str);
+    }
+
+    public static void displayViewVoteboard(Discussion currentDiscussion, String currentSort) {
+        System.out.println("Voteboard: discussion - " + currentDiscussion.getTopic() +
+            "\nCommands: back, sort best, sort worst, sort controversial" +
+            "\nThe voteboard displays posts in a forum by vote count." +
+            "\nCurrent sort: " + currentSort);
+
+        // TODO
+        List<Post> posts = currentDiscussion.getPosts();
+        if (posts.size() == 0) {
+            System.out.println("There are no posts.");
+        } else {
+
+            switch(currentSort) {
+                case "best":
+                    Collections.sort(posts, new Comparator<Post>() {
+                        public int compare(Post p1, Post p2) {
+                            return p2.getVotes() - p1.getVotes();
+                    }});
+
+                    displayPostsVoteboard(posts);
+
+                    break;
+
+                case "worst":
+                    Collections.sort(posts, new Comparator<Post>() {
+                        public int compare(Post p1, Post p2) {
+                            return - (p2.getVotes() - p1.getVotes());
+                    }});
+
+                    displayPostsVoteboard(posts);
+
+                    break;
+
+                case "controversial":
+                    Collections.sort(posts, new Comparator<Post>() {
+                        public int compare(Post p1, Post p2) {
+                            return p2.getControversy() - p1.getControversy();
+                    }});
+
+                    displayPostsVoteboard(posts);
+
+                    break;
+            }
+
         }
 
         System.out.print("> ");

@@ -2,6 +2,9 @@
 
 Missing features
 * serialization/permanence
+* Teachers can view a dashboard that lists the most popular replies to each forum by votes.
+    - Data will appear with the student's name and vote count.
+    - Teachers can choose to sort the dashboard.
 * test cases
 * the report
 * comment the code
@@ -15,6 +18,7 @@ Problems
 - non-major: teacher can't logout from ViewIndividualStudent menu, only go "back" (effect of loop design)
 - MAJOR: in ViewIndividualStudent, each of the student's posts shows up twice
 - MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash, don't know why (example below)
+- MAJOR: can't upvote/downvote/novote posts that are replies to other posts
 
 TO SELF (Richard)
 - Post redesign, print grade if same user or teacher, allows for indentation
@@ -309,14 +313,12 @@ Exception in thread "main" java.lang.NullPointerException
 
 #### Methods
 
-| Signature   | Parameters | Description |
-| ----------- | ---------- | ----------- |
-| `public String getPostsString` | `()` |  Returns chronological list of all posts with id + post topic (see Console Example) |
-| `public Post searchPosts` | `(int id)` | Search `posts` for post with that id, return null if not found  |
-| `public void addPost`   | `(User poster, String newContent)` | Calls Post constructor to add new post to `posts` |
-| `public void addPost`   | `(User poster, Post parentPost, String newContent)` | Calls Post constructor to add new post (*
-which is a reply to an existing post*) to `posts` |
-| `public void delete` | `(User deleter)` | Deletes this forum and all posts within it |
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| createDiscussion | `public static Discussion` | `(Course course, String topic, User user)` |  Creates and returns a new Discussion object if the user has permission to |
+| deleteDiscussion | `public static Discussion` | `(int id, User user)` |  Deletes the discussion with the given id |
+| getPostsString | `public String` | `(Course course, String topic, User user)` |  Returns a string with all the posts listed |
+| sortByUpvotes | `public List<Post>` | `(Course course, String topic, User user)` |  Sorts the list by upvotes |
 
 - Get most popular posts
 
@@ -328,35 +330,38 @@ Note: posts can be under both discussions and other posts
 
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
-| ALL_POSTS  | `public static List<Post>` | Lists all `Post`s |  |
+| POST_LIST  | `public static List<Post>` | Lists all `Post`s |  |
 | id | `private int` | `id` is same as index in list | G |
 | posts | `private List<Post>` | List of all posts related to this `Post` | G |
 | timestamp | `private Date` | Keeps track of when the `Post` was created | G/S |
-| creator | `private int` | Keeps track of the UID of who created this `Post` | G |
+| creatorID | `private int` | Keeps track of the UID of who created this `Post` | G |
 | content | `private String` | Keeps track of the contents in this `Post`, can be changed only by `creator` (EC or a `Teacher`) | G/S |
 | grade | `private int` | Keeps track of the grade of this post `Post`, Only shown if `User` is creator of `Post` or is a `Teacher` | G |
 | maxGrade | `private int` | Keeps track of the max grade of this `Post`, Only shown if `User` is creator of `Post` or is a `Teacher`  | G |
-| upvotes | `private List<Integer>` | Keeps track of all `Student` UIDs who have up-voted this post | G |
-| downvotes | `private List<Integer>` | OPTIONAL BUT COOL? | G |
-| parentPost | `private Post`  | Post that this Post is a reply to; null if this Post is not a reply   | G  |
-| parentDiscussion  | `private Discussion` | Discussion that this Post is a part of  |   |
+| upvotes | `private int` | Keeps track of all `Student` UIDs who have up-voted this post | G |
+| downvotes | `private int` | OPTIONAL BUT COOL? | G |
+| parent | `private Post`  | Post that this Post is a reply to; null if this Post is not a reply   | G  |
+| discussion  | `private Discussion` | Discussion that this Post is a part of  | G |
 
 #### Constructors
 
-| Parameters  | Description |
-| ----------- | ----------- |
-| `(User creator, String content)` | Auto sets id to next id in list |
-| `(Post parentPost, User creator, String content)` | New post is a reply to parentPost  |
+| Signature   | Parameters  | Description |
+| ----------- | ----------- | ----------- |
+| `private` | `(String content, Discussion discussion, Post parent, int creatorId)` | Constructor for Post |
 
 #### Methods
 
-| Signature   | Parameters  | Description |
-| ----------- | ----------- | ----------- |
-| `public void edit`   | `(User editor, String newContent)` | Replaces content of Post with newContent  |
-| `public void delete` | `(User deleter)` | Deletes post |
-| `public void grade` | `(User grader, int grade)` | Assigns grade |
-| `public void upvote`  | `(User upvoter)`  | Upvotes post |
-| `public void downvote`   |  `(User downvoter)`  | Downvotes post  |
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| createPost | `public static`   | `(String content, Discussion discussion, User user)` | Returns a new post if the user has permission to post |
+| createPost | `public static`   | `(String content, Discussion discussion, Post parent, User user)` | Returns a new post if the user has permission to post, Post is a reply to another post |
+| editPost | `public boolean`   | `(String newContent, User user)` | Allows editing of the post if the user has permission to edit or if the user is the creatorId of the post |
+| toString | `public String`   | `()` | The toString for Post |
+| grade | `public boolean`   | `(User user, int grade)` | Grades the post if the user has permission |
+| getPostsString | `public String`   | `()` | Return the list of posts under this post as a string |
+| upvote | `public boolean`   | `(User user, int oldVote)` | Decides if the user can vote, if so, then upvotes |
+| downvote | `public boolean`   | `(User user, int oldVote)` | Decides if the user can vote, if so, then downvotes |
+| removeVote | `public boolean`   | `(int oldVote)` | removes the vote |
 
 ### Display Class
 

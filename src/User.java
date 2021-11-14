@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.sql.SQLOutput;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -12,6 +13,7 @@ import java.util.Scanner;
  * @version 0.1
  */
 public abstract class User implements Serializable {
+    private List<Integer> posts; // ID of every post the User has made
 
     // As per https://stackoverflow.com/
     // questions/10378855/java-io-invalidclassexception-local-class-incompatible
@@ -23,6 +25,8 @@ public abstract class User implements Serializable {
     private String password;
     private String name;
 
+
+
     // this is the User constructor
     public User(String username, String password, String name) {
         this.username = username;
@@ -31,6 +35,8 @@ public abstract class User implements Serializable {
         // TODO: NOT CONCURRENT SAFE : )
         id = USER_LIST.size();
         USER_LIST.add(this);
+
+        posts = new ArrayList<>();
     }
 
     // getter and setter methods
@@ -60,6 +66,10 @@ public abstract class User implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public List<Integer> getPosts() {
+        return posts;
     }
 
     // this connect method is for the user to log in with their credentials
@@ -177,7 +187,14 @@ public abstract class User implements Serializable {
      * @param parentDiscussion discussion forum that contains both posts
      */
     public Post makePostReply(Post parentPost, String newContent, Discussion parentDiscussion) {
-        return Post.createPost(newContent, parentDiscussion, parentPost, this);
+        Post p = Post.createPost(newContent, parentDiscussion, parentPost, this);
+
+        int postId = p.getId();
+        if (!posts.contains(postId)) {
+            posts.add(p.getId());
+        }
+
+        return p;
     }
 
     /**
@@ -197,6 +214,21 @@ public abstract class User implements Serializable {
      */
     public boolean deletePost(Post targetPost) {
         return (targetPost.deletePost(this) != null);
+    }
+
+    /**
+     * Get Vote Count
+     *
+     * @return voteCount which is the total number of upvotes and downvotes together
+     */
+    public int getVoteCount() {
+        int voteCount = 0;
+        for (int post : getPosts()) {
+            Post p = Post.POST_LIST.get(post);
+            voteCount += p.getUpvotes();
+            voteCount -= p.getDownvotes();
+        }
+        return voteCount;
     }
 
     /**
