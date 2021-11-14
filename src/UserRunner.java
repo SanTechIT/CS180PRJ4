@@ -9,6 +9,7 @@ import java.util.Scanner;
  * Runner classes handle control flow and UI interaction.
  *
  * @author briankwon25 (Brian Kwon), saraxiao0 (Sara Xiao)
+ *
  * @version 0.1 - 2021-11-14
  */
 public abstract class UserRunner {
@@ -258,7 +259,6 @@ public abstract class UserRunner {
 
                 default:
                     if (!loopDiscussionOverride(reader, input)) {
-
                         if (!parse2WordInput(input, reader)) {
                             Display.displayBadInput();
                         }
