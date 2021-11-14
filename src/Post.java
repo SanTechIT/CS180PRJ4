@@ -88,6 +88,10 @@ public class Post {
     public Post deletePost(User user) {
         // TODO: delete post in discussion / posts
         if (user.canModifyPost() || user.getId() == creator) {
+            discussion.getPosts().remove(this);
+            if(parent != null){
+                parent.getPosts().remove(this);
+            }
             return POST_LIST.set(id, null);
         }
         return null;
@@ -156,6 +160,15 @@ public class Post {
             str += post.getId() + " - " + post.getContent();
         }
         return str;
+    }
+
+    /**
+     * Returns the list of posts associated with this discussion
+     *
+     * @return
+     */
+    public List<Post> getPosts() {
+        return posts;
     }
 
 
