@@ -134,7 +134,7 @@ public abstract class UserRunner {
                     break;
             }
         }
-        Display.displayExit();
+        Display.displayLogout();
     }
 
     /**
@@ -337,7 +337,7 @@ public abstract class UserRunner {
 
         System.out.println("New post " + newPost.getId() +
             " (reply to " + targetPost.getId() + ")" +
-            "has been created!");
+            " has been created!");
         return true;
     }
 

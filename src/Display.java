@@ -67,8 +67,15 @@ public class Display {
      */
     public static void displayExit() {
         System.out.println("\nExit:" +
-            "\nLogging out..." +
             "\nThank you for using our program. Goodbye!");
+    }
+
+    /**
+     * Displays output for logging out
+     */
+    public static void displayLogout() {
+        System.out.println("\nLogging out:" +
+            "\nYou have successfully logged out.");
     }
 
     /**
@@ -186,9 +193,8 @@ public class Display {
      */
     public static void displayDeletePost(Post targetPost) {
         System.out.println("\nDelete post " + targetPost.getId() + ":" +
-            "\nDeleted posts can't be recovered." +
-            "Are you sure you want to do this?" +
-            "Type yes to confirm.");
+            "\nDeleted posts can't be recovered. Are you sure?" +
+            "\nType yes to confirm.");
 
         System.out.print("> ");
     }
