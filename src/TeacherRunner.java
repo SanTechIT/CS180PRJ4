@@ -221,6 +221,7 @@ public class TeacherRunner extends UserRunner {
         switch (input) {
             case "delete forum":
                 this.teacher.deleteDiscussion(getCurrentDiscussion());
+                setCurrentDiscussion(null);
                 break;
 
             default:
