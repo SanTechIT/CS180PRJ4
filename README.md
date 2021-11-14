@@ -360,6 +360,35 @@ Note: posts can be under both discussions and other posts
 | `public void upvote`  | `(User upvoter)`  | Upvotes post |
 | `public void downvote`   |  `(User downvoter)`  | Downvotes post  |
 
+### Display Class
+
+#### Methods
+
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| displayStart | `public static void` | `()`  |  Displays output for main login/create account loop |
+| displayWelcome | `public static void` | `(User user)`  |  Displays output for User main loop (viewing all courses after login) |
+| displayBadInput | `public static void` | `()`  |  Displays output for invalid input |
+| displayExit | `public static void` | `()`  |  Displays output for program exit |
+| displayLogout | `public static void` | `()`  |  Displays output for logging out |
+| displayCreateCourse | `public static void` | `()`  |  Displays output for creating a course (accessed from main menu) |
+| displayCourse | `public static void` | `(Course currentCourse, User user)`  |  Displays output for course loop (viewing all discussions in 1 course) |
+| displayCreateDiscussion | `public static void` | `(Course currentCourse, User user)`  |  Displays output for creating a discussion |
+| displayEditCourse | `public static void` | `()`  |  Displays output for editing a course topic |
+| displayDiscussion | `public static void` | `(Discussion currentDiscussion, User user)`  |  Displays output for discussion loop (viewing all posts in 1 discussion) |
+| displayDiscussionReply | `public static void` | `(Discussion currentDiscussion)`  |  Displays menu for replying directly to discussion (Student only) |
+| displayPostReply | `public static void` | `(Post targetPost)`  |  Displays menu for replying to post |
+| displayEditPost | `public static void` | `(Post targetPost)`  |  Displays menu for editing post |
+| displayDeletePost | `public static void` | `(Post targetPost)`  |  Displays menu for deleting post |
+| displayGradePost | `public static void` | `(Post targetPost)`  |  Displays menu for grading post |
+| displayEditAccount | `public static void` | `(User user)`  |  Displays output for edit account loop (an option from the main loop) |
+| displayModifyUsername | `public static void` | `(User user)`  |  Displays output for modifying the username |
+| displayModifyName | `public static void` | `(User user)`  |  Displays output for modifying the name |
+| displayModifyPassword | `public static void` | `(User usert)`  |  Displays output for modifying the password |
+| displayDeleteAccount | `public static void` | `(User user)`  |  Displays output for deleting an account |
+| displayViewStudent | `public static void` | `()`  |  Displays output for view student loop (option from the main loop) |
+| displayIndividualStudent | `public static void` | `(Student currentStudent)`  |  Displays output for an individual student |
+
 ## Console Example
 
 * *To write a new example, put 3 backticks at the start and end to make it a code block - otherwise Markdown formatting
