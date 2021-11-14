@@ -41,6 +41,13 @@ public class Discussion {
 
     }
 
+    /**
+     * Deletes the discussion with the given id
+     *
+     * @param id
+     * @param user
+     * @return
+     */
     public static Discussion deleteDiscussion(int id, User user) {
         if (!user.canModifyDiscussion()) {
             return null;
@@ -78,6 +85,14 @@ public class Discussion {
             str += post.getPostsString();
         }
         return str;
+    }
+
+    /**
+     * Returns the list of posts associated with this discussion
+     * @return
+     */
+    public List<Post> getPosts() {
+        return posts;
     }
 
     /**
