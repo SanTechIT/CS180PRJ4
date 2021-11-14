@@ -15,9 +15,10 @@ public class Post {
     public static List<Post> POST_LIST;
 
     private int id;
-    private String content;
     private int grade;
     private int maxGrade;
+    private String content;
+    private Discussion discussion;
     private Post parent;
     private List<Post> posts;
     private int creator;
@@ -27,9 +28,10 @@ public class Post {
         // Deny Instantiation
     }
 
-    private Post(String content, Post parent, int creator) {
+    private Post(String content, Discussion discussion, Post parent, int creator) {
         this.content = content;
         this.parent = parent;
+        this.discussion = discussion;
         this.creator = creator;
         this.maxGrade = 100;
         id = POST_LIST.size();
@@ -44,11 +46,11 @@ public class Post {
      * @param user
      * @return
      */
-    public static Post createPost(String content, User user) {
+    public static Post createPost(String content, Discussion discussion, User user) {
         if (!user.canPost()) {
             return null;
         }
-        return new Post(content, null, user.getId());
+        return new Post(content, discussion, null, user.getId());
     }
 
     /**
@@ -60,11 +62,11 @@ public class Post {
      * @param user
      * @return
      */
-    public static Post createPost(String content, Post parent, User user) {
+    public static Post createPost(String content, Discussion discussion, Post parent, User user) {
         if (!user.canPost()) {
             return null;
         }
-        return new Post(content, parent, user.getId());
+        return new Post(content, discussion, parent, user.getId());
     }
 
     /**
@@ -84,6 +86,7 @@ public class Post {
     }
 
     public Post deletePost(User user) {
+        // TODO: delete post in discussion / posts
         if (user.canModifyPost() || user.getId() == creator) {
             return POST_LIST.set(id, null);
         }
@@ -149,7 +152,7 @@ public class Post {
      */
     public String getPostsString() {
         String str = "";
-        for (Post post : posts){
+        for (Post post : posts) {
             str += post.getId() + " - " + post.getContent();
         }
         return str;

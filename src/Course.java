@@ -99,12 +99,15 @@ public class Course implements Serializable {
      */
     public String getDiscussionsString() {
         String str = "";
-        for (int i = 0; i < discussions.size(); i++) {
-            if (Discussion.DISCUSSION_LIST.get(i) != null) {
-                Discussion d = Discussion.DISCUSSION_LIST.get(i);
-                str += i + " - " + d.getTopic() + "\n";
-
-            }
+//        for (int i = 0; i < discussions.size(); i++) {
+//            if (Discussion.DISCUSSION_LIST.get(i) != null) {
+//                Discussion d = Discussion.DISCUSSION_LIST.get(i);
+//                str += i + " - " + d.getTopic() + "\n";
+//
+//            }
+//        }
+        for(Discussion discussion: discussions){
+            str += discussion.getId() + " - " + discussion.getTopic();
         }
         return str;
     }
