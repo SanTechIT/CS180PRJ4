@@ -168,7 +168,7 @@ public class TeacherRunner extends UserRunner {
                 menuCreateDiscussion(reader);
                 break;
 
-            case "edit course":
+            case "edit this course":
                 menuEditCourse(reader);
                 break;
 

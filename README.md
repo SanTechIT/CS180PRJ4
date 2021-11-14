@@ -15,48 +15,11 @@ Missing features
 Problems
 - MAJOR: (Tentative Done) Validate inputs for class/discussion/post Ids in reply/edit/delete actions
 - Ask if user wants to reply/edit/delete posts of another grouping?
-- non-major: teacher can't logout from ViewIndividualStudent menu, only go "back" (effect of loop design)
-- MAJOR: in ViewIndividualStudent, each of the student's posts shows up twice
 - MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash, don't know why (example below)
-- MAJOR: can't upvote/downvote/novote posts that are replies to other posts
+- Voteboard shows only top-level posts (should be quick fix once Richard finishes Discussion's getPost method)
 
 TO SELF (Richard)
 - Post redesign, print grade if same user or teacher, allows for indentation
-```
-Commands: back, reply [num], edit [num], delete [num], grade [num], logout
-Replace [num] with the number of the post you want to interact with!
-s | s (ID 4) posted
-at time TIMESTAMP NOT IMPLEMENTED
-(votes: +0 | -0)
-sadlkfjdlaskf
-s | s (ID 4) posted
-at time TIMESTAMP NOT IMPLEMENTED
-(votes: +0 | -0)
-sdalkfjlkdasf
-
-> delete 0     
-
-Delete post 0:
-Deleted posts can't be recovered. Are you sure?
-Type yes to confirm.
-> yes
-Post 0has been deleted.
-
-s's Posts:
-
-Commands: back, reply [num], edit [num], delete [num], grade [num], logout
-Replace [num] with the number of the post you want to interact with!
-Exception in thread "main" java.lang.NullPointerException
-	at Student.getPostsString(Student.java:133)
-	at Display.displayIndividualStudent(Display.java:282)
-	at TeacherRunner.loopIndividualStudent(TeacherRunner.java:127)
-	at TeacherRunner.loopViewStudent(TeacherRunner.java:110)
-	at TeacherRunner.loopMainOverride(TeacherRunner.java:55)
-	at UserRunner.loop(UserRunner.java:119)
-	at Teacher.loop(Teacher.java:29)
-	at User.connect(User.java:82)
-	at Tests.main(Tests.java:45)
-```
 
 # [Name] Design specifications
 

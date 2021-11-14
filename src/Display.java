@@ -115,7 +115,7 @@ public class Display {
         } else {
             System.out.println("\nback" +
             "\ncreate forum" +
-            "\nedit course" +
+            "\nedit this course" +
             "\nlogout");
         }
 

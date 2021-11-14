@@ -19,10 +19,10 @@ public class Tests {
 
         // Add default users to USER_LIST
         User.USER_LIST = new ArrayList<>();
-        new Teacher("teacher", "teacher", "John");
-        new Student("student", "student", "Alice"); // ID 2 and ID 3
-        new Student("s", "s", "s"); // ID 4 and ID 5
-        new Teacher("t", "t", "t");
+        Teacher john = new Teacher("teacher", "teacher", "John");
+        Student alice = new Student("student", "student", "Alice"); // ID 2 and ID 3
+        Student s = new Student("s", "s", "s"); // ID 4 and ID 5
+        Teacher t = new Teacher("t", "t", "t");
 
         // Add default courses to COURSE_LIST
         Course.COURSE_LIST = new ArrayList<>();
@@ -35,6 +35,12 @@ public class Tests {
         Discussion.createDiscussion(Course.COURSE_LIST.get(0), "default discussion", User.USER_LIST.get(0));
 
         Post.POST_LIST = new ArrayList<>();
+        Post post0 = s.makeDiscussionReply("test post 0", Discussion.DISCUSSION_LIST.get(0));
+        Post post1 = s.makePostReply(Post.POST_LIST.get(0), "test post 1", Discussion.DISCUSSION_LIST.get(0));
+        Post post2 = s.makePostReply(post0, "test post 2", Discussion.DISCUSSION_LIST.get(0));
+        s.makePostReply(post1, "test post 3", Discussion.DISCUSSION_LIST.get(0));
+        s.makePostReply(post2, "test post 4", Discussion.DISCUSSION_LIST.get(0));
+        s.makeDiscussionReply("test post 5", Discussion.DISCUSSION_LIST.get(0));
 
         String input;
         do {
