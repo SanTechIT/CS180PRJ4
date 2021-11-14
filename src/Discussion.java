@@ -42,7 +42,7 @@ public class Discussion {
     }
 
     public static Discussion deleteDiscussion(int id, User user) {
-        if (!user.canModifyDiscussion()){
+        if (!user.canModifyDiscussion()) {
             return null;
         }
         return DISCUSSION_LIST.set(id, null);
@@ -66,9 +66,17 @@ public class Discussion {
         return topic;
     }
 
-    public String getPostsString(){
-        // TODO
-        return "";
+    /**
+     * Returns a string with all the posts listed
+     *
+     * @return
+     */
+    public String getPostsString() {
+        String str = "";
+        for (Post post : posts) {
+            str += post.getPostsString();
+        }
+        return str;
     }
 
     /**

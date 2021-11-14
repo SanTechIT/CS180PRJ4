@@ -8,7 +8,6 @@ import java.util.List;
  * Post class
  *
  * @author briankwon25 (Brian Kwon)
- *
  * @version 0.2 - 2021-11-12
  */
 
@@ -130,6 +129,7 @@ public class Post {
      * @return
      */
     public String getContent() {
+
         return content;
     }
 
@@ -148,8 +148,11 @@ public class Post {
      * @return
      */
     public String getPostsString() {
-        // TODO
-        return "";
+        String str = "";
+        for (Post post : posts){
+            str += post.getId() + " - " + post.getContent();
+        }
+        return str;
     }
 
 

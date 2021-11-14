@@ -72,7 +72,7 @@ public abstract class User implements Serializable {
             System.out.println("Successfully Logged In!");
         }
 
-        user.loop(in);gi
+        user.loop(in);
     }
 
     public static void createAccount(Scanner in) {
