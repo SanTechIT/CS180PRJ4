@@ -176,5 +176,12 @@ public class Post {
         return posts;
     }
 
+    /**
+     * Teachers can view a dashboard that lists the most popular replies to each forum by votes
+     *
+     * @return
+     */
+     public
+
 
 }
