@@ -12,7 +12,6 @@ Missing features
 Problems
 - MAJOR: (Tentative Done) Validate inputs for class/discussion/post Ids in reply/edit/delete actions
 - Ask if user wants to reply/edit/delete posts of another grouping?
-- MAJOR: Teacher can't delete discussion forums
 - non-major: teacher can't logout from ViewIndividualStudent menu, only go "back" (effect of loop design)
 - MAJOR: in ViewIndividualStudent, each of the student's posts shows up twice
 - MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash, don't know why (example below)
