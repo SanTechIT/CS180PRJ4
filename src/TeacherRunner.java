@@ -218,7 +218,11 @@ public class TeacherRunner {
                         int discussionId = Integer.parseInt(input);
 
                         currentDiscussion = Discussion.DISCUSSION_LIST.get(discussionId);
-                        if (currentDiscussion == null) {
+
+                        if(!currentCourse.getDiscussions().contains(currentDiscussion)){
+                            currentDiscussion = null;
+                            Display.displayBadInput();
+                        } else if (currentDiscussion == null) {
                             Display.displayBadInput();
                         } else {
                             loopDiscussion(reader); // enter discussion menu with inputted discussion

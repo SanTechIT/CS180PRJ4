@@ -2,11 +2,10 @@ import java.util.Scanner;
 
 /**
  * Project 4 - Student Runner
- *
+ * <p>
  * Runs the loop() for the Teacher class
  *
  * @author briankwon25 (Brian Kwon)
- *
  * @version 0.2 - 2021-11-12
  */
 public class StudentRunner {
@@ -30,7 +29,7 @@ public class StudentRunner {
             Display.displayWelcome(this.student);
             String input = reader.nextLine();
 
-            switch(input) {
+            switch (input) {
                 case "edit account":
                     loopEditAccount(reader);
                     break;
@@ -50,7 +49,10 @@ public class StudentRunner {
                         int courseId = Integer.parseInt(input);
 
                         currentCourse = Course.COURSE_LIST.get(courseId);
-                        if (currentCourse == null) {
+                        if (!currentCourse.getDiscussions().contains(currentDiscussion)) {
+                            currentDiscussion = null;
+                            Display.displayBadInput();
+                        } else if (currentCourse == null) {
                             Display.displayBadInput();
                         } else {
                             loopCourse(reader);
@@ -75,7 +77,7 @@ public class StudentRunner {
             Display.displayEditAccount(this.student);
             String input = reader.nextLine();
 
-            switch(input) {
+            switch (input) {
                 case "back":
                     continueThisMenu = false;
                     break;
@@ -131,7 +133,8 @@ public class StudentRunner {
                         if (currentDiscussion == null) {
                             Display.displayBadInput();
                         } else {
-                            loopDiscussion(reader); // enter discussion menu with inputted discussion
+                            loopDiscussion(
+                                    reader); // enter discussion menu with inputted discussion
                         }
 
                     } catch (NumberFormatException e) {
@@ -153,7 +156,7 @@ public class StudentRunner {
 
             // Input loop is different because input can be a static command or one that takes an argument
             // Outer switch checks static commands, inner switch checks arguments
-            switch(input) {
+            switch (input) {
                 case "back":
                     currentDiscussion = null;
                     break;
@@ -176,7 +179,7 @@ public class StudentRunner {
     /**
      * Checks whether 2-word input for loopDiscussion
      * has valid length + post number
-     *
+     * <p>
      * If it is, checks which command is in input, then executes command
      */
     private boolean parse2WordInput(String input, Scanner reader) {
@@ -198,7 +201,7 @@ public class StudentRunner {
         }
 
         // check if post number corresponds to existing post
-//        Post targetPost = currentDiscussion.searchPosts(postId);
+        //        Post targetPost = currentDiscussion.searchPosts(postId);
         Post targetPost = Post.POST_LIST.get(postId);
         if (targetPost == null) {
             return false;
@@ -244,9 +247,8 @@ public class StudentRunner {
         String input = reader.nextLine();
         Post newPost = this.student.makePostReply(targetPost, input, currentDiscussion);
 
-        System.out.println("New post " + newPost.getId() +
-                " (reply to " + targetPost.getId() + ")" +
-                "has been created!");
+        System.out.println(
+                "New post " + newPost.getId() + " (reply to " + targetPost.getId() + ")" + "has been created!");
         return true;
     }
 
@@ -256,8 +258,7 @@ public class StudentRunner {
         String input = reader.nextLine();
         this.student.editPost(targetPost, input);
 
-        System.out.println("Post " + targetPost.getId() +
-                "has been edited!");
+        System.out.println("Post " + targetPost.getId() + "has been edited!");
         return true;
     }
 
@@ -269,8 +270,7 @@ public class StudentRunner {
             this.student.deletePost(targetPost);
         }
 
-        System.out.println("Post " + targetPost.getId() +
-                "has been deleted.");
+        System.out.println("Post " + targetPost.getId() + "has been deleted.");
         return true;
     }
 
