@@ -116,6 +116,7 @@ public class Display {
         System.out.print("> ");
     }
 
+    // Displays output for creating a discussion
     public static void displayCreateDiscussion() {
         System.out.println("\nCreating Discussion:" +
             "\nPlease enter the name of the new discussion:");
@@ -123,6 +124,7 @@ public class Display {
         System.out.print("> ");
     }
 
+    // Displays output for editing a course topic
     public static void displayEditCourse() {
         System.out.println("\nEditing Course Topic:" +
             "\nPlease enter the new topic of this course:");
@@ -234,6 +236,9 @@ public class Display {
         System.out.print("> ");
     }
 
+    /**
+     * Displays output for modifying the username
+     */
     public static void displayModifyUsername(User user) {
         System.out.println("Editing Your Account - " + user.getUsername() + ":");
 
@@ -243,6 +248,9 @@ public class Display {
                 "What would you like your new username to be? It can't be an already existing username");
     }
 
+    /**
+     * Displays output for modifying the name
+     */
     public static void displayModifyName(User user) {
         System.out.println("Editing Your Account - " + user.getUsername() + ":");
 
@@ -251,12 +259,19 @@ public class Display {
         System.out.println("What would you like your new name to be?");
     }
 
+    /**
+     * Displays output for modifying the password
+     */
+
     public static void displayModifyPassword(User user) {
         System.out.println("Editing Your Account - " + user.getUsername() + ":");
 
         System.out.println("What would you like your new password to be?");
     }
 
+    /**
+     * Displays output for deleting an account
+     */
     public static void displayDeleteAccount(User user) {
         System.out.println(
             "Delete Account - " + user.getUsername() + ":" +
@@ -278,6 +293,9 @@ public class Display {
         System.out.print("> ");
     }
 
+    /**
+     *  Displays output for an individual student
+     */
     public static void displayIndividualStudent(Student currentStudent) {
         System.out.println("\n" + currentStudent.getName() +  "'s Posts:");
 
