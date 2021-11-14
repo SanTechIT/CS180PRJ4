@@ -34,6 +34,11 @@ public class Post {
         this.discussion = discussion;
         this.creator = creator;
         this.maxGrade = 100;
+        if (parent == null) {
+            discussion.getPosts().add(this);
+        } else {
+            parent.getPosts().add(this);
+        }
         id = POST_LIST.size();
         posts = new ArrayList<>();
         POST_LIST.add(this);
@@ -89,7 +94,7 @@ public class Post {
         // TODO: delete post in discussion / posts
         if (user.canModifyPost() || user.getId() == creator) {
             discussion.getPosts().remove(this);
-            if(parent != null){
+            if (parent != null) {
                 parent.getPosts().remove(this);
             }
             return POST_LIST.set(id, null);
@@ -170,6 +175,13 @@ public class Post {
     public List<Post> getPosts() {
         return posts;
     }
+
+    /**
+     * Teachers can view a dashboard that lists the most popular replies to each forum by votes
+     *
+     * @return
+     */
+     public
 
 
 }
