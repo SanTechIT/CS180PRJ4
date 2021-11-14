@@ -115,7 +115,42 @@ Exception in thread "main" java.lang.NullPointerException
 | canModifyDiscussion | `public abstract boolean` | `()` |  Whether the user has permission to modify or delete Discussions |
 | canModifyPost | `public abstract boolean` | `()` | (EC) Whether the user has permission to modify or delete Posts made by others |
 
-## Teacher Class (extends `User`)
+## UserRunner Class (abstract) 
+
+##### Fields
+
+| Field      | Signature   | Description | Getter/Setter |
+| ---------- | ----------- | ----------- | ------------- |
+| user   | `private User` | user who's logged in |  |
+| currentCourse    | `private Course`  | current course user's looking at | G/S |
+| currentDiscussion    | `private Discussion`  | current discussion user's looking at | G/S |
+| logOut    | `private boolean`  | whether to logout of the program | G/S |
+
+#### Constructors
+
+| Signature   | Parameters  | Description |
+| ----------- | ----------- | ----------- |
+| `public` | `(User user)` | Creates new UserRunner |
+
+##### Methods
+
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| loop | `public void` | `(Scanner reader)` |  Handles all control flow and UI interaction |
+| loopEditAccount | `private void` | `(Scanner reader)` |  loop for editing account |
+| loopCourse | `private void` | `(Scanner reader)` |  Loop for 1 course and its discussions |
+| loopdiscussion | `private void` | `(Scanner reader)` |  Loop for 1 discussion forum and its posts |
+| parse2WordInput | `protected boolean` | `(String input, Scanner reader)` |  Checks whether 2-word input for loopDiscussion has valid length and post number |
+| menuPostReply | `private boolean` | `(Post targetPost, Scanner reader)` | Menu for posting reply to other post |
+| menuEditPost | `private boolean` | `(Post targetPost, Scanner reader)` | Menu for editing a post |
+| menuDeletePost | `private boolean` | `(Post targetPost, Scanner reader)` | Menu for deleting a post |
+| loopMainOverride | `protected boolean` | `(Scanner reader, String input)` |  For commands exclusive to Teacher or Student, returns false |
+| loopCourseOverride | `protected boolean` | `(Scanner reader, String input)` |  For commands exclusive to Teacher or Student, returns false |
+| loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  For commands exclusive to Teacher or Student, returns false |
+| parse2WordInputOverride | `protected boolean` | `(Post targetPost, Scanner reader, String inputWord1)` |  For commands exclusive to Teacher or Student, returns false |
+
+
+## Teacher Class (extends `User`) (Serializable)
 
 #### Constructors
 
@@ -128,17 +163,34 @@ Exception in thread "main" java.lang.NullPointerException
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
 | loop | `public void` | `(Scanner in)` |  Primary Loop Handler |
+| canVote | `public boolean` | `()` | returns false |
+| canGrade | `public boolean` | `()` | returns true |
+| canPost | `public boolean` | `()` | returns true |
+| canCreateCourse | `public boolean` | `()` | returns true |
+| canCreateDiscussion | `public boolean` | `()` | returns true |
+| canModifyDiscussion | `public boolean` | `()` | returns true |
+| canModifyPost | `public boolean` | `()` | returns true |
+| createCourse | `public boolean` | `()` | Creates course |
+| createDiscussion | `public boolean` | `()` | Creates discussion |
+| editDiscussion | `public boolean` | `()` | Edits discussion form |
+| deleteDiscussion | `public boolean` | `()` | Deletes discussion form  |
+| gradePost | `public boolean` | `()` | Teachers can assign a point value to student's work|
 
-* methods inherited from User - the canVote, etc. have been implemented
 * private utility methods exist, have not been implemented yet - will be handled internally so shouldn't be a concern
 
 ## TeacherRunner Class 
+
+##### Fields
+
+| Field      | Signature   | Description | Getter/Setter |
+| ---------- | ----------- | ----------- | ------------- |
+| teacher   | `private Teacher` | Teacher who's logged in |  |
 
 #### Constructors
 
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
-| `public` | `(Teacher teacher)` | Auto sets id to next id in list |
+| `public` | `(Teacher teacher)` | Creates new TeacherRunner |
 
 #### Methods
 
@@ -150,12 +202,18 @@ Exception in thread "main" java.lang.NullPointerException
 | loodIndividualStudent | `private void` | `(Scanner reader, Student currentStudent)` |  Loop for viewing/editing all posts of 1 student |
 | loopCourseOverride | `protected boolean` | `(Scanner reader, String input)` |  For menu options exclusive to teacher |
 | menuCreateDiscussion | `private void` | `(Scanner reader)` |  The menu for creating new discussion forum |
-| loopDioscussionOverrie | `protected boolean` | `(Scanner reader, String input)` |  Deleting discussion forum menu option for teacher |
+| loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  Deleting discussion forum menu option for teacher |
 | parse2WordInputOverride | `protected boolean` | `(Scanner reader, String input)` |  Parses the word given as input |
 | menuGradePost | `private boolean` | `(Scanner reader, String input)` | menu for grading a post |
 
 
-## Student Class (extends `User`)
+## Student Class (extends `User`) (Serializable)
+
+##### Fields
+
+| Field      | Signature   | Description | Getter/Setter |
+| ---------- | ----------- | ----------- | ------------- |
+| posts | ` private List<Integer>` | ID of every post the student has made | G |
 
 #### Constructors
 
@@ -168,9 +226,41 @@ Exception in thread "main" java.lang.NullPointerException
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
 | loop | `public void` | `(Scanner in)` |  Primary Loop Handler |
+| canVote | `public boolean` | `()` | returns true |
+| canGrade | `public boolean` | `()` | returns false |
+| canPost | `public boolean` | `()` | returns true |
+| canCreateCourse | `public boolean` | `()` | returns false |
+| canModifyCourse | `public boolean` | `()` | returns false |
+| canModifyDiscussion | `public boolean` | `()` | returns false |
+| canModifyPost | `public boolean` | `()` | returns false |
+| canCreateDiscussion | `public boolean` | `()` | returns false |
+| isAdmins | `public boolean` | `()` | returns true |
+| makePostReply | `public Post` | `(Post parentPost, String newContent, Discussion parentDiscussion)` | Reply to a reply to a discussion form |
+| makeDiscussionReply | `public Post` | `(String newContent, Discussion parentDiscussion)` | Reply directly to a discussion form |
+| getPostsString | `public String` | `()` | Gets the Posts String |
+| getVoteCount | `public int` | `()` | Gets the vote count |
+| upvotePost | `public boolean` | `(Post targetPost)` | Student can upvote |
+| downvotePost | `public boolean` | `(Post targetPost)` | Student can downvote |
 
 - get / store all student posts
 - view scores
+
+## StudentRunner Class (extends `User`)
+
+#### Constructors
+
+| Signature   | Parameters  | Description |
+| ----------- | ----------- | ----------- |
+| `public` | `(Student student)` | Creates new StudentRunner |
+
+#### Methods
+
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  Replying to discussion forum menu option for student |
+| menuDiscussionReply | `private boolean` | `(Scanner reader)` |  Menu for replying to a discussion form |
+| loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  Deleting discussion forum menu option for teacher |
+| parse2WordInputOverride | `protected boolean` | `(Scanner reader, String input)` |  Parses the word given as input |
 
 ## Course Class (Serializable)
 
