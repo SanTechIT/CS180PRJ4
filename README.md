@@ -309,14 +309,12 @@ Exception in thread "main" java.lang.NullPointerException
 
 #### Methods
 
-| Signature   | Parameters | Description |
-| ----------- | ---------- | ----------- |
-| `public String getPostsString` | `()` |  Returns chronological list of all posts with id + post topic (see Console Example) |
-| `public Post searchPosts` | `(int id)` | Search `posts` for post with that id, return null if not found  |
-| `public void addPost`   | `(User poster, String newContent)` | Calls Post constructor to add new post to `posts` |
-| `public void addPost`   | `(User poster, Post parentPost, String newContent)` | Calls Post constructor to add new post (*
-which is a reply to an existing post*) to `posts` |
-| `public void delete` | `(User deleter)` | Deletes this forum and all posts within it |
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| createDiscussion | `public static Discussion` | `(Course course, String topic, User user)` |  Creates and returns a new Discussion object if the user has permission to |
+| deleteDiscussion | `public static Discussion` | `(int id, User user)` |  Deletes the discussion with the given id |
+| getPostsString | `public String` | `(Course course, String topic, User user)` |  Returns a string with all the posts listed |
+| sortByUpvotes | `public List<Post>` | `(Course course, String topic, User user)` |  Sorts the list by upvotes |
 
 - Get most popular posts
 
