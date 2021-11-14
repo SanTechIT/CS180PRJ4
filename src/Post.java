@@ -125,7 +125,12 @@ public class Post implements Serializable {
         String timestamp = "TIMESTAMP NOT IMPLEMENTED"; // TODO
 
         postString += "\n";
+
+
         postString += "Post ID " + getId();
+        if (parent != null) {
+            postString += " (reply to " + parent.getId() + ")";
+        }
 
         postString += "\n" + creator.getUsername() + " | " + creator.getName() + " (ID " + creatorId + ") posted";
         postString += " at time " + timestamp;

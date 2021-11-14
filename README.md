@@ -8,11 +8,13 @@ Missing features
 * the report
 * comment the code
 * improve post formatting - grade should only be visible to teacher/poster
+* ungraded posts have a grade of 0 - change that to n/a? will need to keep track of whether a post has been graded
+* Teacher shouldn't be able to reply to a student's posts while viewing their student dashboard, remove that feature.
 
 Problems
 - MAJOR: Validate inputs for class/discussion/post Ids in reply/edit/delete actions
 - Ask if user wants to reply/edit/delete posts of another grouping?
-- MAJOR: Teacher can't delete discussion forums (to fix: best to move delete forum option from "view all forums" menu (course menu) to "view 1 forum" menu (discussion menu)
+- MAJOR: Teacher can't delete discussion forums
 - MAJOR: You can log into any account with any password. We don't have authentication.
 - MAJOR: Posts don't show up correctly! Only posts that are a reply to a post with ID 0 show up, everything else doesn't show.
 - non-major: teacher can't logout from ViewIndividualStudent menu, only go "back" (effect of loop design)
@@ -20,6 +22,7 @@ Problems
 - MAJOR: students have multiple IDs? does each student exist twice in USER_LIST?
     - eg. in Tests.java, Alice has both ID 2 and ID 3
 - MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash sometimes, don't know why (example below)
+- MAJOR: replying to a nonexistent post crashes the program
 
 ```
 Commands: back, reply [num], edit [num], delete [num], grade [num], logout
