@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  * User Class
- *
+ * <p>
  * Represents a user of the program.
  *
  * @author aarinipanzade, chang794, saraxiao0
@@ -23,6 +23,7 @@ public abstract class User implements Serializable {
     private String password;
     private String name;
 
+    // this is the User constructor
     public User(String username, String password, String name) {
         this.username = username;
         this.password = password;
@@ -32,6 +33,7 @@ public abstract class User implements Serializable {
         USER_LIST.add(this);
     }
 
+    // getter and setter methods
     public void setName(String name) {
         this.name = name;
     }
@@ -56,11 +58,11 @@ public abstract class User implements Serializable {
         return id;
     }
 
-
     public String getPassword() {
         return password;
     }
 
+    // this connect method is for the user to log in with their credentials
     public static void connect(Scanner in) {
         System.out.println("Enter your username: ");
         String username = in.nextLine();
@@ -73,15 +75,17 @@ public abstract class User implements Serializable {
         if (user == null) {
             System.out.println("Wrong username or password");
             return;
-        }
-
-        if (password.equals(user.getPassword())) {
+        } else if (!password.equals(user.getPassword())) {
+            System.out.println("Wrong username or password");
+            return;
+        } else {
             System.out.println("Successfully Logged In!");
         }
 
         user.loop(in);
     }
 
+    // this method creates the account for the certain user
     public static void createAccount(Scanner in) {
         System.out.println("Enter your username: ");
         String username = in.nextLine();
@@ -103,18 +107,17 @@ public abstract class User implements Serializable {
     }
 
 
-    // get user method
+    // get user method which finds the user in the user list
     private static User getUser(String username) {
         for (User user : USER_LIST) {
             if (username.equals(user.getUsername())) {
                 return user;
             }
         }
-        // tries to find user in USER_LIST with username/password
-        // if cant returns null
         return null;
     }
 
+    // this method changes the username if the user wants to edit it to a new one
     public void modifyUsername(Scanner in) {
         Display.displayModifyUsername(this);
 
@@ -130,6 +133,7 @@ public abstract class User implements Serializable {
         }
     }
 
+    // this method changes the name if the user wants to edit it to a new one
     public void modifyName(Scanner in) {
         Display.displayModifyName(this);
 
@@ -140,6 +144,7 @@ public abstract class User implements Serializable {
         System.out.println("Congratulations! You have changed your name.");
     }
 
+    // this method changes the password if the user wants to edit it to a new one
     public void modifyPassword(Scanner in) {
         Display.displayModifyPassword(this);
 
@@ -150,6 +155,7 @@ public abstract class User implements Serializable {
         System.out.println("Congratulations! You have changed your password.");
     }
 
+    // this method deletes the account if the user wants to delete their account
     public void deleteAccount(Scanner in) {
         Display.displayDeleteAccount(this);
 
@@ -166,8 +172,8 @@ public abstract class User implements Serializable {
     /**
      * Reply to a reply to a discussion forum
      *
-     * @param parentPost parent post the new post is replying to
-     * @param newContent content of new post
+     * @param parentPost       parent post the new post is replying to
+     * @param newContent       content of new post
      * @param parentDiscussion discussion forum that contains both posts
      */
     public Post makePostReply(Post parentPost, String newContent, Discussion parentDiscussion) {
