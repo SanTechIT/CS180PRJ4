@@ -36,14 +36,16 @@ public class TeacherRunner extends UserRunner {
 
     /*
      * For menu options exclusive to Teacher
-     * protected because abstract methods can't be private (next best thing)
      * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
      *
      * @param reader Scanner for getting additional input
      * @param input Existing user input
+     *
+     * @return if an exclusive command was successfully executed (eg. create forum)
+     * if returns false, no exclusive commands could be detected/executed
      */
     @Override
-    protected void loopMainOverride(Scanner reader, String input) {
+    protected boolean loopMainOverride(Scanner reader, String input) {
         switch(input) {
             case "create course":
                 menuCreateCourse(reader);
@@ -54,8 +56,9 @@ public class TeacherRunner extends UserRunner {
                 break;
 
             default:
-                break;
+                return false;
         }
+        return true;
     }
 
     /**
@@ -137,10 +140,6 @@ public class TeacherRunner extends UserRunner {
                     setExitProgram(true);
                     break;
 
-                case "delete forum":
-                    this.teacher.deleteDiscussion(getCurrentDiscussion());
-                    break;
-
                 default:
                     if (!(super.parse2WordInput(input, reader))) {
                         Display.displayBadInput();
@@ -152,22 +151,25 @@ public class TeacherRunner extends UserRunner {
 
     /*
      * For menu options exclusive to Teacher
-     * protected because abstract methods can't be private (next best thing)
      * called in UserRunner's loopCourse method (viewing discussions in a course)
      *
      * @param reader Scanner for getting additional input
      * @param input Existing user input
+     *
+     * @return if an exclusive command was successfully executed (eg. create forum)
+     * if returns false, no exclusive commands could be detected/executed
      */
     @Override
-    protected void loopCourseOverride(Scanner reader, String input) {
+    protected boolean loopCourseOverride(Scanner reader, String input) {
         switch(input) {
             case "create forum":
                 menuCreateDiscussion(reader);
                 break;
 
             default:
-                break;
+                return false;
         }
+        return true;
     }
 
     /**
@@ -187,33 +189,37 @@ public class TeacherRunner extends UserRunner {
     /**
      * For menu options exclusive to Teacher
      * overrides abstract method in UserRunner
-     * protected because abstract methods can't be private (next best thing)
      * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
      *
      * @param reader Scanner for getting additional input
      * @param input Existing user input
+     *
+     * @return if an exclusive command was successfully executed (eg. create forum)
+     * if returns false, no exclusive commands could be detected/executed
      */
-    @Override
-    protected void loopDiscussionOverride(Scanner reader, String input) {
+    protected boolean loopDiscussionOverride(Scanner reader, String input) {
         switch(input) {
             case "delete forum":
                 this.teacher.deleteDiscussion(getCurrentDiscussion());
                 break;
 
             default:
-                break;
+                return false;
         }
+        return true;
     }
 
     /**
      * For menu options exclusive to Teacher
      * overrides abstract method in UserRunner
-     * protected because abstract methods can't be private (next best thing)
      * called in UserRunner's parse2WordInputOverride method (parsing input w/ argument)
      *
      * @param targetPost post affected by command
      * @param reader scanner for getting input
      * @param inputWord1 1st word of user input, determines command
+     *
+     * @return if an exclusive command was successfully executed (eg. create forum)
+     * if returns false, no exclusive commands could be detected/executed
      */
     @Override
     protected boolean parse2WordInputOverride(
@@ -221,11 +227,13 @@ public class TeacherRunner extends UserRunner {
 
         switch (inputWord1) {
             case "grade":
-                return menuGradePost(targetPost, reader);
+                menuGradePost(targetPost, reader);
+                break;
 
             default:
                 return false;
         }
+        return true;
     }
 
     /**
@@ -233,6 +241,8 @@ public class TeacherRunner extends UserRunner {
      *
      * @param targetPost post to grade
      * @param reader Scanner for getting input
+     *
+     * @return whether operation succeeded (whether grade was valid or not)
      */
     private boolean menuGradePost(Post targetPost, Scanner reader) {
         Display.displayGradePost(targetPost);

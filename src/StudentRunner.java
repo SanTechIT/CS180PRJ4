@@ -22,32 +22,35 @@ public class StudentRunner extends UserRunner {
         this.student = student;
     }
 
-    /* ----- Loop methods - for handling control flow -----
-     * All loop methods are called by loop(Scanner reader) directly or indirectly
-     * Each loop method represents a particular menu
+    /*
+     * For menu options exclusive to Student
+     * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
      *
-     * Each loop method has a corresponding Display.display method that Display.displays output
-     * for that menu
+     * @param reader Scanner for getting additional input
+     * @param input Existing user input
+     *
+     * @return if an exclusive command was successfully executed (eg. create forum)
+     * if returns false, no exclusive commands could be detected/executed
      */
-
     @Override
-    protected void loopMainOverride(Scanner reader, String input){}
-
-    @Override
-    protected void loopCourseOverride(Scanner reader, String input){}
-
-    @Override
-    protected void loopDiscussionOverride(Scanner reader, String input) {
+    protected boolean loopDiscussionOverride(Scanner reader, String input) {
         switch(input) {
             case "reply to discussion":
                 menuDiscussionReply(reader);
                 break;
 
             default:
-                break;
+                return false;
         }
+        return true;
     }
 
+    /*
+     * Menu for replying directly to a discussion forum (Student exclusive)
+     *
+     * @param reader Scanner for user input
+     * @return boolean for whether operation succeeds (always true for now)
+    */
     private boolean menuDiscussionReply(Scanner reader) {
         Display.displayDiscussionReply(getCurrentDiscussion());
 
@@ -58,8 +61,4 @@ public class StudentRunner extends UserRunner {
             "has been created!");
         return true;
     }
-
-    @Override
-    protected boolean parse2WordInputOverride(Post targetPost, Scanner reader, String input){return false;}
-
 }

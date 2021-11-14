@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @version 0.1 - 2021-11-14
  */
 public abstract class UserRunner {
-    private User user;
+    private User user; // User who's logged in
     private Course currentCourse; // current course user's looking at
     private Discussion currentDiscussion; // current discussion user's looking at
 
@@ -115,20 +115,21 @@ public abstract class UserRunner {
                     break;
 
                 default:
-                    loopMainOverride(reader, input);
+                    if (!loopMainOverride(reader, input)) {
 
-                    try {
-                        int courseId = Integer.parseInt(input);
+                        try {
+                            int courseId = Integer.parseInt(input);
 
-                        currentCourse = Course.COURSE_LIST.get(courseId);
-                        if (currentCourse == null) {
+                            currentCourse = Course.COURSE_LIST.get(courseId);
+                            if (currentCourse == null) {
+                                Display.displayBadInput();
+                            } else {
+                                loopCourse(reader);
+                            }
+
+                        } catch (NumberFormatException e) {
                             Display.displayBadInput();
-                        } else {
-                            loopCourse(reader);
                         }
-
-                    } catch (NumberFormatException e) {
-                        Display.displayBadInput();
                     }
                     break;
             }
@@ -180,7 +181,7 @@ public abstract class UserRunner {
         while (currentCourse != null) { // "back" sets currentCourse to null
         // then program goes back to main loop
 
-            Display.displayCourse(currentCourse);
+            Display.displayCourse(currentCourse, this.user);
             String input = reader.nextLine();
 
             switch (input) {
@@ -194,24 +195,25 @@ public abstract class UserRunner {
                     break;
 
                 default:
-                    loopCourseOverride(reader, input);
+                    if (!loopCourseOverride(reader, input)) {
 
-                    try {
-                        int discussionId = Integer.parseInt(input);
+                        try {
+                            int discussionId = Integer.parseInt(input);
 
-                        currentDiscussion = Discussion.DISCUSSION_LIST.get(discussionId);
+                            currentDiscussion = Discussion.DISCUSSION_LIST.get(discussionId);
 
-                        if(!currentCourse.getDiscussions().contains(currentDiscussion)){
-                            currentDiscussion = null;
-                            Display.displayBadInput();
-                        } else if (currentDiscussion == null) {
-                            Display.displayBadInput();
-                        } else {
-                            loopDiscussion(reader); // enter discussion menu with inputted discussion
+                            if(!currentCourse.getDiscussions().contains(currentDiscussion)){
+                                currentDiscussion = null;
+                                Display.displayBadInput();
+                            } else if (currentDiscussion == null) {
+                                Display.displayBadInput();
+                            } else {
+                                loopDiscussion(reader); // enter discussion menu with inputted discussion
+                            }
+
+                        } catch (NumberFormatException e) {
+                            Display.displayBadInput(); // error if discussion ID doesn't convert to number
                         }
-
-                    } catch (NumberFormatException e) {
-                        Display.displayBadInput(); // error if discussion ID doesn't convert to number
                     }
                     break;
             }
@@ -223,12 +225,7 @@ public abstract class UserRunner {
      */
     private void loopDiscussion(Scanner reader) {
         while (currentDiscussion != null) {
-
-            if (user instanceof Student) {
-                Display.displayDiscussionStudent(currentDiscussion);
-            } else { // user is instance of Teacher
-                Display.displayDiscussionTeacher(currentDiscussion);
-            }
+            Display.displayDiscussion(currentDiscussion, this.user);
 
             String input = reader.nextLine();
 
@@ -246,10 +243,11 @@ public abstract class UserRunner {
                     break;
 
                 default:
-                    loopDiscussionOverride(reader, input);
+                    if (!loopDiscussionOverride(reader, input)) {
 
-                    if (!(parse2WordInput(input, reader))) {
-                        Display.displayBadInput();
+                        if (!parse2WordInput(input, reader)) {
+                            Display.displayBadInput();
+                        }
                     }
                     break;
             }
@@ -379,42 +377,61 @@ public abstract class UserRunner {
         return true;
     }
 
-    /* ----- Abstract "loopXOverride" methods -----
+    /* ----- Protected "loopXOverride" methods -----
      * Overriden by derived classes
-     * For menu options exclusive to Teacher or Student
-     * protected because abstract methods can't be private (next best thing)
+     * For commands exclusive to Teacher or Student (eg. "create forum")
+     * Protected so they can be overridden
+     *
+     * @return a boolean:
+     * This boolean represents whether an exclusive command was executed
+     * True if it was called, false if it wasn't and input couldn't be parsed
+     * always false because User has no exclusive commands
      */
 
     /*
-     * For menu options exclusive to Teacher or Student
+     * For commands exclusive to Teacher or Student
      * called in UserRunner's loop method (viewing all courses)
      *
      * @param reader Scanner for getting additional input
      * @param input Existing user input
+     *
+     * @return if an exclusive command was successfully executed
+     * always false because User has no exclusive commands
      */
-    protected abstract void loopMainOverride(Scanner reader, String input);
-
+    protected boolean loopMainOverride(Scanner reader, String input) {
+        return false;
+    }
 
     /*
-     * For menu options exclusive to Teacher or Student
+     * For commands exclusive to Teacher or Student
      * called in UserRunner's loopCourse method (viewing discussions in a course)
      *
      * @param reader Scanner for getting additional input
      * @param input Existing user input
+     *
+     * @return if an exclusive command was successfully executed (eg. create forum)
+     * always false because User has no exclusive commands
      */
-    protected abstract void loopCourseOverride(Scanner reader, String input);
+    protected boolean loopCourseOverride(Scanner reader, String input) {
+        return false;
+    }
 
     /*
-     * For menu options exclusive to Teacher or Student
+     * For commands exclusive to Teacher or Student
      * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
      *
      * @param reader Scanner for getting additional input
      * @param input Existing user input
+     *
+     * @return if an exclusive command was successfully executed (eg. create forum)
+     * always false because User has no exclusive commands
      */
-    protected abstract void loopDiscussionOverride(Scanner reader, String input);
+    protected boolean loopDiscussionOverride(Scanner reader, String input){
+        return false;
+    }
 
     /*
-     * For menu options exclusive to Teacher or Student
+     * For commands exclusive to Teacher or Student
      *
      * called in UserRunner's parse2WordInput method
      * which is called in its loopDiscussion method
@@ -423,8 +440,13 @@ public abstract class UserRunner {
      * @param targetPost post affected by command
      * @param reader scanner for getting input
      * @param inputWord1 1st word of user input, determines command
+     *
+     * @return if an exclusive command was successfully executed (eg. create forum)
+     * always false because User has no exclusive commands
      */
-    protected abstract boolean parse2WordInputOverride(
-        Post targetPost, Scanner reader, String inputWord1);
+    protected boolean parse2WordInputOverride(
+        Post targetPost, Scanner reader, String inputWord1) {
+        return false;
+    }
 
 }

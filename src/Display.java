@@ -36,12 +36,19 @@ public class Display {
             System.out.println(courseList);
         }
 
-        System.out.println("Or, please type one of these commands: " +
-            "\nedit account" +
-            "\ndelete account" +
-            "\ncreate course" +
-            "\nview student" +
-            "\nexit");
+        if (user instanceof Student) {
+            System.out.println("Or, please type one of these commands: " +
+                "\nedit account" +
+                "\ndelete account" +
+                "\nexit");
+        } else {
+            System.out.println("Or, please type one of these commands: " +
+                "\nedit account" +
+                "\ndelete account" +
+                "\ncreate course" +
+                "\nview student" +
+                "\nexit");
+        }
 
         System.out.print("> ");
     }
@@ -77,7 +84,7 @@ public class Display {
     /**
      * Displays output for course loop (viewing all discussions in 1 course)
      */
-    public static void displayCourse(Course currentCourse) {
+    public static void displayCourse(Course currentCourse, User user) {
         System.out.println("\nWelcome to " + currentCourse.getTopic() + "!" +
             "\nPlease type the number of a discussion forum to view:");
 
@@ -88,11 +95,16 @@ public class Display {
             System.out.println(discussionList);
         }
 
-        System.out.println("Or, please type one of these commands: " +
-            "\nback" +
+        System.out.println("Or, please type one of these commands: ");
+        if (user instanceof Student) {
+            System.out.println("\nback" +
+            "\nexit");
+        } else {
+            System.out.println("\nback" +
             "\ncreate forum" +
             "\ndelete forum" +
             "\nexit");
+        }
 
         System.out.print("> ");
     }
@@ -108,7 +120,18 @@ public class Display {
      * Displays output for discussion loop (viewing all posts in 1 discussion)
      * Called by displayDiscussionTeacher and displayDiscussionStudent
      */
-    private static void displayDiscussion(Discussion currentDiscussion, String commands) {
+    public static void displayDiscussion(Discussion currentDiscussion, User user) {
+        String commands;
+        if (user instanceof Student) {
+            commands = "Commands: " +
+                "back, reply to discussion, reply [num], edit [num], delete [num], " +
+                "upvote [num], downvote [num], exit";
+        } else {
+            commands = "Commands: " +
+                "back, reply [num], edit [num], delete [num], " +
+                "grade [num], exit";
+        }
+
         System.out.println("\nWelcome to " + currentDiscussion.getTopic() + "!" +
             "\n" + commands +
             "\nReplace [num] with the number of the post you " +
@@ -122,20 +145,6 @@ public class Display {
         }
 
         System.out.print("> ");
-    }
-
-    public static void displayDiscussionTeacher(Discussion currentDiscussion) {
-        String commands = "Commands: " +
-            "back, reply [num], edit [num], delete [num], " +
-            "grade [num], exit";
-        displayDiscussion(currentDiscussion, commands);
-    }
-
-    public static void displayDiscussionStudent(Discussion currentDiscussion) {
-        String commands = "Commands: " +
-            "back, reply to discussion, reply [num], edit [num], delete [num], " +
-            "upvote [num], downvote [num], exit";
-        displayDiscussion(currentDiscussion, commands);
     }
 
     /**
