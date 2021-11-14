@@ -59,8 +59,9 @@ public class Discussion implements Serializable {
         if (!user.canModifyDiscussion()) {
             return null;
         }
-        // TODO: Delete discussion in course
-        return DISCUSSION_LIST.set(id, null);
+        Discussion deleted = DISCUSSION_LIST.set(id, null);
+        deleted.course.getDiscussions().remove(deleted);
+        return deleted;
     }
 
     /**

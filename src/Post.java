@@ -10,7 +10,6 @@ import java.util.List;
  * Post class
  *
  * @author briankwon25 (Brian Kwon)
- *
  * @version 0.2 - 2021-11-12
  */
 
@@ -44,7 +43,6 @@ public class Post implements Serializable {
      * @param discussion
      * @param parent
      * @param creatorId
-     *
      */
     private Post(String content, Discussion discussion, Post parent, int creatorId) {
         this.content = content;
@@ -93,21 +91,21 @@ public class Post implements Serializable {
         return new Post(content, discussion, parent, user.getId());
     }
 
-//    /**
-//     * Searches all the posts by ID
-//     *
-//     * @param postId
-//     *
-//     * @return
-//     */
-//    public static Post searchPostsById(int postId) {
-//        for (Post post : POST_LIST) {
-//            if (post.getId() == postId) {
-//                return post;
-//            }
-//        }
-//        return null;
-//    }
+    //    /**
+    //     * Searches all the posts by ID
+    //     *
+    //     * @param postId
+    //     *
+    //     * @return
+    //     */
+    //    public static Post searchPostsById(int postId) {
+    //        for (Post post : POST_LIST) {
+    //            if (post.getId() == postId) {
+    //                return post;
+    //            }
+    //        }
+    //        return null;
+    //    }
 
     /**
      * Allows editing of the post if the user has permission to edit or if
@@ -129,7 +127,6 @@ public class Post implements Serializable {
      * Deletes posts in discussions / posts
      *
      * @param user
-     *
      * @return
      */
     public Post deletePost(User user) {
@@ -234,9 +231,18 @@ public class Post implements Serializable {
         String str = "";
         str += this.toString();
         for (Post post : posts) {
-            str += post.toString() + "\n";
+            str += post.getPostsString() + "\n";
         }
         return str;
+    }
+
+    /**
+     * Returns the discussions
+     *
+     * @return
+     */
+    public Discussion getDiscussion() {
+        return discussion;
     }
 
     /**
@@ -270,7 +276,6 @@ public class Post implements Serializable {
      * Decides if the user can vote, if so, then upvotes
      *
      * @param user
-     *
      */
     public boolean upvote(User user, int oldVote) {
         if (!user.canVote()) {
@@ -287,7 +292,6 @@ public class Post implements Serializable {
      * Decides if the user can vote, if so, then downvotes
      *
      * @param user
-     *
      */
     public boolean downvote(User user, int oldVote) {
         if (!user.canVote()) {

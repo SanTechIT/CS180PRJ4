@@ -258,7 +258,6 @@ public abstract class UserRunner {
 
                 default:
                     if (!loopDiscussionOverride(reader, input)) {
-
                         if (!parse2WordInput(input, reader)) {
                             Display.displayBadInput();
                         }
@@ -307,8 +306,10 @@ public abstract class UserRunner {
         if (targetPost == null) {
             // Post is deleted / does not exist
             return false;
-        } else if (!currentDiscussion.getPosts().contains(targetPost)) {
+        } else if (!currentDiscussion.getPosts().contains(
+                targetPost) && !targetPost.getDiscussion().equals(currentDiscussion)) {
             // Post is not part of current discussion
+            // check if post upstream is part of discussion
             return false;
         }
 
