@@ -130,7 +130,6 @@ public class Post implements Serializable {
      * @return
      */
     public Post deletePost(User user) {
-        // TODO: delete post in discussion / posts
         if (user.canModifyPost() || user.getId() == creatorId) {
             discussion.getPosts().remove(this);
             if (parent != null) {
