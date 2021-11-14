@@ -258,7 +258,6 @@ public abstract class UserRunner {
 
                 default:
                     if (!loopDiscussionOverride(reader, input)) {
-
                         if (!parse2WordInput(input, reader)) {
                             Display.displayBadInput();
                         }
