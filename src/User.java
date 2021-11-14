@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  * User Class
- *
+ * <p>
  * Represents a user of the program.
  *
  * @author aarinipanzade, chang794, saraxiao0
@@ -73,9 +73,10 @@ public abstract class User implements Serializable {
         if (user == null) {
             System.out.println("Wrong username or password");
             return;
-        }
-
-        if (password.equals(user.getPassword())) {
+        } else if (!password.equals(user.getPassword())) {
+            System.out.println("Wrong username or password");
+            return;
+        } else {
             System.out.println("Successfully Logged In!");
         }
 
@@ -166,8 +167,8 @@ public abstract class User implements Serializable {
     /**
      * Reply to a reply to a discussion forum
      *
-     * @param parentPost parent post the new post is replying to
-     * @param newContent content of new post
+     * @param parentPost       parent post the new post is replying to
+     * @param newContent       content of new post
      * @param parentDiscussion discussion forum that contains both posts
      */
     public Post makePostReply(Post parentPost, String newContent, Discussion parentDiscussion) {
