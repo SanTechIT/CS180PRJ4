@@ -107,7 +107,7 @@ public class Course implements Serializable {
 //            }
 //        }
         for(Discussion discussion: discussions){
-            str += discussion.getId() + " - " + discussion.getTopic();
+            str += discussion.getId() + " - " + discussion.getTopic() + "\n";
         }
         return str;
     }

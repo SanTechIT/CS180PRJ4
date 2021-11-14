@@ -1,3 +1,11 @@
+# TODO
+
+* voting
+* grading
+* serialization/permanence
+* test cases
+* the report
+
 # [Name] Design specifications
 
 ## Notes
@@ -226,7 +234,7 @@ Example input:
 [22]
 
 [Discussion Topic]
-Commands: reply to discussion, reply [num], edit [num], delete [num], grade [num], exit
+Commands: back, reply to discussion, reply [num], edit [num], delete [num], upvote [num], downvote [num], exit
 Replace [num] with the number of the post you want to interact with!
 [12] [Post Content]
 [33] [Post Content]
@@ -246,7 +254,7 @@ Example input:
 New post [114] (reply to [33]) has been created!
 -----
 [Discussion Topic]
-Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Commands: back, reply to discussion, reply [num], edit [num], delete [num], upvote [num], downvote [num], exit
 Replace [num] with the number of the post you want to interact with!
 [12] [Post Content]
 [33] [Post Content]
@@ -266,7 +274,7 @@ Example input:
 Post [12] has been edited!
 -----
 [Discussion Topic]
-Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Commands: back, reply to discussion, reply [num], edit [num], delete [num], upvote [num], downvote [num], exit
 Replace [num] with the number of the post you want to interact with!
 [12] [Post Content]
 [33] [Post Content]
@@ -286,7 +294,7 @@ Example input:
 Post 12 has been deleted.
 -----
 [Discussion Topic]
-Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Commands: back, reply to discussion, reply [num], edit [num], delete [num], upvote [num], downvote [num], exit
 Replace [num] with the number of the post you want to interact with!
 [33] [Post Content]
 [98] [Post Content]
@@ -641,7 +649,7 @@ Example input:
 [aklsdjflkdsanhfcl]
 
 Input Error:
-Sorry, I couldn't understand what you typed. Please try again!
+Sorry, I couldn't understand what you typed. Please try again! 
 -----
 Welcome [Name]!
 Please type the number of a course to view:
