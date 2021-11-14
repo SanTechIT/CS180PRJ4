@@ -16,14 +16,9 @@ public abstract class UserRunner {
     private Course currentCourse; // current course user's looking at
     private Discussion currentDiscussion; // current discussion user's looking at
 
-<<<<<<< HEAD
     private boolean logout = false; // whether to logout the program
     // set to true when user inputs "logout" - then program logs out
     // and returns to "login / create account / etc" menu
-=======
-    private boolean exitProgram = false; // whether to exit the program
-    // set to true when user inputs "exit" - then program logs off and stops
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
 
     /*
      * Creates new UserRunner
@@ -74,7 +69,6 @@ public abstract class UserRunner {
      }
 
      /**
-<<<<<<< HEAD
      * Returns value of logout
      * @return
      */
@@ -88,21 +82,6 @@ public abstract class UserRunner {
      */
      public void setLogout(boolean logout) {
          this.logout = logout;
-=======
-     * Returns value of exitProgram
-     * @return
-     */
-     public boolean isExitProgram() {
-         return exitProgram;
-     }
-
-     /**
-     * Sets new value of exitProgram
-     * @param
-     */
-     public void setExitProgram(boolean exitProgram) {
-         this.exitProgram = exitProgram;
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
      }
 
     /* ----- Loop methods - for handling control flow -----
@@ -117,11 +96,7 @@ public abstract class UserRunner {
      * Handles all control flow and UI interaction
      */
     public void loop(Scanner reader) {
-<<<<<<< HEAD
         while (!logout) {
-=======
-        while (!exitProgram) {
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
             Display.displayWelcome(this.user);
             String input = reader.nextLine();
 
@@ -133,19 +108,11 @@ public abstract class UserRunner {
                 // deleteAccount is a User method that user inherits
                 case "delete account":
                     user.deleteAccount(reader);
-<<<<<<< HEAD
                     logout = true;
                     break;
 
                 case "logout":
                     logout = true;
-=======
-                    exitProgram = true;
-                    break;
-
-                case "exit":
-                    exitProgram = true;
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
                     break;
 
                 default:
@@ -201,13 +168,8 @@ public abstract class UserRunner {
                     user.modifyPassword(reader);
                     break;
 
-<<<<<<< HEAD
                 case "logout":
                     logout = true;
-=======
-                case "exit":
-                    exitProgram = true;
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
                     break;
             }
         }
@@ -228,15 +190,9 @@ public abstract class UserRunner {
                     currentCourse = null;
                     break;
 
-<<<<<<< HEAD
                 case "logout":
                     currentCourse = null;
                     logout = true;
-=======
-                case "exit":
-                    currentCourse = null;
-                    exitProgram = true;
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
                     break;
 
                 default:
@@ -281,17 +237,10 @@ public abstract class UserRunner {
                     currentDiscussion = null;
                     break;
 
-<<<<<<< HEAD
                 case "logout":
                     currentDiscussion = null;
                     currentCourse = null;
                     logout = true;
-=======
-                case "exit":
-                    currentDiscussion = null;
-                    currentCourse = null;
-                    exitProgram = true;
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
                     break;
 
                 default:

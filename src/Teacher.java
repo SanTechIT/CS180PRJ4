@@ -10,11 +10,9 @@ import java.util.Scanner;
  * @version 0.3 - 2021-11-12
  */
 public class Teacher extends User implements Serializable {
-    private Teacher teacher;
 
     public Teacher(String username, String password, String name) {
         super(username, password, name); // calls User's constructor
-        this.teacher = teacher;
     }
 
     /**

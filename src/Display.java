@@ -40,22 +40,14 @@ public class Display {
             System.out.println("Or, please type one of these commands: " +
                 "\nedit account" +
                 "\ndelete account" +
-<<<<<<< HEAD
                 "\nlogout");
-=======
-                "\nexit");
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
         } else {
             System.out.println("Or, please type one of these commands: " +
                 "\nedit account" +
                 "\ndelete account" +
                 "\ncreate course" +
                 "\nview student" +
-<<<<<<< HEAD
                 "\nlogout");
-=======
-                "\nexit");
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
         }
 
         System.out.print("> ");
@@ -113,20 +105,12 @@ public class Display {
         System.out.println("Or, please type one of these commands: ");
         if (user instanceof Student) {
             System.out.println("\nback" +
-<<<<<<< HEAD
             "\nlogout");
-=======
-            "\nexit");
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
         } else {
             System.out.println("\nback" +
             "\ncreate forum" +
             "\ndelete forum" +
-<<<<<<< HEAD
             "\nlogout");
-=======
-            "\nexit");
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
         }
 
         System.out.print("> ");
@@ -148,19 +132,11 @@ public class Display {
         if (user instanceof Student) {
             commands = "Commands: " +
                 "back, reply to discussion, reply [num], edit [num], delete [num], " +
-<<<<<<< HEAD
                 "upvote [num], downvote [num], logout";
         } else {
             commands = "Commands: " +
                 "back, reply [num], edit [num], delete [num], " +
                 "grade [num], logout";
-=======
-                "upvote [num], downvote [num], exit";
-        } else {
-            commands = "Commands: " +
-                "back, reply [num], edit [num], delete [num], " +
-                "grade [num], exit";
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
         }
 
         System.out.println("\nWelcome to " + currentDiscussion.getTopic() + "!" +

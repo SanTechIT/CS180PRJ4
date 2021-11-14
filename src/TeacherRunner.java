@@ -94,11 +94,7 @@ public class TeacherRunner extends UserRunner {
 
                 case "logout":
                     continueThisMenu = false;
-<<<<<<< HEAD
                     setLogout(true);
-=======
-                    setExitProgram(true);
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
                     break;
 
                 default:
@@ -135,17 +131,7 @@ public class TeacherRunner extends UserRunner {
             // Outer switch checks static commands, inner switch checks arguments
             switch(input) {
                 case "back":
-<<<<<<< HEAD
                     currentStudent = null;
-=======
-                    setCurrentDiscussion(null);
-                    break;
-
-                case "exit":
-                    setCurrentDiscussion(null);
-                    setCurrentCourse(null);
-                    setExitProgram(true);
->>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
                     break;
 
                 default:

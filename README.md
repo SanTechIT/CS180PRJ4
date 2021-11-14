@@ -10,11 +10,12 @@ Missing features
 * improve post formatting - when viewing posts: posts should show timestamp, user who posted it, number of upvotes, number of downvotes (or a combined vote number that's upvotes - downvotes), the grade (grade may only be visible to teacher/poster) - then contents of post
 
 Problems
-- Validate inputs for class/discussion/post Ids in reply/edit/delete actions
+- MAJOR: Validate inputs for class/discussion/post Ids in reply/edit/delete actions
 - Ask if user wants to reply/edit/delete posts of another grouping?
-- Teacher can't delete discussion forums (to fix: best to move delete forum option from "view all forums" menu (course menu) to "view 1 forum" menu (discussion menu)
-- You can log into any account with any password. We don't have authentication.
-- If you just 'reply to discussion', without replying to another post, your new posts don't show up. They aren't returned by getPostsString (so they presumably don't exist in the Discussion's posts field)
+- MAJOR: Teacher can't delete discussion forums (to fix: best to move delete forum option from "view all forums" menu (course menu) to "view 1 forum" menu (discussion menu)
+- MAJOR: You can log into any account with any password. We don't have authentication.
+- MAJOR: Posts don't show up correctly! Only posts that are a reply to a post with ID 0 show up, everything else doesn't show.
+- non-major: teacher can't logout from ViewIndividualStudent menu, only go "back" (effect of loop design)
 
 
 # [Name] Design specifications

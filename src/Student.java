@@ -130,7 +130,7 @@ public class Student extends User implements Serializable {
     public String getPostsString() {
         String str = "";
         for (int post : posts) {
-            str += Post.POST_LIST.get(post);
+            str += Post.POST_LIST.get(post).toString();
         }
         return str;
     }

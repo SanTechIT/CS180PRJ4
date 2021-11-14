@@ -27,7 +27,7 @@ public class Post implements Serializable {
     private Discussion discussion;
     private Post parent;
     private List<Post> posts;
-    private int creator;
+    private int creatorId;
     private Date timestamp;
     private int upvotes;
     private int downvotes;
@@ -36,11 +36,11 @@ public class Post implements Serializable {
         // Deny Instantiation
     }
 
-    private Post(String content, Discussion discussion, Post parent, int creator) {
+    private Post(String content, Discussion discussion, Post parent, int creatorId) {
         this.content = content;
         this.parent = parent;
         this.discussion = discussion;
-        this.creator = creator;
+        this.creatorId = creatorId;
         this.maxGrade = 100;
         if (parent == null) {
             discussion.getPosts().add(this);
@@ -93,14 +93,14 @@ public class Post implements Serializable {
 
     /**
      * Allows editing of the post if the user has permission to edit or if
-     * the user is the creator of the post
+     * the user is the creatorId of the post
      *
      * @param newContent
      * @param user
      * @return
      */
     public boolean editPost(String newContent, User user) {
-        if (user.canModifyPost() || user.getId() == creator) {
+        if (user.canModifyPost() || user.getId() == creatorId) {
             this.content = newContent;
             return true;
         }
@@ -109,7 +109,7 @@ public class Post implements Serializable {
 
     public Post deletePost(User user) {
         // TODO: delete post in discussion / posts
-        if (user.canModifyPost() || user.getId() == creator) {
+        if (user.canModifyPost() || user.getId() == creatorId) {
             discussion.getPosts().remove(this);
             if (parent != null) {
                 parent.getPosts().remove(this);
@@ -117,6 +117,20 @@ public class Post implements Serializable {
             return POST_LIST.set(id, null);
         }
         return null;
+    }
+
+    public String toString() {
+        String postString = "";
+        User creator = User.USER_LIST.get(creatorId);
+        String timestamp = "TIMESTAMP NOT IMPLEMENTED"; // TODO
+
+        postString += creator.getUsername() + " | " + creator.getName() + " (ID " + creatorId + ") posted";
+        postString += "\nat time " + timestamp;
+        postString += "\n(votes: +" + getUpvotes() + " | -" + getDownvotes() + ")";
+        postString += "\n" + getContent();
+        postString += "\n";
+
+        return postString;
     }
 
     /**
@@ -179,7 +193,7 @@ public class Post implements Serializable {
     public String getPostsString() {
         String str = "";
         for (Post post : posts) {
-            str += post.getId() + " - " + post.getContent();
+            str += post.toString();
         }
         return str;
     }
