@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Project 4 - Student Runner
- *
+ * <p>
  * Runs the loop() for the Teacher class
  *
  * @author briankwon25 (Brian Kwon)
@@ -17,7 +17,11 @@ public class StudentRunner {
     private boolean exitProgram = false; // whether to exit the program
     // set to true when user inputs "exit" - then program logs off and stops
 
-
+    /*
+     * Creates new StudentRunner
+     *
+     * @param student Student this runner is connected to and operating for
+     */
     public StudentRunner(Student student) {
         this.student = student;
 
@@ -25,12 +29,24 @@ public class StudentRunner {
         currentDiscussion = null;
     }
 
+    /* ----- Loop methods - for handling control flow -----
+     * All loop methods are called by loop(Scanner reader) directly or indirectly
+     * Each loop method represents a particular menu
+     *
+     * Each loop method has a corresponding Display.display method that Display.displays output
+     * for that menu
+     */
+
+    /*
+     * Handles all control flow and UI interaction
+     * Called by Student's loop method, which is called by Main
+     */
     public void loop(Scanner reader) {
         while (!exitProgram) {
             Display.displayWelcome(this.student);
             String input = reader.nextLine();
 
-            switch(input) {
+            switch (input) {
                 case "edit account":
                     loopEditAccount(reader);
                     break;
@@ -50,7 +66,10 @@ public class StudentRunner {
                         int courseId = Integer.parseInt(input);
 
                         currentCourse = Course.COURSE_LIST.get(courseId);
-                        if (currentCourse == null) {
+                        if (!currentCourse.getDiscussions().contains(currentDiscussion)) {
+                            currentDiscussion = null;
+                            Display.displayBadInput();
+                        } else if (currentCourse == null) {
                             Display.displayBadInput();
                         } else {
                             loopCourse(reader);
@@ -75,7 +94,7 @@ public class StudentRunner {
             Display.displayEditAccount(this.student);
             String input = reader.nextLine();
 
-            switch(input) {
+            switch (input) {
                 case "back":
                     continueThisMenu = false;
                     break;
@@ -131,7 +150,8 @@ public class StudentRunner {
                         if (currentDiscussion == null) {
                             Display.displayBadInput();
                         } else {
-                            loopDiscussion(reader); // enter discussion menu with inputted discussion
+                            loopDiscussion(
+                                    reader); // enter discussion menu with inputted discussion
                         }
 
                     } catch (NumberFormatException e) {
@@ -153,7 +173,7 @@ public class StudentRunner {
 
             // Input loop is different because input can be a static command or one that takes an argument
             // Outer switch checks static commands, inner switch checks arguments
-            switch(input) {
+            switch (input) {
                 case "back":
                     currentDiscussion = null;
                     break;
@@ -191,7 +211,7 @@ public class StudentRunner {
     /**
      * Checks whether 2-word input for loopDiscussion
      * has valid length + post number
-     *
+     * <p>
      * If it is, checks which command is in input, then executes command
      */
     private boolean parse2WordInput(String input, Scanner reader) {
@@ -257,9 +277,8 @@ public class StudentRunner {
         String input = reader.nextLine();
         Post newPost = this.student.makePostReply(targetPost, input, currentDiscussion);
 
-        System.out.println("New post " + newPost.getId() +
-                " (reply to " + targetPost.getId() + ")" +
-                "has been created!");
+        System.out.println(
+                "New post " + newPost.getId() + " (reply to " + targetPost.getId() + ")" + "has been created!");
         return true;
     }
 
@@ -269,8 +288,7 @@ public class StudentRunner {
         String input = reader.nextLine();
         this.student.editPost(targetPost, input);
 
-        System.out.println("Post " + targetPost.getId() +
-                "has been edited!");
+        System.out.println("Post " + targetPost.getId() + "has been edited!");
         return true;
     }
 
@@ -282,8 +300,7 @@ public class StudentRunner {
             this.student.deletePost(targetPost);
         }
 
-        System.out.println("Post " + targetPost.getId() +
-                "has been deleted.");
+        System.out.println("Post " + targetPost.getId() + "has been deleted.");
         return true;
     }
 

@@ -193,14 +193,30 @@ public class Post implements Serializable {
         return posts;
     }
 
+    /**
+     * Returns the amount of upvotes in a post
+     *
+     * @return
+     */
     public int getUpvotes() {
         return upvotes;
     }
 
+    /**
+     * Returns the amount of downvotes in a post
+     *
+     * @return
+     */
     public int getDownvotes() {
         return downvotes;
     }
 
+    /**
+     * Decides if the user can vote, if so, then able to upvote
+     *
+     * @param user
+     *
+     */
     public boolean upvote(User user) {
         if (!user.canVote()) {
             return false;
@@ -209,6 +225,12 @@ public class Post implements Serializable {
         return true;
     }
 
+    /**
+     * Decides if the user can vote, if so, then able to downvote
+     *
+     * @param user
+     *
+     */
     public boolean downvote(User user) {
         if (!user.canVote()) {
             return false;

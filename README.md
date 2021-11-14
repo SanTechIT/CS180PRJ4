@@ -6,9 +6,13 @@
 * test cases
 * the report
 
+- Validate inputs for class/discussion/post Ids in reply/edit/delete actions
+- Ask if user wants to reply/edit/delete posts of another grouping?
+
 # [Name] Design specifications
 
 ## Notes
+
 - When shutting down, serialize the User List, Course List
 - Connect method in user handles all loop logic (better architecture)
 - Whenever anything gets deleted, set its index on the List to `null`
@@ -17,12 +21,15 @@
   `Course`s/`Discussion`s/`Post`s as `id`s in `User`s
 
 ## Main Class
+
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ----------- | ---------- |
 | main        | public static void | String[] args | Main Method |
 
 ## User Class (abstract) (Serializable)
+
 ##### Fields
+
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
 | USER_LIST   | `public static List<User>` | Lists all users |  |
@@ -32,11 +39,13 @@
 | id | `private int` | Id is same as index in list | G |
 
 #### Constructors
+
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `public` | `(String username, String password, String name)` |  |
 
 ##### Methods
+
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
 | connect        | `public static void` | `(Scanner in)` |  Loop Handler for login |
@@ -58,11 +67,13 @@
 ## Teacher Class (extends `User`)
 
 #### Constructors
+
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `public` | `(String username, String password, String name)` | Auto sets id to next id in list |
 
 #### Methods
+
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
 | loop | `public void` | `(Scanner in)` |  Primary Loop Handler |
@@ -73,11 +84,13 @@
 ## Student Class (extends `User`)
 
 #### Constructors
+
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `public` | `(String username, String password, String name)` | Auto sets id to next id in list |
 
 #### Methods
+
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
 | loop | `public void` | `(Scanner in)` |  Primary Loop Handler |
@@ -86,7 +99,9 @@
 - view scores
 
 ## Course Class (Serializable)
+
 ##### Fields
+
 | Field      | Signature   | Description |
 | ---------- | ----------- | ----------- |
 | COURSE_LIST    | `public static List<Course>` | Lists all courses |
@@ -96,11 +111,13 @@
 | creator | `private int` | Keeps track of the UID of who created this `Course` | G |
 
 #### Constructors
+
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `private` | `(String topic, User creator)` | Auto sets id to next id in list |
 
 #### Methods
+
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `public static Course` | `(String topic, User creator)` | Creates a new course, appends to list, and returns |
@@ -110,7 +127,9 @@
 | `public String searchDiscussions`  | `(int id)`  | Search `discussions` for discussion with that id, return null if not found   |
 
 ### Discussion Class (Serializable)
+
 ##### Fields
+
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
 | DISCUSSION_LIST   | `public static List<Discussion>` | Lists all `Discussion`s |  |
@@ -123,25 +142,30 @@
 | creator | `private int` | Keeps track of the UID of who created this `Discussion` | G |
 
 #### Constructors
+
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `public` | `(String topic, Course course, User creator)` | Auto sets id to next id in list |
 
 #### Methods
+
 | Signature   | Parameters | Description |
 | ----------- | ---------- | ----------- |
 | `public String getPostsString` | `()` |  Returns chronological list of all posts with id + post topic (see Console Example) |
 | `public Post searchPosts` | `(int id)` | Search `posts` for post with that id, return null if not found  |
 | `public void addPost`   | `(User poster, String newContent)` | Calls Post constructor to add new post to `posts` |
-| `public void addPost`   | `(User poster, Post parentPost, String newContent)` | Calls Post constructor to add new post (*which is a reply to an existing post*) to `posts` |
+| `public void addPost`   | `(User poster, Post parentPost, String newContent)` | Calls Post constructor to add new post (*
+which is a reply to an existing post*) to `posts` |
 | `public void delete` | `(User deleter)` | Deletes this forum and all posts within it |
 
 - Get most popular posts
 
 ### Post Class (Serializable)
+
 Note: posts can be under both discussions and other posts
 
 ##### Fields
+
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
 | ALL_POSTS  | `public static List<Post>` | Lists all `Post`s |  |
@@ -158,12 +182,14 @@ Note: posts can be under both discussions and other posts
 | parentDiscussion  | `private Discussion` | Discussion that this Post is a part of  |   |
 
 #### Constructors
+
 | Parameters  | Description |
 | ----------- | ----------- |
 | `(User creator, String content)` | Auto sets id to next id in list |
 | `(Post parentPost, User creator, String content)` | New post is a reply to parentPost  |
 
 #### Methods
+
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `public void edit`   | `(User editor, String newContent)` | Replaces content of Post with newContent  |
@@ -174,15 +200,20 @@ Note: posts can be under both discussions and other posts
 
 ## Console Example
 
-* *To write a new example, put 3 backticks at the start and end to make it a code block - otherwise Markdown formatting makes it weird*
+* *To write a new example, put 3 backticks at the start and end to make it a code block - otherwise Markdown formatting
+  makes it weird*
 
 Suggestions:
+
 * Users need to be able to "create, edit, and delete" their own accounts, so those should be menu options.
 * Update the Student Loop to include stuff from the Teacher Loop (eg. additional commands and options)
 
-* When viewing posts: posts should show timestamp, user who posted it, number of upvotes, number of downvotes (or a combined vote number that's upvotes - downvotes), the grade (grade may only be visible to teacher/poster) - then contents of post
+* When viewing posts: posts should show timestamp, user who posted it, number of upvotes, number of downvotes (or a
+  combined vote number that's upvotes - downvotes), the grade (grade may only be visible to teacher/poster) - then
+  contents of post
 
 ___
+
 ### Main Loop:
 
 ```

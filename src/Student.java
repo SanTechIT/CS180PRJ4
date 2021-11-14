@@ -136,6 +136,11 @@ public class Student extends User implements Serializable {
         return (targetPost.deletePost(this) != null);
     }
 
+    /**
+     * Gets Posts String
+     *
+     * @return str which is the posts string
+     */
     public String getPostsString() {
         String str = "";
         for (int post : posts) {
@@ -144,6 +149,11 @@ public class Student extends User implements Serializable {
         return str;
     }
 
+    /**
+     * Get Vote Count
+     *
+     * @return voteCount which is the total number of upvotes and downvotes together
+     */
     public int getVoteCount() {
         int voteCount = 0;
         for (int post : posts) {
