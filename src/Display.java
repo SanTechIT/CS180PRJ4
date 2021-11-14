@@ -109,7 +109,7 @@ public class Display {
             "\nReplace [num] with the number of the post you" +
                 "want to interact with!");
 
-        String postList = currentDiscussion.getPostsString());
+        String postList = currentDiscussion.getPostsString();
         if (postList.isEmpty()) {
             System.out.println("There are no posts.");
         } else {
