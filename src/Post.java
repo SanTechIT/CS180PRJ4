@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class Post implements Serializable {
         this.discussion = discussion;
         this.creatorId = creatorId;
         this.maxGrade = 100;
+        this.timestamp = new Date();
         if (parent == null) {
             discussion.getPosts().add(this);
         } else {
@@ -122,13 +124,12 @@ public class Post implements Serializable {
     public String toString() {
         String postString = "";
         User creator = User.USER_LIST.get(creatorId);
-        String timestamp = "TIMESTAMP NOT IMPLEMENTED"; // TODO
 
         postString += "\n";
         postString += "Post ID " + getId();
 
         postString += "\n" + creator.getUsername() + " | " + creator.getName() + " (ID " + creatorId + ") posted";
-        postString += " at time " + timestamp;
+        postString += " at time " + timestamp.toString();
 
         postString += "\n(votes: +" + getUpvotes() + " | -" + getDownvotes() + ")";
 
@@ -199,6 +200,7 @@ public class Post implements Serializable {
      */
     public String getPostsString() {
         String str = "";
+        str += this.toString();
         for (Post post : posts) {
             str += post.toString() + "\n";
         }
@@ -242,7 +244,7 @@ public class Post implements Serializable {
         if (!user.canVote()) {
             return false;
         }
-        this.upvotes++;
+        this.downvotes++;
         return true;
     }
 

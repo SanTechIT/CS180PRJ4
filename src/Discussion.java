@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -95,6 +96,7 @@ public class Discussion implements Serializable {
 
     /**
      * Returns the list of posts associated with this discussion
+     *
      * @return
      */
     public List<Post> getPosts() {
@@ -113,5 +115,13 @@ public class Discussion implements Serializable {
             return true;
         }
         return false;
+    }
+
+    public List<Post> sortByUpvotes() {
+        //        List<Post> posts = this.posts.clone();
+        // Make copy
+        // Implement compareTo in post
+        // sort arraylist
+        return null;
     }
 }
