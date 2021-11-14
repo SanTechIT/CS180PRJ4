@@ -349,7 +349,7 @@ public class TeacherRunner {
         Display.displayPostReply(targetPost);
 
         String input = reader.nextLine();
-        Post newPost = this.teacher.makePostReply(targetPost, input);
+        Post newPost = this.teacher.makePostReply(targetPost, input, currentDiscussion);
 
         System.out.println("New post " + newPost.getId() +
             " (reply to " + targetPost.getId() + ")" +

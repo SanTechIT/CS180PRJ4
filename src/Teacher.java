@@ -173,9 +173,9 @@ public class Teacher extends User {
      * @param parentPost parent post the new post is replying to
      * @param newContent content of new post
      */
-    public Post makePostReply(Post parentPost, String newContent) {
+    public Post makePostReply(Post parentPost, String newContent, Discussion parentDiscussion) {
         //        return new Post(parentPost, this, newContent);
-        return Post.createPost(newContent, parentPost, this);
+        return Post.createPost(newContent, parentDiscussion, parentPost, this);
     }
 
     /**
