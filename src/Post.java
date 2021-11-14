@@ -125,7 +125,8 @@ public class Post implements Serializable {
         String timestamp = "TIMESTAMP NOT IMPLEMENTED"; // TODO
 
         postString += creator.getUsername() + " | " + creator.getName() + " (ID " + creatorId + ") posted";
-        postString += "\nat time " + timestamp;
+        postString += " at time " + timestamp;
+
         postString += "\n(votes: +" + getUpvotes() + " | -" + getDownvotes() + ")";
         postString += "\n" + getContent();
         postString += "\n";
@@ -193,7 +194,7 @@ public class Post implements Serializable {
     public String getPostsString() {
         String str = "";
         for (Post post : posts) {
-            str += post.toString();
+            str += post.toString() + "\n";
         }
         return str;
     }

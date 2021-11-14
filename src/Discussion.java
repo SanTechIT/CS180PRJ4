@@ -7,7 +7,7 @@ public class Discussion implements Serializable {
     // As per https://stackoverflow.com/
     // questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 01L;
-    
+
     public static List<Discussion> DISCUSSION_LIST;
 
     private int id;
@@ -88,7 +88,7 @@ public class Discussion implements Serializable {
     public String getPostsString() {
         String str = "";
         for (Post post : posts) {
-            str += post.getPostsString();
+            str += post.getPostsString() + "\n";
         }
         return str;
     }

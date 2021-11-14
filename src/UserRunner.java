@@ -374,7 +374,7 @@ public abstract class UserRunner {
         }
 
         System.out.println("Post " + targetPost.getId() +
-            "has been deleted.");
+            " has been deleted.");
         return true;
     }
 

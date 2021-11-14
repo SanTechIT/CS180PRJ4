@@ -104,7 +104,12 @@ public class Student extends User implements Serializable {
     @Override
     public Post makePostReply(Post parentPost, String newContent, Discussion parentDiscussion) {
         Post p = Post.createPost(newContent, parentDiscussion, parentPost, this);
-        posts.add(p.getId());
+
+        int postId = p.getId();
+        if (!posts.contains(postId)) {
+            posts.add(p.getId());
+        }
+        
         return p;
     }
 
@@ -118,7 +123,12 @@ public class Student extends User implements Serializable {
      */
     public Post makeDiscussionReply(String newContent, Discussion parentDiscussion) {
         Post p = Post.createPost(newContent, parentDiscussion, this);
-        posts.add(p.getId());
+
+        int postId = p.getId();
+        if (!posts.contains(postId)) {
+            posts.add(p.getId());
+        }
+
         return p;
     }
 
@@ -129,8 +139,8 @@ public class Student extends User implements Serializable {
      */
     public String getPostsString() {
         String str = "";
-        for (int post : posts) {
-            str += Post.POST_LIST.get(post).toString();
+        for (int postId : posts) {
+            str += Post.POST_LIST.get(postId).toString();
         }
         return str;
     }

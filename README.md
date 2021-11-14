@@ -16,7 +16,44 @@ Problems
 - MAJOR: You can log into any account with any password. We don't have authentication.
 - MAJOR: Posts don't show up correctly! Only posts that are a reply to a post with ID 0 show up, everything else doesn't show.
 - non-major: teacher can't logout from ViewIndividualStudent menu, only go "back" (effect of loop design)
+- MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash sometimes, don't know why (example below)
+- MAJOR: in ViewIndividualStudent, each of the student's posts shows up twice
 
+```
+Commands: back, reply [num], edit [num], delete [num], grade [num], logout
+Replace [num] with the number of the post you want to interact with!
+s | s (ID 4) posted
+at time TIMESTAMP NOT IMPLEMENTED
+(votes: +0 | -0)
+sadlkfjdlaskf
+s | s (ID 4) posted
+at time TIMESTAMP NOT IMPLEMENTED
+(votes: +0 | -0)
+sdalkfjlkdasf
+
+> delete 0     
+
+Delete post 0:
+Deleted posts can't be recovered. Are you sure?
+Type yes to confirm.
+> yes
+Post 0has been deleted.
+
+s's Posts:
+
+Commands: back, reply [num], edit [num], delete [num], grade [num], logout
+Replace [num] with the number of the post you want to interact with!
+Exception in thread "main" java.lang.NullPointerException
+	at Student.getPostsString(Student.java:133)
+	at Display.displayIndividualStudent(Display.java:282)
+	at TeacherRunner.loopIndividualStudent(TeacherRunner.java:127)
+	at TeacherRunner.loopViewStudent(TeacherRunner.java:110)
+	at TeacherRunner.loopMainOverride(TeacherRunner.java:55)
+	at UserRunner.loop(UserRunner.java:119)
+	at Teacher.loop(Teacher.java:29)
+	at User.connect(User.java:82)
+	at Tests.main(Tests.java:45)
+```
 
 # [Name] Design specifications
 
