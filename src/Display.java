@@ -76,11 +76,11 @@ public class Display {
      */
     public static void displayCourse(Course currentCourse) {
         System.out.println("\nWelcome to " + currentCourse.getTopic() + "!" +
-            "\nPlease type the number of a discussion to view:");
+            "\nPlease type the number of a discussion forum to view:");
 
         String discussionList = currentCourse.getDiscussionsString();
         if (discussionList.isEmpty()) {
-            System.out.println("There are no courses.");
+            System.out.println("There are no discussion forums.");
         } else {
             System.out.println(discussionList);
         }
