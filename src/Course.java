@@ -9,6 +9,10 @@ import java.util.List;
  * @version 0.2
  */
 public class Course implements Serializable {
+    // As per https://stackoverflow.com/
+    // questions/10378855/java-io-invalidclassexception-local-class-incompatible
+    private static final long serialVersionUID = 01L;
+
     public static List<Course> COURSE_LIST;
     private int id;
     private String topic;

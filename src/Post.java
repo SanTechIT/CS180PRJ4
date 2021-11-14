@@ -14,6 +14,10 @@ import java.util.List;
  */
 
 public class Post implements Serializable {
+    // As per https://stackoverflow.com/
+    // questions/10378855/java-io-invalidclassexception-local-class-incompatible
+    private static final long serialVersionUID = 01L;
+
     public static List<Post> POST_LIST;
 
     private int id;

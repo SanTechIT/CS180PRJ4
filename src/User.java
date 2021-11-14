@@ -10,6 +10,11 @@ import java.util.Scanner;
  * @version 0.1
  */
 public abstract class User implements Serializable {
+    
+    // As per https://stackoverflow.com/
+    // questions/10378855/java-io-invalidclassexception-local-class-incompatible
+    private static final long serialVersionUID = 01L;
+
     public static List<User> USER_LIST;
     private int id;
     private String username;
@@ -158,8 +163,7 @@ public abstract class User implements Serializable {
 
     public void deleteAccount(Scanner in) {
         System.out.println(
-            "Delete Account - " + username + ":" +
-            "\nDeleted accounts can't be recovered. Are you sure you want to do this? Type yes to confirm.");
+                "Delete Account - " + username + ":" + "\nDeleted accounts can't be recovered. Are you sure you want to do this? Type yes to confirm.");
 
         String deleteConfirm = in.nextLine();
 

@@ -27,17 +27,17 @@ public class Main {
             User.USER_LIST = (List<User>) readData("data/UserList");
             Course.COURSE_LIST = (List<Course>) readData("data/CourseList");
         } catch (IOException e){
-            // TODO
+            System.out.println("An Error while loading data has occurred: " + e.getMessage());
         } catch (ClassNotFoundException e){
-            // TODO
+            System.out.println("An Error while loading data has occurred: " + e.getMessage());
         }
         System.out.println("Data has been read and loaded!");
 
 //         Load Course List if exits
-        Course.COURSE_LIST = new ArrayList<>();
-        Course.createCourse("MA165", User.USER_LIST.get(0));
-        Course.createCourse("CS180", User.USER_LIST.get(0));
-        Course.createCourse("EAPS106", User.USER_LIST.get(0));
+//        Course.COURSE_LIST = new ArrayList<>();
+//        Course.createCourse("MA165", User.USER_LIST.get(0));
+//        Course.createCourse("CS180", User.USER_LIST.get(0));
+//        Course.createCourse("EAPS106", User.USER_LIST.get(0));
 
         // make new Course object, set static vars
 
