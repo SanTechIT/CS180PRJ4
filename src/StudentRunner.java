@@ -126,7 +126,7 @@ public class StudentRunner {
                     try {
                         int discussionId = Integer.parseInt(input);
 
-                        currentDiscussion = Discussion.DISCUSSIONS_LIST.get(discussionId);
+                        currentDiscussion = Discussion.DISCUSSION_LIST.get(discussionId);
                         if (currentDiscussion == null) {
                             Display.displayBadInput();
                         } else {

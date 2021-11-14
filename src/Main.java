@@ -12,8 +12,6 @@ public class Main {
      * @param args Command Line Arguments
      */
     public static void main(String[] args) {
-        Display.displayStart();
-
         Scanner scanner = new Scanner(System.in);
         // Load Course List if exits
         Course.COURSE_LIST = new ArrayList<>();
@@ -21,8 +19,11 @@ public class Main {
         // Load User List if exits
         User.USER_LIST = new ArrayList<>();
         // make new User object, set static vars
+        Discussion.DISCUSSION_LIST = new ArrayList<>();
         String input;
         do {
+            Display.displayStart();
+
             input = scanner.nextLine();
             switch (input) {
                 case "login":
