@@ -123,4 +123,21 @@ public class Student extends User implements Serializable {
     public boolean deletePost(Post targetPost) {
         return (targetPost.deletePost(this) != null);
     }
+
+    public String getPostsString() {
+        String str = "";
+        for (int post : posts) {
+            str += Post.POST_LIST.get(post);
+        }
+        return str;
+    }
+    public int getVoteCount() {
+        int voteCount = 0;
+        for (int post : posts) {
+            Post p = Post.POST_LIST.get(post);
+            voteCount += p.getUpvotes();
+            voteCount -= p.getDownvotes();
+        }
+        return voteCount;
+    }
 }

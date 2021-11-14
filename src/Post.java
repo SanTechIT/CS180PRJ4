@@ -9,6 +9,7 @@ import java.util.List;
  * Post class
  *
  * @author briankwon25 (Brian Kwon)
+ *
  * @version 0.2 - 2021-11-12
  */
 
@@ -24,6 +25,8 @@ public class Post implements Serializable {
     private List<Post> posts;
     private int creator;
     private Date timestamp;
+    private int upvotes;
+    private int downvotes;
 
     private Post() {
         // Deny Instantiation
@@ -175,6 +178,30 @@ public class Post implements Serializable {
      */
     public List<Post> getPosts() {
         return posts;
+    }
+
+    public int getUpvotes() {
+        return upvotes;
+    }
+
+    public int getDownvotes() {
+        return downvotes;
+    }
+
+    public boolean upvote(User user) {
+        if (!user.canVote()) {
+            return false;
+        }
+        this.upvotes++;
+        return true;
+    }
+
+    public boolean downvote(User user) {
+        if (!user.canVote()) {
+            return false;
+        }
+        this.upvotes++;
+        return true;
     }
 
 
