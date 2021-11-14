@@ -11,15 +11,10 @@ import java.util.Scanner;
  * Or copy-paste this into another class to use as a guide.
  *
  * @author saraxiao0 (Sara Xiao)
- * @version 0.2 - 2021-11-12
+ * @version 0.3 - 2021-11-14
  */
-public class TeacherRunner {
+public class TeacherRunner extends UserRunner {
     private Teacher teacher; // Teacher who's logged in
-    private Course currentCourse; // current course user's looking at
-    private Discussion currentDiscussion; // current discussion user's looking at
-
-    private boolean exitProgram = false; // whether to exit the program
-    // set to true when user inputs "exit" - then program logs off and stops
 
     /*
      * Creates new TeacherRunner
@@ -27,10 +22,8 @@ public class TeacherRunner {
      * @param teacher Teacher this runner is connected to and operating for
      */
     public TeacherRunner(Teacher teacher) {
+        super(teacher);
         this.teacher = teacher;
-
-        currentCourse = null;
-        currentDiscussion = null;
     }
 
     /* ----- Loop methods - for handling control flow -----
@@ -42,57 +35,28 @@ public class TeacherRunner {
      */
 
     /*
-     * Handles all control flow and UI interaction
-     * Called by Teacher's loop method, which is called by Main
+     * For menu options exclusive to Teacher
+     * protected because abstract methods can't be private (next best thing)
+     * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
+     *
+     * @param reader Scanner for getting additional input
+     * @param input Existing user input
      */
-    public void loop(Scanner reader) {
-        while (!exitProgram) {
-            Display.displayWelcome(this.teacher);
-            String input = reader.nextLine();
+    @Override
+    protected void loopMainOverride(Scanner reader, String input) {
+        switch(input) {
+            case "create course":
+                menuCreateCourse(reader);
+                break;
 
-            switch(input) {
-                case "edit account":
-                    loopEditAccount(reader);
-                    break;
+            case "view student":
+                loopViewStudent(reader);
+                break;
 
-                // deleteAccount is a User method that teacher inherits
-                case "delete account":
-                    teacher.deleteAccount(reader);
-                    exitProgram = true;
-                    break;
-
-                case "create course":
-                    menuCreateCourse(reader);
-                    break;
-
-                case "view student":
-                    loopViewStudent(reader);
-                    break;
-
-                case "exit":
-                    exitProgram = true;
-                    break;
-
-                default:
-                    try {
-                        int courseId = Integer.parseInt(input);
-
-                        currentCourse = Course.COURSE_LIST.get(courseId);
-                        if (currentCourse == null) {
-                            Display.displayBadInput();
-                        } else {
-                            loopCourse(reader);
-                        }
-
-                    } catch (NumberFormatException e) {
-                        Display.displayBadInput();
-                    }
-                    break;
-            }
+            default:
+                break;
         }
-        Display.displayExit();
     }
-
 
     /**
      * Menu for creating new course (accessed from main menu)
@@ -104,43 +68,6 @@ public class TeacherRunner {
         teacher.createCourse(input);
 
         System.out.println("Course created successfully!");
-    }
-
-    /**
-     * Loop for editing account
-     */
-    private void loopEditAccount(Scanner reader) {
-        boolean continueThisMenu = true;
-        while (continueThisMenu) {
-
-            Display.displayEditAccount(this.teacher);
-            String input = reader.nextLine();
-
-            switch(input) {
-                case "back":
-                    continueThisMenu = false;
-                    break;
-
-                // modifyUsername is a User method that teacher inherits
-                case "change username":
-                    teacher.modifyUsername(reader);
-                    break;
-
-                // modifyName is a User method that teacher inherits
-                case "change name":
-                    teacher.modifyName(reader);
-                    break;
-
-                // modifyPassword is a User method that teacher inherits
-                case "change password":
-                    teacher.modifyPassword(reader);
-                    break;
-
-                case "exit":
-                    exitProgram = true;
-                    break;
-            }
-        }
     }
 
     /**
@@ -164,7 +91,7 @@ public class TeacherRunner {
 
                 case "exit":
                     continueThisMenu = false;
-                    exitProgram = true;
+                    setExitProgram(true);
                     break;
 
                 default:
@@ -201,21 +128,21 @@ public class TeacherRunner {
             // Outer switch checks static commands, inner switch checks arguments
             switch(input) {
                 case "back":
-                    currentDiscussion = null;
+                    setCurrentDiscussion(null);
                     break;
 
                 case "exit":
-                    currentDiscussion = null;
-                    currentCourse = null;
-                    exitProgram = true;
+                    setCurrentDiscussion(null);
+                    setCurrentCourse(null);
+                    setExitProgram(true);
                     break;
 
                 case "delete forum":
-                    this.teacher.deleteDiscussion(currentDiscussion);
+                    this.teacher.deleteDiscussion(getCurrentDiscussion());
                     break;
 
                 default:
-                    if (!(parse2WordInput(input, reader))) {
+                    if (!(super.parse2WordInput(input, reader))) {
                         Display.displayBadInput();
                     }
                     break;
@@ -223,50 +150,23 @@ public class TeacherRunner {
         }
     }
 
-    /**
-     * Loop for 1 course + its discussions
+    /*
+     * For menu options exclusive to Teacher
+     * protected because abstract methods can't be private (next best thing)
+     * called in UserRunner's loopCourse method (viewing discussions in a course)
+     *
+     * @param reader Scanner for getting additional input
+     * @param input Existing user input
      */
-    private void loopCourse(Scanner reader) {
-        while (currentCourse != null) { // "back" sets currentCourse to null
-        // then program goes back to main loop
+    @Override
+    protected void loopCourseOverride(Scanner reader, String input) {
+        switch(input) {
+            case "create forum":
+                menuCreateDiscussion(reader);
+                break;
 
-            Display.displayCourse(currentCourse);
-            String input = reader.nextLine();
-
-            switch (input) {
-                case "back":
-                    currentCourse = null;
-                    break;
-
-                case "create forum":
-                    menuCreateDiscussion(reader);
-                    break;
-
-                case "exit":
-                    currentCourse = null;
-                    exitProgram = true;
-                    break;
-
-                default:
-                    try {
-                        int discussionId = Integer.parseInt(input);
-
-                        currentDiscussion = Discussion.DISCUSSION_LIST.get(discussionId);
-
-                        if(!currentCourse.getDiscussions().contains(currentDiscussion)){
-                            currentDiscussion = null;
-                            Display.displayBadInput();
-                        } else if (currentDiscussion == null) {
-                            Display.displayBadInput();
-                        } else {
-                            loopDiscussion(reader); // enter discussion menu with inputted discussion
-                        }
-
-                    } catch (NumberFormatException e) {
-                        Display.displayBadInput(); // error if discussion ID doesn't convert to number
-                    }
-                    break;
-            }
+            default:
+                break;
         }
     }
 
@@ -277,7 +177,7 @@ public class TeacherRunner {
         Display.displayCreateDiscussion();
         String input = reader.nextLine();
 
-        if (this.teacher.createDiscussion(input, currentCourse)) {
+        if (this.teacher.createDiscussion(input, getCurrentCourse())) {
             System.out.println("Discussion created successfully!");
         } else {
             System.out.println("An error has occurred while creating this discussion");
@@ -285,158 +185,47 @@ public class TeacherRunner {
     }
 
     /**
-     * Loop for 1 discussion form + its posts
+     * For menu options exclusive to Teacher
+     * overrides abstract method in UserRunner
+     * protected because abstract methods can't be private (next best thing)
+     * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
+     *
+     * @param reader Scanner for getting additional input
+     * @param input Existing user input
      */
-    private void loopDiscussion(Scanner reader) {
-        while (currentDiscussion != null) {
-            Display.displayDiscussionTeacher(currentDiscussion);
-            String input = reader.nextLine();
+    @Override
+    protected void loopDiscussionOverride(Scanner reader, String input) {
+        switch(input) {
+            case "delete forum":
+                this.teacher.deleteDiscussion(getCurrentDiscussion());
+                break;
 
-            // Input loop is different because input can be a static command or one that takes an argument
-            // Outer switch checks static commands, inner switch checks arguments
-            switch(input) {
-                case "back":
-                    currentDiscussion = null;
-                    break;
-
-                case "exit":
-                    currentDiscussion = null;
-                    currentCourse = null;
-                    exitProgram = true;
-                    break;
-
-                case "delete forum":
-                    this.teacher.deleteDiscussion(currentDiscussion);
-                    break;
-
-                default:
-                    if (!(parse2WordInput(input, reader))) {
-                        Display.displayBadInput();
-                    }
-                    break;
-            }
+            default:
+                break;
         }
     }
 
     /**
-     * Checks whether 2-word input for loopDiscussion
-     * has valid length + post number
+     * For menu options exclusive to Teacher
+     * overrides abstract method in UserRunner
+     * protected because abstract methods can't be private (next best thing)
+     * called in UserRunner's parse2WordInputOverride method (parsing input w/ argument)
      *
-     * If it is, checks which command is in input, then executes command
+     * @param targetPost post affected by command
+     * @param reader scanner for getting input
+     * @param inputWord1 1st word of user input, determines command
      */
-    private boolean parse2WordInput(String input, Scanner reader) {
-        if (input.split(" ").length != 2) {
-            return false;
-        }
+    @Override
+    protected boolean parse2WordInputOverride(
+        Post targetPost, Scanner reader, String inputWord1) {
 
-        // check if post number is valid
-        int postId;
-        try {
-            postId = Integer.parseInt(input.split(" ")[1]);
-
-            // post id can't be negative
-            if (postId < 0) {
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            return false;
-        }
-
-        // check if post number corresponds to existing post
-        Post targetPost = Post.searchPostsById(postId);
-        if (targetPost == null) {
-            return false;
-        }
-
-        // check command
-        String inputWord1 = input.split(" ")[0];
-
-        boolean operationSuccess = false; // whether operation succeeds
-        // ONLY for if input makes sense - false is for network errors etc
-        // On the other hand, if the command itself makes no sense, the
-        // entire function returns false
-
-        // As of now, some menu functions are incapable of returning false
-        // Since they will always work, since there will always be an Internet connection
         switch (inputWord1) {
-            case "reply":
-                operationSuccess = menuPostReply(targetPost, reader);
-                break;
-
-            case "edit":
-                operationSuccess = menuEditPost(targetPost, reader);
-                break;
-
-            case "delete":
-                operationSuccess = menuDeletePost(targetPost, reader);
-                break;
-
             case "grade":
-                operationSuccess = menuGradePost(targetPost, reader);
-                break;
+                return menuGradePost(targetPost, reader);
 
             default:
                 return false;
         }
-
-        if (!operationSuccess) {
-            System.out.println("Sorry, there was an error in performing the command.");
-        }
-        return true;
-    }
-
-    /**
-     * Menu for posting reply to other post
-     *
-     * @param targetPost post to reply to
-     * @param reader Scanner for getting input
-     */
-    private boolean menuPostReply(Post targetPost, Scanner reader) {
-        Display.displayPostReply(targetPost);
-
-        String input = reader.nextLine();
-        Post newPost = this.teacher.makePostReply(targetPost, input, currentDiscussion);
-
-        System.out.println("New post " + newPost.getId() +
-            " (reply to " + targetPost.getId() + ")" +
-            "has been created!");
-        return true;
-    }
-
-    /**
-     * Menu for editing a post
-     *
-     * @param targetPost post to edit
-     * @param reader Scanner for getting input
-     */
-    private boolean menuEditPost(Post targetPost, Scanner reader) {
-        Display.displayEditPost(targetPost);
-
-        String input = reader.nextLine();
-        this.teacher.editPost(targetPost, input);
-
-        System.out.println("Post " + targetPost.getId() +
-            "has been edited!");
-        return true;
-    }
-
-    /**
-     * Menu for deleting a post
-     *
-     * @param targetPost post to delete
-     * @param reader Scanner for getting input
-     */
-    private boolean menuDeletePost(Post targetPost, Scanner reader) {
-        Display.displayDeletePost(targetPost);
-
-        String input = reader.nextLine();
-        if (input.toLowerCase().equals("yes")) {
-            this.teacher.deletePost(targetPost);
-        }
-
-        System.out.println("Post " + targetPost.getId() +
-            "has been deleted.");
-        return true;
     }
 
     /**
@@ -448,6 +237,7 @@ public class TeacherRunner {
     private boolean menuGradePost(Post targetPost, Scanner reader) {
         Display.displayGradePost(targetPost);
 
+        // get grade from user
         String input = reader.nextLine();
         int grade = -1;
         try {
