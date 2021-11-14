@@ -241,21 +241,26 @@ Exception in thread "main" java.lang.NullPointerException
 - get / store all student posts
 - view scores
 
-## StudentRunner Class (extends `User`)
+## StudentRunner Class (extends `UserRunner`)
+
+##### Fields
+
+| Field      | Signature   | Description | Getter/Setter |
+| ---------- | ----------- | ----------- | ------------- |
+| student | ` private Student` | Student who's logged in | |
 
 #### Constructors
 
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `public` | `(Student student)` | Creates new StudentRunner |
-
+098
 #### Methods
 
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
 | loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  Replying to discussion forum menu option for student |
 | menuDiscussionReply | `private boolean` | `(Scanner reader)` |  Menu for replying to a discussion form |
-| loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  Deleting discussion forum menu option for teacher |
 | parse2WordInputOverride | `protected boolean` | `(Scanner reader, String input)` |  Parses the word given as input |
 
 ## Course Class (Serializable)
@@ -265,8 +270,8 @@ Exception in thread "main" java.lang.NullPointerException
 | Field      | Signature   | Description |
 | ---------- | ----------- | ----------- |
 | COURSE_LIST    | `public static List<Course>` | Lists all courses |
-| discussions | `private List<Discussions` | List of all `Discussion`s of `Course`|
-| id | `private int` | Id is same as index in list | G/S |
+| discussions | `private List<Discussions` | List of all `Discussion`s of `Course`| G |
+| id | `private int` | Id is same as index in list | G |
 | topic | `private String` | Course name, can only be changed by a `Teacher` | G/S |
 | creator | `private int` | Keeps track of the UID of who created this `Course` | G |
 
@@ -274,17 +279,15 @@ Exception in thread "main" java.lang.NullPointerException
 
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
-| `private` | `(String topic, User creator)` | Auto sets id to next id in list |
+| `private` | `(String topic, int creator)` | Auto sets id to next id in list |
 
 #### Methods
 
-| Signature   | Parameters  | Description |
-| ----------- | ----------- | ----------- |
-| `public static Course` | `(String topic, User creator)` | Creates a new course, appends to list, and returns |
-| `public static String getCoursesString` | `()`  |  Returns list of all courses with id + course name (see Console Example) |
-| `public static Course searchCourses` | `(int id)` | Search COURSE_LIST for course with that id, return null if not found |
-| `public String getDiscussionsString` | `()` | Returns list of all discussions with id + discussion topic (see Console Example) |
-| `public String searchDiscussions`  | `(int id)`  | Search `discussions` for discussion with that id, return null if not found   |
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| getCoursesString | `public static g` | `()`  |  Returns list of all courses with id + course name (see Console Example) |
+| getDiscussionsString | `public String ` | `()` | Returns list of all discussions with id + discussion topic (see Console Example) |
+| createCourse | `public static Course ` | `()` | Creates and returns a new course  object if the user has permission to |
 
 ### Discussion Class (Serializable)
 
@@ -293,7 +296,6 @@ Exception in thread "main" java.lang.NullPointerException
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
 | DISCUSSION_LIST   | `public static List<Discussion>` | Lists all `Discussion`s |  |
-| discussions | `private List<Discussion>` | | G/S |
 | id | `private int` | Id is same as index in list | G |
 | topic | `private String` | Discussion Topic | G/S |
 | posts | `private List<Post>` | List of all posts related to this `Discussion` | G |
@@ -305,7 +307,7 @@ Exception in thread "main" java.lang.NullPointerException
 
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
-| `public` | `(String topic, Course course, User creator)` | Auto sets id to next id in list |
+| `private` | `(Course course, String topic, int creator)` | Auto sets id to next id in list |
 
 #### Methods
 

@@ -128,15 +128,15 @@ public class Student extends User implements Serializable {
     //}
 
     /* ----- Methods that Modify Things -----
-     * Will be called as part of TeacherRunner's loop method.
+     * Will be called as part of StudentRunner's loop method.
      * For now, most return a boolean representing operation success/failure.
      *
-     * These are pseudo-private methods that will only be called by TeacherRunner
+     * These are pseudo-private methods that will only be called by StudentRunner
      * They're not really public.
-     * They should be private, but Teacher and TeacherRunner are 2 separate classes..
+     * They should be private, but Student and StudentRunner are 2 separate classes..
      *
      * I'm not sure if these are actually necessary. You may be able to
-     * just call Post methods from TeacherRunner directly.
+     * just call Post methods from StudentRunner directly.
      *
      * WIP.
      */
@@ -211,7 +211,7 @@ public class Student extends User implements Serializable {
     /**
      * returns whether votedPost has been upvoted or downvoted by user
      *
-     * @param votedPost post to look at
+     * @param targetPost post to look at
      * @return -1 if downvoted, 1 if upvoted, null if no vote
      */
     public int getPostVote(Post targetPost) {
