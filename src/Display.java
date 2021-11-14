@@ -40,14 +40,22 @@ public class Display {
             System.out.println("Or, please type one of these commands: " +
                 "\nedit account" +
                 "\ndelete account" +
+<<<<<<< HEAD
                 "\nlogout");
+=======
+                "\nexit");
+>>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
         } else {
             System.out.println("Or, please type one of these commands: " +
                 "\nedit account" +
                 "\ndelete account" +
                 "\ncreate course" +
                 "\nview student" +
+<<<<<<< HEAD
                 "\nlogout");
+=======
+                "\nexit");
+>>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
         }
 
         System.out.print("> ");
@@ -67,8 +75,15 @@ public class Display {
      */
     public static void displayExit() {
         System.out.println("\nExit:" +
-            "\nLogging out..." +
             "\nThank you for using our program. Goodbye!");
+    }
+
+    /**
+     * Displays output for logging out
+     */
+    public static void displayLogout() {
+        System.out.println("\nLogging out:" +
+            "\nYou have successfully logged out.");
     }
 
     /**
@@ -84,7 +99,7 @@ public class Display {
     /**
      * Displays output for course loop (viewing all discussions in 1 course)
      */
-    public static void displayCourse(Course currentCourse) {
+    public static void displayCourse(Course currentCourse, User user) {
         System.out.println("\nWelcome to " + currentCourse.getTopic() + "!" +
             "\nPlease type the number of a discussion forum to view:");
 
@@ -98,12 +113,20 @@ public class Display {
         System.out.println("Or, please type one of these commands: ");
         if (user instanceof Student) {
             System.out.println("\nback" +
+<<<<<<< HEAD
             "\nlogout");
+=======
+            "\nexit");
+>>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
         } else {
             System.out.println("\nback" +
             "\ncreate forum" +
             "\ndelete forum" +
+<<<<<<< HEAD
             "\nlogout");
+=======
+            "\nexit");
+>>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
         }
 
         System.out.print("> ");
@@ -125,11 +148,19 @@ public class Display {
         if (user instanceof Student) {
             commands = "Commands: " +
                 "back, reply to discussion, reply [num], edit [num], delete [num], " +
+<<<<<<< HEAD
                 "upvote [num], downvote [num], logout";
         } else {
             commands = "Commands: " +
                 "back, reply [num], edit [num], delete [num], " +
                 "grade [num], logout";
+=======
+                "upvote [num], downvote [num], exit";
+        } else {
+            commands = "Commands: " +
+                "back, reply [num], edit [num], delete [num], " +
+                "grade [num], exit";
+>>>>>>> b0b02ff8fda181ddf068cb7ddbb0f6f28336734d
         }
 
         System.out.println("\nWelcome to " + currentDiscussion.getTopic() + "!" +
@@ -145,20 +176,6 @@ public class Display {
         }
 
         System.out.print("> ");
-    }
-
-    public static void displayDiscussionTeacher(Discussion currentDiscussion) {
-        String commands = "Commands: " +
-            "back, reply [num], edit [num], delete [num], " +
-            "grade [num], exit";
-        displayDiscussion(currentDiscussion, commands);
-    }
-
-    public static void displayDiscussionStudent(Discussion currentDiscussion) {
-        String commands = "Commands: " +
-            "back, reply to discussion, reply [num], edit [num], delete [num], " +
-            "upvote [num], downvote [num], exit";
-        displayDiscussion(currentDiscussion, commands);
     }
 
     /**
@@ -200,9 +217,8 @@ public class Display {
      */
     public static void displayDeletePost(Post targetPost) {
         System.out.println("\nDelete post " + targetPost.getId() + ":" +
-            "\nDeleted posts can't be recovered." +
-            "Are you sure you want to do this?" +
-            "Type yes to confirm.");
+            "\nDeleted posts can't be recovered. Are you sure?" +
+            "\nType yes to confirm.");
 
         System.out.print("> ");
     }

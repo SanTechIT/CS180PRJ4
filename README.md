@@ -1,15 +1,21 @@
 # TODO
 
+Missing features
 * voting
 * grading
 * serialization/permanence
 * test cases
 * the report
 * comment the code
+* improve post formatting - when viewing posts: posts should show timestamp, user who posted it, number of upvotes, number of downvotes (or a combined vote number that's upvotes - downvotes), the grade (grade may only be visible to teacher/poster) - then contents of post
 
+Problems
 - Validate inputs for class/discussion/post Ids in reply/edit/delete actions
 - Ask if user wants to reply/edit/delete posts of another grouping?
-- Teacher can't delete discussion forums
+- Teacher can't delete discussion forums (to fix: best to move delete forum option from "view all forums" menu (course menu) to "view 1 forum" menu (discussion menu)
+- You can log into any account with any password. We don't have authentication.
+- If you just 'reply to discussion', without replying to another post, your new posts don't show up. They aren't returned by getPostsString (so they presumably don't exist in the Discussion's posts field)
+
 
 # [Name] Design specifications
 
@@ -204,15 +210,6 @@ Note: posts can be under both discussions and other posts
 
 * *To write a new example, put 3 backticks at the start and end to make it a code block - otherwise Markdown formatting
   makes it weird*
-
-Suggestions:
-
-* Users need to be able to "create, edit, and delete" their own accounts, so those should be menu options.
-* Update the Student Loop to include stuff from the Teacher Loop (eg. additional commands and options)
-
-* When viewing posts: posts should show timestamp, user who posted it, number of upvotes, number of downvotes (or a
-  combined vote number that's upvotes - downvotes), the grade (grade may only be visible to teacher/poster) - then
-  contents of post
 
 ___
 
@@ -484,8 +481,6 @@ login
 create account
 logout
 ```
-
-##### Student Example 5 (contains
 
 ___
 
