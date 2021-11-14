@@ -17,11 +17,11 @@ public class Tests {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Load User List if exits
+        // Add default users to USER_LIST
         User.USER_LIST = new ArrayList<>();
         User.USER_LIST.add(new Teacher("teacher", "teacher", "John"));
-        User.USER_LIST.add(new Student("student", "student", "Alice"));
-        User.USER_LIST.add(new Student("s", "s", "s"));
+        User.USER_LIST.add(new Student("student", "student", "Alice")); // ID 3
+        User.USER_LIST.add(new Student("s", "s", "s")); // ID 5
         User.USER_LIST.add(new Teacher("t", "t", "t"));
 
         Course.COURSE_LIST = new ArrayList<>();

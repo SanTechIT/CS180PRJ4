@@ -247,7 +247,7 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 Example input:
 [3]
@@ -261,13 +261,13 @@ Or, please type one of these commands:
 back
 create forum
 delete forum
-exit
+logout
 
 Example input:
 [22]
 
 [Discussion Topic]
-Commands: back, reply to discussion, reply [num], edit [num], delete [num], upvote [num], downvote [num], exit
+Commands: back, reply to discussion, reply [num], edit [num], delete [num], upvote [num], downvote [num], logout
 Replace [num] with the number of the post you want to interact with!
 [12] [Post Content]
 [33] [Post Content]
@@ -287,7 +287,7 @@ Example input:
 New post [114] (reply to [33]) has been created!
 -----
 [Discussion Topic]
-Commands: back, reply to discussion, reply [num], edit [num], delete [num], upvote [num], downvote [num], exit
+Commands: back, reply to discussion, reply [num], edit [num], delete [num], upvote [num], downvote [num], logout
 Replace [num] with the number of the post you want to interact with!
 [12] [Post Content]
 [33] [Post Content]
@@ -307,7 +307,7 @@ Example input:
 Post [12] has been edited!
 -----
 [Discussion Topic]
-Commands: back, reply to discussion, reply [num], edit [num], delete [num], upvote [num], downvote [num], exit
+Commands: back, reply to discussion, reply [num], edit [num], delete [num], upvote [num], downvote [num], logout
 Replace [num] with the number of the post you want to interact with!
 [12] [Post Content]
 [33] [Post Content]
@@ -327,7 +327,7 @@ Example input:
 Post 12 has been deleted.
 -----
 [Discussion Topic]
-Commands: back, reply to discussion, reply [num], edit [num], delete [num], upvote [num], downvote [num], exit
+Commands: back, reply to discussion, reply [num], edit [num], delete [num], upvote [num], downvote [num], logout
 Replace [num] with the number of the post you want to interact with!
 [33] [Post Content]
 [98] [Post Content]
@@ -335,11 +335,11 @@ Replace [num] with the number of the post you want to interact with!
 [114] (reply to 33) [Post Content]
 
 Example input:
-[exit]
+[logout]
 
 ```
 
-#### Student Example 2 (incorrect input and exiting program)
+#### Student Example 2 (incorrect input and logging out)
 
 ```
 Welcome [Name]!
@@ -353,7 +353,7 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 Example input:
 [aklsdjflkdsanhfcl]
@@ -372,10 +372,10 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 Example input:
-[exit]
+[logout]
 
 Exit:
 Logging out...
@@ -396,7 +396,7 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 Example input:
 [edit account]
@@ -407,7 +407,7 @@ back
 change username
 change name
 change password
-exit
+logout
 
 Example input:
 [change username]
@@ -426,7 +426,7 @@ back
 change username
 change name
 change password
-exit
+logout
 ```
 
 ---
@@ -449,7 +449,7 @@ back
 change username
 change name
 change password
-exit
+logout
 ```
 
 #### Student Example 4 (delete account)
@@ -466,7 +466,7 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 Example input:
 [delete account]
@@ -482,7 +482,7 @@ Welcome to [Name]!
 Please type one of these commands:
 login
 create account
-exit
+logout
 ```
 
 ##### Student Example 5 (contains
@@ -507,7 +507,7 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 Example input:
 [3]
@@ -521,13 +521,13 @@ Or, please type one of these commands:
 back
 create forum
 delete forum
-exit
+logout
 
 Example input:
 [22]
 
 [Discussion Topic]
-Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Commands: back, reply [num], edit [num], delete [num], grade [num], logout
 Replace [num] with the number of the post you want to interact with!
 [12] [Post Content]
 [33] [Post Content]
@@ -547,7 +547,7 @@ Example input:
 New post [114] (reply to [33]) has been created!
 -----
 [Discussion Topic]
-Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Commands: back, reply [num], edit [num], delete [num], grade [num], logout
 Replace [num] with the number of the post you want to interact with!
 [12] [Post Content]
 [33] [Post Content]
@@ -567,7 +567,7 @@ Example input:
 Post [12] has been edited!
 -----
 [Discussion Topic]
-Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Commands: back, reply [num], edit [num], delete [num], grade [num], logout
 Replace [num] with the number of the post you want to interact with!
 [12] [Post Content]
 [33] [Post Content]
@@ -587,7 +587,7 @@ Example input:
 Post 12 has been deleted.
 -----
 [Discussion Topic]
-Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Commands: back, reply [num], edit [num], delete [num], grade [num], logout
 Replace [num] with the number of the post you want to interact with!
 [33] [Post Content]
 [98] [Post Content]
@@ -607,7 +607,7 @@ Example input:
 Post 98 has been assigned the grade: 66/[max grade].
 -----
 [Discussion Topic]
-Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Commands: back, reply [num], edit [num], delete [num], grade [num], logout
 Replace [num] with the number of the post you want to interact with!
 [33] [Post Content]
 [98] (grade: 66/[max grade]) [Post Content]
@@ -615,7 +615,7 @@ Replace [num] with the number of the post you want to interact with!
 [114] (reply to 33) [Post Content]
 
 
-[exit]
+[logout]
 ```
 
 ##### Teacher Example 2 (view student dashboard & grade posts)
@@ -632,7 +632,7 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 Example input:
 [view student]
@@ -642,27 +642,27 @@ This shows all of a student's posts and lets you grade them.
 Enter the name or ID of the student to view:
 Or, please type one of these commands:
 back
-exit
+logout
 
 Example input:
 [a valid student id]
 
 [Student Name]'s Posts
-Commands: back, reply [num], edit [num], delete [num], grade [num], exit
+Commands: back, reply [num], edit [num], delete [num], grade [num], logout
 Replace [num] with the number of the post you want to interact with!
 [23] [Post Content]
 [35] [Post Content]
 [42] [Post Content]
-exit
+logout
 
 Example input:
 [edit 23]
 [delete 42]
 [grade 35]
-exit
+logout
 ```
 
-#### Teacher Example 3 (incorrect input and exiting program)
+#### Teacher Example 3 (incorrect input and logouting program)
 
 ```
 Welcome [Name]!
@@ -676,7 +676,7 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 Example input:
 [aklsdjflkdsanhfcl]
@@ -695,10 +695,10 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 Example input:
-[exit]
+[logout]
 
 Exit:
 Logging out...
@@ -719,7 +719,7 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 Example input:
 [edit account]
@@ -730,7 +730,7 @@ back
 change username
 change name
 change password
-exit
+logout
 
 Example input:
 [change username]
@@ -749,7 +749,7 @@ back
 change username
 change name
 change password
-exit
+logout
 ```
 
 ---
@@ -772,7 +772,7 @@ back
 change username
 change name
 change password
-exit
+logout
 ```
 
 #### Teacher Example 5 (delete account)
@@ -789,7 +789,7 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 Example input:
 [delete account]
@@ -805,7 +805,7 @@ Welcome to [Name]!
 Please type one of these commands:
 login
 create account
-exit
+logout
 ```
 
 #### Teacher Example 6 (create course)
@@ -822,7 +822,7 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 Example input:
 [create course]
@@ -847,6 +847,6 @@ edit account
 delete account
 create course
 view student
-exit
+logout
 
 ```

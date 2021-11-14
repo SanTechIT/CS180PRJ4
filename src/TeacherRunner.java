@@ -151,7 +151,7 @@ public class TeacherRunner {
      */
     private void loopViewStudent(Scanner reader) {
         boolean continueThisMenu = true;
-        while (continueThisMenu) { // back, exit set continueThisMenu = false
+        while (continueThisMenu) { // back, logout set continueThisMenu = false
         // then program goes back to main loop
 
             Display.displayViewStudent();
@@ -162,9 +162,9 @@ public class TeacherRunner {
                     continueThisMenu = false;
                     break;
 
-                case "exit":
+                case "logout":
                     continueThisMenu = false;
-                    exitProgram = true;
+                    setLogout(true);
                     break;
 
                 default:
@@ -201,17 +201,7 @@ public class TeacherRunner {
             // Outer switch checks static commands, inner switch checks arguments
             switch(input) {
                 case "back":
-                    currentDiscussion = null;
-                    break;
-
-                case "exit":
-                    currentDiscussion = null;
-                    currentCourse = null;
-                    exitProgram = true;
-                    break;
-
-                case "delete forum":
-                    this.teacher.deleteDiscussion(currentDiscussion);
+                    currentStudent = null;
                     break;
 
                 default:

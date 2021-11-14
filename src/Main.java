@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Load User List if exits
+        // Load User List if exists
         // TODO DELETE ME
 //        User.USER_LIST = new ArrayList<>();
 //        User.USER_LIST.add(new Teacher("teacher", "teacher", "John"));
@@ -33,7 +33,7 @@ public class Main {
         }
         System.out.println("Data has been read and loaded!");
 
-//         Load Course List if exits
+//         Load Course List if exists
 //        Course.COURSE_LIST = new ArrayList<>();
 //        Course.createCourse("MA165", User.USER_LIST.get(0));
 //        Course.createCourse("CS180", User.USER_LIST.get(0));

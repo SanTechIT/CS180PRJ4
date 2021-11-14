@@ -10,8 +10,7 @@ import java.util.Scanner;
  * @version 0.1
  */
 public class Student extends User implements Serializable {
-    // Track posts?
-    private List<Integer> posts;
+    private List<Integer> posts; // ID of every post the Student has made
 
     /**
      * Student Constructor
@@ -95,6 +94,22 @@ public class Student extends User implements Serializable {
      */
 
     /**
+     * Reply to a reply to a discussion forum
+     * Overrides because all posts a Student makes must be added to their posts field
+     *
+     * @param parentPost parent post the new post is replying to
+     * @param newContent content of new post
+     * @param parentDiscussion discussion forum that contains both posts
+     */
+    @Override
+    public Post makePostReply(Post parentPost, String newContent, Discussion parentDiscussion) {
+        Post p = Post.createPost(newContent, parentDiscussion, parentPost, this);
+        posts.add(p.getId());
+        return p;
+    }
+
+
+    /**
      * Reply DIRECTLY to a discussion forum
      * ie. make a new post that's not a reply to a previous post
      *
@@ -102,7 +117,9 @@ public class Student extends User implements Serializable {
      * @param parentDiscussion discussion forum that contains the new post
      */
     public Post makeDiscussionReply(String newContent, Discussion parentDiscussion) {
-        return Post.createPost(newContent, parentDiscussion, this);
+        Post p = Post.createPost(newContent, parentDiscussion, this);
+        posts.add(p.getId());
+        return p;
     }
 
     /**
