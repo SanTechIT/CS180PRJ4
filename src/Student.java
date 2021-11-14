@@ -35,49 +35,90 @@ public class Student extends User implements Serializable {
         sr.loop(in);
     }
 
+    /**
+     * Whether user can vote
+     *
+     * @return true since Students can vote
+     */
     @Override
     public boolean canVote() {
         return true;
     }
 
+    /**
+     * Whether user can grade
+     *
+     * @return false since Students can't grade
+     */
     @Override
     public boolean canGrade() {
         return false;
     }
 
+    /**
+     * Whether user can post
+     *
+     * @return true since Students can post
+     */
     @Override
     public boolean canPost() {
         return true;
     }
 
+    /**
+     * Whether user can create courses
+     *
+     * @return false since Students can't create courses
+     */
     @Override
     public boolean canCreateCourse() {
         return false;
     }
 
+    /**
+     * Whether user can modify courses
+     *
+     * @return false since Students can't modify courses
+     */
     @Override
     public boolean canModifyCourse() {
         return false;
     }
 
+    /**
+     * Whether user modify discussions
+     *
+     * @return false since Students can't modify discussions
+     */
     @Override
     public boolean canModifyDiscussion() {
         return false;
     }
 
+    /**
+     * Whether user can modify posts
+     *
+     * @return false since Students can't modify posts
+     */
     @Override
     public boolean canModifyPost() {
         return false;
     }
 
+    /**
+     * Whether user can create discussions
+     *
+     * @return false since Students can't create discussions
+     */
     @Override
     public boolean canCreateDiscussion() {
         return false;
     }
 
-    public boolean isAdmins() {
-        return true;
-    }
+
+    //public boolean isAdmins() {
+        //return true;
+    //}
 
     /* ----- Methods that Modify Things -----
      * Will be called as part of TeacherRunner's loop method.
