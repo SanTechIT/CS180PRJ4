@@ -241,7 +241,7 @@ public class StudentRunner {
         Display.displayPostReply(targetPost);
 
         String input = reader.nextLine();
-        Post newPost = this.student.makePostReply(targetPost, input);
+        Post newPost = this.student.makePostReply(targetPost, input, currentDiscussion);
 
         System.out.println("New post " + newPost.getId() +
                 " (reply to " + targetPost.getId() + ")" +
