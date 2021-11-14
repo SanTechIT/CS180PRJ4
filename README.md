@@ -2,7 +2,6 @@
 
 Missing features
 * voting
-* grading
 * serialization/permanence
 * test cases
 * the report
@@ -10,6 +9,7 @@ Missing features
 * improve post formatting - grade should only be visible to teacher/poster
 * ungraded posts have a grade of 0 - change that to n/a? will need to keep track of whether a post has been graded
 * Teacher shouldn't be able to reply to a student's posts while viewing their student dashboard, remove that feature.
+* Students can upvote/downvote posts an infinite number of times
 
 Problems
 - MAJOR: Validate inputs for class/discussion/post Ids in reply/edit/delete actions

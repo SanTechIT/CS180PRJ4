@@ -61,4 +61,43 @@ public class StudentRunner extends UserRunner {
             "has been created!");
         return true;
     }
+
+    /**
+     * For menu options exclusive to Student
+     * overrides abstract method in UserRunner
+     * called in UserRunner's parse2WordInputOverride method (parsing input w/ argument)
+     *
+     * @param targetPost post affected by command
+     * @param reader scanner for getting input
+     * @param inputWord1 1st word of user input, determines command
+     *
+     * @return if an exclusive command was successfully executed (eg. create forum)
+     * if returns false, no exclusive commands could be detected/executed
+     */
+    @Override
+    protected boolean parse2WordInputOverride(
+        Post targetPost, Scanner reader, String inputWord1) {
+
+        switch (inputWord1) {
+            case "upvote":
+                if (this.student.upvotePost(targetPost)) {
+                    System.out.println("Post upvoted!");
+                } else {
+                    System.out.println("Sorry, you can't upvote that post.");
+                }
+                break;
+
+            case "downvote":
+                if (this.student.downvotePost(targetPost)) {
+                    System.out.println("Post downvoted.");
+                } else {
+                    System.out.println("Sorry, you can't downvote that post.");
+                }
+                break;
+
+            default:
+                return false;
+        }
+        return true;
+    }
 }

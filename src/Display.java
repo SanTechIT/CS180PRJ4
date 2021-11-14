@@ -157,8 +157,8 @@ public class Display {
      * Displays menu for replying directly to discussion (Student only)
      */
     public static void displayDiscussionReply(Discussion currentDiscussion) {
-        System.out.println("\nReply to discussion " + currentDiscussion.getTopic() + ": " +
-            "\nYou are replying directly to the discussion." +
+        System.out.println("\nReply to discussion - " + currentDiscussion.getTopic() + ": " +
+            "\nYou are replying directly to this discussion." +
             "\nWhat should be the content in your new post?");
 
         System.out.print("> ");

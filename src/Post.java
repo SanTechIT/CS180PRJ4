@@ -36,6 +36,7 @@ public class Post implements Serializable {
     private Post() {
         // Deny Instantiation
     }
+    
     /**
      * Post Constructor
      *
@@ -153,7 +154,6 @@ public class Post implements Serializable {
         User creator = User.USER_LIST.get(creatorId);
 
         postString += "\n";
-
 
         postString += "Post ID " + getId();
         if (parent != null) {
@@ -290,7 +290,7 @@ public class Post implements Serializable {
         if (!user.canVote()) {
             return false;
         }
-        this.upvotes++;
+        this.downvotes++;
         return true;
     }
 }
