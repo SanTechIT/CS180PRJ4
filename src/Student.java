@@ -131,6 +131,7 @@ public class Student extends User implements Serializable {
         }
         return str;
     }
+
     public int getVoteCount() {
         int voteCount = 0;
         for (int post : posts) {
