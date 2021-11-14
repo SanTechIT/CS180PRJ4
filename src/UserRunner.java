@@ -9,7 +9,6 @@ import java.util.Scanner;
  * Runner classes handle control flow and UI interaction.
  *
  * @author briankwon25 (Brian Kwon), saraxiao0 (Sara Xiao)
- *
  * @version 0.1 - 2021-11-14
  */
 public abstract class UserRunner {
@@ -307,8 +306,10 @@ public abstract class UserRunner {
         if (targetPost == null) {
             // Post is deleted / does not exist
             return false;
-        } else if (!currentDiscussion.getPosts().contains(targetPost)) {
+        } else if (!currentDiscussion.getPosts().contains(
+                targetPost) && !targetPost.getDiscussion().equals(currentDiscussion)) {
             // Post is not part of current discussion
+            // check if post upstream is part of discussion
             return false;
         }
 
