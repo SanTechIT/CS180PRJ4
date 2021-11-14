@@ -1,8 +1,6 @@
 # TODO
 
 Missing features
-* voting
-* grading
 * serialization/permanence
 * test cases
 * the report
@@ -10,6 +8,7 @@ Missing features
 * improve post formatting - grade should only be visible to teacher/poster
 * ungraded posts have a grade of 0 - change that to n/a? will need to keep track of whether a post has been graded
 * Teacher shouldn't be able to reply to a student's posts while viewing their student dashboard, remove that feature.
+* Teachers should be able to edit courses
 
 Problems
 - MAJOR: Validate inputs for class/discussion/post Ids in reply/edit/delete actions
@@ -21,8 +20,9 @@ Problems
 - MAJOR: in ViewIndividualStudent, each of the student's posts shows up twice
 - MAJOR: students have multiple IDs? does each student exist twice in USER_LIST?
     - eg. in Tests.java, Alice has both ID 2 and ID 3
-- MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash sometimes, don't know why (example below)
+- MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash, don't know why (example below)
 - MAJOR: replying to a nonexistent post crashes the program
+- Students can upvote/downvote posts an infinite number of times
 
 ```
 Commands: back, reply [num], edit [num], delete [num], grade [num], logout
@@ -131,6 +131,29 @@ Exception in thread "main" java.lang.NullPointerException
 
 * methods inherited from User - the canVote, etc. have been implemented
 * private utility methods exist, have not been implemented yet - will be handled internally so shouldn't be a concern
+
+## TeacherRunner Class 
+
+#### Constructors
+
+| Signature   | Parameters  | Description |
+| ----------- | ----------- | ----------- |
+| `public` | `(Teacher teacher)` | Auto sets id to next id in list |
+
+#### Methods
+
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| loopMainOverride | `protected boolean` | `(Scanner reader, String input)` |  Handles the menu options just for teacher |
+| menuCreateCourse | `private void` | `(Scanner reader)` |  The menu for creating new course |
+| loopViewStudent | `private void` | `(Scanner reader)` |  Shows the dashabord and the data with the name and vote count |
+| loodIndividualStudent | `private void` | `(Scanner reader, Student currentStudent)` |  Loop for viewing/editing all posts of 1 student |
+| loopCourseOverride | `protected boolean` | `(Scanner reader, String input)` |  For menu options exclusive to teacher |
+| menuCreateDiscussion | `private void` | `(Scanner reader)` |  The menu for creating new discussion forum |
+| loopDioscussionOverrie | `protected boolean` | `(Scanner reader, String input)` |  Deleting discussion forum menu option for teacher |
+| parse2WordInputOverride | `protected boolean` | `(Scanner reader, String input)` |  Parses the word given as input |
+| menuGradePost | `private boolean` | `(Scanner reader, String input)` | menu for grading a post |
+
 
 ## Student Class (extends `User`)
 

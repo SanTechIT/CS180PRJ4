@@ -36,6 +36,7 @@ public class Post implements Serializable {
     private Post() {
         // Deny Instantiation
     }
+    
     /**
      * Post Constructor
      *
@@ -43,6 +44,7 @@ public class Post implements Serializable {
      * @param discussion
      * @param parent
      * @param creatorId
+     *
      */
     private Post(String content, Discussion discussion, Post parent, int creatorId) {
         this.content = content;
@@ -91,14 +93,21 @@ public class Post implements Serializable {
         return new Post(content, discussion, parent, user.getId());
     }
 
-//    public static Post searchPostsById(int postId) {
-//        for (Post post : POST_LIST) {
-//            if (post.getId() == postId) {
-//                return post;
-//            }
-//        }
-//        return null;
-//    }
+    /**
+     * Searches all the posts by ID
+     *
+     * @param postId
+     *
+     * @return
+     */
+    public static Post searchPostsById(int postId) {
+        for (Post post : POST_LIST) {
+            if (post.getId() == postId) {
+                return post;
+            }
+        }
+        return null;
+    }
 
     /**
      * Allows editing of the post if the user has permission to edit or if
@@ -116,6 +125,13 @@ public class Post implements Serializable {
         return false;
     }
 
+    /**
+     * Deletes posts in discussions / posts
+     *
+     * @param user
+     *
+     * @return
+     */
     public Post deletePost(User user) {
         // TODO: delete post in discussion / posts
         if (user.canModifyPost() || user.getId() == creatorId) {
@@ -128,12 +144,16 @@ public class Post implements Serializable {
         return null;
     }
 
+    /**
+     * toString for post
+     *
+     * @return postString
+     */
     public String toString() {
         String postString = "";
         User creator = User.USER_LIST.get(creatorId);
 
         postString += "\n";
-
 
         postString += "Post ID " + getId();
         if (parent != null) {
@@ -270,7 +290,7 @@ public class Post implements Serializable {
         if (!user.canVote()) {
             return false;
         }
-        this.upvotes++;
+        this.downvotes++;
         return true;
     }
 }

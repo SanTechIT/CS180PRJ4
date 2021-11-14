@@ -109,7 +109,7 @@ public class Student extends User implements Serializable {
         if (!posts.contains(postId)) {
             posts.add(p.getId());
         }
-        
+
         return p;
     }
 
@@ -158,5 +158,23 @@ public class Student extends User implements Serializable {
             voteCount -= p.getDownvotes();
         }
         return voteCount;
+    }
+
+    /**
+     * Get upvote for post
+     *
+     * @return upvote count
+     */
+    public boolean upvotePost(Post targetPost) {
+        return targetPost.upvote(this);
+    }
+
+    /**
+     * Get downvote for post
+     *
+     * @return downvote count
+     */
+    public boolean downvotePost(Post targetPost) {
+        return targetPost.downvote(this);
     }
 }

@@ -109,6 +109,7 @@ public class Display {
         } else {
             System.out.println("\nback" +
             "\ncreate forum" +
+            "\nedit course" +
             "\nlogout");
         }
 
@@ -118,6 +119,13 @@ public class Display {
     public static void displayCreateDiscussion() {
         System.out.println("\nCreating Discussion:" +
             "\nPlease enter the name of the new discussion:");
+
+        System.out.print("> ");
+    }
+
+    public static void displayEditCourse() {
+        System.out.println("\nEditing Course Topic:" +
+            "\nPlease enter the new topic of this course:");
 
         System.out.print("> ");
     }
@@ -157,8 +165,8 @@ public class Display {
      * Displays menu for replying directly to discussion (Student only)
      */
     public static void displayDiscussionReply(Discussion currentDiscussion) {
-        System.out.println("\nReply to discussion " + currentDiscussion.getTopic() + ": " +
-            "\nYou are replying directly to the discussion." +
+        System.out.println("\nReply to discussion - " + currentDiscussion.getTopic() + ": " +
+            "\nYou are replying directly to this discussion." +
             "\nWhat should be the content in your new post?");
 
         System.out.print("> ");
