@@ -43,6 +43,7 @@ public class Main {
 
         // make new User object, set static vars
         Discussion.DISCUSSION_LIST = new ArrayList<>();
+        Post.POST_LIST = new ArrayList<>();
 
         String input;
         do {
