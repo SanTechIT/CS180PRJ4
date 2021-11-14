@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 /**
  * Project 4 - Teacher Runner
- *
+ * <p>
  * Runs the loop() for the Teacher class
  * because I don't want to put the control flow
  * in the Teacher class.
- *
+ * <p>
  * Feel free to copy this format for other classes.
  * Or copy-paste this into another class to use as a guide.
  *
@@ -46,7 +46,7 @@ public class TeacherRunner extends UserRunner {
      */
     @Override
     protected boolean loopMainOverride(Scanner reader, String input) {
-        switch(input) {
+        switch (input) {
             case "create course":
                 menuCreateCourse(reader);
                 break;
@@ -82,7 +82,7 @@ public class TeacherRunner extends UserRunner {
     private void loopViewStudent(Scanner reader) {
         boolean continueThisMenu = true;
         while (continueThisMenu) { // back, logout set continueThisMenu = false
-        // then program goes back to main loop
+            // then program goes back to main loop
 
             Display.displayViewStudent();
             String input = reader.nextLine(); // user input
@@ -102,7 +102,12 @@ public class TeacherRunner extends UserRunner {
                         int userId = Integer.parseInt(input);
 
                         // TODO
-                        User selectedUser = User.USER_LIST.get(userId);
+                        User selectedUser = null;
+                        // checks if id is valid / exists in list
+                        if (userId < User.USER_LIST.size() && userId >= 0) {
+                            selectedUser = User.USER_LIST.get(userId);
+                        }
+                        // Check if user exists/is deleted/and is a student
                         if (selectedUser == null || !(selectedUser instanceof Student)) {
                             Display.displayBadInput();
                         } else {
@@ -129,7 +134,7 @@ public class TeacherRunner extends UserRunner {
 
             // Input loop is different because input can be a static command or one that takes an argument
             // Outer switch checks static commands, inner switch checks arguments
-            switch(input) {
+            switch (input) {
                 case "back":
                     currentStudent = null;
                     break;
@@ -155,9 +160,13 @@ public class TeacherRunner extends UserRunner {
      */
     @Override
     protected boolean loopCourseOverride(Scanner reader, String input) {
-        switch(input) {
+        switch (input) {
             case "create forum":
                 menuCreateDiscussion(reader);
+                break;
+
+            case "edit course":
+                menuEditCourse(reader);
                 break;
 
             default:
@@ -167,7 +176,9 @@ public class TeacherRunner extends UserRunner {
     }
 
     /**
-     * Menu for creating new discussion forum ()
+     * Menu for creating new discussion forum
+     *
+     * @param reader Scanner for getting input
      */
     private void menuCreateDiscussion(Scanner reader) {
         Display.displayCreateDiscussion();
@@ -181,18 +192,33 @@ public class TeacherRunner extends UserRunner {
     }
 
     /**
+     * Menu for editing course topic
+     *
+     * @param reader Scanner for getting input
+     */
+    private void menuEditCourse(Scanner reader) {
+        Display.displayEditCourse();
+        String input = reader.nextLine();
+
+        if (this.teacher.editCourse(input, getCurrentCourse())) {
+            System.out.println("Course topic edited successfully!");
+        } else {
+            System.out.println("An error has occurred while editing this course topic!");
+        }
+    }
+
+    /**
      * For menu options exclusive to Teacher
      * overrides abstract method in UserRunner
      * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
      *
      * @param reader Scanner for getting additional input
-     * @param input Existing user input
-     *
+     * @param input  Existing user input
      * @return if an exclusive command was successfully executed (eg. create forum)
      * if returns false, no exclusive commands could be detected/executed
      */
     protected boolean loopDiscussionOverride(Scanner reader, String input) {
-        switch(input) {
+        switch (input) {
             case "delete forum":
                 this.teacher.deleteDiscussion(getCurrentDiscussion());
                 break;
@@ -209,15 +235,13 @@ public class TeacherRunner extends UserRunner {
      * called in UserRunner's parse2WordInputOverride method (parsing input w/ argument)
      *
      * @param targetPost post affected by command
-     * @param reader scanner for getting input
+     * @param reader     scanner for getting input
      * @param inputWord1 1st word of user input, determines command
-     *
      * @return if an exclusive command was successfully executed (eg. create forum)
      * if returns false, no exclusive commands could be detected/executed
      */
     @Override
-    protected boolean parse2WordInputOverride(
-        Post targetPost, Scanner reader, String inputWord1) {
+    protected boolean parse2WordInputOverride(Post targetPost, Scanner reader, String inputWord1) {
 
         switch (inputWord1) {
             case "grade":
@@ -234,8 +258,7 @@ public class TeacherRunner extends UserRunner {
      * Menu for grading a post
      *
      * @param targetPost post to grade
-     * @param reader Scanner for getting input
-     *
+     * @param reader     Scanner for getting input
      * @return whether operation succeeded (whether grade was valid or not)
      */
     private boolean menuGradePost(Post targetPost, Scanner reader) {
@@ -256,9 +279,8 @@ public class TeacherRunner extends UserRunner {
 
         this.teacher.gradePost(targetPost, grade);
 
-        System.out.println("Post " + targetPost.getId() +
-            "has been assigned the grade: " + grade + "/" +
-            targetPost.getMaxGrade());
+        System.out.println(
+                "Post " + targetPost.getId() + "has been assigned the grade: " + grade + "/" + targetPost.getMaxGrade());
         return true;
     }
 }

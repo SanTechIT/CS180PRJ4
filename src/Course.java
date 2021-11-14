@@ -72,6 +72,13 @@ public class Course implements Serializable {
         return topic;
     }
 
+    /**
+     * Changes topic of course if user has permission
+     *
+     * @param topic new topic of course
+     * @param user user trying to change course topic
+     * @return whether course topic is changed (whether user had permission)
+     */
     public boolean setTopic(String topic, User user) {
         if (!user.canModifyCourse()) {
             return false;

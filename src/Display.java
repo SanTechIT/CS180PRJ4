@@ -109,6 +109,7 @@ public class Display {
         } else {
             System.out.println("\nback" +
             "\ncreate forum" +
+            "\nedit course" +
             "\nlogout");
         }
 
@@ -118,6 +119,13 @@ public class Display {
     public static void displayCreateDiscussion() {
         System.out.println("\nCreating Discussion:" +
             "\nPlease enter the name of the new discussion:");
+
+        System.out.print("> ");
+    }
+
+    public static void displayEditCourse() {
+        System.out.println("\nEditing Course Topic:" +
+            "\nPlease enter the new topic of this course:");
 
         System.out.print("> ");
     }

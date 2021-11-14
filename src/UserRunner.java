@@ -2,14 +2,13 @@ import java.util.Scanner;
 
 /**
  * Project 4 - User Runner
- *
+ * <p>
  * Abstract, inherited by TeacherRunner and StudentRunner
  * Contains methods accessible to both.
- *
+ * <p>
  * Runner classes handle control flow and UI interaction.
  *
  * @author briankwon25 (Brian Kwon), saraxiao0 (Sara Xiao)
- *
  * @version 0.1 - 2021-11-14
  */
 public abstract class UserRunner {
@@ -37,53 +36,59 @@ public abstract class UserRunner {
      * So derived classes can access private values.
      */
 
-     /**
+    /**
      * Returns value of currentCourse
+     *
      * @return
      */
-     public Course getCurrentCourse() {
-         return currentCourse;
-     }
+    public Course getCurrentCourse() {
+        return currentCourse;
+    }
 
-     /**
+    /**
      * Sets new value of currentCourse
+     *
      * @param
      */
-     public void setCurrentCourse(Course currentCourse) {
-         this.currentCourse = currentCourse;
-     }
+    public void setCurrentCourse(Course currentCourse) {
+        this.currentCourse = currentCourse;
+    }
 
-     /**
+    /**
      * Returns value of currentDiscussion
+     *
      * @return
      */
-     public Discussion getCurrentDiscussion() {
-         return currentDiscussion;
-     }
+    public Discussion getCurrentDiscussion() {
+        return currentDiscussion;
+    }
 
-     /**
+    /**
      * Sets new value of currentDiscussion
+     *
      * @param
      */
-     public void setCurrentDiscussion(Discussion currentDiscussion) {
-         this.currentDiscussion = currentDiscussion;
-     }
+    public void setCurrentDiscussion(Discussion currentDiscussion) {
+        this.currentDiscussion = currentDiscussion;
+    }
 
-     /**
+    /**
      * Returns value of logout
+     *
      * @return
      */
-     public boolean isLogout() {
-         return logout;
-     }
+    public boolean isLogout() {
+        return logout;
+    }
 
-     /**
+    /**
      * Sets new value of logout
+     *
      * @param
      */
-     public void setLogout(boolean logout) {
-         this.logout = logout;
-     }
+    public void setLogout(boolean logout) {
+        this.logout = logout;
+    }
 
     /* ----- Loop methods - for handling control flow -----
      * All loop methods are called by loop(Scanner reader) directly or indirectly
@@ -101,7 +106,7 @@ public abstract class UserRunner {
             Display.displayWelcome(this.user);
             String input = reader.nextLine();
 
-            switch(input) {
+            switch (input) {
                 case "edit account":
                     loopEditAccount(reader);
                     break;
@@ -121,8 +126,11 @@ public abstract class UserRunner {
 
                         try {
                             int courseId = Integer.parseInt(input);
-
-                            currentCourse = Course.COURSE_LIST.get(courseId);
+                            // Checks if course id exists
+                            if (courseId < Course.COURSE_LIST.size() && courseId >= 0) {
+                                currentCourse = Course.COURSE_LIST.get(courseId);
+                            }
+                            // Checks if course is deleted / exists
                             if (currentCourse == null) {
                                 Display.displayBadInput();
                             } else {
@@ -149,7 +157,7 @@ public abstract class UserRunner {
             Display.displayEditAccount(this.user);
             String input = reader.nextLine();
 
-            switch(input) {
+            switch (input) {
                 case "back":
                     continueThisMenu = false;
                     break;
@@ -181,7 +189,7 @@ public abstract class UserRunner {
      */
     private void loopCourse(Scanner reader) {
         while (currentCourse != null) { // "back" sets currentCourse to null
-        // then program goes back to main loop
+            // then program goes back to main loop
 
             Display.displayCourse(currentCourse, this.user);
             String input = reader.nextLine();
@@ -202,15 +210,19 @@ public abstract class UserRunner {
                         try {
                             int discussionId = Integer.parseInt(input);
 
-                            currentDiscussion = Discussion.DISCUSSION_LIST.get(discussionId);
-
-                            if(!currentCourse.getDiscussions().contains(currentDiscussion)){
+                            // Checks if index is in bounds
+                            if (discussionId < Discussion.DISCUSSION_LIST.size() && discussionId >= 0) {
+                                currentDiscussion = Discussion.DISCUSSION_LIST.get(discussionId);
+                            }
+                            // Checks if Discussion is part of the current course
+                            if (!currentCourse.getDiscussions().contains(currentDiscussion)) {
                                 currentDiscussion = null;
                                 Display.displayBadInput();
                             } else if (currentDiscussion == null) {
                                 Display.displayBadInput();
                             } else {
-                                loopDiscussion(reader); // enter discussion menu with inputted discussion
+                                loopDiscussion(
+                                        reader); // enter discussion menu with inputted discussion
                             }
 
                         } catch (NumberFormatException e) {
@@ -233,7 +245,7 @@ public abstract class UserRunner {
 
             // Input loop is different because input can be a static command or one that takes an argument
             // Outer switch checks static commands, inner switch checks arguments
-            switch(input) {
+            switch (input) {
                 case "back":
                     currentDiscussion = null;
                     break;
@@ -259,13 +271,13 @@ public abstract class UserRunner {
     /**
      * Checks whether 2-word input for loopDiscussion
      * has valid length + post number
-     *
+     * <p>
      * If it is, checks which command is in input, then executes command
-     *
+     * <p>
      * Protected because it's called in TeacherRunner's
      * loopIndividualStudent method
      *
-     * @param input Existing user input
+     * @param input  Existing user input
      * @param reader Scanner for getting additional input
      */
     protected boolean parse2WordInput(String input, Scanner reader) {
@@ -287,8 +299,16 @@ public abstract class UserRunner {
         }
 
         // check if post number corresponds to existing post
-        Post targetPost = Post.searchPostsById(postId);
+        Post targetPost = null;
+        if (postId < Post.POST_LIST.size() && postId >= 0) {
+            targetPost = Post.POST_LIST.get(postId);
+        }
+
         if (targetPost == null) {
+            // Post is deleted / does not exist
+            return false;
+        } else if (!currentDiscussion.getPosts().contains(targetPost)) {
+            // Post is not part of current discussion
             return false;
         }
 
@@ -329,7 +349,7 @@ public abstract class UserRunner {
      * Menu for posting reply to other post
      *
      * @param targetPost post to reply to
-     * @param reader Scanner for getting input
+     * @param reader     Scanner for getting input
      */
     private boolean menuPostReply(Post targetPost, Scanner reader) {
         Display.displayPostReply(targetPost);
@@ -337,9 +357,8 @@ public abstract class UserRunner {
         String input = reader.nextLine();
         Post newPost = this.user.makePostReply(targetPost, input, currentDiscussion);
 
-        System.out.println("New post " + newPost.getId() +
-            " (reply to " + targetPost.getId() + ")" +
-            " has been created!");
+        System.out.println(
+                "New post " + newPost.getId() + " (reply to " + targetPost.getId() + ")" + " has been created!");
         return true;
     }
 
@@ -347,7 +366,7 @@ public abstract class UserRunner {
      * Menu for editing a post
      *
      * @param targetPost post to edit
-     * @param reader Scanner for getting input
+     * @param reader     Scanner for getting input
      */
     private boolean menuEditPost(Post targetPost, Scanner reader) {
         Display.displayEditPost(targetPost);
@@ -355,8 +374,7 @@ public abstract class UserRunner {
         String input = reader.nextLine();
         this.user.editPost(targetPost, input);
 
-        System.out.println("Post " + targetPost.getId() +
-            "has been edited!");
+        System.out.println("Post " + targetPost.getId() + "has been edited!");
         return true;
     }
 
@@ -364,7 +382,7 @@ public abstract class UserRunner {
      * Menu for deleting a post
      *
      * @param targetPost post to delete
-     * @param reader Scanner for getting input
+     * @param reader     Scanner for getting input
      */
     private boolean menuDeletePost(Post targetPost, Scanner reader) {
         Display.displayDeletePost(targetPost);
@@ -374,8 +392,7 @@ public abstract class UserRunner {
             this.user.deletePost(targetPost);
         }
 
-        System.out.println("Post " + targetPost.getId() +
-            " has been deleted.");
+        System.out.println("Post " + targetPost.getId() + " has been deleted.");
         return true;
     }
 
@@ -428,7 +445,7 @@ public abstract class UserRunner {
      * @return if an exclusive command was successfully executed (eg. create forum)
      * always false because User has no exclusive commands
      */
-    protected boolean loopDiscussionOverride(Scanner reader, String input){
+    protected boolean loopDiscussionOverride(Scanner reader, String input) {
         return false;
     }
 
@@ -446,8 +463,7 @@ public abstract class UserRunner {
      * @return if an exclusive command was successfully executed (eg. create forum)
      * always false because User has no exclusive commands
      */
-    protected boolean parse2WordInputOverride(
-        Post targetPost, Scanner reader, String inputWord1) {
+    protected boolean parse2WordInputOverride(Post targetPost, Scanner reader, String inputWord1) {
         return false;
     }
 

@@ -19,10 +19,10 @@ public class Tests {
 
         // Add default users to USER_LIST
         User.USER_LIST = new ArrayList<>();
-        User.USER_LIST.add(new Teacher("teacher", "teacher", "John"));
-        User.USER_LIST.add(new Student("student", "student", "Alice")); // ID 2 and ID 3
-        User.USER_LIST.add(new Student("s", "s", "s")); // ID 4 and ID 5
-        User.USER_LIST.add(new Teacher("t", "t", "t"));
+        new Teacher("teacher", "teacher", "John");
+        new Student("student", "student", "Alice"); // ID 2 and ID 3
+        new Student("s", "s", "s"); // ID 4 and ID 5
+        new Teacher("t", "t", "t");
 
         // Add default courses to COURSE_LIST
         Course.COURSE_LIST = new ArrayList<>();
