@@ -7,7 +7,7 @@ Missing features
 * test cases
 * the report
 * comment the code
-* improve post formatting - when viewing posts: posts should show timestamp, user who posted it, number of upvotes, number of downvotes (or a combined vote number that's upvotes - downvotes), the grade (grade may only be visible to teacher/poster) - then contents of post
+* improve post formatting - grade should only be visible to teacher/poster
 
 Problems
 - MAJOR: Validate inputs for class/discussion/post Ids in reply/edit/delete actions
@@ -16,8 +16,10 @@ Problems
 - MAJOR: You can log into any account with any password. We don't have authentication.
 - MAJOR: Posts don't show up correctly! Only posts that are a reply to a post with ID 0 show up, everything else doesn't show.
 - non-major: teacher can't logout from ViewIndividualStudent menu, only go "back" (effect of loop design)
-- MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash sometimes, don't know why (example below)
 - MAJOR: in ViewIndividualStudent, each of the student's posts shows up twice
+- MAJOR: students have multiple IDs? does each student exist twice in USER_LIST?
+    - eg. in Tests.java, Alice has both ID 2 and ID 3
+- MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash sometimes, don't know why (example below)
 
 ```
 Commands: back, reply [num], edit [num], delete [num], grade [num], logout

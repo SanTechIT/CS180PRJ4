@@ -275,7 +275,7 @@ public class Display {
         System.out.println("\n" + currentStudent.getName() +  "'s Posts:");
 
         System.out.println("\nCommands: " +
-            "back, reply [num], edit [num], delete [num], grade [num], logout" +
+            "back, reply [num], edit [num], delete [num], grade [num]" +
             "\nReplace [num] with the number of the post you " +
             "want to interact with!");
 

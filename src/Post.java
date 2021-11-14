@@ -124,10 +124,16 @@ public class Post implements Serializable {
         User creator = User.USER_LIST.get(creatorId);
         String timestamp = "TIMESTAMP NOT IMPLEMENTED"; // TODO
 
-        postString += creator.getUsername() + " | " + creator.getName() + " (ID " + creatorId + ") posted";
+        postString += "\n";
+        postString += "Post ID " + getId();
+
+        postString += "\n" + creator.getUsername() + " | " + creator.getName() + " (ID " + creatorId + ") posted";
         postString += " at time " + timestamp;
 
         postString += "\n(votes: +" + getUpvotes() + " | -" + getDownvotes() + ")";
+
+        postString += "\n(grade: " + getGrade() + "/" + getMaxGrade() + ")";
+
         postString += "\n" + getContent();
         postString += "\n";
 

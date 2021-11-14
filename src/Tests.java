@@ -20,19 +20,20 @@ public class Tests {
         // Add default users to USER_LIST
         User.USER_LIST = new ArrayList<>();
         User.USER_LIST.add(new Teacher("teacher", "teacher", "John"));
-        User.USER_LIST.add(new Student("student", "student", "Alice")); // ID 3
-        User.USER_LIST.add(new Student("s", "s", "s")); // ID 5
+        User.USER_LIST.add(new Student("student", "student", "Alice")); // ID 2 and ID 3
+        User.USER_LIST.add(new Student("s", "s", "s")); // ID 4 and ID 5
         User.USER_LIST.add(new Teacher("t", "t", "t"));
 
+        // Add default courses to COURSE_LIST
         Course.COURSE_LIST = new ArrayList<>();
         Course.createCourse("MA165", User.USER_LIST.get(0));
         Course.createCourse("CS180", User.USER_LIST.get(0));
         Course.createCourse("EAPS106", User.USER_LIST.get(0));
 
-        // make new Course object, set static vars
-
         // make new User object, set static vars
         Discussion.DISCUSSION_LIST = new ArrayList<>();
+        Discussion.createDiscussion(Course.COURSE_LIST.get(0), "default discussion", User.USER_LIST.get(0));
+
         Post.POST_LIST = new ArrayList<>();
 
         String input;
