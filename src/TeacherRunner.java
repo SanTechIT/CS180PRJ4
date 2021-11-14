@@ -160,6 +160,10 @@ public class TeacherRunner extends UserRunner {
                 menuCreateDiscussion(reader);
                 break;
 
+            case "edit course":
+                menuEditCourse(reader);
+                break;
+
             default:
                 return false;
         }
@@ -167,7 +171,9 @@ public class TeacherRunner extends UserRunner {
     }
 
     /**
-     * Menu for creating new discussion forum ()
+     * Menu for creating new discussion forum
+     *
+     * @param reader Scanner for getting input
      */
     private void menuCreateDiscussion(Scanner reader) {
         Display.displayCreateDiscussion();
@@ -177,6 +183,22 @@ public class TeacherRunner extends UserRunner {
             System.out.println("Discussion created successfully!");
         } else {
             System.out.println("An error has occurred while creating this discussion");
+        }
+    }
+
+    /**
+     * Menu for editing course topic
+     *
+     * @param reader Scanner for getting input
+     */
+    private void menuEditCourse(Scanner reader) {
+        Display.displayEditCourse();
+        String input = reader.nextLine();
+
+        if (this.teacher.editCourse(input, getCurrentCourse())) {
+            System.out.println("Course topic edited successfully!");
+        } else {
+            System.out.println("An error has occurred while editing this course topic!");
         }
     }
 

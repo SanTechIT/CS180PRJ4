@@ -1,7 +1,6 @@
 # TODO
 
 Missing features
-* voting
 * serialization/permanence
 * test cases
 * the report
@@ -9,7 +8,7 @@ Missing features
 * improve post formatting - grade should only be visible to teacher/poster
 * ungraded posts have a grade of 0 - change that to n/a? will need to keep track of whether a post has been graded
 * Teacher shouldn't be able to reply to a student's posts while viewing their student dashboard, remove that feature.
-* Students can upvote/downvote posts an infinite number of times
+* Teachers should be able to edit courses
 
 Problems
 - MAJOR: Validate inputs for class/discussion/post Ids in reply/edit/delete actions
@@ -21,8 +20,9 @@ Problems
 - MAJOR: in ViewIndividualStudent, each of the student's posts shows up twice
 - MAJOR: students have multiple IDs? does each student exist twice in USER_LIST?
     - eg. in Tests.java, Alice has both ID 2 and ID 3
-- MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash sometimes, don't know why (example below)
+- MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash, don't know why (example below)
 - MAJOR: replying to a nonexistent post crashes the program
+- Students can upvote/downvote posts an infinite number of times
 
 ```
 Commands: back, reply [num], edit [num], delete [num], grade [num], logout
