@@ -649,7 +649,7 @@ Example input:
 [aklsdjflkdsanhfcl]
 
 Input Error:
-Sorry, I couldn't understand what you typed. Please try again!
+Sorry, I couldn't understand what you typed. Please try again! 
 -----
 Welcome [Name]!
 Please type the number of a course to view:
