@@ -35,7 +35,13 @@ public class Post implements Serializable {
     private Post() {
         // Deny Instantiation
     }
-
+    /**
+     * Post Constructor
+     *
+     * @param content
+     * @param dicussions
+     * @param creatorId
+     */
     private Post(String content, Discussion discussion, Post parent, int creatorId) {
         this.content = content;
         this.parent = parent;

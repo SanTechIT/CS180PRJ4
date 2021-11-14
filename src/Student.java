@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Student class
  *
- * @author [author], chang794
+ * @author [author], chang794 (Richard Chang), briankwon25 (Brian Kwon)
  * @version 0.1
  */
 public class Student extends User implements Serializable {
