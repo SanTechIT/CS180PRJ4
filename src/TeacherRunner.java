@@ -238,9 +238,11 @@ public class TeacherRunner {
         Display.displayCreateDiscussion();
         String input = reader.nextLine();
 
-        this.teacher.createDiscussion(input, currentCourse);
-
-        System.out.println("Discussion created successfully!");
+        if (this.teacher.createDiscussion(input, currentCourse)) {
+            System.out.println("Discussion created successfully!");
+        } else {
+            System.out.println("An error has occurred while creating this discussion");
+        }
     }
 
     /**

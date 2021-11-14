@@ -18,6 +18,7 @@ public class Main {
         // make new Course object, set static vars
         // Load User List if exits
         User.USER_LIST = new ArrayList<>();
+        User.USER_LIST.add(new Teacher("abc", "123", "John"));
         // make new User object, set static vars
         Discussion.DISCUSSION_LIST = new ArrayList<>();
         String input;
