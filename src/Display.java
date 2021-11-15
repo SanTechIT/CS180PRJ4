@@ -330,7 +330,7 @@ public class Display {
      */
     public static void displayViewStudent() {
         System.out.println(
-                "\nView Student:" + "\nThis shows all of a student's posts and lets you grade them." + "\nEnter the name or ID of the student to view: " + "\nOr, please type one of these commands: " + "\nback" + "\nlogout");
+                "\nView Student:" + "\nThis shows all of a student's posts and lets you grade them." + "\nEnter the ID of the student to view. " + "\nOr, please type one of these commands: " + "\nback" + "\nlogout");
 
         System.out.print("> ");
     }
@@ -342,7 +342,7 @@ public class Display {
         System.out.println("\n" + currentStudent.getName() + "'s Posts:");
 
         System.out.println(
-                "\nCommands: " + "back, reply [num], edit [num], delete [num], grade [num]" + "\nReplace [num] with the number of the post you " + "want to interact with!");
+                "\nCommands: " + "back, edit [num], delete [num], grade [num]" + "\nReplace [num] with the number of the post you " + "want to interact with!");
 
         String postList = currentStudent.getPostsString();
         if (postList.isEmpty()) {

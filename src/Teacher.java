@@ -115,11 +115,6 @@ public class Teacher extends User implements Serializable {
         return true;
     }
 
-    //    @Override
-    //    public boolean isAdmin() {
-    //        return false;
-    //    }
-
     /* ----- Methods that Modify Things -----
      * Will be called as part of TeacherRunner's loop method.
      * For now, most return a boolean representing operation success/failure.
@@ -158,7 +153,7 @@ public class Teacher extends User implements Serializable {
      * Create discussion forum
      */
     public boolean createDiscussion(String topic, Course course) {
-        //        Discussion d = new Discussion(topic, course, this);
+        // Discussion d = new Discussion(topic, course, this);
         // Does permissions check for networking so people cant make random discussions;
         return (Discussion.createDiscussion(course, topic, this) != null);
     }

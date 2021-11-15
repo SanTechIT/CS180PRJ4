@@ -159,7 +159,10 @@ public class Student extends User implements Serializable {
     public String getPostsString() {
         String str = "";
         for (int postId : getPosts()) {
-            str += Post.POST_LIST.get(postId).toString();
+            Post p = Post.POST_LIST.get(postId);
+            if (p != null) { // post hasn't been deleted
+                str += p.toString();
+            }
         }
         return str;
     }
