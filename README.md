@@ -9,6 +9,8 @@ To run the program: In the Terminal, after compiling, run `javac Main.java`. Run
 
 To run the test cases: In the Terminal, execute the bash script runTestCases.sh that's located in the src folder. Alternatively, use IntelliJ to run all the Tests classes.
 
+Using IntelliJ is best, since everything should work on it.
+
 ## Notes
 
 - When shutting down, serialize the User List, Course List
