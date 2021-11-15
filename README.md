@@ -351,6 +351,19 @@ Note: posts can be under both discussions and other posts
 | displayViewGrades | `public static void` | `(Discussion currentDiscussion, Student currentStudent)` | Displays grades for all of 1 student's posts in 1 forum |
 | displayPostsGrades | `public static void` | `(List<Integer> posts, User user)` | Given a list of posts, prints them all in order with 0 depth AND INCLUDES ONLY GRADE INFO for displayViewGrades |
 
+### Display Class
+
+#### Methods
+
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| testLoginLogout | `public void` | `()`  | Test logging in and logging out |
+| testMainInvalidInput | `public void` | `()`  | Test that main loop handles invalid input |
+| testMainCreateAccountLogin | `public void` | `()`  | Test account creation and logging in with new account |
+| testMainInvalidUsername | `public void` | `()`  | Test account creation with username that's been used |
+
+
+
 ## Console Example
 
 * *To write a new example, put 3 backticks at the start and end to make it a code block - otherwise Markdown formatting
