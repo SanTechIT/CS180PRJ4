@@ -163,9 +163,11 @@ TO SELF (Richard)
 | loodIndividualStudent | `private void` | `(Scanner reader, Student currentStudent)` |  Loop for viewing/editing all posts of 1 student |
 | loopCourseOverride | `protected boolean` | `(Scanner reader, String input)` |  For menu options exclusive to teacher |
 | menuCreateDiscussion | `private void` | `(Scanner reader)` |  The menu for creating new discussion forum |
+| menuEditCourse | `private void` | `(Scanner reader)` |  The menu for editing course topic  |
 | loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  Deleting discussion forum menu option for teacher |
+| loopViewVoteboard | `private void` | `(Scanner reader)` |  Shows the dashboard by the number of votes |
 | parse2WordInputOverride | `protected boolean` | `(Scanner reader, String input)` |  Parses the word given as input |
-| menuGradePost | `private boolean` | `(Scanner reader, String input)` | menu for grading a post |
+| menuGradePost | `private boolean` | `(Post targetPost, Scanner reader)` | menu for grading a post |
 
 
 ## Student Class (extends `User`) (Serializable)
@@ -322,6 +324,8 @@ Note: posts can be under both discussions and other posts
 | toString | `public String`   | `()` | The toString for Post |
 | grade | `public boolean`   | `(User user, int grade)` | Grades the post if the user has permission |
 | getPostsString | `public String`   | `()` | Return the list of posts under this post as a string |
+| getVotes | `public int`   | `(User user, int oldVote)` | Returns the number of votes after calculation |
+| getControversy | `public int`   | `(User user, int oldVote)` | Returns the total number of votes |
 | upvote | `public boolean`   | `(User user, int oldVote)` | Decides if the user can vote, if so, then upvotes |
 | downvote | `public boolean`   | `(User user, int oldVote)` | Decides if the user can vote, if so, then downvotes |
 | removeVote | `public boolean`   | `(int oldVote)` | removes the vote |
@@ -354,6 +358,8 @@ Note: posts can be under both discussions and other posts
 | displayDeleteAccount | `public static void` | `(User user)`  |  Displays output for deleting an account |
 | displayViewStudent | `public static void` | `()`  |  Displays output for view student loop (option from the main loop) |
 | displayIndividualStudent | `public static void` | `(Student currentStudent)`  |  Displays output for an individual student |
+| displayPostsVoteboard | `private static void` | `(List<Post> posts))`  |  Displays lists of posts |
+| displayViewVoteboard | `public static void` | `(Discussion currentDiscussion, String currentSort)`  |  Displays output for the sorting of the dashboard based on the user |
 
 ## Console Example
 
