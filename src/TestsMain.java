@@ -1,10 +1,11 @@
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Project 4 - Tests Main
- *
+ * <p>
  * Contains JUnit tests for Main class and login loop.
  *
  * @author Richard Chang, Sara Xiao
@@ -43,7 +44,7 @@ public class TestsMain extends Tests {
         Main.main(new String[]{"useser"});
 
         assertTrue(getOut().toString().contains(
-            getOutputFromFile("ExpectedOutputs/testMainInvalidInput")));
+                getOutputFromFile("ExpectedOutputs/testMainInvalidInput")));
     }
 
     /**
@@ -65,8 +66,8 @@ public class TestsMain extends Tests {
         setIOStreams(commands);
         Main.main(new String[]{"useser"});
 
-        assertTrue(getOut().toString().contains(
-                getOutputFromFile("ExpectedOutputs/testMainCreateAccountLogin")));
+        assertEquals(getOutputFromFile("ExpectedOutputs/testMainCreateAccountLogin"), getOut());
+
     }
 
     /**
@@ -89,7 +90,6 @@ public class TestsMain extends Tests {
         setIOStreams(commands);
         Main.main(new String[]{"useser"});
 
-        assertTrue(getOut().toString().contains(
-                getOutputFromFile("ExpectedOutputs/testMainCreateAccountLogin")));
+        assertEquals(getOutputFromFile("ExpectedOutputs/testMainCreateAccountLogin"), getOut());
     }
 }
