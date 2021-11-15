@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Project 4 - Tests Main
@@ -99,6 +100,6 @@ public class TestsMain extends Tests {
         String fileName = "testMainInvalidUsername";
         String actual = getOut().toString();
         String expected = getOutputFromFile("ExpectedOutputs/" + fileName);
-        assertTrue(actual.contains(expected));
+        assertEquals(expected);
     }
 }
