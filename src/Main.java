@@ -21,6 +21,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Reading Data...");
 
+        // Data storage path
+        // Handles any args passed for testing
         String path = "data/";
         boolean blank = false;
         if (args.length > 0 && args[0].equals("useser")) {
@@ -34,6 +36,7 @@ public class Main {
             path = "test_e/";
         }
 
+        // Checks if file exists before using
         boolean filesExist = new File(path + "UserList").exists() && new File(
                 path + "CourseList").exists() && new File(
                 path + "DiscussionList").exists() && new File(path + "PostList").exists();
