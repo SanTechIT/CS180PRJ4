@@ -5,12 +5,10 @@ Missing features
 * test cases
 * the report
 * ungraded posts have a grade of 0 - change that to n/a? will need to keep track of whether a post has been graded
-* Teacher shouldn't be able to reply to a student's posts while viewing their student dashboard, remove that feature.
 
 Problems
 - MAJOR: (Tentative Done) Validate inputs for class/discussion/post Ids in reply/edit/delete actions
 - Ask if user wants to reply/edit/delete posts of another grouping?
-- Voteboard shows only top-level posts (should be quick fix once Richard finishes Discussion's getPost method)
 
 # [Name] Design specifications
 
