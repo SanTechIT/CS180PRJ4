@@ -27,7 +27,7 @@ public class TestsMain extends Tests {
         setIOStreams(commands);
 
         // Run Program
-        Main.main(new String[0]);
+        Main.main(new String[]{"useser"});
     }
 
     /**
@@ -40,7 +40,7 @@ public class TestsMain extends Tests {
         commands += "exit";
 
         setIOStreams(commands);
-        Main.main(new String[0]);
+        Main.main(new String[]{"useser"});
 
         assertTrue(getOut().toString().contains(
             getOutputFromFile("ExpectedOutputs/testMainInvalidInput")));
@@ -63,7 +63,7 @@ public class TestsMain extends Tests {
                 "exit";
 
         setIOStreams(commands);
-        Main.main(new String[0]);
+        Main.main(new String[]{"useser"});
 
         assertTrue(getOut().toString().contains(
                 getOutputFromFile("ExpectedOutputs/testMainCreateAccountLogin")));
@@ -86,7 +86,7 @@ public class TestsMain extends Tests {
                 "exit";
 
         setIOStreams(commands);
-        Main.main(new String[0]);
+        Main.main(new String[]{"useser"});
 
         assertTrue(getOut().toString().contains(
                 getOutputFromFile("ExpectedOutputs/testMainCreateAccountLogin")));
