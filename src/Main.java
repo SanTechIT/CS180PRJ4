@@ -24,7 +24,8 @@ public class Main {
 
         String path = "data/";
         if (args.length > 0 && args[0].equals("useser")) {
-            System.out.println("Running test files");
+            System.out.println("Using test files...");
+            USESER = false;
             path = "test/";
         }
         boolean filesExist = new File(path + "UserList").exists() && new File(
