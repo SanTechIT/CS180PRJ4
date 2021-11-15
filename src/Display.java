@@ -140,7 +140,7 @@ public class Display {
     public static void displayDiscussion(Discussion currentDiscussion, User user) {
         String commands;
         if (user instanceof Student) {
-            commands = "Commands: " + "back, reply to discussion, reply [num], edit [num], delete [num], " + "upvote [num], downvote [num], novote [num], view grades, logout";
+            commands = "Commands: " + "back, reply to discussion, reply [num], edit [num]" + "upvote [num], downvote [num], novote [num], view grades, logout";
         } else {
             commands = "Commands: " + "back, reply [num], edit [num], delete [num], " + "grade [num], view voteboard, edit this forum, delete forum, logout";
         }

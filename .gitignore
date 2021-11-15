@@ -7,4 +7,4 @@ CS180PRJ4.iml
 src/*.class
 *.xml
 target
-junit-jupiter-5.8.1.jar
+*.jar

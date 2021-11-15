@@ -368,7 +368,7 @@ public class TeacherRunner extends UserRunner {
                 break;
 
             case "delete":
-                operationSuccess = super.menuDeletePost(targetPost, reader);
+                operationSuccess = menuDeletePost(targetPost, reader);
                 break;
 
             default:
@@ -398,6 +398,10 @@ public class TeacherRunner extends UserRunner {
         switch (inputWord1) {
             case "grade":
                 menuGradePost(targetPost, reader);
+                break;
+
+            case "delete":
+                menuDeletePost(targetPost, reader);
                 break;
 
             default:
@@ -434,5 +438,29 @@ public class TeacherRunner extends UserRunner {
         System.out.println(
                 "Post " + targetPost.getId() + "has been assigned the grade: " + grade + "/" + targetPost.getMaxGrade());
         return true;
+    }
+
+    /**
+     * Menu for deleting a post
+     *
+     * @param targetPost post to delete
+     * @param reader     Scanner for getting input
+     */
+    private boolean menuDeletePost(Post targetPost, Scanner reader) {
+        Display.displayDeletePost(targetPost);
+
+        String input = reader.nextLine();
+        if (input.toLowerCase().equals("yes")) {
+            boolean success = this.teacher.deletePost(targetPost);
+            if (success) {
+                System.out.println("Post " + targetPost.getId() + " has been deleted.");
+            } else {
+                System.out.println("Sorry, you can't delete that post.");
+            }
+
+            return success;
+        }
+
+        return false;
     }
 }
