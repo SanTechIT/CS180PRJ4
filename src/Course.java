@@ -3,10 +3,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Course Class
+ * Project 4 - Course
  *
- * @author chang794
- * @version 0.2
+ * Represents a teacher-created Course which can
+ * have Discussions.
+ *
+ * @author Richard Chang, Sara Xiao
+ * @version 2021-11-15
  */
 public class Course implements Serializable {
     // As per https://stackoverflow.com/

@@ -1,14 +1,11 @@
 # TODO
 
 Missing features
-* serialization/permanence
 * test cases
 * the report
-* ungraded posts have a grade of 0 - change that to n/a? will need to keep track of whether a post has been graded
 
 Problems
-- MAJOR: (Tentative Done) Validate inputs for class/discussion/post Ids in reply/edit/delete actions
-- Ask if user wants to reply/edit/delete posts of another grouping?
+- (Tentative Done) Validate inputs for class/discussion/post Ids in reply/edit/delete actions
 
 # [Name] Design specifications
 

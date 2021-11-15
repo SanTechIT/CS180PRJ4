@@ -9,17 +9,14 @@ import java.util.ArrayList;
  * Runs the loop() for the Teacher class
  * because I don't want to put the control flow
  * in the Teacher class.
- * <p>
- * Feel free to copy this format for other classes.
- * Or copy-paste this into another class to use as a guide.
  *
- * @author saraxiao0 (Sara Xiao)
- * @version 0.3 - 2021-11-14
+ * @author Sara Xiao, Richard Chang, Aarini Panzade
+ * @version 2021-11-15
  */
 public class TeacherRunner extends UserRunner {
     private Teacher teacher; // Teacher who's logged in
 
-    /*
+    /**
      * Creates new TeacherRunner
      *
      * @param teacher Teacher this runner is connected to and operating for
@@ -37,7 +34,7 @@ public class TeacherRunner extends UserRunner {
      * for that menu
      */
 
-    /*
+    /**
      * For menu options exclusive to Teacher
      * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
      *
@@ -66,6 +63,8 @@ public class TeacherRunner extends UserRunner {
 
     /**
      * Menu for creating new course (accessed from main menu)
+     *
+     * @param reader Scanner for getting input
      */
     private void menuCreateCourse(Scanner reader) {
         Display.displayCreateCourse();
@@ -81,6 +80,8 @@ public class TeacherRunner extends UserRunner {
      * "Data will appear with the student's name and vote count."
      * "Teachers can choose to sort the dashboard."
      * Part of Voting Selection in handout
+     *
+     * @param reader Scanner for getting input
      */
     private void loopViewStudent(Scanner reader) {
         boolean continueThisMenu = true;
@@ -129,6 +130,9 @@ public class TeacherRunner extends UserRunner {
     /**
      * Loop for viewing/editing all posts of 1 student
      * Called by loopViewStudent if valid student ID is inputted
+     *
+     * @param reader Scanner for getting input
+     * @param currentStudent student using this method
      */
     private void loopIndividualStudent(Scanner reader, Student currentStudent) {
         while (currentStudent != null) {

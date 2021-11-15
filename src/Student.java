@@ -5,10 +5,12 @@ import java.util.HashMap; // for tracking voted posts
 import java.util.Scanner;
 
 /**
- * Student class
+ * Project 4 - Student
  *
- * @author [author], chang794 (Richard Chang), briankwon25 (Brian Kwon)
- * @version 0.1
+ * Represents a student user of the class.
+ *
+ * @author Sara Xiao, Brian Kwon, Richard Chang, Aarini Panzade
+ * @version 2021-11-15
  */
 public class Student extends User implements Serializable {
     // hashmap guide: https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html

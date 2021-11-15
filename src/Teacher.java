@@ -6,8 +6,8 @@ import java.util.Scanner;
  * <p>
  * Represents a teacher.
  *
- * @author saraxiao0 (Sara Xiao), chang794
- * @version 0.3 - 2021-11-12
+ * @author Sara Xiao, Richard Chang
+ * @version 2021-11-15
  */
 public class Teacher extends User implements Serializable {
 

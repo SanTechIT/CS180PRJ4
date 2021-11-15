@@ -3,11 +3,10 @@ import java.util.Scanner;
 /**
  * Project 4 - Student Runner
  * <p>
- * Runs the loop() for the Student class
+ * Runs the loop() for the Student class, handling menus/control flow.
  *
- * @author briankwon25 (Brian Kwon), saraxiao0 (Sara Xiao)
- *
- * @version 0.3 - 2021-11-14
+ * @author Sara Xiao, Brian Kwon, Richard Chang
+ * @version 2021-11-15
  */
 public class StudentRunner extends UserRunner {
     private Student student; // Student who's logged in
