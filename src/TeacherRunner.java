@@ -246,7 +246,7 @@ public class TeacherRunner extends UserRunner {
     }
 
     /**
-     * Menu for editing course topic
+     * Menu for editing discussion topic
      *
      * @param reader Scanner for getting input
      */
