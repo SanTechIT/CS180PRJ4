@@ -158,7 +158,8 @@ Problems
 | menuEditCourse | `private void` | `(Scanner reader)` |  The menu for editing course topic  |
 | loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  Deleting discussion forum menu option for teacher |
 | loopViewVoteboard | `private void` | `(Scanner reader)` |  Shows the dashboard by the number of votes |
-| parse2WordInputOverride | `protected boolean` | `(Scanner reader, String input)` |  Parses the word given as input |
+| parse2WordInputOverride | `protected boolean` | `(Post targetPost, Scanner reader, String inputWord1)` |  Parses the word given as input |
+| parse2WordInputStudent | `protected boolean` | `(Scanner reader, String input)` |  Modified version of UserRunner's parse2WordInput for the viewIndividualStudent menu |
 | menuGradePost | `private boolean` | `(Post targetPost, Scanner reader)` | menu for grading a post |
 
 
@@ -185,7 +186,7 @@ Problems
 | canGrade | `public boolean` | `()` | returns false |
 | canPost | `public boolean` | `()` | returns true |
 | canCreateCourse | `public boolean` | `()` | returns false |
-| canModifyCourse | `public boolean` | `()` | returns false |
+| canModifyCourse | `public boolean`  `()` | returns false |
 | canModifyDiscussion | `public boolean` | `()` | returns false |
 | canModifyPost | `public boolean` | `()` | returns false |
 | canCreateDiscussion | `public boolean` | `()` | returns false |
@@ -193,9 +194,9 @@ Problems
 | makePostReply | `public Post` | `(Post parentPost, String newContent, Discussion parentDiscussion)` | Reply to a reply to a discussion form |
 | makeDiscussionReply | `public Post` | `(String newContent, Discussion parentDiscussion)` | Reply directly to a discussion form |
 | getPostsString | `public String` | `()` | Gets the Posts String |
-| getVoteCount | `public int` | `()` | Gets the vote count |
-| upvotePost | `public boolean` | `(Post targetPost)` | Student can upvote |
-| downvotePost | `public boolean` | `(Post targetPost)` | Student can downvote |
+| getPostVote | `public int` | `(Post targetPost)` | returns whether votedPost has been upvoted or downvoted by user |
+| upvotePost | `public boolean` | `(Post targetPost)` | Determines whether upvote goes through for post |
+| downvotePost | `public boolean` | `(Post targetPost)` | Get downvote for post |
 
 - get / store all student posts
 - view scores
