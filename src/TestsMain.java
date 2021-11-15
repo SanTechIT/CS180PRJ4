@@ -12,8 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class TestsMain extends Tests {
 
+    /**
+     * Test logging in and logging out.
+     */
     @Test
-    public void testOne() {
+    public void testLoginLogout() {
         String commands = "";
         commands += "login\n";
         commands += "student\n";
@@ -27,6 +30,9 @@ public class TestsMain extends Tests {
         Main.main(new String[0]);
     }
 
+    /**
+     * Test that main loop handles invalid input.
+     */
     @Test
     public void testMainInvalidInput() {
         String commands = "";
@@ -40,6 +46,9 @@ public class TestsMain extends Tests {
             getOutputFromFile("ExpectedOutputs/testMainInvalidInput")));
     }
 
+    /**
+     * Test account creation and logging in with new account.
+     */
     @Test
     public void testMainCreateAccountLogin() {
         String commands = "create account\n" +
@@ -51,6 +60,29 @@ public class TestsMain extends Tests {
                 "username\n" +
                 "password\n" +
                 "logout\n" +
+                "exit";
+
+        setIOStreams(commands);
+        Main.main(new String[0]);
+
+        assertTrue(getOut().toString().contains(
+                getOutputFromFile("ExpectedOutputs/testMainCreateAccountLogin")));
+    }
+
+    /**
+     * Test account creation with username that's been used.
+     */
+    @Test
+    public void testMainInvalidUsername() {
+        String commands = "create account\n" +
+                "username\n" +
+                "name\n" +
+                "password\n" +
+                "T\n" +
+                "create account\n" +
+                "username\n" +
+                "password2\n" +
+                "T\n" +
                 "exit";
 
         setIOStreams(commands);

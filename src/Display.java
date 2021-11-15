@@ -86,6 +86,9 @@ public class Display {
 
     /**
      * Displays output for course loop (viewing all discussions in 1 course)
+     *
+     * @param currentCourse course being viewed
+     * @param user user viewing the course
      */
     public static void displayCourse(Course currentCourse, User user) {
         System.out.println(
@@ -108,7 +111,9 @@ public class Display {
         System.out.print("> ");
     }
 
-    // Displays output for creating a discussion
+    /**
+     * Displays output for creating a new discussion
+     */
     public static void displayCreateDiscussion() {
         System.out.println(
                 "\nCreating Discussion:" + "\nPlease enter the name of the new discussion:");
@@ -116,24 +121,28 @@ public class Display {
         System.out.print("> ");
     }
 
-    // Displays output for editing a course topic
-    public static void displayEditCourse() {
+    /**
+     * Displays output for editing a discussion topic
+     */
+    public static void displayEditDiscussion() {
         System.out.println(
-                "\nEditing Course Topic:" + "\nPlease enter the new topic of this course:");
+                "\nEditing Discussion Topic:" + "\nPlease enter the new topic of this discussion:");
 
         System.out.print("> ");
     }
 
     /**
      * Displays output for discussion loop (viewing all posts in 1 discussion)
-     * Called by displayDiscussionTeacher and displayDiscussionStudent
+     *
+     * @param currentDiscussion discussion being viewed
+     * @param user user viewing discussion
      */
     public static void displayDiscussion(Discussion currentDiscussion, User user) {
         String commands;
         if (user instanceof Student) {
             commands = "Commands: " + "back, reply to discussion, reply [num], edit [num], delete [num], " + "upvote [num], downvote [num], novote [num], view grades, logout";
         } else {
-            commands = "Commands: " + "back, reply [num], edit [num], delete [num], " + "grade [num], view voteboard, delete forum, logout";
+            commands = "Commands: " + "back, reply [num], edit [num], delete [num], " + "grade [num], view voteboard, edit this forum, delete forum, logout";
         }
 
         System.out.println(
@@ -223,6 +232,14 @@ public class Display {
         postString += indentStr + postin.getContent() + "\n";
         postString += indentStr + "--------------------";
         return postString;
+    }
+
+    // Displays output for editing a course topic
+    public static void displayEditCourse() {
+        System.out.println(
+                "\nEditing Course Topic:" + "\nPlease enter the new topic of this course:");
+
+        System.out.print("> ");
     }
 
     /**

@@ -230,6 +230,10 @@ public class TeacherRunner extends UserRunner {
                 loopViewVoteboard(reader);
                 break;
 
+            case "edit this forum":
+                menuEditDiscussion(reader);
+                break;
+
             case "delete forum":
                 this.teacher.deleteDiscussion(getCurrentDiscussion());
                 setCurrentDiscussion(null);
@@ -239,6 +243,22 @@ public class TeacherRunner extends UserRunner {
                 return false;
         }
         return true;
+    }
+
+    /**
+     * Menu for editing course topic
+     *
+     * @param reader Scanner for getting input
+     */
+    private void menuEditDiscussion(Scanner reader) {
+        Display.displayEditDiscussion();
+        String input = reader.nextLine();
+
+        if (this.teacher.editDiscussion(getCurrentDiscussion(), input)) {
+            System.out.println("Discussion topic edited successfully!");
+        } else {
+            System.out.println("An error has occurred while editing this discussion topic!");
+        }
     }
 
     /**
