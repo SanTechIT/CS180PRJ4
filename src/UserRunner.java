@@ -368,7 +368,7 @@ public abstract class UserRunner {
      * @param targetPost post to edit
      * @param reader     Scanner for getting input
      */
-    private boolean menuEditPost(Post targetPost, Scanner reader) {
+    protected boolean menuEditPost(Post targetPost, Scanner reader) {
         Display.displayEditPost(targetPost);
 
         String input = reader.nextLine();
@@ -384,7 +384,7 @@ public abstract class UserRunner {
      * @param targetPost post to delete
      * @param reader     Scanner for getting input
      */
-    private boolean menuDeletePost(Post targetPost, Scanner reader) {
+    protected boolean menuDeletePost(Post targetPost, Scanner reader) {
         Display.displayDeletePost(targetPost);
 
         String input = reader.nextLine();
