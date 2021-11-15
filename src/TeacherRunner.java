@@ -237,6 +237,9 @@ public class TeacherRunner extends UserRunner {
         return true;
     }
 
+    /**
+     * Shows the dashboard by the number of votes
+     */
     private void loopViewVoteboard(Scanner reader) {
         boolean continueThisMenu = true;
         String currentSort = "best";
