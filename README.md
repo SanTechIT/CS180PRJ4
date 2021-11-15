@@ -10,7 +10,6 @@ Missing features
 Problems
 - MAJOR: (Tentative Done) Validate inputs for class/discussion/post Ids in reply/edit/delete actions
 - Ask if user wants to reply/edit/delete posts of another grouping?
-- MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash, don't know why
 - Voteboard shows only top-level posts (should be quick fix once Richard finishes Discussion's getPost method)
 
 # [Name] Design specifications
