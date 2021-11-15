@@ -324,6 +324,8 @@ Note: posts can be under both discussions and other posts
 | toString | `public String`   | `()` | The toString for Post |
 | grade | `public boolean`   | `(User user, int grade)` | Grades the post if the user has permission |
 | getPostsString | `public String`   | `()` | Return the list of posts under this post as a string |
+| getVotes | `public int`   | `(User user, int oldVote)` | Returns the number of votes after calculation |
+| getControversy | `public int`   | `(User user, int oldVote)` | Returns the total number of votes |
 | upvote | `public boolean`   | `(User user, int oldVote)` | Decides if the user can vote, if so, then upvotes |
 | downvote | `public boolean`   | `(User user, int oldVote)` | Decides if the user can vote, if so, then downvotes |
 | removeVote | `public boolean`   | `(int oldVote)` | removes the vote |
