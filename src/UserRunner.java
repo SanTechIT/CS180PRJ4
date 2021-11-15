@@ -215,7 +215,7 @@ public abstract class UserRunner {
                                 currentDiscussion = Discussion.DISCUSSION_LIST.get(discussionId);
                             }
                             // Checks if Discussion is part of the current course
-                            if (!currentCourse.getDiscussions().contains(currentDiscussion)) {
+                            if (!currentCourse.getDiscussions().contains(discussionId)) {
                                 currentDiscussion = null;
                                 Display.displayBadInput();
                             } else if (currentDiscussion == null) {
@@ -302,12 +302,11 @@ public abstract class UserRunner {
         if (postId < Post.POST_LIST.size() && postId >= 0) {
             targetPost = Post.POST_LIST.get(postId);
         }
-
         if (targetPost == null) {
             // Post is deleted / does not exist
             return false;
         } else if (!currentDiscussion.getPosts().contains(
-                targetPost) && !targetPost.getDiscussion().equals(currentDiscussion)) {
+                postId) && targetPost.getDiscussion() != (currentDiscussion.getId())) {
             // Post is not part of current discussion
             // check if post upstream is part of discussion
             return false;

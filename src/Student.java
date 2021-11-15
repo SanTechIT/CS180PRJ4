@@ -16,6 +16,7 @@ public class Student extends User implements Serializable {
     // key: ID of post student has voted on
     // value: -1 = downvote, 1 = upvote
 
+    // TODO need to keep track of user grades
     /**
      * Student Constructor
      *

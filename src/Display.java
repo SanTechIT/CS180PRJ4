@@ -155,7 +155,8 @@ public class Display {
      */
     private static String getDiscussionString(Discussion discussion, User user) {
         String postString = "";
-        for (Post post : discussion.getPosts()) {
+        for (Integer postId : discussion.getPosts()) {
+            Post post = Post.POST_LIST.get(postId);
             postString += getPostStrings(post, 0, user);
         }
         return postString;
@@ -171,8 +172,12 @@ public class Display {
      */
     private static String getPostStrings(Post postin, int indent, User user) {
         String postString = "";
+        if(postin == null){
+            return "";
+        }
         postString += getPostString(postin, indent, user);
-        for (Post post : postin.getPosts()) {
+        for (int postId : postin.getPosts()) {
+            Post post = Post.POST_LIST.get(postId);
             postString += getPostStrings(post, indent + 1, user);
         }
         return postString;
@@ -187,6 +192,9 @@ public class Display {
      * @return
      */
     private static String getPostString(Post postin, int indent, User user) {
+        if (postin == null) {
+            return "";
+        }
         String postString = "";
         String indentStr = "|  ";
         for(int i = 0; i < indent; i++){
@@ -196,8 +204,8 @@ public class Display {
         postString += "\n" + indentStr + "--------------------\n";
 
         postString += indentStr + "Post ID " + postin.getId();
-        if (postin.getParent() != null) {
-            postString += " (reply to " + postin.getParent().getId() + ")";
+        if (postin.getParent() != -1) {
+            postString += " (reply to " + postin.getParent() + ")";
         }
         postString += "\n";
         User puser = User.USER_LIST.get(postin.getCreatorId());
@@ -346,10 +354,11 @@ public class Display {
         System.out.print("> ");
     }
 
-    private static void displayPostsVoteboard(List<Post> posts) {
+    private static void displayPostsVoteboard(List<Integer> posts) {
         String str = "\n";
 
-        for (Post p : posts) {
+        for (Integer pid : posts) {
+            Post p = Post.POST_LIST.get(pid);
             str += p.toStringVoteboard() + "\n";
         }
 
@@ -361,15 +370,17 @@ public class Display {
                 "Voteboard: discussion - " + currentDiscussion.getTopic() + "\nCommands: back, sort best, sort worst, sort controversial" + "\nThe voteboard displays posts in a forum by vote count." + "\nCurrent sort: " + currentSort);
 
         // TODO
-        List<Post> posts = currentDiscussion.getPosts();
+        List<Integer> posts = currentDiscussion.getPosts();
         if (posts.size() == 0) {
             System.out.println("There are no posts.");
         } else {
 
             switch (currentSort) {
                 case "best":
-                    Collections.sort(posts, new Comparator<Post>() {
-                        public int compare(Post p1, Post p2) {
+                    Collections.sort(posts, new Comparator<Integer>() {
+                        public int compare(Integer p1id, Integer p2id) {
+                            Post p1 = Post.POST_LIST.get(p1id);
+                            Post p2 = Post.POST_LIST.get(p2id);
                             return p2.getVotes() - p1.getVotes();
                         }
                     });
@@ -379,8 +390,10 @@ public class Display {
                     break;
 
                 case "worst":
-                    Collections.sort(posts, new Comparator<Post>() {
-                        public int compare(Post p1, Post p2) {
+                    Collections.sort(posts, new Comparator<Integer>() {
+                        public int compare(Integer p1id, Integer p2id) {
+                            Post p1 = Post.POST_LIST.get(p1id);
+                            Post p2 = Post.POST_LIST.get(p2id);
                             return -(p2.getVotes() - p1.getVotes());
                         }
                     });
@@ -390,8 +403,10 @@ public class Display {
                     break;
 
                 case "controversial":
-                    Collections.sort(posts, new Comparator<Post>() {
-                        public int compare(Post p1, Post p2) {
+                    Collections.sort(posts, new Comparator<Integer>() {
+                        public int compare(Integer p1id, Integer p2id) {
+                            Post p1 = Post.POST_LIST.get(p1id);
+                            Post p2 = Post.POST_LIST.get(p2id);
                             return p2.getControversy() - p1.getControversy();
                         }
                     });
