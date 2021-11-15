@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
  * @author chang799
  * @version 0.1
  */
-public class TestsPost extends Tests{
+public class TestsPost extends Tests {
     private static String CREATE_TEACHER = "create account\n" + "teacher\n" + "name\n" +
             "password\n" + "t\n";
     private static String CREATE_STUDENT = "create account\n" + "student\n" + "name\n" +
@@ -44,12 +44,13 @@ public class TestsPost extends Tests{
             }
         }
     }
+
     /**
      * Tests whether students can make a reply
      * Tests whether invalid ids crash the program
      */
     @Test
-    public void testReplyTeacherStudent(){
+    public void testReplyTeacherStudent() {
         String commands = "";
         commands += CREATE_TEACHER;
         commands += LOGIN_TEACHER;
@@ -101,7 +102,7 @@ public class TestsPost extends Tests{
      * Tests if voting works properly and that each person can only vote once
      */
     @Test
-    public void testVote(){
+    public void testVote() {
         String commands = "";
         commands += CREATE_TEACHER;
         commands += LOGIN_TEACHER;
@@ -134,7 +135,7 @@ public class TestsPost extends Tests{
      * Tests if teachers can properly grade
      */
     @Test
-    public void testGradeTeacher(){
+    public void testGradeTeacher() {
         String commands = "";
         commands += CREATE_TEACHER;
         commands += LOGIN_TEACHER;
@@ -168,7 +169,7 @@ public class TestsPost extends Tests{
      * Tests if students cant
      */
     @Test
-    public void testGradeStudent(){
+    public void testGradeStudent() {
         String commands = "";
         commands += CREATE_TEACHER;
         commands += LOGIN_TEACHER;

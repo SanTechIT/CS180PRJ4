@@ -31,7 +31,7 @@ public abstract class User implements Serializable {
      *
      * @param username username of user
      * @param password password of user
-     * @param name IRL name of user
+     * @param name     IRL name of user
      */
     public User(String username, String password, String name) {
         this.username = username;
@@ -46,6 +46,7 @@ public abstract class User implements Serializable {
 
     /**
      * sets name
+     *
      * @param name new name
      */
     public void setName(String name) {
@@ -54,6 +55,7 @@ public abstract class User implements Serializable {
 
     /**
      * get username
+     *
      * @return username
      */
     public String getUsername() {
@@ -62,6 +64,7 @@ public abstract class User implements Serializable {
 
     /**
      * get name
+     *
      * @return name
      */
     public String getName() {
@@ -70,6 +73,7 @@ public abstract class User implements Serializable {
 
     /**
      * get user id
+     *
      * @return id
      */
     public int getId() {
@@ -78,6 +82,7 @@ public abstract class User implements Serializable {
 
     /**
      * get id of all posts user has made
+     *
      * @return list of post ids
      */
     public List<Integer> getPosts() {
@@ -86,6 +91,7 @@ public abstract class User implements Serializable {
 
     /**
      * For user to login with their credentials
+     *
      * @param in Scanner for getting input
      */
     public static void connect(Scanner in) {
@@ -112,6 +118,7 @@ public abstract class User implements Serializable {
 
     /**
      * Creates account for a user
+     *
      * @param in Scanner for input
      */
     public static void createAccount(Scanner in) {
@@ -126,7 +133,7 @@ public abstract class User implements Serializable {
 
         System.out.println("Select if you are a [T]eacher or [S]tudent: ");
         String userType = in.nextLine();
-        if(getUser(username) != null){
+        if (getUser(username) != null) {
             System.out.println("Error: A user with this username already exists");
         }
         if (userType.equalsIgnoreCase("T")) {
@@ -174,6 +181,7 @@ public abstract class User implements Serializable {
 
     /**
      * this method changes the name if the user wants to edit it to a new one
+     *
      * @param in Scanner for input
      */
     public void modifyName(Scanner in) {
@@ -188,6 +196,7 @@ public abstract class User implements Serializable {
 
     /**
      * this method changes the password if the user wants to edit it to a new one
+     *
      * @param in Scanner for input
      */
     public void modifyPassword(Scanner in) {
@@ -202,6 +211,7 @@ public abstract class User implements Serializable {
 
     /**
      * this method deletes the account if the user wants to delete their account
+     *
      * @param in Scanner for input
      */
     public void deleteAccount(Scanner in) {
@@ -212,7 +222,8 @@ public abstract class User implements Serializable {
         if (deleteConfirm.equalsIgnoreCase("yes")) {
             USER_LIST.remove(this);
             System.out.println(
-                    "Your account has been deleted. Welcome to the Learning Management Discussion Board!");
+                    "Your account has been deleted. Welcome to the Learning Management Discussion" +
+                            " Board!");
         }
     }
 

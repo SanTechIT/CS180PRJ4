@@ -39,8 +39,7 @@ public class TeacherRunner extends UserRunner {
      * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
      *
      * @param reader Scanner for getting additional input
-     * @param input Existing user input
-     *
+     * @param input  Existing user input
      * @return if an exclusive command was successfully executed (eg. create forum)
      * if returns false, no exclusive commands could be detected/executed
      */
@@ -131,7 +130,7 @@ public class TeacherRunner extends UserRunner {
      * Loop for viewing/editing all posts of 1 student
      * Called by loopViewStudent if valid student ID is inputted
      *
-     * @param reader Scanner for getting input
+     * @param reader         Scanner for getting input
      * @param currentStudent student using this method
      */
     private void loopIndividualStudent(Scanner reader, Student currentStudent) {
@@ -139,7 +138,8 @@ public class TeacherRunner extends UserRunner {
             Display.displayIndividualStudent(currentStudent);
             String input = reader.nextLine();
 
-            // Input loop is different because input can be a static command or one that takes an argument
+            // Input loop is different because input can be a static command or one that takes an
+            // argument
             // Outer switch checks static commands, inner switch checks arguments
             switch (input) {
                 case "back":
@@ -160,8 +160,7 @@ public class TeacherRunner extends UserRunner {
      * called in UserRunner's loopCourse method (viewing discussions in a course)
      *
      * @param reader Scanner for getting additional input
-     * @param input Existing user input
-     *
+     * @param input  Existing user input
      * @return if an exclusive command was successfully executed (eg. create forum)
      * if returns false, no exclusive commands could be detected/executed
      */

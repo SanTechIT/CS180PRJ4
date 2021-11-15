@@ -227,7 +227,8 @@ public abstract class UserRunner {
                             }
 
                         } catch (NumberFormatException e) {
-                            Display.displayBadInput(); // error if discussion ID doesn't convert to number
+                            Display.displayBadInput(); // error if discussion ID doesn't convert
+                            // to number
                         }
                     }
                     break;
@@ -246,7 +247,8 @@ public abstract class UserRunner {
 
             String input = reader.nextLine();
 
-            // Input loop is different because input can be a static command or one that takes an argument
+            // Input loop is different because input can be a static command or one that takes an
+            // argument
             // Outer switch checks static commands, inner switch checks arguments
             switch (input) {
                 case "back":
@@ -357,7 +359,8 @@ public abstract class UserRunner {
         Post newPost = this.user.makePostReply(targetPost, input, currentDiscussion);
 
         System.out.println(
-                "New post " + newPost.getId() + " (reply to " + targetPost.getId() + ")" + " has been created!");
+                "New post " + newPost.getId() + " (reply to " + targetPost.getId() + ")" + " has " +
+                        "been created!");
 
         return true;
     }
@@ -399,8 +402,7 @@ public abstract class UserRunner {
      * called in UserRunner's loop method (viewing all courses)
      *
      * @param reader Scanner for getting additional input
-     * @param input Existing user input
-     *
+     * @param input  Existing user input
      * @return if an exclusive command was successfully executed
      * always false because User has no exclusive commands
      */
@@ -413,8 +415,7 @@ public abstract class UserRunner {
      * called in UserRunner's loopCourse method (viewing discussions in a course)
      *
      * @param reader Scanner for getting additional input
-     * @param input Existing user input
-     *
+     * @param input  Existing user input
      * @return if an exclusive command was successfully executed (eg. create forum)
      * always false because User has no exclusive commands
      */
@@ -427,8 +428,7 @@ public abstract class UserRunner {
      * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
      *
      * @param reader Scanner for getting additional input
-     * @param input Existing user input
-     *
+     * @param input  Existing user input
      * @return if an exclusive command was successfully executed (eg. create forum)
      * always false because User has no exclusive commands
      */
@@ -438,15 +438,14 @@ public abstract class UserRunner {
 
     /**
      * For commands exclusive to Teacher or Student
-     *
+     * <p>
      * called in UserRunner's parse2WordInput method
      * which is called in its loopDiscussion method
      * for parsing commands with an argument
      *
      * @param targetPost post affected by command
-     * @param reader scanner for getting input
+     * @param reader     scanner for getting input
      * @param inputWord1 1st word of user input, determines command
-     *
      * @return if an exclusive command was successfully executed (eg. create forum)
      * always false because User has no exclusive commands
      */

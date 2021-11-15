@@ -26,14 +26,13 @@ public class StudentRunner extends UserRunner {
      * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
      *
      * @param reader Scanner for getting additional input
-     * @param input Existing user input
-     *
+     * @param input  Existing user input
      * @return if an exclusive command was successfully executed (eg. create forum)
      * if returns false, no exclusive commands could be detected/executed
      */
     @Override
     protected boolean loopDiscussionOverride(Scanner reader, String input) {
-        switch(input) {
+        switch (input) {
             case "reply to discussion":
                 menuDiscussionReply(reader);
                 break;
@@ -65,7 +64,7 @@ public class StudentRunner extends UserRunner {
      *
      * @param reader Scanner for user input
      * @return boolean for whether operation succeeds (always true for now)
-    */
+     */
     private boolean menuDiscussionReply(Scanner reader) {
         Display.displayDiscussionReply(getCurrentDiscussion());
 
@@ -73,7 +72,7 @@ public class StudentRunner extends UserRunner {
         Post newPost = this.student.makeDiscussionReply(input, getCurrentDiscussion());
 
         System.out.println("New post " + newPost.getId() + " " +
-            "has been created!");
+                "has been created!");
         return true;
     }
 
@@ -83,15 +82,14 @@ public class StudentRunner extends UserRunner {
      * called in UserRunner's parse2WordInputOverride method (parsing input w/ argument)
      *
      * @param targetPost post affected by command
-     * @param reader scanner for getting input
+     * @param reader     scanner for getting input
      * @param inputWord1 1st word of user input, determines command
-     *
      * @return if an exclusive command was successfully executed (eg. create forum)
      * if returns false, no exclusive commands could be detected/executed
      */
     @Override
     protected boolean parse2WordInputOverride(
-        Post targetPost, Scanner reader, String inputWord1) {
+            Post targetPost, Scanner reader, String inputWord1) {
 
         switch (inputWord1) {
             case "upvote":

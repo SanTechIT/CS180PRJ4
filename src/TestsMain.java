@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 /**
  * Project 4 - Tests Main
- *
+ * <p>
  * Contains JUnit tests for Main class and login loop.
  *
  * @author Richard Chang, Sara Xiao
@@ -24,9 +24,10 @@ public class TestsMain extends Tests {
 
     /**
      * Borrowed from RunLocal
+     *
      * @param args
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Result result = JUnitCore.runClasses(TestsMain.class);
         if (result.wasSuccessful()) {
             System.out.println("Excellent - Test ran successfully");

@@ -1,6 +1,8 @@
 import org.junit.Test;
 import org.junit.After;
+
 import java.lang.reflect.Field;
+
 import org.junit.Assert;
 import org.junit.Before;
 
@@ -9,13 +11,14 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 import java.io.*;
+
 import static org.hamcrest.CoreMatchers.containsString;
 
 import static org.junit.Assert.*;
 
 /**
  * Project 4 - Tests
- *
+ * <p>
  * Utility class for test cases.
  * <p>
  * Contains functionality for setting streams,
@@ -32,6 +35,7 @@ public class Tests {
 
     /**
      * Get the out stream
+     *
      * @return ByteArrayOutputStream representing current output
      */
     public ByteArrayOutputStream getOut() {
@@ -40,6 +44,7 @@ public class Tests {
 
     /**
      * Set out stream
+     *
      * @param out
      */
     public void setOut(ByteArrayOutputStream out) {
@@ -49,7 +54,7 @@ public class Tests {
     /**
      * Set up in/output
      * Methods-to-test will get "console" input from a passed in string
-     *
+     * <p>
      * Courtesy of
      * https://stackoverflow.com/questions/6415728/junit-testing-with-simulated-user-input
      * As well as RunLocalTest.java (Various)
@@ -84,7 +89,7 @@ public class Tests {
      */
     public static String getOutputFromFile(String fileName) {
         try (BufferedReader br = new BufferedReader(
-            new FileReader(fileName)
+                new FileReader(fileName)
         )) {
             String output = "";
             String line = br.readLine();
@@ -95,10 +100,9 @@ public class Tests {
 
             // shave off last \n
             return output.substring(0, output.length() - 1);
-        }
-        catch (IOException e) {
-          e.printStackTrace();
-          return "FILE ERROR";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "FILE ERROR";
         }
     }
 

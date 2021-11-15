@@ -145,7 +145,7 @@ public class Teacher extends User implements Serializable {
      * Edit course topic
      *
      * @param newTopic new topic of course
-     * @param course course to change
+     * @param course   course to change
      * @return whether operation succeeds (no network errors, etc)
      */
     public boolean editCourse(String newTopic, Course course) {
@@ -159,7 +159,7 @@ public class Teacher extends User implements Serializable {
     /**
      * Create discussion forum
      *
-     * @param topic topic of forum
+     * @param topic  topic of forum
      * @param course course forum belongs to
      * @return if operation succeeds
      */
@@ -173,7 +173,7 @@ public class Teacher extends User implements Serializable {
      * Edit discussion forum
      *
      * @param discussion discussion to edit
-     * @param newTopic new topic of discussion
+     * @param newTopic   new topic of discussion
      * @return if operation succeeded
      */
     public boolean editDiscussion(Discussion discussion, String newTopic) {
@@ -194,7 +194,7 @@ public class Teacher extends User implements Serializable {
      * grades a post
      *
      * @param targetPost post to grade
-     * @param grade grade to assign - goes between 1 and 100
+     * @param grade      grade to assign - goes between 1 and 100
      * @return if operation succeeded
      */
     public boolean gradePost(Post targetPost, int grade) {

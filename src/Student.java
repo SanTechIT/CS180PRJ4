@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * Project 4 - Student
- *
+ * <p>
  * Represents a student user of the class.
  *
  * @author Sara Xiao, Brian Kwon, Richard Chang, Aarini Panzade
@@ -140,7 +140,7 @@ public class Student extends User implements Serializable {
      * Reply DIRECTLY to a discussion forum
      * ie. make a new post that's not a reply to a previous post
      *
-     * @param newContent content of new post
+     * @param newContent       content of new post
      * @param parentDiscussion discussion forum that contains the new post
      */
     public Post makeDiscussionReply(String newContent, Discussion parentDiscussion) {
@@ -183,15 +183,15 @@ public class Student extends User implements Serializable {
      * Determines whether upvote goes through for post
      *
      * @param targetPost
-     *
      * @return
      */
     public boolean upvotePost(Post targetPost) {
         int oldVoteValue = getPostVote(targetPost);
 
         if (
-            oldVoteValue != 1 // student hasn't already upvoted post
-            && targetPost.upvote(this, oldVoteValue)) { // student has permission to vote
+                oldVoteValue != 1 // student hasn't already upvoted post
+                        && targetPost.upvote(this,
+                        oldVoteValue)) { // student has permission to vote
 
             // upvote post
             votedPosts.put(targetPost.getId(), 1);
@@ -211,8 +211,9 @@ public class Student extends User implements Serializable {
         int oldVoteValue = getPostVote(targetPost);
 
         if (
-            oldVoteValue != -1 // student hasn't already downvoted post
-            && targetPost.downvote(this, oldVoteValue)) { // student has permission to vote
+                oldVoteValue != -1 // student hasn't already downvoted post
+                        && targetPost.downvote(this,
+                        oldVoteValue)) { // student has permission to vote
 
             // downvote post
             votedPosts.put(targetPost.getId(), -1);
@@ -226,15 +227,14 @@ public class Student extends User implements Serializable {
      * Removes all votes that Student has made
      *
      * @param targetPost post to remove votes on
-     *
      * @return boolean representing success
      */
     public boolean noVotePost(Post targetPost) {
         int oldVoteValue = getPostVote(targetPost);
 
         if (
-            oldVoteValue != 0 // student has voted on targetPost
-            && targetPost.removeVote(oldVoteValue)) {
+                oldVoteValue != 0 // student has voted on targetPost
+                        && targetPost.removeVote(oldVoteValue)) {
 
             // remove vote on post
             votedPosts.remove(targetPost.getId());
