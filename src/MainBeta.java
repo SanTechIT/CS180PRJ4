@@ -34,6 +34,15 @@ public class MainBeta {
         s.makePostReply(post1, "test post 3", Discussion.DISCUSSION_LIST.get(0));
         s.makePostReply(post2, "test post 4", Discussion.DISCUSSION_LIST.get(0));
         s.makeDiscussionReply("test post 5", Discussion.DISCUSSION_LIST.get(0));
+
+        s.upvotePost(post0);
+        s.downvotePost(post1);
+        s.downvotePost(post2);
+
+        alice.upvotePost(post0);
+        alice.upvotePost(post1);
+        alice.downvotePost(post2);
+
         String input;
         do {
             Display.displayStart();

@@ -354,12 +354,12 @@ public class Display {
         System.out.print("> ");
     }
 
-    private static void displayPostsVoteboard(List<Integer> posts) {
+    private static void displayPostsVoteboard(List<Integer> posts, User user) {
         String str = "\n";
 
         for (Integer pid : posts) {
             Post p = Post.POST_LIST.get(pid);
-            str += p.toStringVoteboard() + "\n";
+            str += getPostString(p, 0, user);
         }
 
         System.out.println(str);
@@ -369,8 +369,7 @@ public class Display {
         System.out.println(
                 "Voteboard: discussion - " + currentDiscussion.getTopic() + "\nCommands: back, sort best, sort worst, sort controversial" + "\nThe voteboard displays posts in a forum by vote count." + "\nCurrent sort: " + currentSort);
 
-        // TODO
-        List<Integer> posts = currentDiscussion.getPosts();
+        List<Integer> posts = currentDiscussion.getAllPosts();
         if (posts.size() == 0) {
             System.out.println("There are no posts.");
         } else {
@@ -401,7 +400,7 @@ public class Display {
                         public int compare(Integer p1id, Integer p2id) {
                             Post p1 = Post.POST_LIST.get(p1id);
                             Post p2 = Post.POST_LIST.get(p2id);
-                            return p2.getControversy() - p1.getControversy();
+                            return - (p2.getControversy() - p1.getControversy());
                         }
                     });
                     break;
