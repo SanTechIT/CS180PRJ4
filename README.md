@@ -1,13 +1,10 @@
-# TODO
-
-Missing features
-* test cases
-* the report
-
-Problems
-- (Tentative Done) Validate inputs for class/discussion/post Ids in reply/edit/delete actions
-
 # [Name] Design specifications
+## Documentation
+- Aarini - Submitted Report on Brightspace
+- Richard - Submitted Vocareum workspace.
+
+To compile the program in Vocareum: In the Terminal, cd to the src folder.
+To run the program in Vocareum: Run javac Main.java. Run java Main.
 
 ## Notes
 
