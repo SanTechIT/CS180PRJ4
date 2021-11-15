@@ -1,0 +1,45 @@
+
+Welcome to our program!
+Please type one of these commands:
+login
+create account
+exit
+> Enter your username: 
+Enter your name: 
+Create your password: 
+Select if you are a [T]eacher or [S]tudent: 
+
+Welcome to our program!
+Please type one of these commands:
+login
+create account
+exit
+> Enter your username: 
+Enter your password: 
+Successfully Logged In!
+
+Welcome name!
+Please type the number of a course to view:
+0 - MA165
+1 - CS180
+2 - EAPS106
+
+Or, please type one of these commands: 
+edit account
+delete account
+create course
+view student
+logout
+> 
+Logging out:
+You have successfully logged out.
+
+Welcome to our program!
+Please type one of these commands:
+login
+create account
+exit
+> 
+Exit:
+Thank you for using our program. Goodbye!
+
