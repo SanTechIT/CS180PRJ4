@@ -45,7 +45,7 @@ To run the program in Vocareum: Run javac Main.java. Run java Main.
 
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
-| connect        | `public static void` | `(Scanner in)` |  Loop Handler for login |
+| connect        | `public static void` | `(Scanner in)` |  For user to login with their credentials |
 | loop           | `public abstract void` | `(Scanner in)` | Primary Loop Handler |
 | FIXME | FIXME | FIXME | FIXME |
 | createAccount  | `public static void` | `(Scanner in)` |  Creates Account and appends to account list, does not log user in |
@@ -54,7 +54,7 @@ To run the program in Vocareum: Run javac Main.java. Run java Main.
 | modifyPassword  | `public void` | `(Scanner in)` | Modifies password, can only be done to self   |
 | deleteAccount  | `public void` | `(Scanner in)` |  Deletes the user account and sets its index in list to null |
 | canVote  | `public abstract boolean` | `()` |  Whether the user has permission to vote |
-| canGrade  | `public abstract boolean` | `()` |  Whether the u ser has permission to grade |
+| canGrade  | `public abstract boolean` | `()` |  Whether the user has permission to grade |
 | canPost  | `public abstract boolean` | `()` |  Whether the user has permission to make or reply to posts, and edit their own posts |
 | canCreateCourse |`public abstract boolean` | `()` | Whether the user can create courses |
 | canModifyCourse |`public abstract boolean` | `()` | Whether the user can modify courses |
@@ -149,6 +149,7 @@ To run the program in Vocareum: Run javac Main.java. Run java Main.
 | loopCourseOverride | `protected boolean` | `(Scanner reader, String input)` |  For menu options exclusive to teacher |
 | menuCreateDiscussion | `private void` | `(Scanner reader)` |  The menu for creating new discussion forum |
 | menuEditCourse | `private void` | `(Scanner reader)` |  The menu for editing course topic  |
+| menuEditDiscussion | `private void` | `(Scanner reader)` |  The menu for editing discussion topic |
 | loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  Deleting discussion forum menu option for teacher |
 | loopViewVoteboard | `private void` | `(Scanner reader)` |  Shows the dashboard by the number of votes |
 | parse2WordInputOverride | `protected boolean` | `(Post targetPost, Scanner reader, String inputWord1)` |  Parses the word given as input |
@@ -213,6 +214,7 @@ To run the program in Vocareum: Run javac Main.java. Run java Main.
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
 | loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  Replying to discussion forum menu option for student |
+| menuViewGrades | `protected boolean` | `(Scanner reader)` |  Menu for viewing all grades received for all posts in the forum (Student exclusive) |
 | menuDiscussionReply | `private boolean` | `(Scanner reader)` |  Menu for replying to a discussion form |
 | parse2WordInputOverride | `protected boolean` | `(Scanner reader, String input)` |  Parses the word given as input |
 
@@ -340,12 +342,14 @@ Note: posts can be under both discussions and other posts
 | displayEditAccount | `public static void` | `(User user)`  |  Displays output for edit account loop (an option from the main loop) |
 | displayModifyUsername | `public static void` | `(User user)`  |  Displays output for modifying the username |
 | displayModifyName | `public static void` | `(User user)`  |  Displays output for modifying the name |
-| displayModifyPassword | `public static void` | `(User usert)`  |  Displays output for modifying the password |
+| displayModifyPassword | `public static void` | `(User user)`  |  Displays output for modifying the password |
 | displayDeleteAccount | `public static void` | `(User user)`  |  Displays output for deleting an account |
 | displayViewStudent | `public static void` | `()`  |  Displays output for view student loop (option from the main loop) |
 | displayIndividualStudent | `public static void` | `(Student currentStudent)`  |  Displays output for an individual student |
-| displayPostsVoteboard | `private static void` | `(List<Post> posts))`  |  Displays lists of posts |
-| displayViewVoteboard | `public static void` | `(Discussion currentDiscussion, String currentSort)`  |  Displays output for the sorting of the dashboard based on the user |
+| displayPostsVoteboard | `private static void` | `(List<Post> posts))` |  Displays lists of posts |
+| displayViewVoteboard | `public static void` | `(Discussion currentDiscussion, String currentSort, User user)` | Displays voteboard, which shows all posts in a forum ranked by votes with sorting options. |
+| displayViewGrades | `public static void` | `(Discussion currentDiscussion, Student currentStudent)` | Displays grades for all of 1 student's posts in 1 forum |
+| displayPostsGrades | `public static void` | `(List<Integer> posts, User user)` | Given a list of posts, prints them all in order with 0 depth AND INCLUDES ONLY GRADE INFO for displayViewGrades |
 
 ## Console Example
 
