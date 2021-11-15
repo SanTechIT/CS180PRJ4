@@ -21,13 +21,15 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Reading Data...");
-        boolean filesExist = new File("data/UserList").exists() && new File(
-                "data/CourseList").exists() && new File("data/DiscussionList").exists() && new File(
-                "data/PostList").exists();
+
         String path = "data/";
         if (args.length > 0 && args[0].equals("useser")) {
+            System.out.println("Running test files");
             path = "test/";
         }
+        boolean filesExist = new File(path + "UserList").exists() && new File(
+                path + "CourseList").exists() && new File(
+                path + "DiscussionList").exists() && new File(path + "PostList").exists();
 
         if (USESER && filesExist) {
             System.out.println("Using Saved Data");
