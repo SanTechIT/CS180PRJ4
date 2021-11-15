@@ -11,39 +11,54 @@ import java.util.Scanner;
  * @version 0.1
  */
 public class Main {
+    private static boolean USESER = true;
+
     /**
      * @param args Command Line Arguments
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        // Load User List if exists
-        // TODO DELETE ME
-//        User.USER_LIST = new ArrayList<>();
-//        User.USER_LIST.add(new Teacher("teacher", "teacher", "John"));
-//        User.USER_LIST.add(new Student("student", "student", "Alice"));
         System.out.println("Reading Data...");
-        try {
-            User.USER_LIST = (List<User>) readData("data/UserList");
-            Course.COURSE_LIST = (List<Course>) readData("data/CourseList");
-        } catch (IOException e){
-            System.out.println("An Error while loading data has occurred: " + e.getMessage());
-        } catch (ClassNotFoundException e){
-            System.out.println("An Error while loading data has occurred: " + e.getMessage());
+        if (USESER) {
+            System.out.println("Using Saved Data");
+            try {
+                User.USER_LIST = (List<User>) readData("data/UserList");
+                Course.COURSE_LIST = (List<Course>) readData("data/CourseList");
+                Discussion.DISCUSSION_LIST = (List<Discussion>) readData("data/DiscussionList");
+                Post.POST_LIST = (List<Post>) readData("data/PostList");
+            } catch (IOException e) {
+                System.out.println("An Error while loading data has occurred: " + e.getMessage());
+            } catch (ClassNotFoundException e) {
+                System.out.println("An Error while loading data has occurred: " + e.getMessage());
+            }
+        } else {
+            User.USER_LIST = new ArrayList<>();
+            Teacher john = new Teacher("teacher", "teacher", "John");
+            Student alice = new Student("student", "student", "Alice"); // ID 2 and ID 3
+            Student s = new Student("s", "s", "s"); // ID 4 and ID 5
+            Teacher t = new Teacher("t", "t", "t");
+
+            // Add default courses to COURSE_LIST
+            Course.COURSE_LIST = new ArrayList<>();
+            Course.createCourse("MA165", User.USER_LIST.get(0));
+            Course.createCourse("CS180", User.USER_LIST.get(0));
+            Course.createCourse("EAPS106", User.USER_LIST.get(0));
+
+            // make new User object, set static vars
+            Discussion.DISCUSSION_LIST = new ArrayList<>();
+            Discussion.createDiscussion(Course.COURSE_LIST.get(0), "default discussion",
+                    User.USER_LIST.get(0));
+
+            Post.POST_LIST = new ArrayList<>();
+            Post post0 = s.makeDiscussionReply("test post 0", Discussion.DISCUSSION_LIST.get(0));
+            Post post1 = s.makePostReply(Post.POST_LIST.get(0), "test post 1",
+                    Discussion.DISCUSSION_LIST.get(0));
+            Post post2 = s.makePostReply(post0, "test post 2", Discussion.DISCUSSION_LIST.get(0));
+            s.makePostReply(post1, "test post 3", Discussion.DISCUSSION_LIST.get(0));
+            s.makePostReply(post2, "test post 4", Discussion.DISCUSSION_LIST.get(0));
+            s.makeDiscussionReply("test post 5", Discussion.DISCUSSION_LIST.get(0));
         }
         System.out.println("Data has been read and loaded!");
-
-//         Load Course List if exists
-//        Course.COURSE_LIST = new ArrayList<>();
-//        Course.createCourse("MA165", User.USER_LIST.get(0));
-//        Course.createCourse("CS180", User.USER_LIST.get(0));
-//        Course.createCourse("EAPS106", User.USER_LIST.get(0));
-
-        // make new Course object, set static vars
-
-        // make new User object, set static vars
-        Discussion.DISCUSSION_LIST = new ArrayList<>();
-        Post.POST_LIST = new ArrayList<>();
 
         String input;
         do {
@@ -74,6 +89,8 @@ public class Main {
         try {
             writeData(User.USER_LIST, "data/UserList");
             writeData(Course.COURSE_LIST, "data/CourseList");
+            writeData(Discussion.DISCUSSION_LIST, "data/DiscussionList");
+            writeData(Post.POST_LIST, "data/PostList");
         } catch (IOException e) {
             System.out.println(
                     "An error has occured while trying to save the data: " + e.getMessage());
