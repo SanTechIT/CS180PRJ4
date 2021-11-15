@@ -346,22 +346,21 @@ public class Display {
         System.out.print("> ");
     }
 
-    private static void displayPostsVoteboard(List<Post> posts) {
+    private static void displayPostsVoteboard(List<Post> posts, User user) {
         String str = "\n";
 
         for (Post p : posts) {
-            str += p.toStringVoteboard() + "\n";
+            str += getPostString(p, 0, user);
         }
 
         System.out.println(str);
     }
 
-    public static void displayViewVoteboard(Discussion currentDiscussion, String currentSort) {
+    public static void displayViewVoteboard(Discussion currentDiscussion, String currentSort, User user) {
         System.out.println(
                 "Voteboard: discussion - " + currentDiscussion.getTopic() + "\nCommands: back, sort best, sort worst, sort controversial" + "\nThe voteboard displays posts in a forum by vote count." + "\nCurrent sort: " + currentSort);
 
-        // TODO
-        List<Post> posts = currentDiscussion.getPosts();
+        List<Post> posts = currentDiscussion.getAllPosts();
         if (posts.size() == 0) {
             System.out.println("There are no posts.");
         } else {
@@ -373,9 +372,6 @@ public class Display {
                             return p2.getVotes() - p1.getVotes();
                         }
                     });
-
-                    displayPostsVoteboard(posts);
-
                     break;
 
                 case "worst":
@@ -384,9 +380,6 @@ public class Display {
                             return -(p2.getVotes() - p1.getVotes());
                         }
                     });
-
-                    displayPostsVoteboard(posts);
-
                     break;
 
                 case "controversial":
@@ -395,12 +388,9 @@ public class Display {
                             return p2.getControversy() - p1.getControversy();
                         }
                     });
-
-                    displayPostsVoteboard(posts);
-
                     break;
             }
-
+            displayPostsVoteboard(posts, user);
         }
 
         System.out.print("> ");

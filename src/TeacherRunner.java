@@ -245,7 +245,7 @@ public class TeacherRunner extends UserRunner {
         String currentSort = "best";
 
         while (continueThisMenu) {
-            Display.displayViewVoteboard(getCurrentDiscussion(), currentSort);
+            Display.displayViewVoteboard(getCurrentDiscussion(), currentSort, this.teacher);
             String input = reader.nextLine();
 
             switch (input) {

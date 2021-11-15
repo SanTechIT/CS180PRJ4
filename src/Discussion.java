@@ -105,6 +105,17 @@ public class Discussion implements Serializable {
     }
 
     /**
+     * Returns every single post in this discussion
+     * By recursively searching through each post's replies
+     *
+     * @return every single post in this discussion
+     */
+    public List<Post> getAllPosts() {
+        // TODO
+        return null;
+    }
+
+    /**
      * Checks the user's permissions and tries
      * to set the topic of discussion accordingly
      *
