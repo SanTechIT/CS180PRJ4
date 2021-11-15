@@ -5,7 +5,7 @@
 
 To compile the program in Vocareum: In the Terminal, cd to the src folder.
 To run the program in Vocareum: Run javac Main.java. Run java Main.
-
+Note: Using IntelliJ is best, everything works on it
 ## Notes
 
 - When shutting down, serialize the User List, Course List
