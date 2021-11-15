@@ -176,6 +176,11 @@ public class TeacherRunner extends UserRunner {
                 menuEditCourse(reader);
                 break;
 
+            case "delete course":
+                menuDeleteCourse(reader);
+                setCurrentCourse(null);
+                break;
+
             default:
                 return false;
         }
@@ -211,6 +216,22 @@ public class TeacherRunner extends UserRunner {
             System.out.println("Course topic edited successfully!");
         } else {
             System.out.println("An error has occurred while editing this course topic!");
+        }
+    }
+
+    /**
+     * Menu for deleting course
+     *
+     * @param reader Scanner for getting input
+     */
+    private void menuDeleteCourse(Scanner reader) {
+        Display.displayDeleteCourse(getCurrentCourse());
+        String input = reader.nextLine();
+
+        if (this.teacher.deleteCourse(getCurrentCourse())) {
+            System.out.println("Course deleted successfully!");
+        } else {
+            System.out.println("An error has occurred while deleting this course!");
         }
     }
 

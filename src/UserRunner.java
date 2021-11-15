@@ -45,6 +45,10 @@ public abstract class UserRunner {
         return currentCourse;
     }
 
+    public Course setCurrentCourse(Course c) {
+        this.course = c;
+    }
+
     /**
      * Returns value of currentDiscussion
      *

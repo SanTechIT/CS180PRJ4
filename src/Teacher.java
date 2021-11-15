@@ -152,6 +152,10 @@ public class Teacher extends User implements Serializable {
         return course.setTopic(newTopic, this);
     }
 
+    public boolean deleteCourse(Course course) {
+        return (Course.deleteCourse(course.getId(), this) == null);
+    }
+
     /**
      * Create discussion forum
      *

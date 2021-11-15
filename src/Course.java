@@ -91,6 +91,24 @@ public class Course implements Serializable {
     }
 
     /**
+     * Deletes the discussion with the given id
+     *
+     * @param id
+     * @param user
+     * @return
+     */
+    public static Course deleteCourse(int id, User user) {
+        if (!user.canModifyCourse()) {
+            return null;
+        }
+        Course deleted = COURSE_LIST.set(id, null);
+        for (Course c : COURSE_LIST) {
+            System.out.println(c.id);
+        }
+        return deleted;
+    }
+
+    /**
      * Returns the user who created this course
      *
      * @return

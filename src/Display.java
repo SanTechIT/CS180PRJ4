@@ -105,7 +105,7 @@ public class Display {
         if (user instanceof Student) {
             System.out.println("\nback" + "\nlogout");
         } else {
-            System.out.println("\nback" + "\ncreate forum" + "\nedit this course" + "\nlogout");
+            System.out.println("\nback" + "\ncreate forum" + "\nedit this course" + "\ndelete course" + "\nlogout");
         }
 
         System.out.print("> ");
@@ -232,6 +232,14 @@ public class Display {
         postString += indentStr + postin.getContent() + "\n";
         postString += indentStr + "--------------------";
         return postString;
+    }
+
+    // Displays output for deleting a course
+    public static void displayDeleteCourse(Course currentCourse) {
+        System.out.println(
+                "\nDelete course " + currentCourse.getId() + ":" + "\nDeleted courses can't be recovered. Are you sure?" + "\nType yes to confirm.");
+
+        System.out.print("> ");
     }
 
     // Displays output for editing a course topic
