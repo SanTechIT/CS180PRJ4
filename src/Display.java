@@ -1,18 +1,21 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator; // for sorting Discussion posts by votes
+import java.util.Comparator;
+// for sorting Discussion posts by votes
 // in displayViewVoteboard
 
-/* ----- Display methods - for displaying UI messages -----
+/** Project 4 - Display
+ *
+ * Utility class for displaying output/UI messages.
  * These methods display messages to the user.
  * None of these methods change anything.
  *
  * For Project 5, can be modified to use GUI (handling input will be
  * trickier, though).
  *
- * @author Sara Xiao
- * @version 2021-11-13
+ * @author Sara Xiao, Richard Chang, Aarini Panzade
+ * @version 2021-11-15
  */
 public class Display {
     /**

@@ -7,10 +7,11 @@ import java.util.List;
 /**
  * Project 4 - Post
  * <p>
- * Post class
+ * Represents a post that is a reply to a discussion forum
+ * or a reply to another post.
  *
- * @author briankwon25 (Brian Kwon)
- * @version 0.2 - 2021-11-12
+ * @author Richard Chang, Brian Kwon, Sara Xiao
+ * @version 2021-11-15
  */
 
 public class Post implements Serializable {
@@ -64,9 +65,9 @@ public class Post implements Serializable {
     /**
      * Returns a new post if the user has permission to post
      *
-     * @param content
-     * @param user
-     * @return
+     * @param content content of post
+     * @param user user who posted the post
+     * @return the created post
      */
     public static Post createPost(String content, Discussion discussion, User user) {
         if (!user.canPost()) {
@@ -79,10 +80,10 @@ public class Post implements Serializable {
      * Returns a new post if the user has permission to post
      * Post is a reply to another post
      *
-     * @param content
-     * @param parent
-     * @param user
-     * @return
+     * @param content content of post
+     * @param parent parent post (null if nonexistent)
+     * @param user user who posted the post
+     * @return the created post
      */
     public static Post createPost(String content, Discussion discussion, Post parent, User user) {
         if (!user.canPost()) {
@@ -93,6 +94,8 @@ public class Post implements Serializable {
 
     //    /**
     //     * Searches all the posts by ID
+    //     * Unused because a post's ID is its position in POST_LIST,
+    //     * so searching POST_LIST does the same thing
     //     *
     //     * @param postId
     //     *

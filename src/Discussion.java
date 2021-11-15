@@ -4,6 +4,15 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Project 4 - Discussion
+ *
+ * Represents a teacher-created Discussion which
+ * belongs to a Course and has Posts.
+ *
+ * @author Richard Chang, Sara Xiao
+ * @version 2021-11-15
+ */
 public class Discussion implements Serializable {
     // As per https://stackoverflow.com/
     // questions/10378855/java-io-invalidclassexception-local-class-incompatible

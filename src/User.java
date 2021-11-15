@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * User Class
+ * Project 4 - User Class
  * <p>
  * Represents a user of the program.
  *
- * @author aarinipanzade, chang794, saraxiao0
- * @version 0.1
+ * @author Richard Chang, Sara Xiao, Aarini Panzade, Brian Kwon
+ * @version 2021-11-15
  */
 public abstract class User implements Serializable {
     private List<Integer> posts; // ID of every post the User has made

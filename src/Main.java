@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Main class
+ * Project 4 - Main
  *
- * @author chang794
- * @version 0.1
+ * Main class that runs the program.
+ *
+ * @author Richard Chang, Sara Xiao, Brian Kwon, Aarini Panzade
+ * @version 2021-11-15
  */
 public class Main {
     private static boolean USESER = false;

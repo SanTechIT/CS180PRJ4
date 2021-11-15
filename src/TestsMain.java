@@ -2,6 +2,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Project 4 - Tests Main
+ *
+ * Contains JUnit tests for Main class and login loop.
+ *
+ * @author Richard Chang, Sara Xiao
+ * @version 2021-11-15
+ */
 public class TestsMain extends Tests {
 
     @Test

@@ -8,8 +8,8 @@ import java.util.Scanner;
  * <p>
  * Runner classes handle control flow and UI interaction.
  *
- * @author briankwon25 (Brian Kwon), aarinipanzade, saraxiao0 (Sara Xiao),
- * @version 0.1 - 2021-11-14
+ * @author Sara Xiao, Richard Chang, Brian Kwon, Aarini Panzade
+ * @version 2021-11-15
  */
 public abstract class UserRunner {
     private User user; // User who's logged  in
