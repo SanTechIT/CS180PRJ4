@@ -135,6 +135,7 @@ public class Post implements Serializable {
             if (parent != -1) {
                 Post.POST_LIST.get(parent).getPosts().remove(Integer.valueOf(id));
             }
+            User.USER_LIST.get(creatorId).getPosts().remove(Integer.valueOf(id));
             return POST_LIST.set(id, null);
         }
         return null;
