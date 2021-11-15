@@ -106,6 +106,36 @@ public class Discussion implements Serializable {
     }
 
     /**
+     * Returns ID of every single post in this discussion
+     *
+     * @return every single post in this discussion
+     */
+    public List<Integer> getAllPosts() {
+        List<Integer> returnList = new ArrayList<>();
+        for (int postId : posts) {
+            Post p = Post.POST_LIST.get(postId);
+            returnList.addAll(getPostAndReplies(p));
+        }
+
+        return returnList;
+    }
+
+    /**
+     * Returns ID of target post and all its replies in 1 list
+     * By recursively searching through each post's replies
+     */
+    public List<Integer> getPostAndReplies(Post targetPost) {
+        List<Integer> returnList = new ArrayList<>();
+        returnList.add(targetPost.getId());
+        for (int postId : targetPost.getPosts()) {
+            Post p = Post.POST_LIST.get(postId);
+            returnList.addAll(getPostAndReplies(p));
+        }
+
+        return returnList;
+    }
+
+    /**
      * Checks the user's permissions and tries
      * to set the topic of discussion accordingly
      *

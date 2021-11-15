@@ -311,7 +311,7 @@ public class Post implements Serializable {
     /**
      * Returns the amount of upvotes in a post
      *
-     * @return
+     * @return upvotes
      */
     public int getUpvotes() {
         return upvotes;
@@ -320,18 +320,42 @@ public class Post implements Serializable {
     /**
      * Returns the amount of downvotes in a post
      *
-     * @return
+     * @return downvotes
      */
     public int getDownvotes() {
         return downvotes;
     }
 
+    /**
+     * Returns a total vote score.
+     *
+     * Used for ranking posts for voteboard
+     * @return votes = upvotes - downvotes
+     */
     public int getVotes() {
         return getUpvotes() - getDownvotes();
     }
 
+    /**
+     * Returns an int representing controversy
+     * smaller = more controversial
+     * Used for ranking posts for voteboard
+     *
+     * @return controversy number
+     */
     public int getControversy() {
-        return getUpvotes() + getDownvotes();
+        // number that grows smaller the more votes
+        // the post has
+        // because more popular = more likely to be controversial
+        float inversePopular = 1 / ((float) getUpvotes() + getDownvotes());
+
+        // number that grows larger the less
+        // "balanced" the ratio of upvotes : downvotes is
+        // because if people agree that a post is good/bad,
+        // it's not a controversial post
+        float ratio = 100 * (Math.abs(1 - (float) getUpvotes() / getDownvotes()));
+
+        return (int) (1000 * inversePopular * ratio);
     }
 
     /**

@@ -245,7 +245,7 @@ public class TeacherRunner extends UserRunner {
         String currentSort = "best";
 
         while (continueThisMenu) {
-            Display.displayViewVoteboard(getCurrentDiscussion(), currentSort);
+            Display.displayViewVoteboard(getCurrentDiscussion(), currentSort, this.teacher);
             String input = reader.nextLine();
 
             switch (input) {
@@ -380,7 +380,7 @@ public class TeacherRunner extends UserRunner {
             return false;
         }
 
-        if (grade < 0 || grade > targetPost.getMaxGrade()) {
+        if (grade < 1 || grade > targetPost.getMaxGrade()) {
             return false;
         }
 

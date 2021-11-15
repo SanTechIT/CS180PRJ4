@@ -5,13 +5,10 @@ Missing features
 * test cases
 * the report
 * ungraded posts have a grade of 0 - change that to n/a? will need to keep track of whether a post has been graded
-* Teacher shouldn't be able to reply to a student's posts while viewing their student dashboard, remove that feature.
 
 Problems
 - MAJOR: (Tentative Done) Validate inputs for class/discussion/post Ids in reply/edit/delete actions
 - Ask if user wants to reply/edit/delete posts of another grouping?
-- MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash, don't know why
-- Voteboard shows only top-level posts (should be quick fix once Richard finishes Discussion's getPost method)
 
 # [Name] Design specifications
 
@@ -28,7 +25,9 @@ Problems
 
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ----------- | ---------- |
-| main        | public static void | String[] args | Main Method |
+| main | `public static void` | `(String[] args)` | Main Method |
+| writeData | `private static void` | `(Object obj, String filename)` | Writes the data into the file |
+| readData | `private static Serializable` | `(String filename)` | Reads the data |
 
 ## User Class (abstract) (Serializable)
 

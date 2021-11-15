@@ -1,25 +1,24 @@
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.*;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class Tests {
-    private final InputStream originalInput = System.in;
-    private final PrintStream originalOutput = System.out;
-    private ByteArrayInputStream in;
-    private ByteArrayOutputStream out;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+public class Tests {
+    private static final PrintStream ts = System.out;
+    private ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+    public ByteArrayOutputStream getOut() {
+        return out;
+    }
+
+    public void setOut(ByteArrayOutputStream out) {
+        this.out = out;
+    }
+
+    /*
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -74,214 +73,47 @@ public class Tests {
         } while (!input.equals("exit")); // Not Exit
         // return array of objects
     }
+    */
 
-    @BeforeEach
-    public void setup() {
-        out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
+    // Courtesy of
+    // https://stackoverflow.com/questions/6415728/junit-testing-with-simulated-user-input
+    // As well as RunLocalTest.java (Various)
+    public void setIOStreams(String commands) {
+        // Setup IN/OUTPUT
+        ByteArrayInputStream in = new ByteArrayInputStream(commands.getBytes());
+        setOut(new ByteArrayOutputStream());
+        System.setOut(new PrintStream(getOut()));
+        System.setIn(in);
     }
 
     @AfterEach
-    public void end() {
-        System.setOut(originalOutput);
-        System.out.println(out);
+    public void setIOStreamsAfter() {
+        // Restore output, print output
+        System.setOut(ts);
+        System.out.println(getOut());
     }
 
-    /**
-     * Login Test
-     */
-    @Test
-    public void goodLogin() {
-        // Courtesy of
-        // https://stackoverflow.com/questions/6415728/junit-testing-with-simulated-user-input
-        // As well as RunLocalTest.java (Various)
-        String commands = "";
-        commands += "login\n";
-        commands += "student\n";
-        commands += "student\n";
-        commands += "logout\n";
-        commands += "exit\n";
+    public static String getOutputFromFile(String fileName) {
+        try (BufferedReader br = new BufferedReader(
+            new FileReader(fileName)
+        )) {
+            String output = "";
+            String line = br.readLine();
+            while (line != null) {
+                output += line + "\n";
+                line = br.readLine();
+            }
 
-        // Setup IN/OUTPUT
-        in = new ByteArrayInputStream(commands.getBytes());
-        System.setIn(in);
-
-        // Run Program
-        main(new String[0]);
-
-        // Restore output, print output
-        assertTrue(out.toString().contains("Successfully Logged In!\n\nWelcome Alice!"));
+            // shave off last \n
+            return output.substring(0, output.length() - 1);
+        }
+        catch (IOException e) {
+          e.printStackTrace();
+          return "FILE ERROR";
+        }
     }
 
-    @Test
-    public void badLoginOne() {
-        String commands = "";
-        commands += "login\n";
-        commands += "invaliduser\n";
-        commands += "invaliduser\n";
-        commands += "logout\n";
-        commands += "exit\n";
-
-        // Setup IN/OUTPUT
-        in = new ByteArrayInputStream(commands.getBytes());
-        System.setIn(in);
-
-        // Run Program
-        main(new String[0]);
-
-        // Restore output, print output
-        assertTrue(out.toString().contains("Wrong username or password"));
-    }
-
-    @Test
-    public void badLoginTwo() {
-        String commands = "";
-        commands += "login\n";
-        commands += "student\n";
-        commands += "Student\n";
-        commands += "logout\n";
-        commands += "exit\n";
-
-        // Setup IN/OUTPUT
-        in = new ByteArrayInputStream(commands.getBytes());
-        System.setIn(in);
-
-        // Run Program
-        main(new String[0]);
-
-        // Restore output, print output
-        assertTrue(out.toString().contains("Wrong username or password"));
-    }
-
-    @Test
-    public void createUserAndLogInTeacher() {
-        // Courtesy of
-        // https://stackoverflow.com/questions/6415728/junit-testing-with-simulated-user-input
-        // As well as RunLocalTest.java (Various)
-        String commands = "";
-        commands += "create account\n";
-        commands += "user\n";
-        commands += "hello world\n";
-        commands += "pass\n";
-        commands += "t\n";
-        commands += "login\n";
-        commands += "user\n";
-        commands += "pass\n";
-        commands += "logout\n";
-        commands += "exit\n";
-
-        // Setup IN/OUTPUT
-        in = new ByteArrayInputStream(commands.getBytes());
-        System.setIn(in);
-
-        // Run Program
-        main(new String[0]);
-
-        // Restore output, print output
-        assertTrue(out.toString().contains("Welcome hello world!"));
-        assertTrue(out.toString().contains(
-                "edit account\n" + "delete account\n" + "create course\n" + "view student"));
-    }
-
-    @Test
-    public void createUserAndLogInStudent() {
-        // Courtesy of
-        // https://stackoverflow.com/questions/6415728/junit-testing-with-simulated-user-input
-        // As well as RunLocalTest.java (Various)
-        String commands = "";
-        commands += "create account\n";
-        commands += "user\n";
-        commands += "hello world\n";
-        commands += "pass\n";
-        commands += "s\n";
-        commands += "login\n";
-        commands += "user\n";
-        commands += "pass\n";
-        commands += "logout\n";
-        commands += "exit\n";
-
-        // Setup IN/OUTPUT
-        in = new ByteArrayInputStream(commands.getBytes());
-        System.setIn(in);
-
-        // Run Program
-        main(new String[0]);
-
-        // Restore output, print output
-        assertTrue(out.toString().contains("Welcome hello world!"));
-        assertTrue(out.toString().contains(
-                "Or, please type one of these commands: \nedit account\ndelete account\n"));
-    }
-
-    @Test
-    public void createCourse() {
-        String commands = "";
-        commands += "login\nt\nt\n";
-        commands += "create course\n";
-        commands += "ENGL106\n";
-        commands += "create course\n";
-        commands += "ENGR103\n";
-        commands += "logout\n";
-        commands += "exit\n";
-        in = new ByteArrayInputStream(commands.getBytes());
-        System.setIn(in);
-
-        // Run Program
-        main(new String[0]);
-
-        // Restore output, print output
-        assertTrue(out.toString().contains("3 - ENGL106"));
-        assertTrue(out.toString().contains("4 - ENGR103"));
-    }
-
-    @Test
-    public void createCourseStudent() {
-        String commands = "";
-        commands += "login\ns\ns\n";
-        commands += "create course\n";
-        commands += "ENGL106\n";
-        commands += "create course\n";
-        commands += "ENGR103\n";
-        commands += "logout\n";
-        commands += "exit\n";
-        in = new ByteArrayInputStream(commands.getBytes());
-        System.setIn(in);
-
-        // Run Program
-        main(new String[0]);
-
-        // Restore output, print output
-        assertFalse(out.toString().contains("3 - ENGL106"));
-        assertFalse(out.toString().contains("4 - ENGR103"));
-    }
-
-    @Test
-    public void createDiscussion() {
-        String commands = "";
-        commands += "login\nt\nt\n";
-        commands += "create course\n";
-        commands += "ENGL106\n";
-        commands += "create course\n";
-        commands += "ENGR103\n";
-        commands += "3\n";
-        commands += "create forum\n";
-        commands += "Lesson 1\n";
-        commands += "create forum\n";
-        commands += "Lesson 2\n";
-        commands += "create forum\n";
-        commands += "Lesson 3\n";
-        commands += "logout\n";
-        commands += "exit\n";
-        in = new ByteArrayInputStream(commands.getBytes());
-        System.setIn(in);
-
-        // Run Program
-        main(new String[0]);
-
-        // Restore output, print output
-        assertTrue(out.toString().contains("3 - ENGL106"));
-        assertTrue(out.toString().contains("4 - ENGR103"));
-        assertTrue(out.toString().contains("Welcome to ENGL106!\n" + "Please type the number of a" +
-                " discussion forum to view:\n" + "1 - Lesson 1\n" + "2 - Lesson 2\n" + "3 - Lesson 3"));
+    public static String removeWhitespace(String str) {
+        return str.replace(" ", "").replace("\n", "");
     }
 }

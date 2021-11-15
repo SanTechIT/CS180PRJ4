@@ -340,7 +340,7 @@ public abstract class UserRunner {
         }
 
         if (!operationSuccess) {
-            System.out.println("Sorry, there was an error in performing the command.");
+            System.out.println("The operation didn't go through.");
         }
         return true;
     }
@@ -359,6 +359,7 @@ public abstract class UserRunner {
 
         System.out.println(
                 "New post " + newPost.getId() + " (reply to " + targetPost.getId() + ")" + " has been created!");
+
         return true;
     }
 
@@ -372,10 +373,15 @@ public abstract class UserRunner {
         Display.displayEditPost(targetPost);
 
         String input = reader.nextLine();
-        this.user.editPost(targetPost, input);
+        boolean success = this.user.editPost(targetPost, input);
 
-        System.out.println("Post " + targetPost.getId() + "has been edited!");
-        return true;
+        if (success) {
+            System.out.println("Post " + targetPost.getId() + "has been edited!");
+        } else {
+            System.out.println("Sorry, you can't edit that post.");
+        }
+
+        return success;
     }
 
     /**
@@ -389,11 +395,17 @@ public abstract class UserRunner {
 
         String input = reader.nextLine();
         if (input.toLowerCase().equals("yes")) {
-            this.user.deletePost(targetPost);
+            boolean success = this.user.deletePost(targetPost);
+            if (success) {
+                System.out.println("Post " + targetPost.getId() + " has been deleted.");
+            } else {
+                System.out.println("Sorry, you can't delete that post.");
+            }
+
+            return success;
         }
 
-        System.out.println("Post " + targetPost.getId() + " has been deleted.");
-        return true;
+        return false;
     }
 
     /* ----- Protected "loopXOverride" methods -----

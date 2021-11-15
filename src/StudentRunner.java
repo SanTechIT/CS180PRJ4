@@ -39,9 +39,25 @@ public class StudentRunner extends UserRunner {
                 menuDiscussionReply(reader);
                 break;
 
+            case "view grades":
+                menuViewGrades(reader);
+                break;
+
             default:
                 return false;
         }
+        return true;
+    }
+
+    /*
+     * Menu for viewing all grades received for all posts in the forum (Student exclusive)
+     *
+     * @param reader Scanner for user input
+     * @return boolean for whether operation succeeds (always true for now)
+     */
+    private boolean menuViewGrades(Scanner reader) {
+        Display.displayViewGrades(getCurrentDiscussion(), this.student);
+        String input = reader.nextLine(); // nothing done with this, just to "pause" program
         return true;
     }
 

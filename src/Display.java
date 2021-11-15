@@ -128,7 +128,7 @@ public class Display {
     public static void displayDiscussion(Discussion currentDiscussion, User user) {
         String commands;
         if (user instanceof Student) {
-            commands = "Commands: " + "back, reply to discussion, reply [num], edit [num], delete [num], " + "upvote [num], downvote [num], novote [num], logout";
+            commands = "Commands: " + "back, reply to discussion, reply [num], edit [num], delete [num], " + "upvote [num], downvote [num], novote [num], view grades, logout";
         } else {
             commands = "Commands: " + "back, reply [num], edit [num], delete [num], " + "grade [num], view voteboard, delete forum, logout";
         }
@@ -354,23 +354,38 @@ public class Display {
         System.out.print("> ");
     }
 
-    private static void displayPostsVoteboard(List<Integer> posts) {
+    /**
+     * Given a list of posts, prints them all in order with 0 depth
+     * (as opposed to "normal" way of printing posts, which indents and puts
+     * replies beneath parent posts)
+     *
+     * @param posts posts to display
+     * @param user user viewing posts (determines whether certain info is seen)
+     */
+    private static void displayPostsDepth0(List<Integer> posts, User user) {
         String str = "\n";
 
         for (Integer pid : posts) {
             Post p = Post.POST_LIST.get(pid);
-            str += p.toStringVoteboard() + "\n";
+            str += getPostString(p, 0, user);
         }
 
         System.out.println(str);
     }
 
-    public static void displayViewVoteboard(Discussion currentDiscussion, String currentSort) {
+    /**
+     * Displays voteboard, which shows all posts in a forum ranked by votes
+     * with sorting options.
+     *
+     * @param currentDiscussion discussion forum to show posts of
+     * @param currentSort current sorting methodology - either "best", "worst" or "controversial"
+     * @param user user viewing the voteboard
+     */
+    public static void displayViewVoteboard(Discussion currentDiscussion, String currentSort, User user) {
         System.out.println(
                 "Voteboard: discussion - " + currentDiscussion.getTopic() + "\nCommands: back, sort best, sort worst, sort controversial" + "\nThe voteboard displays posts in a forum by vote count." + "\nCurrent sort: " + currentSort);
 
-        // TODO
-        List<Integer> posts = currentDiscussion.getPosts();
+        List<Integer> posts = currentDiscussion.getAllPosts();
         if (posts.size() == 0) {
             System.out.println("There are no posts.");
         } else {
@@ -384,9 +399,6 @@ public class Display {
                             return p2.getVotes() - p1.getVotes();
                         }
                     });
-
-                    displayPostsVoteboard(posts);
-
                     break;
 
                 case "worst":
@@ -397,9 +409,6 @@ public class Display {
                             return -(p2.getVotes() - p1.getVotes());
                         }
                     });
-
-                    displayPostsVoteboard(posts);
-
                     break;
 
                 case "controversial":
@@ -407,17 +416,76 @@ public class Display {
                         public int compare(Integer p1id, Integer p2id) {
                             Post p1 = Post.POST_LIST.get(p1id);
                             Post p2 = Post.POST_LIST.get(p2id);
-                            return p2.getControversy() - p1.getControversy();
+                            return - (p2.getControversy() - p1.getControversy());
                         }
                     });
-
-                    displayPostsVoteboard(posts);
-
                     break;
             }
-
+            displayPostsDepth0(posts, user);
         }
 
         System.out.print("> ");
+    }
+
+    public static void displayViewGrades(Discussion currentDiscussion, Student currentStudent) {
+        System.out.println("\nView Grades - " + currentDiscussion.getTopic() +
+            "\nYou are viewing the grades for every post you have made in this forum." +
+            "\nMinimum grade is 1. If a post has grade 0, it has not been graded yet.");
+
+        // get posts
+        List<Integer> posts = currentDiscussion.getAllPosts();
+        // filter out posts not made by student
+        List<Integer> posts2 = new ArrayList<>();
+        for (int i = 0; i < posts.size(); i++) {
+            int postId = posts.get(i);
+            int creatorId = Post.POST_LIST.get(posts.get(i)).getCreatorId();
+            if (creatorId == currentStudent.getId()) {
+                posts2.add(postId);
+            }
+        }
+
+        // display posts
+        if (posts2.size() == 0) {
+            System.out.println("There are no posts.");
+        } else {
+            displayPostsGrades(posts2, currentStudent);
+        }
+
+        System.out.print("> ");
+    }
+
+    /**
+     * Given a list of posts, prints them all in order with 0 depth
+     * AND INCLUDES ONLY GRADE INFO
+     * for displayViewGrades
+     *
+     * @param posts posts to display
+     * @param user user viewing posts (determines whether certain info is seen)
+     */
+    private static void displayPostsGrades(List<Integer> posts, User user) {
+        String str = "\n";
+
+        for (Integer pid : posts) {
+            Post postin = Post.POST_LIST.get(pid);
+            String postString = "";
+            if (postin != null) {
+                String indentStr = "|  ";
+
+                postString += "\n" + indentStr + "--------------------\n";
+
+                postString += indentStr + "Post ID " + postin.getId();
+                if (postin.getParent() != -1) {
+                    postString += " (reply to " + postin.getParent() + ")";
+                }
+                postString += "\n";
+                postString += indentStr + "(grade: " + postin.getGrade() + "/" + postin.getMaxGrade() + ")\n";
+
+                postString += indentStr + postin.getContent() + "\n";
+                postString += indentStr + "--------------------";
+            }
+            str += postString;
+        }
+
+        System.out.println(str);
     }
 }
