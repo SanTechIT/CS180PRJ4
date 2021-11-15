@@ -23,16 +23,23 @@ public class Main {
         System.out.println("Reading Data...");
 
         String path = "data/";
+        boolean blank = false;
         if (args.length > 0 && args[0].equals("useser")) {
             System.out.println("Using test files...");
             USESER = false;
             path = "test/";
+        } else if(args.length > 0 && args[0].equals("empty")){
+            System.out.println("Using blank state...");
+            USESER = false;
+            blank = true;
+            path = "test_e/";
         }
+
         boolean filesExist = new File(path + "UserList").exists() && new File(
                 path + "CourseList").exists() && new File(
                 path + "DiscussionList").exists() && new File(path + "PostList").exists();
 
-        if (USESER && filesExist) {
+        if (USESER && filesExist && !blank) {
             System.out.println("Using Saved Data");
             try {
                 User.USER_LIST = (List<User>) readData(path + "UserList");
@@ -44,6 +51,11 @@ public class Main {
             } catch (ClassNotFoundException e) {
                 System.out.println("An Error while loading data has occurred: " + e.getMessage());
             }
+        } else if (blank){
+            User.USER_LIST = new ArrayList<>();
+            Course.COURSE_LIST = new ArrayList<>();
+            Discussion.DISCUSSION_LIST = new ArrayList<>();
+            Post.POST_LIST = new ArrayList<>();
         } else {
             System.out.println("Using Initial Dataset");
             User.USER_LIST = new ArrayList<>();

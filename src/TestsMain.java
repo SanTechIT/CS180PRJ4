@@ -24,6 +24,10 @@ import static org.junit.Assert.*;
 public class TestsMain extends Tests {
 
 
+    /**
+     * Borrowed from RunLocal
+     * @param args
+     */
     public static void main(String[] args){
         Result result = JUnitCore.runClasses(TestsMain.class);
         if (result.wasSuccessful()) {
