@@ -7,7 +7,7 @@ To compile the program: In the Terminal, cd to the src folder.
 
 To run the program: In the Terminal, after compiling, run `javac Main.java`. Run `java Main`.
 
-To run the test cases: In the Terminal, execute the bash script runTestCases.sh that's located in the src folder. Alternatively, use IntelliJ to run all the Tests classes.
+To run the test cases: Use IntelliJ to run the test classes for each class. The Tests class contains no tests, only utility methods.
 
 Using IntelliJ is best, since everything should work on it.
 
