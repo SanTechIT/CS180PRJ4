@@ -73,7 +73,7 @@ public class TestsMain extends Tests {
         String actual = getOut().toString();
         String expected = "Reading Data...\n" +
                 "Using test files...\n" +
-                "Using Initial Dataset\n" +
+                "Creating new Db\n" +
                 "Data has been read and loaded!\n" +
                 "\n" +
                 "Welcome to our program!\n" +
@@ -121,7 +121,53 @@ public class TestsMain extends Tests {
         // actual contains expected
         String fileName = "testMainCreateAccountLogin";
         String actual = getOut().toString();
-        String expected = getOutputFromFile("ExpectedOutputs/" + fileName);
+        String expected = "Reading Data...\n" +
+                "Using test files...\n" +
+                "Creating new Db\n" +
+                "Data has been read and loaded!\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> Enter your username: \n" +
+                "Enter your name: \n" +
+                "Create your password: \n" +
+                "Select if you are a [T]eacher or [S]tudent: \n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> Enter your username: \n" +
+                "Enter your password: \n" +
+                "Successfully Logged In!\n" +
+                "\n" +
+                "Welcome name!\n" +
+                "Please type the number of a course to view:\n" +
+                "There are no courses.\n" +
+                "Or, please type one of these commands: \n" +
+                "edit account\n" +
+                "delete account\n" +
+                "create course\n" +
+                "view student\n" +
+                "logout\n" +
+                "> \n" +
+                "Logging out:\n" +
+                "You have successfully logged out.\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Exit:\n" +
+                "Thank you for using our program. Goodbye!\n" +
+                "Saving Data...\n" +
+                "Data has been saved!";
         assertTrue(actual.contains(expected));
     }
 
@@ -150,7 +196,7 @@ public class TestsMain extends Tests {
         String actual = getOut().toString();
         String expected = "Reading Data...\n" +
                 "Using test files...\n" +
-                "Using Initial Dataset\n" +
+                "Creating new Db\n" +
                 "Data has been read and loaded!\n" +
                 "\n" +
                 "Welcome to our program!\n" +

@@ -57,14 +57,165 @@ public class TestsTeacherRunner extends Tests {
         );
 
         setIOStreams(commands);
-        Main.main(new String[0]);
+        Main.main(new String[]{"blank"});
 
         // actual contains expected
         String fileName = "testTRBasicNav";
         String actual = getOut().toString();
-        String expected = getOutputFromFile("ExpectedOutputs/" + fileName);
+        String expected = "Reading Data...\n" +
+                "Creating new Db\n" +
+                "Data has been read and loaded!\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> Enter your username: \n" +
+                "Enter your password: \n" +
+                "Wrong username or password\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Exit:\n" +
+                "Thank you for using our program. Goodbye!\n" +
+                "Saving Data...\n" +
+                "Data has been saved!";
 
-        assertEquals(getOut().toString(), expected);
         assertTrue(actual.contains(expected));
     }
 }
