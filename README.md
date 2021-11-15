@@ -27,7 +27,9 @@ Problems
 
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ----------- | ---------- |
-| main        | public static void | String[] args | Main Method |
+| main | `public static void` | `(String[] args)` | Main Method |
+| writeData | `private static void` | `(Object obj, String filename)` | Writes the data into the file |
+| readData | `private static Serializable` | `(String filename)` | Reads the data |
 
 ## User Class (abstract) (Serializable)
 
