@@ -2,13 +2,8 @@
 
 Missing features
 * serialization/permanence
-* Teachers can view a dashboard that lists the most popular replies to each forum by votes.
-    - Data will appear with the student's name and vote count.
-    - Teachers can choose to sort the dashboard.
 * test cases
 * the report
-* comment the code
-* improve post formatting - grade should only be visible to teacher/poster
 * ungraded posts have a grade of 0 - change that to n/a? will need to keep track of whether a post has been graded
 * Teacher shouldn't be able to reply to a student's posts while viewing their student dashboard, remove that feature.
 
