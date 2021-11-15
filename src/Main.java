@@ -24,15 +24,18 @@ public class Main {
         boolean filesExist = new File("data/UserList").exists() && new File(
                 "data/CourseList").exists() && new File("data/DiscussionList").exists() && new File(
                 "data/PostList").exists();
-        USESER = args.length > 0 && args[0].equals("useser");
+        String path = "data/";
+        if (args.length > 0 && args[0].equals("useser")) {
+            path = "test/";
+        }
 
         if (USESER && filesExist) {
             System.out.println("Using Saved Data");
             try {
-                User.USER_LIST = (List<User>) readData("data/UserList");
-                Course.COURSE_LIST = (List<Course>) readData("data/CourseList");
-                Discussion.DISCUSSION_LIST = (List<Discussion>) readData("data/DiscussionList");
-                Post.POST_LIST = (List<Post>) readData("data/PostList");
+                User.USER_LIST = (List<User>) readData(path + "UserList");
+                Course.COURSE_LIST = (List<Course>) readData(path + "CourseList");
+                Discussion.DISCUSSION_LIST = (List<Discussion>) readData(path + "DiscussionList");
+                Post.POST_LIST = (List<Post>) readData(path + "PostList");
             } catch (IOException e) {
                 System.out.println("An Error while loading data has occurred: " + e.getMessage());
             } catch (ClassNotFoundException e) {
