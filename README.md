@@ -1,10 +1,13 @@
-# [Name] Design specifications
+# CS180 Project 4 Design Specifications
 ## Documentation
 - Aarini - Submitted Report on Brightspace
-- Richard - Submitted Vocareum workspace.
+- Sara - Submitted code on Vocareum workspace
 
-To compile the program in Vocareum: In the Terminal, cd to the src folder.
-To run the program in Vocareum: Run javac Main.java. Run java Main.
+To compile the program: In the Terminal, cd to the src folder.
+
+To run the program: In the Terminal, after compiling, run `javac Main.java`. Run `java Main`.
+
+To run the test cases: In the Terminal, execute the bash script runTestCases.sh that's located in the src folder. Alternatively, use IntelliJ to run all the Tests classes.
 
 ## Notes
 
@@ -89,7 +92,6 @@ To run the program in Vocareum: Run javac Main.java. Run java Main.
 | parse2WordInput | `protected boolean` | `(String input, Scanner reader)` |  Checks whether 2-word input for loopDiscussion has valid length and post number |
 | menuPostReply | `private boolean` | `(Post targetPost, Scanner reader)` | Menu for posting reply to other post |
 | menuEditPost | `private boolean` | `(Post targetPost, Scanner reader)` | Menu for editing a post |
-| menuDeletePost | `private boolean` | `(Post targetPost, Scanner reader)` | Menu for deleting a post |
 | loopMainOverride | `protected boolean` | `(Scanner reader, String input)` |  For commands exclusive to Teacher or Student, returns false |
 | loopCourseOverride | `protected boolean` | `(Scanner reader, String input)` |  For commands exclusive to Teacher or Student, returns false |
 | loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  For commands exclusive to Teacher or Student, returns false |
@@ -145,15 +147,17 @@ To run the program in Vocareum: Run javac Main.java. Run java Main.
 | loopMainOverride | `protected boolean` | `(Scanner reader, String input)` |  Handles the menu options just for teacher |
 | menuCreateCourse | `private void` | `(Scanner reader)` |  The menu for creating new course |
 | loopViewStudent | `private void` | `(Scanner reader)` |  Shows the dashabord and the data with the name and vote count |
-| loodIndividualStudent | `private void` | `(Scanner reader, Student currentStudent)` |  Loop for viewing/editing all posts of 1 student |
+| loopIndividualStudent | `private void` | `(Scanner reader, Student currentStudent)` |  Loop for viewing/editing all posts of 1 student |
 | loopCourseOverride | `protected boolean` | `(Scanner reader, String input)` |  For menu options exclusive to teacher |
 | menuCreateDiscussion | `private void` | `(Scanner reader)` |  The menu for creating new discussion forum |
 | menuEditCourse | `private void` | `(Scanner reader)` |  The menu for editing course topic  |
+| menuDeleteCourse | `private void` | `(Scanner reader)` | The menu for deleting a course |
 | menuEditDiscussion | `private void` | `(Scanner reader)` |  The menu for editing discussion topic |
 | loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  Deleting discussion forum menu option for teacher |
 | loopViewVoteboard | `private void` | `(Scanner reader)` |  Shows the dashboard by the number of votes |
 | parse2WordInputOverride | `protected boolean` | `(Post targetPost, Scanner reader, String inputWord1)` |  Parses the word given as input |
 | parse2WordInputStudent | `protected boolean` | `(Scanner reader, String input)` |  Modified version of UserRunner's parse2WordInput for the viewIndividualStudent menu |
+| menuDeletePost | `private boolean` | `(Post targetPost, Scanner reader)` | menu for deleting a post |
 | menuGradePost | `private boolean` | `(Post targetPost, Scanner reader)` | menu for grading a post |
 
 
@@ -368,6 +372,8 @@ Note: posts can be under both discussions and other posts
 
 * *To write a new example, put 3 backticks at the start and end to make it a code block - otherwise Markdown formatting
   makes it weird*
+
+Note: output shown in console examples is not final. Test cases contain verification for proper output.
 
 ___
 
