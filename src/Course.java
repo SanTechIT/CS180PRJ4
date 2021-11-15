@@ -17,7 +17,7 @@ public class Course implements Serializable {
     private int id;
     private String topic;
     private int creator;
-    private List<Discussion> discussions;
+    private List<Integer> discussions;
 
     private Course() {
         // Deny Instantiation
@@ -101,7 +101,7 @@ public class Course implements Serializable {
      *
      * @return
      */
-    public List<Discussion> getDiscussions() {
+    public List<Integer> getDiscussions() {
         return discussions;
     }
 
@@ -110,7 +110,8 @@ public class Course implements Serializable {
      */
     public String getDiscussionsString() {
         String str = "";
-        for(Discussion discussion: discussions){
+        for(Integer discussionId: discussions){
+            Discussion discussion = Discussion.DISCUSSION_LIST.get(discussionId);
             str += discussion.getId() + " - " + discussion.getTopic() + "\n";
         }
         return str;

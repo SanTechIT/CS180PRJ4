@@ -24,9 +24,9 @@ public class Post implements Serializable {
     private int grade;
     private int maxGrade;
     private String content;
-    private Discussion discussion;
-    private Post parent;
-    private List<Post> posts;
+    private int discussion;
+    private int parent;
+    private List<Integer> posts;
     private int creatorId;
     private Date timestamp;
     private int upvotes;
@@ -46,17 +46,17 @@ public class Post implements Serializable {
      */
     private Post(String content, Discussion discussion, Post parent, int creatorId) {
         this.content = content;
-        this.parent = parent;
-        this.discussion = discussion;
+        this.parent = parent != null ? parent.getId() : -1;
+        this.discussion = discussion.getId();
         this.creatorId = creatorId;
         this.maxGrade = 100;
         this.timestamp = new Date();
-        if (parent == null) {
-            discussion.getPosts().add(this);
-        } else {
-            parent.getPosts().add(this);
-        }
         id = POST_LIST.size();
+        if (parent == null) {
+            discussion.getPosts().add(id);
+        } else {
+            parent.getPosts().add(id);
+        }
         posts = new ArrayList<>();
         POST_LIST.add(this);
     }
@@ -130,10 +130,10 @@ public class Post implements Serializable {
      * @return
      */
     public Post deletePost(User user) {
-        if (user.canModifyPost() || user.getId() == creatorId) {
-            discussion.getPosts().remove(this);
-            if (parent != null) {
-                parent.getPosts().remove(this);
+        if (user.canModifyPost()) {
+            Discussion.DISCUSSION_LIST.get(discussion).getPosts().remove(Integer.valueOf(id));
+            if (parent != -1) {
+                Post.POST_LIST.get(parent).getPosts().remove(Integer.valueOf(id));
             }
             return POST_LIST.set(id, null);
         }
@@ -152,8 +152,8 @@ public class Post implements Serializable {
         postString += "\n";
 
         postString += "Post ID " + getId();
-        if (parent != null) {
-            postString += " (reply to " + parent.getId() + ")";
+        if (parent != -1) {
+            postString += " (reply to " + parent + ")";
         }
 
         postString += "\n" + creator.getUsername() + " | " + creator.getName() + " (ID " + creatorId + ") posted";
@@ -176,8 +176,8 @@ public class Post implements Serializable {
         postString += "\n";
 
         postString += "Post ID " + getId();
-        if (parent != null) {
-            postString += " (reply to " + parent.getId() + ")";
+        if (parent != -1) {
+            postString += " (reply to " + parent + ")";
         }
 
         postString += "\n" + creator.getUsername() + " | " + creator.getName() + " (ID " + creatorId + ") posted";
@@ -200,7 +200,7 @@ public class Post implements Serializable {
      *
      * @return
      */
-    public Post getParent() {
+    public int getParent() {
         return parent;
     }
 
@@ -273,7 +273,8 @@ public class Post implements Serializable {
     public String getPostsString() {
         String str = "";
         str += this.toString();
-        for (Post post : posts) {
+        for (Integer postid : posts) {
+            Post post = Post.POST_LIST.get(postid);
             str += post.getPostsString() + "\n";
         }
         return str;
@@ -284,7 +285,7 @@ public class Post implements Serializable {
      *
      * @return
      */
-    public Discussion getDiscussion() {
+    public int getDiscussion() {
         return discussion;
     }
 
@@ -302,7 +303,7 @@ public class Post implements Serializable {
      *
      * @return
      */
-    public List<Post> getPosts() {
+    public List<Integer> getPosts() {
         return posts;
     }
 

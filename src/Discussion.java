@@ -13,8 +13,8 @@ public class Discussion implements Serializable {
 
     private int id;
     private String topic;
-    private List<Post> posts;
-    private Course course;
+    private List<Integer> posts;
+    private int course;
     private Date timestamp;
     private int creator;
 
@@ -25,9 +25,9 @@ public class Discussion implements Serializable {
     private Discussion(Course course, String topic, int creator) {
         this.topic = topic;
         this.creator = creator;
-        this.course = course;
-        course.getDiscussions().add(this);
+        this.course = course.getId();
         id = DISCUSSION_LIST.size();
+        course.getDiscussions().add(id);
         posts = new ArrayList<>();
         DISCUSSION_LIST.add(this);
     }
@@ -60,7 +60,7 @@ public class Discussion implements Serializable {
             return null;
         }
         Discussion deleted = DISCUSSION_LIST.set(id, null);
-        deleted.course.getDiscussions().remove(deleted);
+        Course.COURSE_LIST.get(deleted.course).getDiscussions().remove(deleted.getId());
         return deleted;
     }
 
@@ -89,7 +89,8 @@ public class Discussion implements Serializable {
      */
     public String getPostsString() {
         String str = "";
-        for (Post post : posts) {
+        for (int postId : posts) {
+            Post post = Post.POST_LIST.get(postId);
             str += post.getPostsString() + "\n";
         }
         return str;
@@ -100,7 +101,7 @@ public class Discussion implements Serializable {
      *
      * @return
      */
-    public List<Post> getPosts() {
+    public List<Integer> getPosts() {
         return posts;
     }
 
