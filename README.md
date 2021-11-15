@@ -18,9 +18,6 @@ Problems
 - MAJOR: Deleting a post from the ViewIndividualStudent menu causes the program to crash, don't know why (example below)
 - Voteboard shows only top-level posts (should be quick fix once Richard finishes Discussion's getPost method)
 
-TO SELF (Richard)
-- Post redesign, print grade if same user or teacher, allows for indentation
-
 # [Name] Design specifications
 
 ## Notes

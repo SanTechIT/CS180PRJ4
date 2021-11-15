@@ -188,10 +188,14 @@ public class Display {
      */
     private static String getPostString(Post postin, int indent, User user) {
         String postString = "";
-        String indentStr = " ".repeat(indent * 4);
+        String indentStr = "|  ";
+        for(int i = 0; i < indent; i++){
+            indentStr += " ".repeat(4) + "|  ";
+        }
+
         postString += "\n" + indentStr + "--------------------\n";
 
-        postString += indentStr + "Post ID " + user.getId();
+        postString += indentStr + "Post ID " + postin.getId();
         if (postin.getParent() != null) {
             postString += " (reply to " + postin.getParent().getId() + ")";
         }
