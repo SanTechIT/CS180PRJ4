@@ -363,7 +363,8 @@ public class Post implements Serializable {
     /**
      * Decides if the user can vote, if so, then upvotes
      *
-     * @param user
+     * @param user user who's voting
+     * @param oldVote value representing user's previous vote on the post (-1, 1, 0)
      */
     public boolean upvote(User user, int oldVote) {
         if (!user.canVote()) {
@@ -379,7 +380,8 @@ public class Post implements Serializable {
     /**
      * Decides if the user can vote, if so, then downvotes
      *
-     * @param user
+     * @param user user who's voting
+     * @param oldVote value representing user's previous vote on the post (-1, 1, 0)
      */
     public boolean downvote(User user, int oldVote) {
         if (!user.canVote()) {
@@ -392,6 +394,11 @@ public class Post implements Serializable {
         return true;
     }
 
+    /**
+     * Removes 1 upvote or downvote from the code
+     *
+     * @param oldVote 1 for upvote, -1 for downvote
+     */
     public boolean removeVote(int oldVote) {
         if (oldVote == 1) {
             this.upvotes--;

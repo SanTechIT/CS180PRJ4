@@ -20,7 +20,7 @@ public abstract class UserRunner {
     // set to true when user inputs "logout" - then program logs out
     // and returns to "login / create account / etc" menu
 
-    /*
+    /**
      * Creates new UserRunner
      *
      * @param user User this runner is connected to and operating for
@@ -43,15 +43,6 @@ public abstract class UserRunner {
      */
     public Course getCurrentCourse() {
         return currentCourse;
-    }
-
-    /**
-     * Sets new value of currentCourse
-     *
-     * @param
-     */
-    public void setCurrentCourse(Course currentCourse) {
-        this.currentCourse = currentCourse;
     }
 
     /**
@@ -84,7 +75,7 @@ public abstract class UserRunner {
     /**
      * Sets new value of logout
      *
-     * @param
+     * @param logout
      */
     public void setLogout(boolean logout) {
         this.logout = logout;
@@ -98,8 +89,10 @@ public abstract class UserRunner {
      * for that menu
      */
 
-    /*
+    /**
      * Handles all control flow and UI interaction
+     *
+     * @param reader Scanner for input
      */
     public void loop(Scanner reader) {
         while (!logout) {
@@ -149,6 +142,8 @@ public abstract class UserRunner {
 
     /**
      * Loop for editing account
+     *
+     * @param reader Scanner for input
      */
     private void loopEditAccount(Scanner reader) {
         boolean continueThisMenu = true;
@@ -186,6 +181,8 @@ public abstract class UserRunner {
 
     /**
      * Loop for 1 course + its discussions
+     *
+     * @param reader Scanner for input
      */
     private void loopCourse(Scanner reader) {
         while (currentCourse != null) { // "back" sets currentCourse to null
@@ -236,6 +233,8 @@ public abstract class UserRunner {
 
     /**
      * Loop for 1 discussion form + its posts
+     *
+     * @param reader Scanner for input
      */
     private void loopDiscussion(Scanner reader) {
         while (currentDiscussion != null) {
@@ -419,7 +418,7 @@ public abstract class UserRunner {
      * always false because User has no exclusive commands
      */
 
-    /*
+    /**
      * For commands exclusive to Teacher or Student
      * called in UserRunner's loop method (viewing all courses)
      *
@@ -433,7 +432,7 @@ public abstract class UserRunner {
         return false;
     }
 
-    /*
+    /**
      * For commands exclusive to Teacher or Student
      * called in UserRunner's loopCourse method (viewing discussions in a course)
      *
@@ -447,7 +446,7 @@ public abstract class UserRunner {
         return false;
     }
 
-    /*
+    /**
      * For commands exclusive to Teacher or Student
      * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
      *
@@ -461,7 +460,7 @@ public abstract class UserRunner {
         return false;
     }
 
-    /*
+    /**
      * For commands exclusive to Teacher or Student
      *
      * called in UserRunner's parse2WordInput method

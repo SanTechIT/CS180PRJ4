@@ -122,11 +122,6 @@ public class Student extends User implements Serializable {
         return false;
     }
 
-
-    //public boolean isAdmins() {
-        //return true;
-    //}
-
     /* ----- Methods that Modify Things -----
      * Will be called as part of StudentRunner's loop method.
      * For now, most return a boolean representing operation success/failure.
@@ -209,6 +204,7 @@ public class Student extends User implements Serializable {
 
     /**
      * Get downvote for post
+     *
      * @param targetPost
      * @return downvote count
      */
@@ -230,9 +226,9 @@ public class Student extends User implements Serializable {
     /**
      * Removes all votes that Student has made
      *
-     * @param targetPost
+     * @param targetPost post to remove votes on
      *
-     * @return
+     * @return boolean representing success
      */
     public boolean noVotePost(Post targetPost) {
         int oldVoteValue = getPostVote(targetPost);

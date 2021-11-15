@@ -166,12 +166,12 @@ public class Display {
     }
 
     /**
-     * Gets the posts and nested posts and returns a string representation
+     * Gets string representation of 1 post + all its replies
      *
-     * @param postin
-     * @param indent
-     * @param user
-     * @return
+     * @param postin parent post
+     * @param indent level of indent for reply posts
+     * @param user user getting this info
+     * @return string representing posts
      */
     private static String getPostStrings(Post postin, int indent, User user) {
         String postString = "";
@@ -189,10 +189,10 @@ public class Display {
     /**
      * Returns the string representation of a post
      *
-     * @param postin
-     * @param indent
-     * @param user
-     * @return
+     * @param postin post to get representation of
+     * @param indent level of indentation
+     * @param user user getting this info
+     * @return string representing posts
      */
     private static String getPostString(Post postin, int indent, User user) {
         if (postin == null) {
@@ -227,6 +227,8 @@ public class Display {
 
     /**
      * Displays menu for replying directly to discussion (Student only)
+     *
+     * @param currentDiscussion discussion Student is replying to
      */
     public static void displayDiscussionReply(Discussion currentDiscussion) {
         System.out.println(
@@ -237,6 +239,8 @@ public class Display {
 
     /**
      * Displays menu for replying to post
+     *
+     * @param targetPost post User is replying to
      */
     public static void displayPostReply(Post targetPost) {
         System.out.println(
@@ -247,6 +251,8 @@ public class Display {
 
     /**
      * Displays menu for editing post
+     *
+     * @param targetPost Post User is editing
      */
     public static void displayEditPost(Post targetPost) {
         int id = targetPost.getId();
@@ -258,6 +264,8 @@ public class Display {
 
     /**
      * Displays menu for deleting post
+     *
+     * @param targetPost Post user is deleting (only teachers have permission to)
      */
     public static void displayDeletePost(Post targetPost) {
         System.out.println(
@@ -268,6 +276,8 @@ public class Display {
 
     /**
      * Displays menu for grading post
+     *
+     * @param targetPost post user is grading
      */
     public static void displayGradePost(Post targetPost) {
         int id = targetPost.getId();
@@ -279,6 +289,8 @@ public class Display {
 
     /**
      * Displays output for edit account loop (an option from the main loop)
+     *
+     * @param user user who is editing account
      */
     public static void displayEditAccount(User user) {
         System.out.println(
@@ -289,6 +301,8 @@ public class Display {
 
     /**
      * Displays output for modifying the username
+     *
+     * @param user user who's modifying username
      */
     public static void displayModifyUsername(User user) {
         System.out.println("Editing Your Account - " + user.getUsername() + ":");
@@ -301,6 +315,8 @@ public class Display {
 
     /**
      * Displays output for modifying the name
+     *
+     * @param user user who's modifying name
      */
     public static void displayModifyName(User user) {
         System.out.println("Editing Your Account - " + user.getUsername() + ":");
@@ -312,6 +328,8 @@ public class Display {
 
     /**
      * Displays output for modifying the password
+     *
+     * @param user user who's modifying password
      */
 
     public static void displayModifyPassword(User user) {
@@ -322,6 +340,8 @@ public class Display {
 
     /**
      * Displays output for deleting an account
+     *
+     * @param user user who's deleting account
      */
     public static void displayDeleteAccount(User user) {
         System.out.println(
@@ -340,6 +360,8 @@ public class Display {
 
     /**
      * Displays output for an individual student
+     *
+     * @param currentStudent current student being viewed
      */
     public static void displayIndividualStudent(Student currentStudent) {
         System.out.println("\n" + currentStudent.getName() + "'s Posts:");
@@ -430,6 +452,12 @@ public class Display {
         System.out.print("> ");
     }
 
+    /**
+     * Displays grades for all of 1 student's posts in 1 forum
+     *
+     * @param currentDiscussion discussion forum to show posts of
+     * @param currentStudent student who's viewing their own posts
+     */
     public static void displayViewGrades(Discussion currentDiscussion, Student currentStudent) {
         System.out.println("\nView Grades - " + currentDiscussion.getTopic() +
             "\nYou are viewing the grades for every post you have made in this forum." +

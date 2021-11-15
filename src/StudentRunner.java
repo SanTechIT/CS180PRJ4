@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class StudentRunner extends UserRunner {
     private Student student; // Student who's logged in
 
-    /*
+    /**
      * Creates new StudentRunner
      *
      * @param student Student this runner is connected to and operating for
@@ -21,7 +21,7 @@ public class StudentRunner extends UserRunner {
         this.student = student;
     }
 
-    /*
+    /**
      * For menu options exclusive to Student
      * called in UserRunner's loopDiscussion method (viewing posts in a discussion)
      *
@@ -48,7 +48,7 @@ public class StudentRunner extends UserRunner {
         return true;
     }
 
-    /*
+    /**
      * Menu for viewing all grades received for all posts in the forum (Student exclusive)
      *
      * @param reader Scanner for user input
@@ -60,7 +60,7 @@ public class StudentRunner extends UserRunner {
         return true;
     }
 
-    /*
+    /**
      * Menu for replying directly to a discussion forum (Student exclusive)
      *
      * @param reader Scanner for user input

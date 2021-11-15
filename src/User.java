@@ -26,8 +26,13 @@ public abstract class User implements Serializable {
     private String name;
 
 
-
-    // this is the User constructor
+    /**
+     * User constructor
+     *
+     * @param username username of user
+     * @param password password of user
+     * @param name IRL name of user
+     */
     public User(String username, String password, String name) {
         this.username = username;
         this.password = password;
@@ -39,40 +44,50 @@ public abstract class User implements Serializable {
         posts = new ArrayList<>();
     }
 
-    // getter and setter methods
+    /**
+     * sets name
+     * @param name new name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * get username
+     * @return username
+     */
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    /**
+     * get name
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * get user id
+     * @return id
+     */
     public int getId() {
         return id;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
+    /**
+     * get id of all posts user has made
+     * @return list of post ids
+     */
     public List<Integer> getPosts() {
         return posts;
     }
 
-    // this connect method is for the user to log in with their credentials
+    /**
+     * For user to login with their credentials
+     * @param in Scanner for getting input
+     */
     public static void connect(Scanner in) {
         System.out.println("Enter your username: ");
         String username = in.nextLine();
@@ -85,7 +100,7 @@ public abstract class User implements Serializable {
         if (user == null) {
             System.out.println("Wrong username or password");
             return;
-        } else if (!password.equals(user.getPassword())) {
+        } else if (!password.equals(user.password)) {
             System.out.println("Wrong username or password");
             return;
         } else {
@@ -95,7 +110,10 @@ public abstract class User implements Serializable {
         user.loop(in);
     }
 
-    // this method creates the account for the certain user
+    /**
+     * Creates account for a user
+     * @param in Scanner for input
+     */
     public static void createAccount(Scanner in) {
         System.out.println("Enter your username: ");
         String username = in.nextLine();
@@ -117,7 +135,12 @@ public abstract class User implements Serializable {
     }
 
 
-    // get user method which finds the user in the user list
+    /**
+     * get user method which finds the user in the user list
+     *
+     * @param username
+     * @return
+     */
     private static User getUser(String username) {
         for (User user : USER_LIST) {
             if (username.equals(user.getUsername())) {
@@ -127,7 +150,11 @@ public abstract class User implements Serializable {
         return null;
     }
 
-    // this method changes the username if the user wants to edit it to a new one
+    /**
+     * this method changes the username if the user wants to edit it to a new one
+     *
+     * @param in Scanner for input
+     */
     public void modifyUsername(Scanner in) {
         Display.displayModifyUsername(this);
 
@@ -143,7 +170,10 @@ public abstract class User implements Serializable {
         }
     }
 
-    // this method changes the name if the user wants to edit it to a new one
+    /**
+     * this method changes the name if the user wants to edit it to a new one
+     * @param in Scanner for input
+     */
     public void modifyName(Scanner in) {
         Display.displayModifyName(this);
 
@@ -154,7 +184,10 @@ public abstract class User implements Serializable {
         System.out.println("Congratulations! You have changed your name.");
     }
 
-    // this method changes the password if the user wants to edit it to a new one
+    /**
+     * this method changes the password if the user wants to edit it to a new one
+     * @param in Scanner for input
+     */
     public void modifyPassword(Scanner in) {
         Display.displayModifyPassword(this);
 
@@ -165,7 +198,10 @@ public abstract class User implements Serializable {
         System.out.println("Congratulations! You have changed your password.");
     }
 
-    // this method deletes the account if the user wants to delete their account
+    /**
+     * this method deletes the account if the user wants to delete their account
+     * @param in Scanner for input
+     */
     public void deleteAccount(Scanner in) {
         Display.displayDeleteAccount(this);
 
@@ -177,7 +213,6 @@ public abstract class User implements Serializable {
                     "Your account has been deleted. Welcome to the Learning Management Discussion Board!");
         }
     }
-
 
     /**
      * Reply to a reply to a discussion forum

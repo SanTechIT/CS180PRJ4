@@ -131,6 +131,9 @@ public class Teacher extends User implements Serializable {
 
     /**
      * Create course
+     *
+     * @param topic topic of course
+     * @return whether operation succeeds
      */
     public boolean createCourse(String topic) {
         //        Course c = new Course(topic, this);
@@ -151,6 +154,10 @@ public class Teacher extends User implements Serializable {
 
     /**
      * Create discussion forum
+     *
+     * @param topic topic of forum
+     * @param course course forum belongs to
+     * @return if operation succeeds
      */
     public boolean createDiscussion(String topic, Course course) {
         // Discussion d = new Discussion(topic, course, this);
@@ -160,6 +167,10 @@ public class Teacher extends User implements Serializable {
 
     /**
      * Edit discussion forum
+     *
+     * @param discussion discussion to edit
+     * @param newTopic new topic of discussion
+     * @return if operation succeeded
      */
     public boolean editDiscussion(Discussion discussion, String newTopic) {
         return discussion.setTopic(newTopic, this);
@@ -167,14 +178,20 @@ public class Teacher extends User implements Serializable {
 
     /**
      * Delete discussion forum
+     *
+     * @param discussion discussion to delete
+     * @return if operation succeeded
      */
     public boolean deleteDiscussion(Discussion discussion) {
         return (Discussion.deleteDiscussion(discussion.getId(), this) != null);
     }
 
     /**
-     * "Teachers can view replies for a specific student on one page
-     * and assign a point value to their work."
+     * grades a post
+     *
+     * @param targetPost post to grade
+     * @param grade grade to assign - goes between 1 and 100
+     * @return if operation succeeded
      */
     public boolean gradePost(Post targetPost, int grade) {
         return targetPost.grade(this, grade);

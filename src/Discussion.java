@@ -27,10 +27,18 @@ public class Discussion implements Serializable {
     private Date timestamp;
     private int creator;
 
+    /**
+     * CANNOT BE USED. Discussions can't be instantiated with constructor.
+     * createDiscussion MUST be used.
+     */
     private Discussion() {
         // Deny Instantiation
     }
 
+    /**
+     * CANNOT BE USED. Discussions can't be instantiated with constructor.
+     * createDiscussion MUST be used.
+     */
     private Discussion(Course course, String topic, int creator) {
         this.topic = topic;
         this.creator = creator;
@@ -44,10 +52,10 @@ public class Discussion implements Serializable {
     /**
      * Creates and returns a new Discussion object if the user has permission to.
      *
-     * @param course
-     * @param topic
-     * @param user
-     * @return
+     * @param course course it belongs to
+     * @param topic topic of discussion
+     * @param user user who's creating discussion
+     * @return created Discussion
      */
     public static Discussion createDiscussion(Course course, String topic, User user) {
         if (!user.canCreateDiscussion()) {
@@ -156,13 +164,5 @@ public class Discussion implements Serializable {
             return true;
         }
         return false;
-    }
-
-    public List<Post> sortByUpvotes() {
-        //        List<Post> posts = this.posts.clone();
-        // Make copy
-        // Implement compareTo in post
-        // sort arraylist
-        return null;
     }
 }

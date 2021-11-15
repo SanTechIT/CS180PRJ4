@@ -155,7 +155,7 @@ public class TeacherRunner extends UserRunner {
         }
     }
 
-    /*
+    /**
      * For menu options exclusive to Teacher
      * called in UserRunner's loopCourse method (viewing discussions in a course)
      *
