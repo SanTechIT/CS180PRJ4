@@ -8,8 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Tests {
     private static final PrintStream ts = System.out;
-    private static ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private ByteArrayOutputStream out = new ByteArrayOutputStream();
 
+    public ByteArrayOutputStream getOut() {
+        return out;
+    }
+
+    public void setOut(ByteArrayOutputStream out) {
+        this.out = out;
+    }
+
+    /*
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -64,6 +73,7 @@ public class Tests {
         } while (!input.equals("exit")); // Not Exit
         // return array of objects
     }
+    */
 
     // Courtesy of
     // https://stackoverflow.com/questions/6415728/junit-testing-with-simulated-user-input
@@ -71,8 +81,8 @@ public class Tests {
     public void setIOStreams(String commands) {
         // Setup IN/OUTPUT
         ByteArrayInputStream in = new ByteArrayInputStream(commands.getBytes());
-        out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
+        setOut(new ByteArrayOutputStream());
+        System.setOut(new PrintStream(getOut()));
         System.setIn(in);
     }
 
@@ -80,10 +90,10 @@ public class Tests {
     public void setIOStreamsAfter() {
         // Restore output, print output
         System.setOut(ts);
-        System.out.println(out);
+        System.out.println(getOut());
     }
 
-    public String getOutputFromFile(String fileName) {
+    public static String getOutputFromFile(String fileName) {
         try (BufferedReader br = new BufferedReader(
             new FileReader(fileName)
         )) {
@@ -103,55 +113,7 @@ public class Tests {
         }
     }
 
-    private String removeWhitespace(String str) {
+    public static String removeWhitespace(String str) {
         return str.replace(" ", "").replace("\n", "");
-    }
-
-    @Test
-    public void testOne() {
-        String commands = "";
-        commands += "login\n";
-        commands += "student\n";
-        commands += "student\n";
-        commands += "logout\n";
-        commands += "exit\n";
-
-        setIOStreams(commands);
-
-        // Run Program
-        main(new String[0]);
-    }
-
-    @Test
-    public void testMainInvalidInput() {
-        String commands = "";
-        commands += "asdlfj092dalkfjlkdasjflksd\n";
-        commands += "exit";
-
-        setIOStreams(commands);
-        main(new String[0]);
-
-        assertEquals(getOutputFromFile("ExpectedOutputs/testMainInvalidInput"),
-            out.toString());
-    }
-
-    @Test
-    public void testMainCreateAccountLogin() {
-        String commands = "create account\n" +
-            "username\n" +
-            "name\n" +
-            "password\n" +
-            "T\n" +
-            "login\n" +
-            "username\n" +
-            "password\n" +
-            "logout\n" +
-            "exit";
-
-        setIOStreams(commands);
-        main(new String[0]);
-
-        assertEquals(getOutputFromFile("ExpectedOutputs/testMainCreateAccountLogin"),
-            out.toString());
     }
 }
