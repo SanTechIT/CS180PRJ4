@@ -37,7 +37,7 @@ public abstract class User implements Serializable {
         this.username = username;
         this.password = password;
         this.name = name;
-        // TODO: NOT CONCURRENT SAFE : )
+        // TOD: NOT CONCURRENT SAFE : )
         id = USER_LIST.size();
         USER_LIST.add(this);
 

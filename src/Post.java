@@ -91,25 +91,6 @@ public class Post implements Serializable {
         }
         return new Post(content, discussion, parent, user.getId());
     }
-
-    //    /**
-    //     * Searches all the posts by ID
-    //     * Unused because a post's ID is its position in POST_LIST,
-    //     * so searching POST_LIST does the same thing
-    //     *
-    //     * @param postId
-    //     *
-    //     * @return
-    //     */
-    //    public static Post searchPostsById(int postId) {
-    //        for (Post post : POST_LIST) {
-    //            if (post.getId() == postId) {
-    //                return post;
-    //            }
-    //        }
-    //        return null;
-    //    }
-
     /**
      * Allows editing of the post if the user has permission to edit or if
      * the user is the creatorId of the post
@@ -138,6 +119,7 @@ public class Post implements Serializable {
             if (parent != -1) {
                 Post.POST_LIST.get(parent).getPosts().remove(Integer.valueOf(id));
             }
+            User.USER_LIST.get(creatorId).getPosts().remove(Integer.valueOf(id));
             return POST_LIST.set(id, null);
         }
         return null;
