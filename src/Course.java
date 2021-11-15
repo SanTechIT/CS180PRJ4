@@ -102,9 +102,6 @@ public class Course implements Serializable {
             return null;
         }
         Course deleted = COURSE_LIST.set(id, null);
-        for (Course c : COURSE_LIST) {
-            System.out.println(c.id);
-        }
         return deleted;
     }
 

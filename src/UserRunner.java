@@ -45,8 +45,8 @@ public abstract class UserRunner {
         return currentCourse;
     }
 
-    public Course setCurrentCourse(Course c) {
-        this.course = c;
+    public void setCurrentCourse(Course c) {
+        this.currentCourse = c;
     }
 
     /**
