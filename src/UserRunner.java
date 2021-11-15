@@ -334,10 +334,6 @@ public abstract class UserRunner {
                 operationSuccess = menuEditPost(targetPost, reader);
                 break;
 
-            case "delete":
-                operationSuccess = menuDeletePost(targetPost, reader);
-                break;
-
             default:
                 return parse2WordInputOverride(targetPost, reader, inputWord1);
         }
@@ -385,30 +381,6 @@ public abstract class UserRunner {
         }
 
         return success;
-    }
-
-    /**
-     * Menu for deleting a post
-     *
-     * @param targetPost post to delete
-     * @param reader     Scanner for getting input
-     */
-    protected boolean menuDeletePost(Post targetPost, Scanner reader) {
-        Display.displayDeletePost(targetPost);
-
-        String input = reader.nextLine();
-        if (input.toLowerCase().equals("yes")) {
-            boolean success = this.user.deletePost(targetPost);
-            if (success) {
-                System.out.println("Post " + targetPost.getId() + " has been deleted.");
-            } else {
-                System.out.println("Sorry, you can't delete that post.");
-            }
-
-            return success;
-        }
-
-        return false;
     }
 
     /* ----- Protected "loopXOverride" methods -----
