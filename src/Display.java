@@ -318,7 +318,7 @@ public class Display {
      */
     public static void displayViewStudent() {
         System.out.println(
-                "\nView Student:" + "\nThis shows all of a student's posts and lets you grade them." + "\nEnter the name or ID of the student to view: " + "\nOr, please type one of these commands: " + "\nback" + "\nlogout");
+                "\nView Student:" + "\nThis shows all of a student's posts and lets you grade them." + "\nEnter the ID of the student to view: " + "\nOr, please type one of these commands: " + "\nback" + "\nlogout");
 
         System.out.print("> ");
     }

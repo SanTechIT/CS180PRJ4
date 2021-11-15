@@ -273,13 +273,11 @@ public abstract class UserRunner {
      * <p>
      * If it is, checks which command is in input, then executes command
      * <p>
-     * Protected because it's called in TeacherRunner's
-     * loopIndividualStudent method
      *
      * @param input  Existing user input
      * @param reader Scanner for getting additional input
      */
-    protected boolean parse2WordInput(String input, Scanner reader) {
+    private boolean parse2WordInput(String input, Scanner reader) {
         if (input.split(" ").length != 2) {
             return false;
         }
@@ -288,11 +286,6 @@ public abstract class UserRunner {
         int postId;
         try {
             postId = Integer.parseInt(input.split(" ")[1]);
-
-            // post id can't be negative
-            if (postId < 0) {
-                return false;
-            }
         } catch (NumberFormatException e) {
             return false;
         }
@@ -306,8 +299,10 @@ public abstract class UserRunner {
         if (targetPost == null) {
             // Post is deleted / does not exist
             return false;
-        } else if (!currentDiscussion.getPosts().contains(
-                targetPost) && !targetPost.getDiscussion().equals(currentDiscussion)) {
+        } else if (
+            currentDiscussion.getPosts().contains(targetPost)
+            && !targetPost.getDiscussion().equals(currentDiscussion)) {
+
             // Post is not part of current discussion
             // check if post upstream is part of discussion
             return false;
@@ -369,7 +364,7 @@ public abstract class UserRunner {
      * @param targetPost post to edit
      * @param reader     Scanner for getting input
      */
-    private boolean menuEditPost(Post targetPost, Scanner reader) {
+    protected boolean menuEditPost(Post targetPost, Scanner reader) {
         Display.displayEditPost(targetPost);
 
         String input = reader.nextLine();
@@ -385,7 +380,7 @@ public abstract class UserRunner {
      * @param targetPost post to delete
      * @param reader     Scanner for getting input
      */
-    private boolean menuDeletePost(Post targetPost, Scanner reader) {
+    protected boolean menuDeletePost(Post targetPost, Scanner reader) {
         Display.displayDeletePost(targetPost);
 
         String input = reader.nextLine();

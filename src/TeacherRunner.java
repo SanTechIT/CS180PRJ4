@@ -143,7 +143,7 @@ public class TeacherRunner extends UserRunner {
                     break;
 
                 default:
-                    if (!(super.parse2WordInput(input, reader))) {
+                    if (!parse2WordInputStudent(input, reader)) {
                         Display.displayBadInput();
                     }
                     break;
@@ -267,6 +267,70 @@ public class TeacherRunner extends UserRunner {
                     break;
             }
         }
+    }
+
+    /**
+     * Modified version of UserRunner's parse2WordInput.
+     * However, while UserRunner's method is for the discussion menu,
+     * this method is for the viewIndividualStudent menu.
+     * <p>
+     * So there are slight modifications.
+     * <p>
+     *
+     * @param input  Existing user input
+     * @param reader Scanner for getting additional input
+     */
+    private boolean parse2WordInputStudent(String input, Scanner reader) {
+        if (input.split(" ").length != 2) {
+            return false;
+        }
+
+        // check if post number is valid
+        int postId;
+        try {
+            postId = Integer.parseInt(input.split(" ")[1]);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        // check if post number corresponds to existing post
+        Post targetPost = null;
+        if (postId < Post.POST_LIST.size() && postId >= 0) {
+            targetPost = Post.POST_LIST.get(postId);
+        }
+
+        if (targetPost == null) {
+            // Post is deleted / does not exist
+            return false;
+        }
+
+        // check command
+        String inputWord1 = input.split(" ")[0];
+
+        boolean operationSuccess = false; // whether operation succeeds
+        // ONLY for if input makes sense - false is for network errors etc
+        // On the other hand, if the command itself makes no sense, the
+        // entire function returns false
+
+        // As of now, some menu functions are incapable of returning false
+        // Since they will always work, since there will always be an Internet connection
+        switch (inputWord1) {
+            case "edit":
+                operationSuccess = super.menuEditPost(targetPost, reader);
+                break;
+
+            case "delete":
+                operationSuccess = super.menuDeletePost(targetPost, reader);
+                break;
+
+            default:
+                return parse2WordInputOverride(targetPost, reader, inputWord1);
+        }
+
+        if (!operationSuccess) {
+            System.out.println("Sorry, there was an error in performing the command.");
+        }
+        return true;
     }
 
     /**
