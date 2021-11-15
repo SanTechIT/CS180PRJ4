@@ -1,6 +1,6 @@
 Reading Data...
-Running test files
-Using Saved Data
+Using test files...
+Using Initial Dataset
 Data has been read and loaded!
 
 Welcome to our program!
@@ -8,7 +8,7 @@ Please type one of these commands:
 login
 create account
 exit
-> 
+>
 Input Error:
 Sorry, I couldn't understand what you typed. Please try again!
 -----
@@ -18,7 +18,8 @@ Please type one of these commands:
 login
 create account
 exit
-> 
+>
 Exit:
 Thank you for using our program. Goodbye!
-
+Saving Data...
+Data has been saved!

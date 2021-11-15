@@ -70,7 +70,31 @@ public class TestsMain extends Tests {
         // actual contains expected
         String fileName = "testMainInvalidInput";
         String actual = getOut().toString();
-        String expected = getOutputFromFile("ExpectedOutputs/" + fileName);
+        String expected = "Reading Data...\n" +
+                "Using test files...\n" +
+                "Using Initial Dataset\n" +
+                "Data has been read and loaded!\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Input Error:\n" +
+                "Sorry, I couldn't understand what you typed. Please try again!\n" +
+                "-----\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Exit:\n" +
+                "Thank you for using our program. Goodbye!\n" +
+                "Saving Data...\n" +
+                "Data has been saved!";
         assertTrue(actual.contains(expected));
     }
 
@@ -123,7 +147,42 @@ public class TestsMain extends Tests {
         // actual contains expected
         String fileName = "testMainInvalidUsername";
         String actual = getOut().toString();
-        String expected = getOutputFromFile("ExpectedOutputs/" + fileName);
-        assertEquals(expected, actual);
+        String expected = "Reading Data...\n" +
+                "Using test files...\n" +
+                "Using Initial Dataset\n" +
+                "Data has been read and loaded!\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> Enter your username: \n" +
+                "Enter your name: \n" +
+                "Create your password: \n" +
+                "Select if you are a [T]eacher or [S]tudent: \n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> Enter your username: \n" +
+                "Enter your name: \n" +
+                "Create your password: \n" +
+                "Select if you are a [T]eacher or [S]tudent: \n" +
+                "Error: A user with this username already exists\n" +
+                "\n" +
+                "Welcome to our program!\n" +
+                "Please type one of these commands:\n" +
+                "login\n" +
+                "create account\n" +
+                "exit\n" +
+                "> \n" +
+                "Exit:\n" +
+                "Thank you for using our program. Goodbye!\n" +
+                "Saving Data...\n" +
+                "Data has been saved!";
+        assertTrue(actual.contains(expected));
     }
 }
