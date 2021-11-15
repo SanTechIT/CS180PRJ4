@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * Project 4 - Main
- *
+ * <p>
  * Main class that runs the program.
  *
  * @author Richard Chang, Sara Xiao, Brian Kwon, Aarini Panzade
@@ -21,7 +21,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Reading Data...");
-        boolean filesExist = new File("data/UserList").exists();
+        boolean filesExist = new File("data/UserList").exists() && new File(
+                "data/CourseList").exists() && new File("data/DiscussionList").exists() && new File(
+                "data/PostList").exists();
+        USESER = args.length > 0 && args[0].equals("useser");
+
         if (USESER && filesExist) {
             System.out.println("Using Saved Data");
             try {
