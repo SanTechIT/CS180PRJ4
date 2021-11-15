@@ -1,11 +1,10 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Project 4 - Tests Main
- * <p>
+ *
  * Contains JUnit tests for Main class and login loop.
  *
  * @author Richard Chang, Sara Xiao
@@ -43,8 +42,11 @@ public class TestsMain extends Tests {
         setIOStreams(commands);
         Main.main(new String[]{"useser"});
 
-        assertTrue(getOut().toString().contains(
-                getOutputFromFile("ExpectedOutputs/testMainInvalidInput")));
+        // actual contains expected
+        String fileName = "testMainInvalidInput";
+        String actual = getOut().toString();
+        String expected = getOutputFromFile("ExpectedOutputs/" + fileName);
+        assertTrue(actual.contains(expected));
     }
 
     /**
@@ -66,8 +68,11 @@ public class TestsMain extends Tests {
         setIOStreams(commands);
         Main.main(new String[]{"useser"});
 
-        assertEquals(getOutputFromFile("ExpectedOutputs/testMainCreateAccountLogin"), getOut());
-
+        // actual contains expected
+        String fileName = "testMainCreateAccountLogin";
+        String actual = getOut().toString();
+        String expected = getOutputFromFile("ExpectedOutputs/" + fileName);
+        assertTrue(actual.contains(expected));
     }
 
     /**
@@ -90,6 +95,10 @@ public class TestsMain extends Tests {
         setIOStreams(commands);
         Main.main(new String[]{"useser"});
 
-        assertEquals(getOutputFromFile("ExpectedOutputs/testMainCreateAccountLogin"), getOut());
+        // actual contains expected
+        String fileName = "testMainInvalidUsername";
+        String actual = getOut().toString();
+        String expected = getOutputFromFile("ExpectedOutputs/" + fileName);
+        assertTrue(actual.contains(expected));
     }
 }

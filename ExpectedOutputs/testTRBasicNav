@@ -1,0 +1,314 @@
+Reading Data...
+Data has been read and loaded!
+
+Welcome to our program!
+Please type one of these commands:
+login
+create account
+exit
+> Enter your username: 
+Enter your password: 
+Successfully Logged In!
+
+Welcome t!
+Please type the number of a course to view:
+0 - MA165
+1 - CS180
+2 - EAPS106
+
+Or, please type one of these commands: 
+edit account
+delete account
+create course
+view student
+logout
+> 
+Welcome to MA165!
+Please type the number of a discussion forum to view:
+0 - default discussion
+
+Or, please type one of these commands: 
+
+back
+create forum
+edit this course
+logout
+> 
+Welcome to default discussion!
+Commands: back, reply [num], edit [num], delete [num], grade [num], view voteboard, edit this forum, delete forum, logout
+Replace [num] with the number of the post you want to interact with!
+
+|  --------------------
+|  Post ID 0
+|  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|  (votes: +2 | -0)
+|  (grade: 0/100)
+|  test post 0
+|  --------------------
+|      |  --------------------
+|      |  Post ID 1 (reply to 0)
+|      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |  (votes: +1 | -1)
+|      |  (grade: 0/100)
+|      |  test post 1
+|      |  --------------------
+|      |      |  --------------------
+|      |      |  Post ID 3 (reply to 1)
+|      |      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |      |  (votes: +0 | -0)
+|      |      |  (grade: 0/100)
+|      |      |  test post 3
+|      |      |  --------------------
+|      |  --------------------
+|      |  Post ID 2 (reply to 0)
+|      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |  (votes: +0 | -2)
+|      |  (grade: 0/100)
+|      |  test post 2
+|      |  --------------------
+|      |      |  --------------------
+|      |      |  Post ID 4 (reply to 2)
+|      |      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |      |  (votes: +0 | -0)
+|      |      |  (grade: 0/100)
+|      |      |  test post 4
+|      |      |  --------------------
+|  --------------------
+|  Post ID 5
+|  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|  (votes: +0 | -0)
+|  (grade: 0/100)
+|  test post 5
+|  --------------------
+> 
+Input Error:
+Sorry, I couldn't understand what you typed. Please try again!
+-----
+
+Welcome to default discussion!
+Commands: back, reply [num], edit [num], delete [num], grade [num], view voteboard, edit this forum, delete forum, logout
+Replace [num] with the number of the post you want to interact with!
+
+|  --------------------
+|  Post ID 0
+|  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|  (votes: +2 | -0)
+|  (grade: 0/100)
+|  test post 0
+|  --------------------
+|      |  --------------------
+|      |  Post ID 1 (reply to 0)
+|      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |  (votes: +1 | -1)
+|      |  (grade: 0/100)
+|      |  test post 1
+|      |  --------------------
+|      |      |  --------------------
+|      |      |  Post ID 3 (reply to 1)
+|      |      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |      |  (votes: +0 | -0)
+|      |      |  (grade: 0/100)
+|      |      |  test post 3
+|      |      |  --------------------
+|      |  --------------------
+|      |  Post ID 2 (reply to 0)
+|      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |  (votes: +0 | -2)
+|      |  (grade: 0/100)
+|      |  test post 2
+|      |  --------------------
+|      |      |  --------------------
+|      |      |  Post ID 4 (reply to 2)
+|      |      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |      |  (votes: +0 | -0)
+|      |      |  (grade: 0/100)
+|      |      |  test post 4
+|      |      |  --------------------
+|  --------------------
+|  Post ID 5
+|  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|  (votes: +0 | -0)
+|  (grade: 0/100)
+|  test post 5
+|  --------------------
+> 
+Reply to post 1:
+You are replying to an existing post in the discussion.
+What should be the content in your new reply post?
+> New post 6 (reply to 1) has been created!
+
+Welcome to default discussion!
+Commands: back, reply [num], edit [num], delete [num], grade [num], view voteboard, edit this forum, delete forum, logout
+Replace [num] with the number of the post you want to interact with!
+
+|  --------------------
+|  Post ID 0
+|  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|  (votes: +2 | -0)
+|  (grade: 0/100)
+|  test post 0
+|  --------------------
+|      |  --------------------
+|      |  Post ID 1 (reply to 0)
+|      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |  (votes: +1 | -1)
+|      |  (grade: 0/100)
+|      |  test post 1
+|      |  --------------------
+|      |      |  --------------------
+|      |      |  Post ID 3 (reply to 1)
+|      |      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |      |  (votes: +0 | -0)
+|      |      |  (grade: 0/100)
+|      |      |  test post 3
+|      |      |  --------------------
+|      |      |  --------------------
+|      |      |  Post ID 6 (reply to 1)
+|      |      |  t | t (ID 3) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |      |  (votes: +0 | -0)
+|      |      |  (grade: 0/100)
+|      |      |  test post that is reply to 1
+|      |      |  --------------------
+|      |  --------------------
+|      |  Post ID 2 (reply to 0)
+|      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |  (votes: +0 | -2)
+|      |  (grade: 0/100)
+|      |  test post 2
+|      |  --------------------
+|      |      |  --------------------
+|      |      |  Post ID 4 (reply to 2)
+|      |      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |      |  (votes: +0 | -0)
+|      |      |  (grade: 0/100)
+|      |      |  test post 4
+|      |      |  --------------------
+|  --------------------
+|  Post ID 5
+|  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|  (votes: +0 | -0)
+|  (grade: 0/100)
+|  test post 5
+|  --------------------
+> 
+Delete post 6:
+Deleted posts can't be recovered. Are you sure?
+Type yes to confirm.
+> Post 6 has been deleted.
+
+Welcome to default discussion!
+Commands: back, reply [num], edit [num], delete [num], grade [num], view voteboard, edit this forum, delete forum, logout
+Replace [num] with the number of the post you want to interact with!
+
+|  --------------------
+|  Post ID 0
+|  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|  (votes: +2 | -0)
+|  (grade: 0/100)
+|  test post 0
+|  --------------------
+|      |  --------------------
+|      |  Post ID 1 (reply to 0)
+|      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |  (votes: +1 | -1)
+|      |  (grade: 0/100)
+|      |  test post 1
+|      |  --------------------
+|      |      |  --------------------
+|      |      |  Post ID 3 (reply to 1)
+|      |      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |      |  (votes: +0 | -0)
+|      |      |  (grade: 0/100)
+|      |      |  test post 3
+|      |      |  --------------------
+|      |  --------------------
+|      |  Post ID 2 (reply to 0)
+|      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |  (votes: +0 | -2)
+|      |  (grade: 0/100)
+|      |  test post 2
+|      |  --------------------
+|      |      |  --------------------
+|      |      |  Post ID 4 (reply to 2)
+|      |      |  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|      |      |  (votes: +0 | -0)
+|      |      |  (grade: 0/100)
+|      |      |  test post 4
+|      |      |  --------------------
+|  --------------------
+|  Post ID 5
+|  s | s (ID 2) posted at time Mon Nov 15 14:05:39 EST 2021
+|  (votes: +0 | -0)
+|  (grade: 0/100)
+|  test post 5
+|  --------------------
+> 
+Welcome to MA165!
+Please type the number of a discussion forum to view:
+There are no discussion forums.
+Or, please type one of these commands: 
+
+back
+create forum
+edit this course
+logout
+> 
+Creating Discussion:
+Please enter the name of the new discussion:
+> Discussion created successfully!
+
+Welcome to MA165!
+Please type the number of a discussion forum to view:
+1 - 1
+
+Or, please type one of these commands: 
+
+back
+create forum
+edit this course
+logout
+> 
+Welcome t!
+Please type the number of a course to view:
+0 - MA165
+1 - CS180
+2 - EAPS106
+
+Or, please type one of these commands: 
+edit account
+delete account
+create course
+view student
+logout
+> 
+Input Error:
+Sorry, I couldn't understand what you typed. Please try again!
+-----
+
+Welcome t!
+Please type the number of a course to view:
+0 - MA165
+1 - CS180
+2 - EAPS106
+
+Or, please type one of these commands: 
+edit account
+delete account
+create course
+view student
+logout
+> 
+Logging out:
+You have successfully logged out.
+
+Welcome to our program!
+Please type one of these commands:
+login
+create account
+exit
+> 
+Exit:
+Thank you for using our program. Goodbye!
+Saving Data...
+Data has been saved!
+
