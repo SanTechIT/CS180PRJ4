@@ -153,7 +153,7 @@ public class Teacher extends User implements Serializable {
     }
 
     public boolean deleteCourse(Course course) {
-        return (Course.deleteCourse(course.getId(), this) == null);
+        return (Course.deleteCourse(course.getId(), this) != null);
     }
 
     /**
