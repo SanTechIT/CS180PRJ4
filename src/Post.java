@@ -66,7 +66,7 @@ public class Post implements Serializable {
      * Returns a new post if the user has permission to post
      *
      * @param content content of post
-     * @param user user who posted the post
+     * @param user    user who posted the post
      * @return the created post
      */
     public static Post createPost(String content, Discussion discussion, User user) {
@@ -81,8 +81,8 @@ public class Post implements Serializable {
      * Post is a reply to another post
      *
      * @param content content of post
-     * @param parent parent post (null if nonexistent)
-     * @param user user who posted the post
+     * @param parent  parent post (null if nonexistent)
+     * @param user    user who posted the post
      * @return the created post
      */
     public static Post createPost(String content, Discussion discussion, Post parent, User user) {
@@ -91,6 +91,7 @@ public class Post implements Serializable {
         }
         return new Post(content, discussion, parent, user.getId());
     }
+
     /**
      * Allows editing of the post if the user has permission to edit or if
      * the user is the creatorId of the post
@@ -120,6 +121,9 @@ public class Post implements Serializable {
                 Post.POST_LIST.get(parent).getPosts().remove(Integer.valueOf(id));
             }
             User.USER_LIST.get(creatorId).getPosts().remove(Integer.valueOf(id));
+            for (int i = 0; i < posts.size(); i++) {
+                Post.POST_LIST.get(posts.get(i)).deletePost(user);
+            }
             return POST_LIST.set(id, null);
         }
         return null;
@@ -312,8 +316,9 @@ public class Post implements Serializable {
 
     /**
      * Returns a total vote score.
-     *
+     * <p>
      * Used for ranking posts for voteboard
+     *
      * @return votes = upvotes - downvotes
      */
     public int getVotes() {
@@ -345,7 +350,7 @@ public class Post implements Serializable {
     /**
      * Decides if the user can vote, if so, then upvotes
      *
-     * @param user user who's voting
+     * @param user    user who's voting
      * @param oldVote value representing user's previous vote on the post (-1, 1, 0)
      */
     public boolean upvote(User user, int oldVote) {
@@ -362,7 +367,7 @@ public class Post implements Serializable {
     /**
      * Decides if the user can vote, if so, then downvotes
      *
-     * @param user user who's voting
+     * @param user    user who's voting
      * @param oldVote value representing user's previous vote on the post (-1, 1, 0)
      */
     public boolean downvote(User user, int oldVote) {
