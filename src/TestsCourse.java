@@ -126,6 +126,8 @@ public class TestsCourse extends Tests {
         commands += "2\n";
         commands += "back\n";
         commands += "3\n";
+        commands += "100\n";
+        commands += "-3\n";
         commands += "logout\n";
         commands += "exit\n";
 
@@ -160,6 +162,7 @@ public class TestsCourse extends Tests {
         commands += CREATE_SINGLE_CLASS;
         commands += "0\n";
         commands += "delete course\n";
+        commands += "yes\n";
         commands += "logout\n";
         commands += "exit\n";
 
@@ -170,7 +173,14 @@ public class TestsCourse extends Tests {
 
         // Courses should exist since they are created in this order
         String actual = getOut().toString();
-        String expected1 = " ";
+        String expected1 = "Delete course 0:\n" +
+                "Deleted courses can't be recovered. Are you sure?\n" +
+                "Type yes to confirm.\n" +
+                "> Course deleted successfully!\n" +
+                "\n" +
+                "Welcome name!\n" +
+                "Please type the number of a course to view:\n" +
+                "There are no courses.";
         assertTrue(actual.contains(expected1));
 
     }

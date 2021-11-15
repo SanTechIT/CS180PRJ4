@@ -119,6 +119,7 @@ public class TestsDiscussion extends Tests {
 
     /**
      * Tests whether the discussions were properly created and the student can see them
+     * Tests whether invalid ids crash program
      */
     @Test
     public void testStudentCanSeeDiscussions() {
@@ -133,6 +134,8 @@ public class TestsDiscussion extends Tests {
         commands += LOGIN_STUDENT;
         commands += "1\n";
         commands += "back\n";
+        commands += "100\n";
+        commands += "-15\n";
         commands += "0\n";
         commands += "2\n";
         commands += "back\n";
@@ -156,8 +159,8 @@ public class TestsDiscussion extends Tests {
                 "1 - Lesson 2\n" +
                 "2 - Lesson 3";
         String expected3 = "Welcome to Lesson 3!\n" +
-                "Commands: back, reply to discussion, reply [num], edit [num], delete [num], " +
-                "upvote [num], downvote [num], novote [num], view grades, logout\n" +
+                "Commands: back, reply to discussion, reply [num], edit [num]upvote [num], " +
+                "downvote [num], novote [num], view grades, logout\n" +
                 "Replace [num] with the number of the post you want to interact with!\n" +
                 "There are no posts.";
         assertTrue(actual.contains(expected1));
