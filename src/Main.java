@@ -21,7 +21,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Reading Data...");
-        if (USESER) {
+        boolean filesExist = new File("data/UserList").exists();
+        if (USESER && filesExist) {
             System.out.println("Using Saved Data");
             try {
                 User.USER_LIST = (List<User>) readData("data/UserList");
@@ -34,10 +35,11 @@ public class Main {
                 System.out.println("An Error while loading data has occurred: " + e.getMessage());
             }
         } else {
+            System.out.println("Using Initial Dataset");
             User.USER_LIST = new ArrayList<>();
             Teacher john = new Teacher("teacher", "teacher", "John");
-            Student alice = new Student("student", "student", "Alice"); // ID 2 and ID 3
-            Student s = new Student("s", "s", "s"); // ID 4 and ID 5
+            Student alice = new Student("student", "student", "Alice");
+            Student s = new Student("s", "s", "s");
             Teacher t = new Teacher("t", "t", "t");
 
             // Add default courses to COURSE_LIST
