@@ -1,7 +1,17 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.After;
+import java.lang.reflect.Field;
+import org.junit.Assert;
+import org.junit.Before;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
+import java.io.*;
+import static org.hamcrest.CoreMatchers.containsString;
+
+import static org.junit.Assert.*;
 
 /**
  * Project 4 - Tests Main
@@ -12,6 +22,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @version 2021-11-15
  */
 public class TestsMain extends Tests {
+
+
+    public static void main(String[] args){
+        Result result = JUnitCore.runClasses(TestsMain.class);
+        if (result.wasSuccessful()) {
+            System.out.println("Excellent - Test ran successfully");
+        } else {
+            for (Failure failure : result.getFailures()) {
+                System.out.println(failure.toString());
+            }
+        }
+    }
 
     /**
      * Test logging in and logging out.
@@ -100,6 +122,6 @@ public class TestsMain extends Tests {
         String fileName = "testMainInvalidUsername";
         String actual = getOut().toString();
         String expected = getOutputFromFile("ExpectedOutputs/" + fileName);
-        assertEquals(expected);
+        assertEquals(expected, actual);
     }
 }

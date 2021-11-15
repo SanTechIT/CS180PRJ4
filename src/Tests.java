@@ -1,10 +1,17 @@
-import org.junit.jupiter.api.*;
+import org.junit.Test;
+import org.junit.After;
+import java.lang.reflect.Field;
+import org.junit.Assert;
+import org.junit.Before;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import static org.hamcrest.CoreMatchers.containsString;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Project 4 - Tests
@@ -62,7 +69,7 @@ public class Tests {
      * After each test is finished, set system output to console/terminal
      * So program output can be seen in test cases
      */
-    @AfterEach
+    @After
     public void setIOStreamsAfter() {
         // Restore output, print output
         System.setOut(ts);
