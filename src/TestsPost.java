@@ -30,7 +30,7 @@ public class TestsPost {
      * @param args
      */
     public static void main(String[] args) {
-        Result result = JUnitCore.runClasses(TestsCourse.class);
+        Result result = JUnitCore.runClasses(TestsPost.class);
         if (result.wasSuccessful()) {
             System.out.println("Excellent - Test ran successfully");
         } else {
