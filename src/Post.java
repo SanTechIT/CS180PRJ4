@@ -130,7 +130,6 @@ public class Post implements Serializable {
      * @return
      */
     public Post deletePost(User user) {
-        // TODO: delete post in discussion / posts
         if (user.canModifyPost() || user.getId() == creatorId) {
             discussion.getPosts().remove(this);
             if (parent != null) {
@@ -194,6 +193,24 @@ public class Post implements Serializable {
         postString += "\n";
 
         return postString;
+    }
+
+    /**
+     * Returns the parent of the post
+     *
+     * @return
+     */
+    public Post getParent() {
+        return parent;
+    }
+
+    /**
+     * Returns the id of the creator of the post
+     *
+     * @return
+     */
+    public int getCreatorId() {
+        return creatorId;
     }
 
     /**
@@ -269,6 +286,15 @@ public class Post implements Serializable {
      */
     public Discussion getDiscussion() {
         return discussion;
+    }
+
+    /**
+     * Returns the timestamp
+     *
+     * @return
+     */
+    public Date getTimestamp() {
+        return timestamp;
     }
 
     /**
