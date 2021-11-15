@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @version 0.1
  */
 public class Main {
-    private static boolean USESER = true;
+    private static boolean USESER = false;
 
     /**
      * @param args Command Line Arguments
