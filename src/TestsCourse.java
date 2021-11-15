@@ -12,8 +12,6 @@ import org.junit.runner.notification.Failure;
 
 import java.io.*;
 
-import static org.hamcrest.CoreMatchers.containsString;
-
 import static org.junit.Assert.*;
 
 /**
