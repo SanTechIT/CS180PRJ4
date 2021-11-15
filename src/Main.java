@@ -6,14 +6,14 @@ import java.util.Scanner;
 
 /**
  * Project 4 - Main
- *
+ * <p>
  * Main class that runs the program.
  *
  * @author Richard Chang, Sara Xiao, Brian Kwon, Aarini Panzade
  * @version 2021-11-15
  */
 public class Main {
-    private static boolean USESER = false;
+    private static boolean USESER = true;
 
     /**
      * @param args Command Line Arguments
@@ -21,23 +21,34 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Reading Data...");
-        if (USESER) {
+
+        String path = "data/";
+        if (args.length > 0 && args[0].equals("useser")) {
+            System.out.println("Running test files");
+            path = "test/";
+        }
+        boolean filesExist = new File(path + "UserList").exists() && new File(
+                path + "CourseList").exists() && new File(
+                path + "DiscussionList").exists() && new File(path + "PostList").exists();
+
+        if (USESER && filesExist) {
             System.out.println("Using Saved Data");
             try {
-                User.USER_LIST = (List<User>) readData("data/UserList");
-                Course.COURSE_LIST = (List<Course>) readData("data/CourseList");
-                Discussion.DISCUSSION_LIST = (List<Discussion>) readData("data/DiscussionList");
-                Post.POST_LIST = (List<Post>) readData("data/PostList");
+                User.USER_LIST = (List<User>) readData(path + "UserList");
+                Course.COURSE_LIST = (List<Course>) readData(path + "CourseList");
+                Discussion.DISCUSSION_LIST = (List<Discussion>) readData(path + "DiscussionList");
+                Post.POST_LIST = (List<Post>) readData(path + "PostList");
             } catch (IOException e) {
                 System.out.println("An Error while loading data has occurred: " + e.getMessage());
             } catch (ClassNotFoundException e) {
                 System.out.println("An Error while loading data has occurred: " + e.getMessage());
             }
         } else {
+            System.out.println("Using Initial Dataset");
             User.USER_LIST = new ArrayList<>();
             Teacher john = new Teacher("teacher", "teacher", "John");
-            Student alice = new Student("student", "student", "Alice"); // ID 2 and ID 3
-            Student s = new Student("s", "s", "s"); // ID 4 and ID 5
+            Student alice = new Student("student", "student", "Alice");
+            Student s = new Student("s", "s", "s");
             Teacher t = new Teacher("t", "t", "t");
 
             // Add default courses to COURSE_LIST

@@ -57,6 +57,7 @@ public class Tests {
         System.setIn(in);
     }
 
+
     /**
      * After each test is finished, set system output to console/terminal
      * So program output can be seen in test cases

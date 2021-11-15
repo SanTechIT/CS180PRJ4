@@ -27,7 +27,7 @@ public class TestsMain extends Tests {
         setIOStreams(commands);
 
         // Run Program
-        Main.main(new String[0]);
+        Main.main(new String[]{"useser"});
     }
 
     /**
@@ -37,10 +37,10 @@ public class TestsMain extends Tests {
     public void testMainInvalidInput() {
         String commands = "";
         commands += "asdlfj092dalkfjlkdasjflksd\n";
-        commands += "exit";
+        commands += "exit\n";
 
         setIOStreams(commands);
-        Main.main(new String[0]);
+        Main.main(new String[]{"useser"});
 
         // actual contains expected
         String fileName = "testMainInvalidInput";
@@ -63,10 +63,10 @@ public class TestsMain extends Tests {
                 "username\n" +
                 "password\n" +
                 "logout\n" +
-                "exit";
+                "exit\n";
 
         setIOStreams(commands);
-        Main.main(new String[0]);
+        Main.main(new String[]{"useser"});
 
         // actual contains expected
         String fileName = "testMainCreateAccountLogin";
@@ -87,12 +87,13 @@ public class TestsMain extends Tests {
                 "T\n" +
                 "create account\n" +
                 "username\n" +
-                "pw\n" +
+                "name\n" +
+                "password2\n" +
                 "T\n" +
-                "exit";
+                "exit\n";
 
         setIOStreams(commands);
-        Main.main(new String[0]);
+        Main.main(new String[]{"useser"});
 
         // actual contains expected
         String fileName = "testMainInvalidUsername";
