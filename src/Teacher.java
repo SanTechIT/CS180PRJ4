@@ -11,6 +11,13 @@ import java.util.Scanner;
  */
 public class Teacher extends User implements Serializable {
 
+    /**
+     * Constructor for Teacher
+     *
+     * @param username username of Teacher
+     * @param password password of Teacher
+     * @param name name of Teacher
+     */
     public Teacher(String username, String password, String name) {
         super(username, password, name); // calls User's constructor
     }
@@ -152,6 +159,12 @@ public class Teacher extends User implements Serializable {
         return course.setTopic(newTopic, this);
     }
 
+    /**
+     * Delete course
+     *
+     * @param course   course to delete
+     * @return whether operation succeeds (no network errors, etc)
+     */
     public boolean deleteCourse(Course course) {
         return (Course.deleteCourse(course.getId(), this) != null);
     }
@@ -164,7 +177,6 @@ public class Teacher extends User implements Serializable {
      * @return if operation succeeds
      */
     public boolean createDiscussion(String topic, Course course) {
-        // Discussion d = new Discussion(topic, course, this);
         // Does permissions check for networking so people cant make random discussions;
         return (Discussion.createDiscussion(course, topic, this) != null);
     }

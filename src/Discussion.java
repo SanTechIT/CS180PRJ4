@@ -1,3 +1,4 @@
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import java.util.List;
 public class Discussion implements Serializable {
     // As per https://stackoverflow.com/
     // questions/10378855/java-io-invalidclassexception-local-class-incompatible
+    @Serial
     private static final long serialVersionUID = 01L;
 
     public static List<Discussion> DISCUSSION_LIST;
@@ -31,6 +33,15 @@ public class Discussion implements Serializable {
         // Deny Instantiation
     }
 
+    /**
+     * Constructor for Discussion (always called internally)
+     * Not accessible by other classes!
+     * Other classes must create Discussion with createDiscussion method
+     *
+     * @param course course Discussion belongs to
+     * @param topic topic of Discussion
+     * @param creator ID of user creating discussion
+     */
     private Discussion(Course course, String topic, int creator) {
         this.topic = topic;
         this.creator = creator;
@@ -41,13 +52,41 @@ public class Discussion implements Serializable {
         DISCUSSION_LIST.add(this);
     }
 
+
+    /**
+     * Returns the Id of the discussion
+     *
+     * @return id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Returns the topic of the discussion
+     *
+     * @return topic
+     */
+    public String getTopic() {
+        return topic;
+    }
+
+    /**
+     * Returns the list of posts associated with this discussion
+     *
+     * @return posts
+     */
+    public List<Integer> getPosts() {
+        return posts;
+    }
+
     /**
      * Creates and returns a new Discussion object if the user has permission to.
      *
-     * @param course
-     * @param topic
-     * @param user
-     * @return
+     * @param course parent course
+     * @param topic discussion topic
+     * @param user user creating discussion
+     * @return created discussion, null if failed
      */
     public static Discussion createDiscussion(Course course, String topic, User user) {
         if (!user.canCreateDiscussion()) {
@@ -60,9 +99,9 @@ public class Discussion implements Serializable {
     /**
      * Deletes the discussion with the given id
      *
-     * @param id
-     * @param user
-     * @return
+     * @param id id of discussion to be deleted
+     * @param user user trying to delete discussion
+     * @return deleted discussion, null if discussion deletion failed
      */
     public static Discussion deleteDiscussion(int id, User user) {
         if (!user.canModifyDiscussion()) {
@@ -74,47 +113,6 @@ public class Discussion implements Serializable {
     }
 
     /**
-     * Returns the Id of the discussion
-     *
-     * @return
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Returns the topic of the discussion
-     *
-     * @return
-     */
-    public String getTopic() {
-        return topic;
-    }
-
-    /**
-     * Returns a string with all the posts listed
-     *
-     * @return
-     */
-    public String getPostsString() {
-        String str = "";
-        for (int postId : posts) {
-            Post post = Post.POST_LIST.get(postId);
-            str += post.getPostsString() + "\n";
-        }
-        return str;
-    }
-
-    /**
-     * Returns the list of posts associated with this discussion
-     *
-     * @return
-     */
-    public List<Integer> getPosts() {
-        return posts;
-    }
-
-    /**
      * Returns ID of every single post in this discussion
      *
      * @return every single post in this discussion
@@ -123,22 +121,7 @@ public class Discussion implements Serializable {
         List<Integer> returnList = new ArrayList<>();
         for (int postId : posts) {
             Post p = Post.POST_LIST.get(postId);
-            returnList.addAll(getPostAndReplies(p));
-        }
-
-        return returnList;
-    }
-
-    /**
-     * Returns ID of target post and all its replies in 1 list
-     * By recursively searching through each post's replies
-     */
-    public List<Integer> getPostAndReplies(Post targetPost) {
-        List<Integer> returnList = new ArrayList<>();
-        returnList.add(targetPost.getId());
-        for (int postId : targetPost.getPosts()) {
-            Post p = Post.POST_LIST.get(postId);
-            returnList.addAll(getPostAndReplies(p));
+            returnList.addAll(p.getPostAndReplies());
         }
 
         return returnList;
@@ -148,7 +131,7 @@ public class Discussion implements Serializable {
      * Checks the user's permissions and tries
      * to set the topic of discussion accordingly
      *
-     * @return
+     * @return operation success boolean
      */
     public boolean setTopic(String topic, User user) {
         if (user.canModifyDiscussion()) {
@@ -156,13 +139,5 @@ public class Discussion implements Serializable {
             return true;
         }
         return false;
-    }
-
-    public List<Post> sortByUpvotes() {
-        //        List<Post> posts = this.posts.clone();
-        // Make copy
-        // Implement compareTo in post
-        // sort arraylist
-        return null;
     }
 }

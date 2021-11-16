@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * in the Teacher class.
  *
  * @author Sara Xiao, Richard Chang, Aarini Panzade
- * @version 2021-11-15
+ * @version 2021-11-16
  */
 public class TeacherRunner extends UserRunner {
     private Teacher teacher; // Teacher who's logged in
@@ -104,14 +104,13 @@ public class TeacherRunner extends UserRunner {
                     try {
                         int userId = Integer.parseInt(input);
 
-                        // TODO
                         User selectedUser = null;
                         // checks if id is valid / exists in list
                         if (userId < User.USER_LIST.size() && userId >= 0) {
                             selectedUser = User.USER_LIST.get(userId);
                         }
-                        // Check if user exists/is deleted/and is a student
-                        if (selectedUser == null || !(selectedUser instanceof Student)) {
+                        // Check if user exists and is a student
+                        if (!(selectedUser instanceof Student)) {
                             Display.displayBadInput();
                         } else {
                             Student currentStudent = (Student) selectedUser;
@@ -282,7 +281,9 @@ public class TeacherRunner extends UserRunner {
     }
 
     /**
-     * Shows the dashboard by the number of votes
+     * Shows all posts in 1 forum sorted by votes
+     *
+     * @param reader Scanner for input
      */
     private void loopViewVoteboard(Scanner reader) {
         boolean continueThisMenu = true;

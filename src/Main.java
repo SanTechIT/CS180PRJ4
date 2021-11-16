@@ -12,7 +12,11 @@ import java.util.Scanner;
  * @version 2021-11-15
  */
 public class Main {
+    // whether serialization is used
     private static boolean USESER = true;
+
+    // path separator (OS-dependent)
+    private static final String pathSep = System.getProperty("file.separator");
 
     /**
      * @param args Command Line Arguments
@@ -23,19 +27,31 @@ public class Main {
 
         // Data storage path
         // Handles any args passed for testing
-        String path = "data/";
+        String path = "data" + pathSep;
         boolean blank = false;
-        if (args.length > 0 && args[0].equals("useser")) {
+
+        // if "test" passed as command line argument,
+        // no serialization used
+        // starts program with default course/post/user info
+        // contained in test/ folder (used for testing)
+        if (args.length > 0 && args[0].equals("test")) {
             System.out.println("Using test files...");
             USESER = false;
-            path = "test/";
+            // save test data to different folder, so it doesn't ruin real data
+            path = "test" + pathSep;
+
+        // if "empty" passed as command line argument,
+        // no serialization used
+        // starts program with no default courses/users
         } else if (args.length > 0 && args[0].equals("empty")) {
             System.out.println("Using blank state...");
             USESER = false;
             blank = true;
-            path = "test_e/";
+            // save blank data to different folder, so it doesn't ruin real data
+            path = "test_e" + pathSep;
         }
 
+        System.out.println("PATH " + path);
         // Checks if file exists before using
         boolean filesExist = new File(path + "UserList").exists() && new File(
                 path + "CourseList").exists() && new File(
@@ -48,9 +64,7 @@ public class Main {
                 Course.COURSE_LIST = (List<Course>) readData(path + "CourseList");
                 Discussion.DISCUSSION_LIST = (List<Discussion>) readData(path + "DiscussionList");
                 Post.POST_LIST = (List<Post>) readData(path + "PostList");
-            } catch (IOException e) {
-                System.out.println("An Error while loading data has occurred: " + e.getMessage());
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 System.out.println("An Error while loading data has occurred: " + e.getMessage());
             }
         } else if (blank) {
@@ -58,50 +72,50 @@ public class Main {
             Course.COURSE_LIST = new ArrayList<>();
             Discussion.DISCUSSION_LIST = new ArrayList<>();
             Post.POST_LIST = new ArrayList<>();
-        } else {
+        } else { // test
             // Internal Database Deleted
-            System.out.println("Creating new Db");
+            System.out.println("Creating new Database");
             User.USER_LIST = new ArrayList<>();
             Course.COURSE_LIST = new ArrayList<>();
             Discussion.DISCUSSION_LIST = new ArrayList<>();
             Post.POST_LIST = new ArrayList<>();
-            //            System.out.println("Using Initial Dataset");
-            //            User.USER_LIST = new ArrayList<>();
-            //            Teacher john = new Teacher("teacher", "teacher", "John");
-            //            Student alice = new Student("student", "student", "Alice");
-            //            Student s = new Student("s", "s", "s");
-            //            Teacher t = new Teacher("t", "t", "t");
-            //
-            //            // Add default courses to COURSE_LIST
-            //            Course.COURSE_LIST = new ArrayList<>();
-            //            Course.createCourse("MA165", User.USER_LIST.get(0));
-            //            Course.createCourse("CS180", User.USER_LIST.get(0));
-            //            Course.createCourse("EAPS106", User.USER_LIST.get(0));
-            //
-            //            // make new User object, set static vars
-            //            Discussion.DISCUSSION_LIST = new ArrayList<>();
-            //            Discussion.createDiscussion(Course.COURSE_LIST.get(0), "default
-            //            discussion",
-            //                    User.USER_LIST.get(0));
-            //
-            //            Post.POST_LIST = new ArrayList<>();
-            //            Post post0 = s.makeDiscussionReply("test post 0", Discussion
-            //            .DISCUSSION_LIST.get(0));
-            //            Post post1 = s.makePostReply(Post.POST_LIST.get(0), "test post 1",
-            //                    Discussion.DISCUSSION_LIST.get(0));
-            //            Post post2 = s.makePostReply(post0, "test post 2", Discussion
-            //            .DISCUSSION_LIST.get(0));
-            //            s.makePostReply(post1, "test post 3", Discussion.DISCUSSION_LIST.get(0));
-            //            s.makePostReply(post2, "test post 4", Discussion.DISCUSSION_LIST.get(0));
-            //            s.makeDiscussionReply("test post 5", Discussion.DISCUSSION_LIST.get(0));
-            //
-            //            s.upvotePost(post0);
-            //            s.downvotePost(post1);
-            //            s.downvotePost(post2);
-            //
-            //            alice.upvotePost(post0);
-            //            alice.upvotePost(post1);
-            //            alice.downvotePost(post2);
+
+            System.out.println("Using Initial Dataset");
+            User.USER_LIST = new ArrayList<>();
+            Teacher john = new Teacher("teacher", "teacher", "John");
+            Student alice = new Student("student", "student", "Alice");
+            Student s = new Student("s", "s", "s");
+            Teacher t = new Teacher("t", "t", "t");
+
+            // Add default courses to COURSE_LIST
+            Course.COURSE_LIST = new ArrayList<>();
+            Course.createCourse("MA165", User.USER_LIST.get(0));
+            Course.createCourse("CS180", User.USER_LIST.get(0));
+            Course.createCourse("EAPS106", User.USER_LIST.get(0));
+
+            // make new User object, set static vars
+            Discussion.DISCUSSION_LIST = new ArrayList<>();
+            Discussion.createDiscussion(Course.COURSE_LIST.get(0), "default discussion",
+                User.USER_LIST.get(0));
+
+            Post.POST_LIST = new ArrayList<>();
+            Post post0 = s.makeDiscussionReply("test post 0", Discussion
+            .DISCUSSION_LIST.get(0));
+            Post post1 = s.makePostReply(Post.POST_LIST.get(0), "test post 1",
+                    Discussion.DISCUSSION_LIST.get(0));
+            Post post2 = s.makePostReply(post0, "test post 2", Discussion
+            .DISCUSSION_LIST.get(0));
+            s.makePostReply(post1, "test post 3", Discussion.DISCUSSION_LIST.get(0));
+            s.makePostReply(post2, "test post 4", Discussion.DISCUSSION_LIST.get(0));
+            s.makeDiscussionReply("test post 5", Discussion.DISCUSSION_LIST.get(0));
+
+            s.upvotePost(post0);
+            s.downvotePost(post1);
+            s.downvotePost(post2);
+
+            alice.upvotePost(post0);
+            alice.upvotePost(post1);
+            alice.downvotePost(post2);
         }
         System.out.println("Data has been read and loaded!");
 

@@ -145,10 +145,10 @@ public abstract class User implements Serializable {
 
 
     /**
-     * get user method which finds the user in the user list
+     * get user method which finds user based on username
      *
-     * @param username
-     * @return
+     * @param username username to search user from
+     * @return User with username, null if no User has that username
      */
     private static User getUser(String username) {
         for (User user : USER_LIST) {
@@ -187,9 +187,7 @@ public abstract class User implements Serializable {
     public void modifyName(Scanner in) {
         Display.displayModifyName(this);
 
-        String newName = in.nextLine();
-
-        name = newName;
+        name = in.nextLine();
 
         System.out.println("Congratulations! You have changed your name.");
     }
@@ -202,9 +200,7 @@ public abstract class User implements Serializable {
     public void modifyPassword(Scanner in) {
         Display.displayModifyPassword(this);
 
-        String newPassword = in.nextLine();
-
-        password = newPassword;
+        password = in.nextLine();
 
         System.out.println("Congratulations! You have changed your password.");
     }
@@ -233,13 +229,14 @@ public abstract class User implements Serializable {
      * @param parentPost       parent post the new post is replying to
      * @param newContent       content of new post
      * @param parentDiscussion discussion forum that contains both posts
+     * @return created post
      */
     public Post makePostReply(Post parentPost, String newContent, Discussion parentDiscussion) {
         Post p = Post.createPost(newContent, parentDiscussion, parentPost, this);
 
         int postId = p.getId();
         if (!posts.contains(postId)) {
-            posts.add(p.getId());
+            posts.add(postId);
         }
 
         return p;

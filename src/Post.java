@@ -40,10 +40,10 @@ public class Post implements Serializable {
     /**
      * Post Constructor
      *
-     * @param content
-     * @param discussion
-     * @param parent
-     * @param creatorId
+     * @param content content of post
+     * @param discussion id of discussion post belongs to
+     * @param parent id of parent post, null if there's none
+     * @param creatorId id of user who created post
      */
     private Post(String content, Discussion discussion, Post parent, int creatorId) {
         this.content = content;
@@ -63,131 +63,9 @@ public class Post implements Serializable {
     }
 
     /**
-     * Returns a new post if the user has permission to post
-     *
-     * @param content content of post
-     * @param user    user who posted the post
-     * @return the created post
-     */
-    public static Post createPost(String content, Discussion discussion, User user) {
-        if (!user.canPost()) {
-            return null;
-        }
-        return new Post(content, discussion, null, user.getId());
-    }
-
-    /**
-     * Returns a new post if the user has permission to post
-     * Post is a reply to another post
-     *
-     * @param content content of post
-     * @param parent  parent post (null if nonexistent)
-     * @param user    user who posted the post
-     * @return the created post
-     */
-    public static Post createPost(String content, Discussion discussion, Post parent, User user) {
-        if (!user.canPost()) {
-            return null;
-        }
-        return new Post(content, discussion, parent, user.getId());
-    }
-
-    /**
-     * Allows editing of the post if the user has permission to edit or if
-     * the user is the creatorId of the post
-     *
-     * @param newContent
-     * @param user
-     * @return
-     */
-    public boolean editPost(String newContent, User user) {
-        if (user.canModifyPost() || user.getId() == creatorId) {
-            this.content = newContent;
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Deletes posts in discussions / posts
-     *
-     * @param user
-     * @return
-     */
-    public Post deletePost(User user) {
-        if (user.canModifyPost()) {
-            Discussion.DISCUSSION_LIST.get(discussion).getPosts().remove(Integer.valueOf(id));
-            if (parent != -1) {
-                Post.POST_LIST.get(parent).getPosts().remove(Integer.valueOf(id));
-            }
-            User.USER_LIST.get(creatorId).getPosts().remove(Integer.valueOf(id));
-            for (int i = 0; i < posts.size(); i++) {
-                Post.POST_LIST.get(posts.get(i)).deletePost(user);
-            }
-            return POST_LIST.set(id, null);
-        }
-        return null;
-    }
-
-    /**
-     * toString for post
-     *
-     * @return postString
-     */
-    public String toString() {
-        String postString = "";
-        User creator = User.USER_LIST.get(creatorId);
-
-        postString += "\n";
-
-        postString += "Post ID " + getId();
-        if (parent != -1) {
-            postString += " (reply to " + parent + ")";
-        }
-
-        postString += "\n" + creator.getUsername() + " | " + creator.getName() + " (ID " + creatorId + ") posted";
-        postString += " at time " + timestamp.toString();
-
-        postString += "\n(votes: +" + getUpvotes() + " | -" + getDownvotes() + ")";
-
-        postString += "\n(grade: " + getGrade() + "/" + getMaxGrade() + ")";
-
-        postString += "\n" + getContent();
-        postString += "\n";
-
-        return postString;
-    }
-
-    public String toStringVoteboard() {
-        String postString = "";
-        User creator = User.USER_LIST.get(creatorId);
-
-        postString += "\n";
-
-        postString += "Post ID " + getId();
-        if (parent != -1) {
-            postString += " (reply to " + parent + ")";
-        }
-
-        postString += "\n" + creator.getUsername() + " | " + creator.getName() + " (ID " + creatorId + ") posted";
-        postString += " at time " + timestamp.toString();
-
-        postString += "\nPoster's vote count: " + creator.getVoteCount();
-
-        postString += "\n(votes: +" + getUpvotes() + " | -" + getDownvotes() + ")";
-
-        postString += "\n(grade: " + getGrade() + "/" + getMaxGrade() + ")";
-
-        postString += "\n" + getContent();
-        postString += "\n";
-
-        return postString;
-    }
-
-    /**
      * Returns the parent of the post
      *
-     * @return
+     * @return parent
      */
     public int getParent() {
         return parent;
@@ -196,16 +74,16 @@ public class Post implements Serializable {
     /**
      * Returns the id of the creator of the post
      *
-     * @return
+     * @return creatorID
      */
     public int getCreatorId() {
         return creatorId;
     }
 
     /**
-     * Returns the Id of the post
+     * Returns the id of the post
      *
-     * @return
+     * @return id
      */
     public int getId() {
         return id;
@@ -214,31 +92,16 @@ public class Post implements Serializable {
     /**
      * Returns the grade of the post
      *
-     * @return
+     * @return grade
      */
     public int getGrade() {
         return grade;
     }
 
     /**
-     * Grades the post if the user has permission
-     *
-     * @param user
-     * @param grade
-     * @return
-     */
-    public boolean grade(User user, int grade) {
-        if (!user.canGrade()) {
-            return false;
-        }
-        this.grade = grade;
-        return true;
-    }
-
-    /**
      * Returns the content of the post
      *
-     * @return
+     * @return content
      */
     public String getContent() {
 
@@ -248,31 +111,16 @@ public class Post implements Serializable {
     /**
      * Returns the max grade
      *
-     * @return
+     * @return maxGrade
      */
     public int getMaxGrade() {
         return maxGrade;
     }
 
     /**
-     * Return the list of posts under this post as a string
-     *
-     * @return
-     */
-    public String getPostsString() {
-        String str = "";
-        str += this.toString();
-        for (Integer postid : posts) {
-            Post post = Post.POST_LIST.get(postid);
-            str += post.getPostsString() + "\n";
-        }
-        return str;
-    }
-
-    /**
      * Returns the discussions
      *
-     * @return
+     * @return discussion
      */
     public int getDiscussion() {
         return discussion;
@@ -281,7 +129,7 @@ public class Post implements Serializable {
     /**
      * Returns the timestamp
      *
-     * @return
+     * @return timestamp
      */
     public Date getTimestamp() {
         return timestamp;
@@ -290,7 +138,7 @@ public class Post implements Serializable {
     /**
      * Returns the list of posts associated with this discussion
      *
-     * @return
+     * @return posts
      */
     public List<Integer> getPosts() {
         return posts;
@@ -323,6 +171,91 @@ public class Post implements Serializable {
      */
     public int getVotes() {
         return getUpvotes() - getDownvotes();
+    }
+
+    /**
+     * Returns a new post if the user has permission to post
+     * Post is a reply to another post
+     *
+     * @param content content of post
+     * @param parent  parent post (null if nonexistent)
+     * @param user    user who posted the post
+     * @return the created post (never returns null because all Users can post)
+     */
+    public static Post createPost(String content, Discussion discussion, Post parent, User user) {
+        if (!user.canPost()) {
+            return null;
+        }
+        return new Post(content, discussion, parent, user.getId());
+    }
+
+    /**
+     * Allows editing of the post if the user has permission to edit or if
+     * the user is the creatorId of the post
+     *
+     * @param newContent new content of post
+     * @param user user who wants to edit post
+     * @return operation success
+     */
+    public boolean editPost(String newContent, User user) {
+        if (user.canModifyPost() || user.getId() == creatorId) {
+            this.content = newContent;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Deletes this post if permission allows
+     *
+     * @param user User trying to delete post
+     * @return deleted Post, null if deletion failed
+     */
+    public Post deletePost(User user) {
+        if (user.canModifyPost()) {
+            Discussion.DISCUSSION_LIST.get(discussion).getPosts().remove(Integer.valueOf(id));
+            if (parent != -1) {
+                Post.POST_LIST.get(parent).getPosts().remove(Integer.valueOf(id));
+            }
+            User.USER_LIST.get(creatorId).getPosts().remove(Integer.valueOf(id));
+            for (int i = 0; i < posts.size(); i++) {
+                Post.POST_LIST.get(posts.get(i)).deletePost(user);
+            }
+            return POST_LIST.set(id, null);
+        }
+        return null;
+    }
+
+    /**
+     * Grades the post if the user has permission
+     *
+     * @param user user trying to grade post
+     * @param grade grade to assign to post (always between 1 and 100 inclusive)
+     * @return operation success
+     */
+    public boolean grade(User user, int grade) {
+        if (!user.canGrade()) {
+            return false;
+        }
+        this.grade = grade;
+        return true;
+    }
+
+    /**
+     * Returns ID of this post and all its replies in 1 list
+     * By recursively searching through each post's replies
+     *
+     * @return IDs of this post and all its replies
+     */
+    public List<Integer> getPostAndReplies() {
+        List<Integer> returnList = new ArrayList<>();
+        returnList.add(getId());
+        for (int postId : getPosts()) {
+            Post p = Post.POST_LIST.get(postId);
+            returnList.addAll(p.getPostAndReplies());
+        }
+
+        return returnList;
     }
 
     /**
@@ -382,7 +315,7 @@ public class Post implements Serializable {
     }
 
     /**
-     * Removes 1 upvote or downvote from the code
+     * Removes an upvote/downvote based on value of oldVote
      *
      * @param oldVote 1 for upvote, -1 for downvote
      */

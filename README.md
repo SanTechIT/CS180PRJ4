@@ -20,7 +20,18 @@ Using IntelliJ is best, since everything should work on it.
 - Always store users using their `id`s in `Course`s/`Discussion`s/`Post`s and store
   `Course`s/`Discussion`s/`Post`s as `id`s in `User`s
 
-## Main Class
+_______________
+
+## Class Documentation
+
+### Main Class
+
+#### Fields
+
+| Field      | Signature   | Description | Getter/Setter |
+| ---------- | ----------- | ----------- | ------------- |
+| USESER     | `private static boolean` | whether serialization is used |  |
+| pathSep    | `private static final String` | OS-dependent path separator for file handling |  |
 
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ----------- | ---------- |
@@ -28,54 +39,59 @@ Using IntelliJ is best, since everything should work on it.
 | writeData | `private static void` | `(Object obj, String filename)` | Writes the data into the file |
 | readData | `private static Serializable` | `(String filename)` | Reads the data |
 
-## User Class (abstract) (Serializable)
+### User Class (abstract) (Serializable)
 
-##### Fields
+#### Fields
 
-| Field      | Signature   | Description | Getter/Setter |
-| ---------- | ----------- | ----------- | ------------- |
+| Field       | Signature   | Description | Getter/Setter |
+| ----------- | ----------- | ----------- | ------------- |
+| posts       | `private List<Integer> posts` | ID of every post the User has made | G |
 | USER_LIST   | `public static List<User>` | Lists all users |  |
+| id          | `private int` | Id is same as index in list | G |
 | username    | `private String`  | None | G  |
 | password    | `private String`  | NaN | |
 | name        | `private String`  | -NaN | G/S |
-| id | `private int` | Id is same as index in list | G |
 
 #### Constructors
 
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
-| `public` | `(String username, String password, String name)` |  |
+| `public` | `(String username, String password, String name)` | Creates new User, adds to USER_LIST |
 
-##### Methods
+#### Methods
 
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
 | connect        | `public static void` | `(Scanner in)` |  For user to login with their credentials |
-| loop           | `public abstract void` | `(Scanner in)` | Primary Loop Handler |
-| FIXME | FIXME | FIXME | FIXME |
 | createAccount  | `public static void` | `(Scanner in)` |  Creates Account and appends to account list, does not log user in |
-| modifyUsername  | `public void` | `(Scanner in)` |  Modifies username, can only be done to self, username should be unique |
-| modifyName | `public void` | `(Scanner in)`  | Modifies name, can only be done to self   |
-| modifyPassword  | `public void` | `(Scanner in)` | Modifies password, can only be done to self   |
+| getUser        | `public static User` | `(String username)` | Returns user with username, null if none have that username
+| modifyUsername | `public void` | `(Scanner in)` |  Modifies username, can only be done to self, username should be unique |
+| modifyName     | `public void` | `(Scanner in)`  | Modifies name, can only be done to self   |
+| modifyPassword | `public void` | `(Scanner in)` | Modifies password, can only be done to self   |
 | deleteAccount  | `public void` | `(Scanner in)` |  Deletes the user account and sets its index in list to null |
-| canVote  | `public abstract boolean` | `()` |  Whether the user has permission to vote |
-| canGrade  | `public abstract boolean` | `()` |  Whether the user has permission to grade |
-| canPost  | `public abstract boolean` | `()` |  Whether the user has permission to make or reply to posts, and edit their own posts |
+| makePostReply  | `public Post` | `(Post parentPost, String newContent, Discussion parentDiscussion)` | Reply to a reply to a discussion form |
+| editPost       | `public boolean`   | `(Post targetPost, String newContent)` | Calls post's editPost method to edit post
+| deletePost     | `public boolean`   | `(Post targetPost)` | Calls post's deletePost method to delete post
+| getVoteCount   | `public int`   | `()` | Sums all upvotes and downvotes user's posts have received for a total "vote count"
+| loop           | `public abstract void` | `(Scanner in)` | Primary Loop Handler |
+| canVote        | `public abstract boolean` | `()` |  Whether the user has permission to vote |
+| canGrade       | `public abstract boolean` | `()` |  Whether the user has permission to grade |
+| canPost        | `public abstract boolean` | `()` |  Whether the user has permission to make or reply to posts, and edit their own posts |
 | canCreateCourse |`public abstract boolean` | `()` | Whether the user can create courses |
 | canModifyCourse |`public abstract boolean` | `()` | Whether the user can modify courses |
 | canModifyDiscussion | `public abstract boolean` | `()` |  Whether the user has permission to modify or delete Discussions |
-| canModifyPost | `public abstract boolean` | `()` | (EC) Whether the user has permission to modify or delete Posts made by others |
+| canModifyPost  | `public abstract boolean` | `()` | (EC) Whether the user has permission to modify or delete Posts made by others |
 
-## UserRunner Class (abstract)
+### UserRunner Class (abstract)
 
-##### Fields
+#### Fields
 
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
 | user   | `private User` | user who's logged in |  |
 | currentCourse    | `private Course`  | current course user's looking at | G/S |
 | currentDiscussion    | `private Discussion`  | current discussion user's looking at | G/S |
-| logOut    | `private boolean`  | whether to logout of the program | G/S |
+| logOut    | `private boolean`  | whether to log out of the program | S |
 
 #### Constructors
 
@@ -83,14 +99,14 @@ Using IntelliJ is best, since everything should work on it.
 | ----------- | ----------- | ----------- |
 | `public` | `(User user)` | Creates new UserRunner |
 
-##### Methods
+#### Methods
 
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
 | loop | `public void` | `(Scanner reader)` |  Handles all control flow and UI interaction |
 | loopEditAccount | `private void` | `(Scanner reader)` |  loop for editing account |
 | loopCourse | `private void` | `(Scanner reader)` |  Loop for 1 course and its discussions |
-| loopdiscussion | `private void` | `(Scanner reader)` |  Loop for 1 discussion forum and its posts |
+| loopDiscussion | `private void` | `(Scanner reader)` |  Loop for 1 discussion forum and its posts |
 | parse2WordInput | `protected boolean` | `(String input, Scanner reader)` |  Checks whether 2-word input for loopDiscussion has valid length and post number |
 | menuPostReply | `private boolean` | `(Post targetPost, Scanner reader)` | Menu for posting reply to other post |
 | menuEditPost | `private boolean` | `(Post targetPost, Scanner reader)` | Menu for editing a post |
@@ -100,7 +116,11 @@ Using IntelliJ is best, since everything should work on it.
 | parse2WordInputOverride | `protected boolean` | `(Post targetPost, Scanner reader, String inputWord1)` |  For commands exclusive to Teacher or Student, returns false |
 
 
-## Teacher Class (extends `User`) (Serializable)
+### Teacher Class (extends `User`) (Serializable)
+
+#### Fields
+
+None that aren't inherited.
 
 #### Constructors
 
@@ -118,19 +138,20 @@ Using IntelliJ is best, since everything should work on it.
 | canPost | `public boolean` | `()` | returns true |
 | canCreateCourse | `public boolean` | `()` | returns true |
 | canCreateDiscussion | `public boolean` | `()` | returns true |
+| canModifyCourse | `public boolean`  `()` | returns true |
 | canModifyDiscussion | `public boolean` | `()` | returns true |
 | canModifyPost | `public boolean` | `()` | returns true |
-| createCourse | `public boolean` | `()` | Creates course |
-| createDiscussion | `public boolean` | `()` | Creates discussion |
-| editDiscussion | `public boolean` | `()` | Edits discussion form |
-| deleteDiscussion | `public boolean` | `()` | Deletes discussion form  |
-| gradePost | `public boolean` | `()` | Teachers can assign a point value to student's work|
+| createCourse | `public boolean` | `(String topic)` | Creates course |
+| editCourse | `public boolean` | `(String newTopic, Course course)` | Edits course topic |
+| deleteCourse | `public boolean` | `(Course course)` | Deletes course |
+| createDiscussion | `public boolean` | `(String topic, Course course)` | Creates discussion |
+| editDiscussion | `public boolean` | `(Dicussion discussion, String newTopic)` | Edits discussion forum |
+| deleteDiscussion | `public boolean` | `(Discussion discussion)` | Deletes discussion form  |
+| gradePost | `public boolean` | `(Post targetPost, int grade)` | Teachers can assign a point value to student's work|
 
-* private utility methods exist, have not been implemented yet - will be handled internally so shouldn't be a concern
+### TeacherRunner Class
 
-## TeacherRunner Class
-
-##### Fields
+#### Fields
 
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
@@ -154,22 +175,22 @@ Using IntelliJ is best, since everything should work on it.
 | menuCreateDiscussion | `private void` | `(Scanner reader)` |  The menu for creating new discussion forum |
 | menuEditCourse | `private void` | `(Scanner reader)` |  The menu for editing course topic  |
 | menuDeleteCourse | `private void` | `(Scanner reader)` | The menu for deleting a course |
-| menuEditDiscussion | `private void` | `(Scanner reader)` |  The menu for editing discussion topic |
 | loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  Deleting discussion forum menu option for teacher |
+| menuEditDiscussion | `private void` | `(Scanner reader)` |  The menu for editing discussion topic |
 | loopViewVoteboard | `private void` | `(Scanner reader)` |  Shows the dashboard by the number of votes |
-| parse2WordInputOverride | `protected boolean` | `(Post targetPost, Scanner reader, String inputWord1)` |  Parses the word given as input |
 | parse2WordInputStudent | `protected boolean` | `(Scanner reader, String input)` |  Modified version of UserRunner's parse2WordInput for the viewIndividualStudent menu |
-| menuDeletePost | `private boolean` | `(Post targetPost, Scanner reader)` | menu for deleting a post |
+| parse2WordInputOverride | `protected boolean` | `(Post targetPost, Scanner reader, String inputWord1)` |  Parses the word given as input |
 | menuGradePost | `private boolean` | `(Post targetPost, Scanner reader)` | menu for grading a post |
+| menuDeletePost | `private boolean` | `(Post targetPost, Scanner reader)` | menu for deleting a post |
 
 
-## Student Class (extends `User`) (Serializable)
+### Student Class (extends `User`) (Serializable)
 
-##### Fields
+#### Fields
 
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
-| posts | ` private List<Integer>` | ID of every post the student has made | G |
+| votedPosts | ` private HashMap<Integer, Integer>` | ID of every post the student has voted on |  |
 
 #### Constructors
 
@@ -190,20 +211,16 @@ Using IntelliJ is best, since everything should work on it.
 | canModifyDiscussion | `public boolean` | `()` | returns false |
 | canModifyPost | `public boolean` | `()` | returns false |
 | canCreateDiscussion | `public boolean` | `()` | returns false |
-| isAdmins | `public boolean` | `()` | returns true |
-| makePostReply | `public Post` | `(Post parentPost, String newContent, Discussion parentDiscussion)` | Reply to a reply to a discussion form |
 | makeDiscussionReply | `public Post` | `(String newContent, Discussion parentDiscussion)` | Reply directly to a discussion form |
 | getPostsString | `public String` | `()` | Gets the Posts String |
 | getPostVote | `public int` | `(Post targetPost)` | returns whether votedPost has been upvoted or downvoted by user |
-| upvotePost | `public boolean` | `(Post targetPost)` | Determines whether upvote goes through for post |
-| downvotePost | `public boolean` | `(Post targetPost)` | Get downvote for post |
+| upvotePost | `public boolean` | `(Post targetPost)` | Upvote post if possible
+| downvotePost | `public boolean` | `(Post targetPost)` | Downvote post if possible
+| noVotePost | `public boolean` | `(Post targetPost)` | Remove student's vote on post
 
-- get / store all student posts
-- view scores
+### StudentRunner Class (extends `UserRunner`)
 
-## StudentRunner Class (extends `UserRunner`)
-
-##### Fields
+#### Fields
 
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
@@ -214,24 +231,25 @@ Using IntelliJ is best, since everything should work on it.
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
 | `public` | `(Student student)` | Creates new StudentRunner |
-098
+
 #### Methods
 
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
 | loopDiscussionOverride | `protected boolean` | `(Scanner reader, String input)` |  Replying to discussion forum menu option for student |
-| menuViewGrades | `protected boolean` | `(Scanner reader)` |  Menu for viewing all grades received for all posts in the forum (Student exclusive) |
+| menuViewGrades | `private boolean` | `(Scanner reader)` |  Menu for viewing all grades received for all posts in the forum (Student exclusive) |
 | menuDiscussionReply | `private boolean` | `(Scanner reader)` |  Menu for replying to a discussion form |
 | parse2WordInputOverride | `protected boolean` | `(Scanner reader, String input)` |  Parses the word given as input |
 
-## Course Class (Serializable)
+### Course Class (Serializable)
 
-##### Fields
+#### Fields
 
 | Field      | Signature   | Description |
 | ---------- | ----------- | ----------- |
-| COURSE_LIST    | `public static List<Course>` | Lists all courses |
-| discussions | `private List<Discussions` | List of all `Discussion`s of `Course`| G |
+| serialVersionUID | `private static final long` | Required for serialization | |
+| COURSE_LIST    | `public static List<Course>` | Lists all courses | |
+| discussions | `private List<Integer>` | IDs of all `Discussion`s of course| G |
 | id | `private int` | Id is same as index in list | G |
 | topic | `private String` | Course name, can only be changed by a `Teacher` | G/S |
 | creator | `private int` | Keeps track of the UID of who created this `Course` | G |
@@ -240,34 +258,38 @@ Using IntelliJ is best, since everything should work on it.
 
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
-| `private` | `(String topic, int creator)` | Auto sets id to next id in list |
+| `private` | `()` | Deny instantiation; courses are created with createCourse |
+| `private` | `(String topic, int creator)` | Auto sets id to next id in list (called internally) |
 
 #### Methods
 
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
-| getCoursesString | `public static g` | `()`  |  Returns list of all courses with id + course name (see Console Example) |
+| createCourse | `public static Course ` | `(String topic, User user)` | Creates and returns a new course  object if the user has permission to |
+| deleteCourse | `public static Course ` | `(int id, User user)` | Deletes the course with the given id if permissions allow
 | getDiscussionsString | `public String ` | `()` | Returns list of all discussions with id + discussion topic (see Console Example) |
-| createCourse | `public static Course ` | `()` | Creates and returns a new course  object if the user has permission to |
+| getCoursesString | `public static String` | `()`  |  Returns list of all courses with id + course name (see Console Example) |
 
 ### Discussion Class (Serializable)
 
-##### Fields
+#### Fields
 
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
+| serialVersionUID | `private static final long` | Required for serialization | |
 | DISCUSSION_LIST   | `public static List<Discussion>` | Lists all `Discussion`s |  |
 | id | `private int` | Id is same as index in list | G |
 | topic | `private String` | Discussion Topic | G/S |
-| posts | `private List<Post>` | List of all posts related to this `Discussion` | G |
-| course | `private Course` | Parent Course | G |
+| posts | `private List<Integer>` | IDs of all posts related to this `Discussion` | G |
+| course | `private int` | ID of Parent Course | G |
 | timestamp | `private Date` | Keeps track of when the `Discussion` was created | G/S |
-| creator | `private int` | Keeps track of the UID of who created this `Discussion` | G |
+| creator | `private int` | Keeps track of the user ID of who created this `Discussion` | G |
 
 #### Constructors
 
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
+| `private` | `()` | Deny instantiation; discussions are created with createDiscussion |
 | `private` | `(Course course, String topic, int creator)` | Auto sets id to next id in list |
 
 #### Methods
@@ -276,57 +298,54 @@ Using IntelliJ is best, since everything should work on it.
 | ----------- | ----------- | ---------- | ----------- |
 | createDiscussion | `public static Discussion` | `(Course course, String topic, User user)` |  Creates and returns a new Discussion object if the user has permission to |
 | deleteDiscussion | `public static Discussion` | `(int id, User user)` |  Deletes the discussion with the given id |
-| getPostsString | `public String` | `(Course course, String topic, User user)` |  Returns a string with all the posts listed |
-| sortByUpvotes | `public List<Post>` | `(Course course, String topic, User user)` |  Sorts the list by upvotes |
-
-- Get most popular posts
+| getAllPosts | `public List<Integer>` | `()` | Returns ID of every post in the discussion |
+| setTopic | `public boolean` | `(String topic, User user)` | Changes topic of discussion if permission allows |
 
 ### Post Class (Serializable)
 
 Note: posts can be under both discussions and other posts
 
-##### Fields
+#### Fields
 
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
+| serialVersionUID | `private static final long` | Required for serialization | |
 | POST_LIST  | `public static List<Post>` | Lists all `Post`s |  |
 | id | `private int` | `id` is same as index in list | G |
-| posts | `private List<Post>` | List of all posts related to this `Post` | G |
+| posts | `private List<Integer>` | IDs of all posts related to this `Post` | G |
 | timestamp | `private Date` | Keeps track of when the `Post` was created | G/S |
-| creatorID | `private int` | Keeps track of the UID of who created this `Post` | G |
+| creatorID | `private int` | Keeps track of the user ID of who created this `Post` | G |
 | content | `private String` | Keeps track of the contents in this `Post`, can be changed only by `creator` (EC or a `Teacher`) | G/S |
 | grade | `private int` | Keeps track of the grade of this post `Post`, Only shown if `User` is creator of `Post` or is a `Teacher` | G |
 | maxGrade | `private int` | Keeps track of the max grade of this `Post`, Only shown if `User` is creator of `Post` or is a `Teacher`  | G |
-| upvotes | `private int` | Keeps track of all `Student` UIDs who have up-voted this post | G |
-| downvotes | `private int` | OPTIONAL BUT COOL? | G |
-| parent | `private Post`  | Post that this Post is a reply to; null if this Post is not a reply   | G  |
-| discussion  | `private Discussion` | Discussion that this Post is a part of  | G |
+| upvotes | `private int` | Number of upvotes | G |
+| downvotes | `private int` | Number of downvotes | G |
+| parent | `private int`  | ID of post that this Post is a reply to; null if this Post is not a reply   | G  |
+| discussion  | `private int` | ID of discussion that this Post is a part of  | G |
 
 #### Constructors
 
 | Signature   | Parameters  | Description |
 | ----------- | ----------- | ----------- |
-| `private` | `(String content, Discussion discussion, Post parent, int creatorId)` | Constructor for Post |
+| `private` | `(String content, Discussion discussion, Post parent, User user)` | Constructor for Post (always called internally) |
 
 #### Methods
 
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
-| createPost | `public static`   | `(String content, Discussion discussion, User user)` | Returns a new post if the user has permission to post |
-| createPost | `public static`   | `(String content, Discussion discussion, Post parent, User user)` | Returns a new post if the user has permission to post, Post is a reply to another post |
-| editPost | `public boolean`   | `(String newContent, User user)` | Allows editing of the post if the user has permission to edit or if the user is the creatorId of the post |
-| toString | `public String`   | `()` | The toString for Post |
+| createPost | `public static`   | `(String content, Discussion discussion, Post parent, User user)` | Returns a new post if the user has permission to post |
+| editPost | `public boolean`   | `(String newContent, User user)` | Replaces post content with newContent if permission allows
+| deletePost | `public Post`   | `(User user)` | Deletes post if permission allows
 | grade | `public boolean`   | `(User user, int grade)` | Grades the post if the user has permission |
-| getPostsString | `public String`   | `()` | Return the list of posts under this post as a string |
-| getVotes | `public int`   | `(User user, int oldVote)` | Returns the number of votes after calculation |
-| getControversy | `public int`   | `(User user, int oldVote)` | Returns the total number of votes |
+| getPostAndReplies | `public List<Integer>` | `()` | Returns list with ID of post and all its replies |
+| getControversy | `public int`   | `()` | Returns an int representing controversy |
 | upvote | `public boolean`   | `(User user, int oldVote)` | Decides if the user can vote, if so, then upvotes |
 | downvote | `public boolean`   | `(User user, int oldVote)` | Decides if the user can vote, if so, then downvotes |
-| removeVote | `public boolean`   | `(int oldVote)` | removes the vote |
+| removeVote | `public boolean`   | `(int oldVote)` | Removes an upvote/downvote based on value of oldVote |
 
 ### Display Class
 
-#### Methods
+##### Methods
 
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
@@ -337,9 +356,14 @@ Note: posts can be under both discussions and other posts
 | displayLogout | `public static void` | `()`  |  Displays output for logging out |
 | displayCreateCourse | `public static void` | `()`  |  Displays output for creating a course (accessed from main menu) |
 | displayCourse | `public static void` | `(Course currentCourse, User user)`  |  Displays output for course loop (viewing all discussions in 1 course) |
-| displayCreateDiscussion | `public static void` | `(Course currentCourse, User user)`  |  Displays output for creating a discussion |
-| displayEditCourse | `public static void` | `()`  |  Displays output for editing a course topic |
+| displayCreateDiscussion | `public static void` | `()`  |  Displays output for creating a discussion |
+| displayEditDiscussion | `public static void` | `()`  |  Displays output for editing a discussion |
 | displayDiscussion | `public static void` | `(Discussion currentDiscussion, User user)`  |  Displays output for discussion loop (viewing all posts in 1 discussion) |
+| getDiscussionString | `private static String` | `(Discussion discussion, User user)`  |  Gets the posts of direct child in discussion and return as string |
+| getPostStrings | `private static String` | `(Post postin, int indent, User user)`  |  Gets string representation of 1 post + all its replies |
+| getPostString | `private static String` | `(Post postin, int indent, User user)`  | Returns string representation of a post |
+| displayDeleteCourse | `public static void` | `(Course currentCourse)`  |  Displays output for deleting a course |
+| displayEditCourse | `public static void` | `()`  |  Displays output for editing a course topic |
 | displayDiscussionReply | `public static void` | `(Discussion currentDiscussion)`  |  Displays menu for replying directly to discussion (Student only) |
 | displayPostReply | `public static void` | `(Post targetPost)`  |  Displays menu for replying to post |
 | displayEditPost | `public static void` | `(Post targetPost)`  |  Displays menu for editing post |
@@ -352,12 +376,23 @@ Note: posts can be under both discussions and other posts
 | displayDeleteAccount | `public static void` | `(User user)`  |  Displays output for deleting an account |
 | displayViewStudent | `public static void` | `()`  |  Displays output for view student loop (option from the main loop) |
 | displayIndividualStudent | `public static void` | `(Student currentStudent)`  |  Displays output for an individual student |
-| displayPostsVoteboard | `private static void` | `(List<Post> posts))` |  Displays lists of posts |
+| displayPostsDepth0 | `private static void` | `(List<Integer> posts, User user)` |  Displays list of posts without indenting |
 | displayViewVoteboard | `public static void` | `(Discussion currentDiscussion, String currentSort, User user)` | Displays voteboard, which shows all posts in a forum ranked by votes with sorting options. |
 | displayViewGrades | `public static void` | `(Discussion currentDiscussion, Student currentStudent)` | Displays grades for all of 1 student's posts in 1 forum |
 | displayPostsGrades | `public static void` | `(List<Integer> posts, User user)` | Given a list of posts, prints them all in order with 0 depth AND INCLUDES ONLY GRADE INFO for displayViewGrades |
+| toStringGrades | `public static String`   | `(Post postin)` | Returns post as formatted string (used when student is viewing grades)
 
-### Display Class
+_______________
+
+## Test Classes
+
+### Tests
+
+### TestsCourse
+
+### TestsDiscussion
+
+### TestsMain
 
 #### Methods
 
@@ -368,7 +403,11 @@ Note: posts can be under both discussions and other posts
 | testMainCreateAccountLogin | `public void` | `()`  | Test account creation and logging in with new account |
 | testMainInvalidUsername | `public void` | `()`  | Test account creation with username that's been used |
 
+### TestsPost
 
+### TestsTeacherRunner
+
+_______________
 
 ## Console Example
 

@@ -39,7 +39,7 @@ public abstract class UserRunner {
     /**
      * Returns value of currentCourse
      *
-     * @return
+     * @return currentCourse
      */
     public Course getCurrentCourse() {
         return currentCourse;
@@ -52,7 +52,7 @@ public abstract class UserRunner {
     /**
      * Returns value of currentDiscussion
      *
-     * @return
+     * @return currentDiscussion
      */
     public Discussion getCurrentDiscussion() {
         return currentDiscussion;
@@ -61,25 +61,16 @@ public abstract class UserRunner {
     /**
      * Sets new value of currentDiscussion
      *
-     * @param
+     * @param currentDiscussion new value
      */
     public void setCurrentDiscussion(Discussion currentDiscussion) {
         this.currentDiscussion = currentDiscussion;
     }
 
     /**
-     * Returns value of logout
-     *
-     * @return
-     */
-    public boolean isLogout() {
-        return logout;
-    }
-
-    /**
      * Sets new value of logout
      *
-     * @param logout
+     * @param logout new value
      */
     public void setLogout(boolean logout) {
         this.logout = logout;
@@ -293,11 +284,6 @@ public abstract class UserRunner {
         int postId;
         try {
             postId = Integer.parseInt(input.split(" ")[1]);
-
-            // post id can't be negative
-            if (postId < 0) {
-                return false;
-            }
         } catch (NumberFormatException e) {
             return false;
         }

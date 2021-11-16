@@ -1,3 +1,4 @@
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +10,12 @@ import java.util.List;
  * have Discussions.
  *
  * @author Richard Chang, Sara Xiao
- * @version 2021-11-15
+ * @version 2021-11-16
  */
 public class Course implements Serializable {
     // As per https://stackoverflow.com/
     // questions/10378855/java-io-invalidclassexception-local-class-incompatible
+    @Serial
     private static final long serialVersionUID = 01L;
 
     public static List<Course> COURSE_LIST;
@@ -28,10 +30,10 @@ public class Course implements Serializable {
 
     /**
      * Course Constructor
-     * (Not to be Accessed outside create course method)
+     * (Not to be accessed outside createCourse method)
      *
-     * @param topic
-     * @param creator
+     * @param topic topic of course
+     * @param creator ID of user trying to create course
      */
     private Course(String topic, int creator) {
         this.creator = creator;
@@ -45,9 +47,9 @@ public class Course implements Serializable {
     /**
      * Creates and returns a new course object if the user has permission to.
      *
-     * @param topic
-     * @param user
-     * @return
+     * @param topic topic of course
+     * @param user User trying to create course
+     * @return created course or null if it failed
      */
     public static Course createCourse(String topic, User user) {
         if (user.canCreateCourse()) {
@@ -60,7 +62,7 @@ public class Course implements Serializable {
     /**
      * Returns the id of this class
      *
-     * @return
+     * @return id
      */
     public int getId() {
         return id;
@@ -69,7 +71,7 @@ public class Course implements Serializable {
     /**
      * Returns the topic of this class
      *
-     * @return
+     * @return topic
      */
     public String getTopic() {
         return topic;
@@ -91,11 +93,29 @@ public class Course implements Serializable {
     }
 
     /**
-     * Deletes the discussion with the given id
+     * Returns id of the user who created this course
      *
-     * @param id
-     * @param user
-     * @return
+     * @return creator's id
+     */
+    public int getCreator() {
+        return creator;
+    }
+
+    /**
+     * Returns the ids of all discussions associated with this course
+     *
+     * @return discussions
+     */
+    public List<Integer> getDiscussions() {
+        return discussions;
+    }
+
+    /**
+     * Deletes the course with the given id if permissions allow
+     *
+     * @param id id of course to be deleted
+     * @param user user trying to delete course
+     * @return deleted course or null if no deletion happened
      */
     public static Course deleteCourse(int id, User user) {
         if (!user.canModifyCourse()) {
@@ -106,25 +126,9 @@ public class Course implements Serializable {
     }
 
     /**
-     * Returns the user who created this course
+     * returns String representation of all discussions in course
      *
-     * @return
-     */
-    public int getCreator() {
-        return creator;
-    }
-
-    /**
-     * Returns a list of all discussions associated with this course
-     *
-     * @return
-     */
-    public List<Integer> getDiscussions() {
-        return discussions;
-    }
-
-    /**
-     * @return
+     * @return formatted discussion list
      */
     public String getDiscussionsString() {
         String str = "";
@@ -138,7 +142,7 @@ public class Course implements Serializable {
     /**
      * Returns list of all courses with id + course name
      *
-     * @return
+     * @return formatted course list
      */
     public static String getCoursesString() {
         String str = "";

@@ -31,6 +31,8 @@ public class Display {
 
     /**
      * Displays output for User main loop (viewing all courses after login)
+     *
+     * @param user User viewing output
      */
     public static void displayWelcome(User user) {
         System.out.println(
@@ -171,19 +173,19 @@ public class Display {
     }
 
     /**
-     * Gets the posts of direct child in discussion and return as string
+     * Returns formatted String representing all posts in Discussion
      *
-     * @param discussion
-     * @param user
-     * @return
+     * @param discussion discussion to return String for
+     * @param user user viewing discussion
+     * @return formatted String
      */
     private static String getDiscussionString(Discussion discussion, User user) {
-        String postString = "";
+        String discussionString = "";
         for (Integer postId : discussion.getPosts()) {
             Post post = Post.POST_LIST.get(postId);
-            postString += getPostStrings(post, 0, user);
+            discussionString += getPostStrings(post, 0, user);
         }
-        return postString;
+        return discussionString;
     }
 
     /**
@@ -246,7 +248,11 @@ public class Display {
         return postString;
     }
 
-    // Displays output for deleting a course
+    /**
+     * Displays output for deleting a course
+     *
+     * @param currentCourse course to delete
+     */
     public static void displayDeleteCourse(Course currentCourse) {
         System.out.println(
                 "\nDelete course " + currentCourse.getId() + ":" + "\nDeleted courses can't be " +
@@ -255,7 +261,9 @@ public class Display {
         System.out.print("> ");
     }
 
-    // Displays output for editing a course topic
+    /**
+     * Displays output for editing a course topic
+     */
     public static void displayEditCourse() {
         System.out.println(
                 "\nEditing Course Topic:" + "\nPlease enter the new topic of this course:");
@@ -432,7 +440,7 @@ public class Display {
     }
 
     /**
-     * Given a list of posts, prints them all in order with 0 depth
+     * Given a list of posts, prints them all in order with 0 depth/indentation
      * (as opposed to "normal" way of printing posts, which indents and puts
      * replies beneath parent posts)
      *
@@ -473,32 +481,26 @@ public class Display {
 
             switch (currentSort) {
                 case "best":
-                    Collections.sort(posts, new Comparator<Integer>() {
-                        public int compare(Integer p1id, Integer p2id) {
-                            Post p1 = Post.POST_LIST.get(p1id);
-                            Post p2 = Post.POST_LIST.get(p2id);
-                            return p2.getVotes() - p1.getVotes();
-                        }
+                    posts.sort((p1id, p2id) -> {
+                        Post p1 = Post.POST_LIST.get(p1id);
+                        Post p2 = Post.POST_LIST.get(p2id);
+                        return p2.getVotes() - p1.getVotes();
                     });
                     break;
 
                 case "worst":
-                    Collections.sort(posts, new Comparator<Integer>() {
-                        public int compare(Integer p1id, Integer p2id) {
-                            Post p1 = Post.POST_LIST.get(p1id);
-                            Post p2 = Post.POST_LIST.get(p2id);
-                            return -(p2.getVotes() - p1.getVotes());
-                        }
+                    posts.sort((p1id, p2id) -> {
+                        Post p1 = Post.POST_LIST.get(p1id);
+                        Post p2 = Post.POST_LIST.get(p2id);
+                        return -(p2.getVotes() - p1.getVotes());
                     });
                     break;
 
                 case "controversial":
-                    Collections.sort(posts, new Comparator<Integer>() {
-                        public int compare(Integer p1id, Integer p2id) {
-                            Post p1 = Post.POST_LIST.get(p1id);
-                            Post p2 = Post.POST_LIST.get(p2id);
-                            return -(p2.getControversy() - p1.getControversy());
-                        }
+                    posts.sort((p1id, p2id) -> {
+                        Post p1 = Post.POST_LIST.get(p1id);
+                        Post p2 = Post.POST_LIST.get(p2id);
+                        return -(p2.getControversy() - p1.getControversy());
                     });
                     break;
             }
@@ -535,7 +537,7 @@ public class Display {
         if (posts2.size() == 0) {
             System.out.println("There are no posts.");
         } else {
-            displayPostsGrades(posts2, currentStudent);
+            displayPostsGrades(posts2);
         }
 
         System.out.print("> ");
@@ -547,32 +549,44 @@ public class Display {
      * for displayViewGrades
      *
      * @param posts posts to display
-     * @param user  user viewing posts (determines whether certain info is seen)
      */
-    private static void displayPostsGrades(List<Integer> posts, User user) {
+    private static void displayPostsGrades(List<Integer> posts) {
         String str = "\n";
 
         for (Integer pid : posts) {
             Post postin = Post.POST_LIST.get(pid);
             String postString = "";
             if (postin != null) {
-                String indentStr = "|  ";
-
-                postString += "\n" + indentStr + "--------------------\n";
-
-                postString += indentStr + "Post ID " + postin.getId();
-                if (postin.getParent() != -1) {
-                    postString += " (reply to " + postin.getParent() + ")";
-                }
-                postString += "\n";
-                postString += indentStr + "(grade: " + postin.getGrade() + "/" + postin.getMaxGrade() + ")\n";
-
-                postString += indentStr + postin.getContent() + "\n";
-                postString += indentStr + "--------------------";
+                postString = toStringGrades(postin);
             }
             str += postString;
         }
 
         System.out.println(str);
+    }
+
+    /**
+     * toString for post when viewed with 'view grades'
+     * Modified version that omits unimportant information
+     * so student can focus on grade info
+     *
+     * @return post as formatted string
+     */
+    private static String toStringGrades(Post postin) {
+        String postString = "";
+        String indentStr = "|  ";
+
+        postString += "\n" + indentStr + "--------------------\n";
+
+        postString += indentStr + "Post ID " + postin.getId();
+        if (postin.getParent() != -1) {
+            postString += " (reply to " + postin.getParent() + ")";
+        }
+        postString += "\n";
+        postString += indentStr + "(grade: " + postin.getGrade() + "/" + postin.getMaxGrade() + ")\n";
+
+        postString += indentStr + postin.getContent() + "\n";
+        postString += indentStr + "--------------------";
+        return postString;
     }
 }

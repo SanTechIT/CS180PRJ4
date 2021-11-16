@@ -21,9 +21,9 @@ public class Student extends User implements Serializable {
     /**
      * Student Constructor
      *
-     * @param username
-     * @param password
-     * @param name
+     * @param username username of student
+     * @param password password of student
+     * @param name name of student
      */
     public Student(String username, String password, String name) {
         super(username, password, name);
@@ -180,10 +180,10 @@ public class Student extends User implements Serializable {
     }
 
     /**
-     * Determines whether upvote goes through for post
+     * Upvotes post if possible
      *
-     * @param targetPost
-     * @return
+     * @param targetPost post to be upvoted
+     * @return whether operation succeeds
      */
     public boolean upvotePost(Post targetPost) {
         int oldVoteValue = getPostVote(targetPost);
@@ -202,10 +202,10 @@ public class Student extends User implements Serializable {
     }
 
     /**
-     * Get downvote for post
+     * Downvotes post if possible
      *
-     * @param targetPost
-     * @return downvote count
+     * @param targetPost post to be downvoted
+     * @return whether operation succeeds
      */
     public boolean downvotePost(Post targetPost) {
         int oldVoteValue = getPostVote(targetPost);
