@@ -8,24 +8,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Test cases for course creation and access
+ * Project 4 - Tests Discussion
+ * <p>
+ * Contains JUnit tests for testing Discussion class.
  *
- * @author chang799
- * @version 0.1
+ * @author Richard Chang
+ * @version 2021-11-15
  */
 public class TestsDiscussion extends Tests {
-    private static String CREATE_TEACHER = "create account\n" + "teacher\n" + "name\n" +
-            "password\n" + "t\n";
-    private static String CREATE_STUDENT = "create account\n" + "student\n" + "name\n" +
-            "password\n" + "s\n";
-    private static String LOGIN_TEACHER = "login\n" + "teacher\n" + "password\n";
-    private static String LOGIN_STUDENT = "login\n" + "student\n" + "password\n";
-    private static String CREATE_DEFAULT_CLASSES = "create course\n" + "PHYS110\n" + "create " +
-            "course\n" + "CS180\n" + "create " +
-            "course\n" + "ENGL106\n";
-    private static String CREATE_SINGLE_CLASS = "create course\n" + "PHYS110\n";
-    private static String CREATE_DEFAULT_DISCUSSIONS = "create forum\n" + "Lesson 1\n" +
-            "create forum\n" + "Lesson 2\n" + "create forum\n" + "Lesson 3\n";
 
     /**
      * Borrowed from RunLocal
@@ -81,13 +71,13 @@ public class TestsDiscussion extends Tests {
     }
 
     /**
-     * Check students cant create discussions
+     * Check students can't create discussions
      */
     @Test
     public void testCreateDiscussionStudent() {
         String commands = "";
         commands += CREATE_STUDENT;
-        commands += LOGIN_STUDENT;
+        commands += LOGIN_STUDENT_ALICE;
         commands += CREATE_DEFAULT_CLASSES;
         commands += "0\n";
         commands += CREATE_DEFAULT_DISCUSSIONS;
@@ -131,7 +121,7 @@ public class TestsDiscussion extends Tests {
         commands += CREATE_DEFAULT_DISCUSSIONS;
         commands += "logout\n";
         commands += CREATE_STUDENT;
-        commands += LOGIN_STUDENT;
+        commands += LOGIN_STUDENT_ALICE;
         commands += "1\n";
         commands += "back\n";
         commands += "100\n";
@@ -220,7 +210,7 @@ public class TestsDiscussion extends Tests {
         commands += CREATE_DEFAULT_DISCUSSIONS;
         commands += "logout\n";
         commands += CREATE_STUDENT;
-        commands += LOGIN_STUDENT;
+        commands += LOGIN_STUDENT_ALICE;
         commands += "0\n";
         commands += "1\n";
         commands += "delete forum\n";

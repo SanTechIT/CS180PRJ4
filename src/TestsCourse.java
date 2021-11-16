@@ -1,36 +1,20 @@
 import org.junit.Test;
-import org.junit.After;
-
-import java.lang.reflect.Field;
-
-import org.junit.Assert;
-import org.junit.Before;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-import java.io.*;
-
 import static org.junit.Assert.*;
 
 /**
- * Test cases for course creation and access
+ * Project 4 - Tests Course
+ * <p>
+ * Contains JUnit tests for testing Main class.
  *
- * @author chang799
- * @version 0.1
+ * @author Richard Chang, Sara Xiao
+ * @version 2021-11-16
  */
 public class TestsCourse extends Tests {
-    private static String CREATE_TEACHER = "create account\n" + "teacher\n" + "name\n" +
-            "password\n" + "t\n";
-    private static String CREATE_STUDENT = "create account\n" + "student\n" + "name\n" +
-            "password\n" + "s\n";
-    private static String LOGIN_TEACHER = "login\n" + "teacher\n" + "password\n";
-    private static String LOGIN_STUDENT = "login\n" + "student\n" + "password\n";
-    private static String CREATE_DEFAULT_CLASSES = "create course\n" + "PHYS110\n" + "create " +
-            "course\n" + "CS180\n" + "create " +
-            "course\n" + "ENGL106\n";
-    private static String CREATE_SINGLE_CLASS = "create course\n" + "PHYS110\n";
 
     /**
      * Borrowed from RunLocal
@@ -85,7 +69,7 @@ public class TestsCourse extends Tests {
     public void testCreateCourseStudent() {
         String commands = "";
         commands += CREATE_STUDENT;
-        commands += LOGIN_STUDENT;
+        commands += LOGIN_STUDENT_ALICE;
         commands += CREATE_DEFAULT_CLASSES;
         commands += "logout\n";
         commands += "exit\n";
@@ -118,7 +102,7 @@ public class TestsCourse extends Tests {
         commands += CREATE_DEFAULT_CLASSES;
         commands += "logout\n";
         commands += CREATE_STUDENT;
-        commands += LOGIN_STUDENT;
+        commands += LOGIN_STUDENT_ALICE;
         commands += "0\n";
         commands += "back\n";
         commands += "1\n";

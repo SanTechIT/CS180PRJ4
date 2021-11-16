@@ -3,11 +3,13 @@
 - Aarini - Submitted Report on Brightspace
 - Sara - Submitted code on Vocareum workspace
 
-To compile the program: In the Terminal, cd to the src folder.
+To compile the program: In the Terminal, cd to the src folder. Run `javac Main.java`.
 
-To run the program: In the Terminal, after compiling, run `javac Main.java`. Run `java Main`.
+To run the program: In the Terminal, after compiling, run `java Main`.
 
-To run the test cases: Use IntelliJ to run the test classes for each class. The Tests class contains no tests, only utility methods.
+To run the test cases: You can use IntelliJ to individually run the test classes for each class. The Tests class contains no tests, only utility methods.
+
+Alternatively, to run the tests, you can run the bash script runTestCases.sh in the src folder.
 
 Using IntelliJ is best, since everything should work on it.
 
@@ -404,6 +406,8 @@ _______________
 | testMainInvalidUsername | `public void` | `()`  | Test account creation with username that's been used |
 
 ### TestsPost
+
+### TestsStudentRunner
 
 ### TestsTeacherRunner
 

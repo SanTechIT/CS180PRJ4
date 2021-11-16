@@ -422,18 +422,18 @@ public class Display {
      *
      * @param currentStudent current student being viewed
      */
-    public static void displayIndividualStudent(Student currentStudent) {
+    public static void displayIndividualStudent(Student currentStudent, Teacher currentTeacher) {
         System.out.println("\n" + currentStudent.getName() + "'s Posts:");
 
         System.out.println(
                 "\nCommands: " + "back, edit [num], delete [num], grade [num]" + "\nReplace [num]" +
                         " with the number of the post you " + "want to interact with!");
 
-        String postList = currentStudent.getPostsString();
-        if (postList.isEmpty()) {
+        List<Integer> studentPosts = currentStudent.getPosts();
+        if (studentPosts.isEmpty()) {
             System.out.println("There are no posts.");
         } else {
-            System.out.println(postList);
+            displayPostsDepth0(studentPosts, currentTeacher);
         }
 
         System.out.print("> ");

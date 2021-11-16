@@ -16,7 +16,7 @@ public class Main {
     private static boolean USESER = true;
 
     // path separator (OS-dependent)
-    private static final String pathSep = System.getProperty("file.separator");
+    private static final String pathSep = File.separator;
 
     /**
      * @param args Command Line Arguments
@@ -31,9 +31,9 @@ public class Main {
         boolean blank = false;
 
         // if "test" passed as command line argument,
-        // no serialization used
+        // serialized objects will not be loaded from data folder
         // starts program with default course/post/user info
-        // contained in test/ folder (used for testing)
+        // contained in test folder (used for testing)
         if (args.length > 0 && args[0].equals("test")) {
             System.out.println("Using test files...");
             USESER = false;
@@ -41,7 +41,7 @@ public class Main {
             path = "test" + pathSep;
 
         // if "empty" passed as command line argument,
-        // no serialization used
+        // serialized objects will not be loaded from data folder
         // starts program with no default courses/users
         } else if (args.length > 0 && args[0].equals("empty")) {
             System.out.println("Using blank state...");
@@ -73,6 +73,7 @@ public class Main {
             Discussion.DISCUSSION_LIST = new ArrayList<>();
             Post.POST_LIST = new ArrayList<>();
         } else { // test
+            // If running tests, delete internal database and replace with default database
             // Internal Database Deleted
             System.out.println("Creating new Database");
             User.USER_LIST = new ArrayList<>();
@@ -82,8 +83,8 @@ public class Main {
 
             System.out.println("Using Initial Dataset");
             User.USER_LIST = new ArrayList<>();
-            Teacher john = new Teacher("teacher", "teacher", "John");
-            Student alice = new Student("student", "student", "Alice");
+            Teacher john = new Teacher("teacher", "password", "John");
+            Student alice = new Student("student", "password", "Alice");
             Student s = new Student("s", "s", "s");
             Teacher t = new Teacher("t", "t", "t");
 
@@ -116,6 +117,8 @@ public class Main {
             alice.upvotePost(post0);
             alice.upvotePost(post1);
             alice.downvotePost(post2);
+
+            john.gradePost(post2, 33);
         }
         System.out.println("Data has been read and loaded!");
 
@@ -145,23 +148,25 @@ public class Main {
 
         System.out.println("Saving Data...");
         // ON Exit Save Data
-        try {
-            writeData(User.USER_LIST, path + "UserList");
-            writeData(Course.COURSE_LIST, path + "CourseList");
-            writeData(Discussion.DISCUSSION_LIST, path + "DiscussionList");
-            writeData(Post.POST_LIST, path + "/PostList");
-        } catch (IOException e) {
-            System.out.println(
-                    "An error has occured while trying to save the data: " + e.getMessage());
+        if (!blank) {
+            try {
+                writeData(User.USER_LIST, path + "UserList");
+                writeData(Course.COURSE_LIST, path + "CourseList");
+                writeData(Discussion.DISCUSSION_LIST, path + "DiscussionList");
+                writeData(Post.POST_LIST, path + "/PostList");
+            } catch (IOException e) {
+                System.out.println(
+                        "An error has occured while trying to save the data: " + e.getMessage());
+            }
+            System.out.println("Data has been saved!");
         }
-        System.out.println("Data has been saved!");
     }
 
     /**
      * With inspiration from https://www.geeksforgeeks.org/serialization-in-java/
      *
-     * @param obj
-     * @throws FileNotFoundException
+     * @param obj object to write to file
+     * @throws FileNotFoundException if write fails
      */
     private static void writeData(Object obj, String filename) throws IOException {
         ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(filename, false));
@@ -173,10 +178,10 @@ public class Main {
      * Reads
      * With inspiration from https://www.geeksforgeeks.org/serialization-in-java/
      *
-     * @param filename
-     * @return
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @param filename name of file to read from
+     * @return object read from file
+     * @throws IOException if read fails
+     * @throws ClassNotFoundException if read fails
      */
     private static Serializable readData(
             String filename) throws IOException, ClassNotFoundException {

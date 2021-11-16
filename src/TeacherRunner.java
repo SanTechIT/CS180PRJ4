@@ -134,7 +134,7 @@ public class TeacherRunner extends UserRunner {
      */
     private void loopIndividualStudent(Scanner reader, Student currentStudent) {
         while (currentStudent != null) {
-            Display.displayIndividualStudent(currentStudent);
+            Display.displayIndividualStudent(currentStudent, this.teacher);
             String input = reader.nextLine();
 
             // Input loop is different because input can be a static command or one that takes an
