@@ -40,9 +40,9 @@ public class Main {
             // save test data to different folder, so it doesn't ruin real data
             path = "test" + pathSep;
 
-        // if "empty" passed as command line argument,
-        // serialized objects will not be loaded from data folder
-        // starts program with no default courses/users
+            // if "empty" passed as command line argument,
+            // serialized objects will not be loaded from data folder
+            // starts program with no default courses/users
         } else if (args.length > 0 && args[0].equals("empty")) {
             System.out.println("Using blank state...");
             USESER = false;
@@ -58,8 +58,8 @@ public class Main {
 
         // Checks if file exists before using
         boolean filesExist = new File(path + "UserList").exists() && new File(
-                path + "CourseList").exists() && new File(
-                path + "DiscussionList").exists() && new File(path + "PostList").exists();
+            path + "CourseList").exists() && new File(
+            path + "DiscussionList").exists() && new File(path + "PostList").exists();
 
         if (USESER && filesExist && !blank) {
             System.out.println("Using Saved Data");
@@ -106,11 +106,11 @@ public class Main {
 
             Post.POST_LIST = new ArrayList<>();
             Post post0 = s.makeDiscussionReply("test post 0", Discussion
-            .DISCUSSION_LIST.get(0));
+                .DISCUSSION_LIST.get(0));
             Post post1 = s.makePostReply(Post.POST_LIST.get(0), "test post 1",
-                    Discussion.DISCUSSION_LIST.get(0));
+                Discussion.DISCUSSION_LIST.get(0));
             Post post2 = s.makePostReply(post0, "test post 2", Discussion
-            .DISCUSSION_LIST.get(0));
+                .DISCUSSION_LIST.get(0));
             s.makePostReply(post1, "test post 3", Discussion.DISCUSSION_LIST.get(0));
             s.makePostReply(post2, "test post 4", Discussion.DISCUSSION_LIST.get(0));
             s.makeDiscussionReply("test post 5", Discussion.DISCUSSION_LIST.get(0));
@@ -170,7 +170,7 @@ public class Main {
             System.out.println("Data has been saved!");
         } catch (IOException e) {
             System.out.println(
-                    "An error has occured while trying to save the data: " + e.getMessage());
+                "An error has occured while trying to save the data: " + e.getMessage());
         }
     }
 
@@ -192,11 +192,11 @@ public class Main {
      *
      * @param filename name of file to read from
      * @return object read from file
-     * @throws IOException if read fails
+     * @throws IOException            if read fails
      * @throws ClassNotFoundException if read fails
      */
     private static Serializable readData(
-            String filename) throws IOException, ClassNotFoundException {
+        String filename) throws IOException, ClassNotFoundException {
         ObjectInputStream input = new ObjectInputStream(new FileInputStream(filename));
         Serializable obj = (Serializable) input.readObject();
         input.close();

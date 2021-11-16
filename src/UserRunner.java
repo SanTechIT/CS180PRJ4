@@ -198,7 +198,6 @@ public abstract class UserRunner {
 
                 default:
                     if (!loopCourseOverride(reader, input)) {
-
                         try {
                             int discussionId = Integer.parseInt(input);
 
@@ -214,7 +213,7 @@ public abstract class UserRunner {
                                 Display.displayBadInput();
                             } else {
                                 loopDiscussion(
-                                        reader); // enter discussion menu with inputted discussion
+                                    reader); // enter discussion menu with inputted discussion
                             }
 
                         } catch (NumberFormatException e) {
@@ -297,7 +296,7 @@ public abstract class UserRunner {
             // Post is deleted / does not exist
             return false;
         } else if (!currentDiscussion.getPosts().contains(
-                postId) && targetPost.getDiscussion() != (currentDiscussion.getId())) {
+            postId) && targetPost.getDiscussion() != (currentDiscussion.getId())) {
             // Post is not part of current discussion
             // check if post upstream is part of discussion
             return false;
@@ -345,8 +344,8 @@ public abstract class UserRunner {
         Post newPost = this.user.makePostReply(targetPost, input, currentDiscussion);
 
         System.out.println(
-                "New post " + newPost.getId() + " (reply to " + targetPost.getId() + ")" + " has " +
-                        "been created!");
+            "New post " + newPost.getId() + " (reply to " + targetPost.getId() + ")" + " has " +
+                "been created!");
 
         return true;
     }

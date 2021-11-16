@@ -59,13 +59,13 @@ public class TestsDiscussion extends Tests {
         // Courses should exist since they are created in this order
         String actual = getOut().toString();
         String expected1 = "Welcome to CS180!\n" +
-                "Please type the number of a discussion forum to view:\n" +
-                "There are no discussion forums.";
+            "Please type the number of a discussion forum to view:\n" +
+            "There are no discussion forums.";
         String expected2 = "Welcome to PHYS110!\n" +
-                "Please type the number of a discussion forum to view:\n" +
-                "0 - Lesson 1\n" +
-                "1 - Lesson 2\n" +
-                "2 - Lesson 3";
+            "Please type the number of a discussion forum to view:\n" +
+            "0 - Lesson 1\n" +
+            "1 - Lesson 2\n" +
+            "2 - Lesson 3";
         assertTrue(actual.contains(expected1));
         assertTrue(actual.contains(expected2));
     }
@@ -96,13 +96,13 @@ public class TestsDiscussion extends Tests {
         // Courses should exist since they are created in this order
         String actual = getOut().toString();
         String expected1 = "Welcome to CS180!\n" +
-                "Please type the number of a discussion forum to view:\n" +
-                "There are no discussion forums.";
+            "Please type the number of a discussion forum to view:\n" +
+            "There are no discussion forums.";
         String expected2 = "Welcome to PHYS110!\n" +
-                "Please type the number of a discussion forum to view:\n" +
-                "0 - Lesson 1\n" +
-                "1 - Lesson 2\n" +
-                "2 - Lesson 3";
+            "Please type the number of a discussion forum to view:\n" +
+            "0 - Lesson 1\n" +
+            "1 - Lesson 2\n" +
+            "2 - Lesson 3";
         assertFalse(actual.contains(expected1));
         assertFalse(actual.contains(expected2));
     }
@@ -141,18 +141,18 @@ public class TestsDiscussion extends Tests {
         // Courses should exist since they are created in this order
         String actual = getOut().toString();
         String expected1 = "Welcome to CS180!\n" +
-                "Please type the number of a discussion forum to view:\n" +
-                "There are no discussion forums.";
+            "Please type the number of a discussion forum to view:\n" +
+            "There are no discussion forums.";
         String expected2 = "Welcome to PHYS110!\n" +
-                "Please type the number of a discussion forum to view:\n" +
-                "0 - Lesson 1\n" +
-                "1 - Lesson 2\n" +
-                "2 - Lesson 3";
+            "Please type the number of a discussion forum to view:\n" +
+            "0 - Lesson 1\n" +
+            "1 - Lesson 2\n" +
+            "2 - Lesson 3";
         String expected3 = "Welcome to Lesson 3!\n" +
-                "Commands: back, reply to discussion, reply [num], edit [num]upvote [num], " +
-                "downvote [num], novote [num], view grades, logout\n" +
-                "Replace [num] with the number of the post you want to interact with!\n" +
-                "There are no posts.";
+            "Commands: back, reply to discussion, reply [num], edit [num]upvote [num], " +
+            "downvote [num], novote [num], view grades, logout\n" +
+            "Replace [num] with the number of the post you want to interact with!\n" +
+            "There are no posts.";
         assertTrue(actual.contains(expected1));
         assertTrue(actual.contains(expected2));
         assertTrue(actual.contains(expected3));
@@ -185,14 +185,14 @@ public class TestsDiscussion extends Tests {
         // Courses should exist since they are created in this order
         String actual = getOut().toString();
         String expected1 = "Welcome to PHYS110!\n" +
-                "Please type the number of a discussion forum to view:\n" +
-                "0 - Lesson 1\n" +
-                "1 - Lesson 2\n" +
-                "2 - Lesson 3";
+            "Please type the number of a discussion forum to view:\n" +
+            "0 - Lesson 1\n" +
+            "1 - Lesson 2\n" +
+            "2 - Lesson 3";
         String expected2 = "Welcome to PHYS110!\n" +
-                "Please type the number of a discussion forum to view:\n" +
-                "0 - Lesson 1\n" +
-                "2 - Lesson 3";
+            "Please type the number of a discussion forum to view:\n" +
+            "0 - Lesson 1\n" +
+            "2 - Lesson 3";
         assertTrue(actual.contains(expected1));
         assertTrue(actual.contains(expected2));
     }
@@ -228,14 +228,14 @@ public class TestsDiscussion extends Tests {
         // Courses should exist since they are created in this order
         String actual = getOut().toString();
         String expected1 = "Welcome to PHYS110!\n" +
-                "Please type the number of a discussion forum to view:\n" +
-                "0 - Lesson 1\n" +
-                "1 - Lesson 2\n" +
-                "2 - Lesson 3";
+            "Please type the number of a discussion forum to view:\n" +
+            "0 - Lesson 1\n" +
+            "1 - Lesson 2\n" +
+            "2 - Lesson 3";
         String expected2 = "Welcome to PHYS110!\n" +
-                "Please type the number of a discussion forum to view:\n" +
-                "0 - Lesson 1\n" +
-                "2 - Lesson 3";
+            "Please type the number of a discussion forum to view:\n" +
+            "0 - Lesson 1\n" +
+            "2 - Lesson 3";
         assertTrue(actual.contains(expected1));
         assertFalse(actual.contains(expected2));
     }

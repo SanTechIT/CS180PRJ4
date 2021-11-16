@@ -36,20 +36,20 @@ public class Tests {
     // Strings for easily executing certain commands
     // that must be executed to test other features
     public static final String CREATE_TEACHER = "create account\n" + "teacher\n" + "name\n" +
-            "password\n" + "t\n";
+        "password\n" + "t\n";
     public static final String CREATE_STUDENT = "create account\n" + "student\n" + "name\n" +
-            "password\n" + "s\n";
+        "password\n" + "s\n";
     public static final String LOGIN_TEACHER = "login\n" + "teacher\n" + "password\n";
     public static final String LOGIN_STUDENT_ALICE = "login\n" + "student\n" + "password\n";
     public static final String LOGIN_STUDENT_S = "login\n" + "s\n" + "s\n";
     public static final String CREATE_DEFAULT_CLASSES = "create course\n" + "PHYS110\n" + "create " +
-            "course\n" + "CS180\n" + "create " +
-            "course\n" + "ENGL106\n";
+        "course\n" + "CS180\n" + "create " +
+        "course\n" + "ENGL106\n";
     public static final String CREATE_DISCUSSION = "create discussion\n" + "Lesson 1\n" + "create " +
-            "discussion\n" + "Lesson 2\n" + "create discussion\n" + "Lesson 3\n";
+        "discussion\n" + "Lesson 2\n" + "create discussion\n" + "Lesson 3\n";
     public static final String CREATE_SINGLE_CLASS = "create course\n" + "PHYS110\n";
     public static final String CREATE_DEFAULT_DISCUSSIONS = "create forum\n" + "Lesson 1\n" +
-            "create forum\n" + "Lesson 2\n" + "create forum\n" + "Lesson 3\n";
+        "create forum\n" + "Lesson 2\n" + "create forum\n" + "Lesson 3\n";
     public static final String NAVIGATE_TO_DISCUSSION = "0\n" + "0\n";
     public static final String EXIT_STRING = "logout\n" + "exit\n";
 
@@ -96,8 +96,8 @@ public class Tests {
      * @param expected string expected to be in output
      */
     public void checkOutputContainsExpected(String expected) {
-       String actual = getOut().toString();
-       assertThat(actual, containsString(expected));
+        String actual = getOut().toString();
+        assertThat(actual, containsString(expected));
     }
 
     /**
@@ -130,7 +130,7 @@ public class Tests {
      */
     public static String getOutputFromFile(String fileName) {
         try (BufferedReader br = new BufferedReader(
-                new FileReader(fileName)
+            new FileReader(fileName)
         )) {
             String output = "";
             String line = br.readLine();

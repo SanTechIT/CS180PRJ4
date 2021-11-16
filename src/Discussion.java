@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Project 4 - Discussion
- *
+ * <p>
  * Represents a teacher-created Discussion which
  * belongs to a Course and has Posts.
  *
@@ -38,8 +38,8 @@ public class Discussion implements Serializable {
      * Not accessible by other classes!
      * Other classes must create Discussion with createDiscussion method
      *
-     * @param course course Discussion belongs to
-     * @param topic topic of Discussion
+     * @param course  course Discussion belongs to
+     * @param topic   topic of Discussion
      * @param creator ID of user creating discussion
      */
     private Discussion(Course course, String topic, int creator) {
@@ -84,8 +84,8 @@ public class Discussion implements Serializable {
      * Creates and returns a new Discussion object if the user has permission to.
      *
      * @param course parent course
-     * @param topic discussion topic
-     * @param user user creating discussion
+     * @param topic  discussion topic
+     * @param user   user creating discussion
      * @return created discussion, null if failed
      */
     public static Discussion createDiscussion(Course course, String topic, User user) {
@@ -99,7 +99,7 @@ public class Discussion implements Serializable {
     /**
      * Deletes the discussion with the given id
      *
-     * @param id id of discussion to be deleted
+     * @param id   id of discussion to be deleted
      * @param user user trying to delete discussion
      * @return deleted discussion, null if discussion deletion failed
      */

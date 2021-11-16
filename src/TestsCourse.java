@@ -157,13 +157,13 @@ public class TestsCourse extends Tests {
 
         // Courses should exist since they are created in this order
         String expected1 = "Delete course 0:\n" +
-                "Deleted courses can't be recovered. Are you sure?\n" +
-                "Type yes to confirm.\n" +
-                "> Course deleted successfully!\n" +
-                "\n" +
-                "Welcome name!\n" +
-                "Please type the number of a course to view:\n" +
-                "There are no courses.";
+            "Deleted courses can't be recovered. Are you sure?\n" +
+            "Type yes to confirm.\n" +
+            "> Course deleted successfully!\n" +
+            "\n" +
+            "Welcome name!\n" +
+            "Please type the number of a course to view:\n" +
+            "There are no courses.";
         checkOutputContainsExpected(expected1);
 
     }

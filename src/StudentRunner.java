@@ -72,7 +72,7 @@ public class StudentRunner extends UserRunner {
         Post newPost = this.student.makeDiscussionReply(input, getCurrentDiscussion());
 
         System.out.println("New post " + newPost.getId() + " " +
-                "has been created!");
+            "has been created!");
         return true;
     }
 
@@ -89,7 +89,7 @@ public class StudentRunner extends UserRunner {
      */
     @Override
     protected boolean parse2WordInputOverride(
-            Post targetPost, Scanner reader, String inputWord1) {
+        Post targetPost, Scanner reader, String inputWord1) {
 
         switch (inputWord1) {
             case "upvote":

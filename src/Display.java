@@ -24,7 +24,8 @@ public class Display {
      */
     public static void displayStart() {
         System.out.println(
-                "\nWelcome to our program!" + "\nPlease type one of these commands:" + "\nlogin" + "\ncreate account" + "\nexit");
+            "\nWelcome to our program!" + "\nPlease type one of these commands:" + "\nlogin" + "\ncreate account" +
+                "\nexit");
 
         System.out.print("> ");
     }
@@ -36,8 +37,8 @@ public class Display {
      */
     public static void displayWelcome(User user) {
         System.out.println(
-                "\nWelcome " + user.getName() + "!" + "\nPlease type the number of a course to " +
-                        "view:");
+            "\nWelcome " + user.getName() + "!" + "\nPlease type the number of a course to " +
+                "view:");
 
         String courseList = Course.getCoursesString();
         if (courseList.isEmpty()) {
@@ -48,12 +49,12 @@ public class Display {
 
         if (user instanceof Student) {
             System.out.println(
-                    "Or, please type one of these commands: " + "\nedit account" + "\ndelete " +
-                            "account" + "\nlogout");
+                "Or, please type one of these commands: " + "\nedit account" + "\ndelete " +
+                    "account" + "\nlogout");
         } else {
             System.out.println(
-                    "Or, please type one of these commands: " + "\nedit account" + "\ndelete " +
-                            "account" + "\ncreate course" + "\nview student" + "\nlogout");
+                "Or, please type one of these commands: " + "\nedit account" + "\ndelete " +
+                    "account" + "\ncreate course" + "\nview student" + "\nlogout");
         }
 
         System.out.print("> ");
@@ -64,8 +65,8 @@ public class Display {
      */
     public static void displayBadInput() {
         System.out.println(
-                "\nInput Error:" + "\nSorry, I couldn't understand what you typed. Please try " +
-                        "again!" + "\n-----");
+            "\nInput Error:" + "\nSorry, I couldn't understand what you typed. Please try " +
+                "again!" + "\n-----");
     }
 
     /**
@@ -99,8 +100,8 @@ public class Display {
      */
     public static void displayCourse(Course currentCourse, User user) {
         System.out.println(
-                "\nWelcome to " + currentCourse.getTopic() + "!" + "\nPlease type the number of a" +
-                        " discussion forum to view:");
+            "\nWelcome to " + currentCourse.getTopic() + "!" + "\nPlease type the number of a" +
+                " discussion forum to view:");
 
         String discussionList = currentCourse.getDiscussionsString();
         if (discussionList.isEmpty()) {
@@ -114,8 +115,8 @@ public class Display {
             System.out.println("\nback" + "\nlogout");
         } else {
             System.out.println(
-                    "\nback" + "\ncreate forum" + "\nedit this course" + "\ndelete course" +
-                            "\nlogout");
+                "\nback" + "\ncreate forum" + "\nedit this course" + "\ndelete course" +
+                    "\nlogout");
         }
 
         System.out.print("> ");
@@ -126,7 +127,7 @@ public class Display {
      */
     public static void displayCreateDiscussion() {
         System.out.println(
-                "\nCreating Discussion:" + "\nPlease enter the name of the new discussion:");
+            "\nCreating Discussion:" + "\nPlease enter the name of the new discussion:");
 
         System.out.print("> ");
     }
@@ -136,7 +137,7 @@ public class Display {
      */
     public static void displayEditDiscussion() {
         System.out.println(
-                "\nEditing Discussion Topic:" + "\nPlease enter the new topic of this discussion:");
+            "\nEditing Discussion Topic:" + "\nPlease enter the new topic of this discussion:");
 
         System.out.print("> ");
     }
@@ -151,16 +152,16 @@ public class Display {
         String commands;
         if (user instanceof Student) {
             commands = "Commands: " + "back, reply to discussion, reply [num], edit [num]" +
-                    "upvote [num], downvote [num], novote [num], view grades, logout";
+                "upvote [num], downvote [num], novote [num], view grades, logout";
         } else {
             commands = "Commands: " + "back, reply [num], edit [num], delete [num], " + "grade " +
-                    "[num], view voteboard, edit this forum, delete forum, logout";
+                "[num], view voteboard, edit this forum, delete forum, logout";
         }
 
         System.out.println(
-                "\nWelcome to " + currentDiscussion.getTopic() + "!" + "\n" + commands +
-                        "\nReplace [num] with the number of the post you " + "want to interact " +
-                        "with!");
+            "\nWelcome to " + currentDiscussion.getTopic() + "!" + "\n" + commands +
+                "\nReplace [num] with the number of the post you " + "want to interact " +
+                "with!");
 
         String postList = getDiscussionString(currentDiscussion, user);
         if (postList.isEmpty()) {
@@ -176,7 +177,7 @@ public class Display {
      * Returns formatted String representing all posts in Discussion
      *
      * @param discussion discussion to return String for
-     * @param user user viewing discussion
+     * @param user       user viewing discussion
      * @return formatted String
      */
     private static String getDiscussionString(Discussion discussion, User user) {
@@ -235,7 +236,8 @@ public class Display {
         }
         postString += "\n";
         User puser = User.USER_LIST.get(postin.getCreatorId());
-        postString += indentStr + puser.getUsername() + " | " + puser.getName() + " " + "(ID " + puser.getId() + ") posted";
+        postString += indentStr + puser.getUsername() + " | " + puser.getName() + " " + "(ID " + puser.getId() + ") " +
+            "posted";
         postString += " at time " + postin.getTimestamp().toString() + "\n";
 
         postString += indentStr + "(votes: +" + postin.getUpvotes() + " | -" + postin.getDownvotes() + ")\n";
@@ -255,8 +257,8 @@ public class Display {
      */
     public static void displayDeleteCourse(Course currentCourse) {
         System.out.println(
-                "\nDelete course " + currentCourse.getId() + ":" + "\nDeleted courses can't be " +
-                        "recovered. Are you sure?" + "\nType yes to confirm.");
+            "\nDelete course " + currentCourse.getId() + ":" + "\nDeleted courses can't be " +
+                "recovered. Are you sure?" + "\nType yes to confirm.");
 
         System.out.print("> ");
     }
@@ -266,7 +268,7 @@ public class Display {
      */
     public static void displayEditCourse() {
         System.out.println(
-                "\nEditing Course Topic:" + "\nPlease enter the new topic of this course:");
+            "\nEditing Course Topic:" + "\nPlease enter the new topic of this course:");
 
         System.out.print("> ");
     }
@@ -278,9 +280,9 @@ public class Display {
      */
     public static void displayDiscussionReply(Discussion currentDiscussion) {
         System.out.println(
-                "\nReply to discussion - " + currentDiscussion.getTopic() + ": " + "\nYou are " +
-                        "replying directly to this discussion." + "\nWhat should be the content " +
-                        "in your new post?");
+            "\nReply to discussion - " + currentDiscussion.getTopic() + ": " + "\nYou are " +
+                "replying directly to this discussion." + "\nWhat should be the content " +
+                "in your new post?");
 
         System.out.print("> ");
     }
@@ -292,9 +294,9 @@ public class Display {
      */
     public static void displayPostReply(Post targetPost) {
         System.out.println(
-                "\nReply to post " + targetPost.getId() + ":" + "\nYou are replying to an " +
-                        "existing post in the discussion." + "\nWhat should be the content in " +
-                        "your new reply post?");
+            "\nReply to post " + targetPost.getId() + ":" + "\nYou are replying to an " +
+                "existing post in the discussion." + "\nWhat should be the content in " +
+                "your new reply post?");
 
         System.out.print("> ");
     }
@@ -307,7 +309,7 @@ public class Display {
     public static void displayEditPost(Post targetPost) {
         int id = targetPost.getId();
         System.out.println(
-                "\nEdit post " + id + ":" + "\nWhat should be the new content in post " + id + "?");
+            "\nEdit post " + id + ":" + "\nWhat should be the new content in post " + id + "?");
 
         System.out.print("> ");
     }
@@ -319,8 +321,8 @@ public class Display {
      */
     public static void displayDeletePost(Post targetPost) {
         System.out.println(
-                "\nDelete post " + targetPost.getId() + ":" + "\nDeleted posts can't be recovered" +
-                        ". Are you sure?" + "\nType yes to confirm.");
+            "\nDelete post " + targetPost.getId() + ":" + "\nDeleted posts can't be recovered" +
+                ". Are you sure?" + "\nType yes to confirm.");
 
         System.out.print("> ");
     }
@@ -333,9 +335,9 @@ public class Display {
     public static void displayGradePost(Post targetPost) {
         int id = targetPost.getId();
         System.out.println(
-                "\nGrade post " + id + ":" + "\nThe minimum grade is 0," + "and the maximum grade" +
-                        " is " + targetPost.getMaxGrade() + "." + "\nEnter the grade to assign to" +
-                        " post " + id + ":");
+            "\nGrade post " + id + ":" + "\nThe minimum grade is 0," + "and the maximum grade" +
+                " is " + targetPost.getMaxGrade() + "." + "\nEnter the grade to assign to" +
+                " post " + id + ":");
 
         System.out.print("> ");
     }
@@ -347,9 +349,9 @@ public class Display {
      */
     public static void displayEditAccount(User user) {
         System.out.println(
-                "\nEditing Your Account - " + user.getUsername() + "\nPlease type one of these " +
-                        "commands: " + "\nback" + "\nchange username" + "\nchange name" +
-                        "\nchange password" + "\nlogout");
+            "\nEditing Your Account - " + user.getUsername() + "\nPlease type one of these " +
+                "commands: " + "\nback" + "\nchange username" + "\nchange name" +
+                "\nchange password" + "\nlogout");
 
         System.out.print("> ");
     }
@@ -365,8 +367,8 @@ public class Display {
         System.out.println("Current username: " + user.getUsername());
 
         System.out.println(
-                "What would you like your new username to be? It can't be an already existing " +
-                        "username");
+            "What would you like your new username to be? It can't be an already existing " +
+                "username");
     }
 
     /**
@@ -401,8 +403,8 @@ public class Display {
      */
     public static void displayDeleteAccount(User user) {
         System.out.println(
-                "Delete Account - " + user.getUsername() + ":" + "\nDeleted accounts can't be " +
-                        "recovered. Are you sure you want to do this?" + " Type yes to confirm.");
+            "Delete Account - " + user.getUsername() + ":" + "\nDeleted accounts can't be " +
+                "recovered. Are you sure you want to do this?" + " Type yes to confirm.");
     }
 
     /**
@@ -410,9 +412,9 @@ public class Display {
      */
     public static void displayViewStudent() {
         System.out.println(
-                "\nView Student:" + "\nThis shows all of a student's posts and lets you grade " +
-                        "them." + "\nEnter the ID of the student to view. " + "\nOr, please type " +
-                        "one of these commands: " + "\nback" + "\nlogout");
+            "\nView Student:" + "\nThis shows all of a student's posts and lets you grade " +
+                "them." + "\nEnter the ID of the student to view. " + "\nOr, please type " +
+                "one of these commands: " + "\nback" + "\nlogout");
 
         System.out.print("> ");
     }
@@ -426,8 +428,8 @@ public class Display {
         System.out.println("\n" + currentStudent.getName() + "'s Posts:");
 
         System.out.println(
-                "\nCommands: " + "back, edit [num], delete [num], grade [num]" + "\nReplace [num]" +
-                        " with the number of the post you " + "want to interact with!");
+            "\nCommands: " + "back, edit [num], delete [num], grade [num]" + "\nReplace [num]" +
+                " with the number of the post you " + "want to interact with!");
 
         List<Integer> studentPosts = currentStudent.getPosts();
         if (studentPosts.isEmpty()) {
@@ -470,9 +472,9 @@ public class Display {
     public static void displayViewVoteboard(Discussion currentDiscussion, String currentSort,
                                             User user) {
         System.out.println(
-                "Voteboard: discussion - " + currentDiscussion.getTopic() + "\nCommands: back, " +
-                        "sort best, sort worst, sort controversial" + "\nThe voteboard displays " +
-                        "posts in a forum by vote count." + "\nCurrent sort: " + currentSort);
+            "Voteboard: discussion - " + currentDiscussion.getTopic() + "\nCommands: back, " +
+                "sort best, sort worst, sort controversial" + "\nThe voteboard displays " +
+                "posts in a forum by vote count." + "\nCurrent sort: " + currentSort);
 
         List<Integer> posts = currentDiscussion.getAllPosts();
         if (posts.size() == 0) {
@@ -518,8 +520,8 @@ public class Display {
      */
     public static void displayViewGrades(Discussion currentDiscussion, Student currentStudent) {
         System.out.println("\nView Grades - " + currentDiscussion.getTopic() +
-                "\nYou are viewing the grades for every post you have made in this forum." +
-                "\nMinimum grade is 1. If a post has grade 0, it has not been graded yet.");
+            "\nYou are viewing the grades for every post you have made in this forum." +
+            "\nMinimum grade is 1. If a post has grade 0, it has not been graded yet.");
 
         // get posts
         List<Integer> posts = currentDiscussion.getAllPosts();

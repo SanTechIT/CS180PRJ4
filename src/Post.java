@@ -40,10 +40,10 @@ public class Post implements Serializable {
     /**
      * Post Constructor
      *
-     * @param content content of post
+     * @param content    content of post
      * @param discussion id of discussion post belongs to
-     * @param parent id of parent post, null if there's none
-     * @param creatorId id of user who created post
+     * @param parent     id of parent post, null if there's none
+     * @param creatorId  id of user who created post
      */
     private Post(String content, Discussion discussion, Post parent, int creatorId) {
         this.content = content;
@@ -194,7 +194,7 @@ public class Post implements Serializable {
      * the user is the creatorId of the post
      *
      * @param newContent new content of post
-     * @param user user who wants to edit post
+     * @param user       user who wants to edit post
      * @return operation success
      */
     public boolean editPost(String newContent, User user) {
@@ -229,7 +229,7 @@ public class Post implements Serializable {
     /**
      * Grades the post if the user has permission
      *
-     * @param user user trying to grade post
+     * @param user  user trying to grade post
      * @param grade grade to assign to post (always between 1 and 100 inclusive)
      * @return operation success
      */

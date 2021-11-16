@@ -46,7 +46,7 @@ public class TestsMain extends Tests {
      * Test running the program + immediately exiting.
      * Runs non-test version of program.
      * Make sure it displays correct output and doesn't crash.
-     *
+     * <p>
      * Uses 3 expected strings because read/load data messages can vary.
      */
     @Test
@@ -58,17 +58,17 @@ public class TestsMain extends Tests {
         Main.main(new String[0]);
 
         String expected = "Data has been read and loaded!\n" +
-                "\n" +
-                "Welcome to our program!\n" +
-                "Please type one of these commands:\n" +
-                "login\n" +
-                "create account\n" +
-                "exit\n" +
-                "> \n" +
-                "Exit:\n" +
-                "Thank you for using our program. Goodbye!\n" +
-                "Saving Data...\n" +
-                "Data has been saved!\n";
+            "\n" +
+            "Welcome to our program!\n" +
+            "Please type one of these commands:\n" +
+            "login\n" +
+            "create account\n" +
+            "exit\n" +
+            "> \n" +
+            "Exit:\n" +
+            "Thank you for using our program. Goodbye!\n" +
+            "Saving Data...\n" +
+            "Data has been saved!\n";
         checkOutputContainsExpected(expected);
     }
 
@@ -89,33 +89,33 @@ public class TestsMain extends Tests {
         Main.main(new String[]{"test"});
 
         String expected = "Welcome to our program!\n" +
-                "Please type one of these commands:\n" +
-                "login\n" +
-                "create account\n" +
-                "exit\n" +
-                "> Enter your username: \n" +
-                "Enter your password: \n" +
-                "Successfully Logged In!\n" +
-                "\n" +
-                "Welcome Alice!\n" +
-                "Please type the number of a course to view:\n" +
-                "0 - MA165\n" +
-                "1 - CS180\n" +
-                "2 - EAPS106\n" +
-                "\n" +
-                "Or, please type one of these commands: \n" +
-                "edit account\n" +
-                "delete account\n" +
-                "logout\n" +
-                "> \n" +
-                "Logging out:\n" +
-                "You have successfully logged out.\n" +
-                "\n" +
-                "Welcome to our program!\n" +
-                "Please type one of these commands:\n" +
-                "login\n" +
-                "create account\n" +
-                "exit";
+            "Please type one of these commands:\n" +
+            "login\n" +
+            "create account\n" +
+            "exit\n" +
+            "> Enter your username: \n" +
+            "Enter your password: \n" +
+            "Successfully Logged In!\n" +
+            "\n" +
+            "Welcome Alice!\n" +
+            "Please type the number of a course to view:\n" +
+            "0 - MA165\n" +
+            "1 - CS180\n" +
+            "2 - EAPS106\n" +
+            "\n" +
+            "Or, please type one of these commands: \n" +
+            "edit account\n" +
+            "delete account\n" +
+            "logout\n" +
+            "> \n" +
+            "Logging out:\n" +
+            "You have successfully logged out.\n" +
+            "\n" +
+            "Welcome to our program!\n" +
+            "Please type one of these commands:\n" +
+            "login\n" +
+            "create account\n" +
+            "exit";
         checkOutputContainsExpected(expected);
     }
 
@@ -133,20 +133,20 @@ public class TestsMain extends Tests {
 
         // actual contains expected
         String expected = "Welcome to our program!\n" +
-                "Please type one of these commands:\n" +
-                "login\n" +
-                "create account\n" +
-                "exit\n" +
-                "> \n" +
-                "Input Error:\n" +
-                "Sorry, I couldn't understand what you typed. Please try again!\n" +
-                "-----\n" +
-                "\n" +
-                "Welcome to our program!\n" +
-                "Please type one of these commands:\n" +
-                "login\n" +
-                "create account\n" +
-                "exit\n";
+            "Please type one of these commands:\n" +
+            "login\n" +
+            "create account\n" +
+            "exit\n" +
+            "> \n" +
+            "Input Error:\n" +
+            "Sorry, I couldn't understand what you typed. Please try again!\n" +
+            "-----\n" +
+            "\n" +
+            "Welcome to our program!\n" +
+            "Please type one of these commands:\n" +
+            "login\n" +
+            "create account\n" +
+            "exit\n";
         checkOutputContainsExpected(expected);
     }
 
@@ -156,65 +156,65 @@ public class TestsMain extends Tests {
     @Test
     public void testCreateAccountLogin() {
         String commands = "create account\n" +
-                "username\n" +
-                "name\n" +
-                "password\n" +
-                "T\n" +
-                "login\n" +
-                "username\n" +
-                "password\n" +
-                "logout\n" +
-                "exit\n";
+            "username\n" +
+            "name\n" +
+            "password\n" +
+            "T\n" +
+            "login\n" +
+            "username\n" +
+            "password\n" +
+            "logout\n" +
+            "exit\n";
 
         setIOStreams(commands);
         Main.main(new String[]{"test"});
 
         // actual contains expected
         String expected = "Welcome to our program!\n" +
-                "Please type one of these commands:\n" +
-                "login\n" +
-                "create account\n" +
-                "exit\n" +
-                "> Enter your username: \n" +
-                "Enter your name: \n" +
-                "Create your password: \n" +
-                "Select if you are a [T]eacher or [S]tudent: \n" +
-                "\n" +
-                "Welcome to our program!\n" +
-                "Please type one of these commands:\n" +
-                "login\n" +
-                "create account\n" +
-                "exit\n" +
-                "> Enter your username: \n" +
-                "Enter your password: \n" +
-                "Successfully Logged In!\n" +
-                "\n" +
-                "Welcome name!\n" +
-                "Please type the number of a course to view:\n" +
-                "0 - MA165\n" +
-                "1 - CS180\n" +
-                "2 - EAPS106\n" +
-                "\n" +
-                "Or, please type one of these commands: \n" +
-                "edit account\n" +
-                "delete account\n" +
-                "create course\n" +
-                "view student\n" +
-                "logout\n" +
-                "> \n" +
-                "Logging out:\n" +
-                "You have successfully logged out.\n" +
-                "\n" +
-                "Welcome to our program!\n" +
-                "Please type one of these commands:\n" +
-                "login\n" +
-                "create account\n" +
-                "exit\n" +
-                "> \n" +
-                "Exit:\n" +
-                "Thank you for using our program. Goodbye!\n" +
-                "Saving Data...\n" +
-                "Data has been saved!";
+            "Please type one of these commands:\n" +
+            "login\n" +
+            "create account\n" +
+            "exit\n" +
+            "> Enter your username: \n" +
+            "Enter your name: \n" +
+            "Create your password: \n" +
+            "Select if you are a [T]eacher or [S]tudent: \n" +
+            "\n" +
+            "Welcome to our program!\n" +
+            "Please type one of these commands:\n" +
+            "login\n" +
+            "create account\n" +
+            "exit\n" +
+            "> Enter your username: \n" +
+            "Enter your password: \n" +
+            "Successfully Logged In!\n" +
+            "\n" +
+            "Welcome name!\n" +
+            "Please type the number of a course to view:\n" +
+            "0 - MA165\n" +
+            "1 - CS180\n" +
+            "2 - EAPS106\n" +
+            "\n" +
+            "Or, please type one of these commands: \n" +
+            "edit account\n" +
+            "delete account\n" +
+            "create course\n" +
+            "view student\n" +
+            "logout\n" +
+            "> \n" +
+            "Logging out:\n" +
+            "You have successfully logged out.\n" +
+            "\n" +
+            "Welcome to our program!\n" +
+            "Please type one of these commands:\n" +
+            "login\n" +
+            "create account\n" +
+            "exit\n" +
+            "> \n" +
+            "Exit:\n" +
+            "Thank you for using our program. Goodbye!\n" +
+            "Saving Data...\n" +
+            "Data has been saved!";
         checkOutputContainsExpected(expected);
     }
 
@@ -224,51 +224,51 @@ public class TestsMain extends Tests {
     @Test
     public void testInvalidUsername() {
         String commands = "create account\n" +
-                "username\n" +
-                "name\n" +
-                "password\n" +
-                "T\n" +
-                "create account\n" +
-                "username\n" +
-                "name\n" +
-                "password2\n" +
-                "T\n" +
-                "exit\n";
+            "username\n" +
+            "name\n" +
+            "password\n" +
+            "T\n" +
+            "create account\n" +
+            "username\n" +
+            "name\n" +
+            "password2\n" +
+            "T\n" +
+            "exit\n";
 
         setIOStreams(commands);
         Main.main(new String[]{"test"});
 
         String expected = "" +
-                "Please type one of these commands:\n" +
-                "login\n" +
-                "create account\n" +
-                "exit\n" +
-                "> Enter your username: \n" +
-                "Enter your name: \n" +
-                "Create your password: \n" +
-                "Select if you are a [T]eacher or [S]tudent: \n" +
-                "\n" +
-                "Welcome to our program!\n" +
-                "Please type one of these commands:\n" +
-                "login\n" +
-                "create account\n" +
-                "exit\n" +
-                "> Enter your username: \n" +
-                "Enter your name: \n" +
-                "Create your password: \n" +
-                "Select if you are a [T]eacher or [S]tudent: \n" +
-                "Error: A user with this username already exists\n" +
-                "\n" +
-                "Welcome to our program!\n" +
-                "Please type one of these commands:\n" +
-                "login\n" +
-                "create account\n" +
-                "exit\n" +
-                "> \n" +
-                "Exit:\n" +
-                "Thank you for using our program. Goodbye!\n" +
-                "Saving Data...\n" +
-                "Data has been saved!";
+            "Please type one of these commands:\n" +
+            "login\n" +
+            "create account\n" +
+            "exit\n" +
+            "> Enter your username: \n" +
+            "Enter your name: \n" +
+            "Create your password: \n" +
+            "Select if you are a [T]eacher or [S]tudent: \n" +
+            "\n" +
+            "Welcome to our program!\n" +
+            "Please type one of these commands:\n" +
+            "login\n" +
+            "create account\n" +
+            "exit\n" +
+            "> Enter your username: \n" +
+            "Enter your name: \n" +
+            "Create your password: \n" +
+            "Select if you are a [T]eacher or [S]tudent: \n" +
+            "Error: A user with this username already exists\n" +
+            "\n" +
+            "Welcome to our program!\n" +
+            "Please type one of these commands:\n" +
+            "login\n" +
+            "create account\n" +
+            "exit\n" +
+            "> \n" +
+            "Exit:\n" +
+            "Thank you for using our program. Goodbye!\n" +
+            "Saving Data...\n" +
+            "Data has been saved!";
         checkOutputContainsExpected(expected);
     }
 }

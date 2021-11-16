@@ -20,10 +20,10 @@ public class TestsStudentRunner extends Tests {
     public void testViewGrades() {
         String commands =
             LOGIN_STUDENT_S +
-            NAVIGATE_TO_DISCUSSION +
-            "view grades\n" +
-            "back\n" +
-            EXIT_STRING;
+                NAVIGATE_TO_DISCUSSION +
+                "view grades\n" +
+                "back\n" +
+                EXIT_STRING;
 
         setIOStreams(commands);
         Main.main(new String[]{"test"});

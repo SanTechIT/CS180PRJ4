@@ -218,8 +218,8 @@ public abstract class User implements Serializable {
         if (deleteConfirm.equalsIgnoreCase("yes")) {
             USER_LIST.remove(this);
             System.out.println(
-                    "Your account has been deleted. Welcome to the Learning Management Discussion" +
-                            " Board!");
+                "Your account has been deleted. Welcome to the Learning Management Discussion" +
+                    " Board!");
         }
     }
 

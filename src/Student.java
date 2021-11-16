@@ -23,7 +23,7 @@ public class Student extends User implements Serializable {
      *
      * @param username username of student
      * @param password password of student
-     * @param name name of student
+     * @param name     name of student
      */
     public Student(String username, String password, String name) {
         super(username, password, name);
@@ -189,9 +189,9 @@ public class Student extends User implements Serializable {
         int oldVoteValue = getPostVote(targetPost);
 
         if (
-                oldVoteValue != 1 // student hasn't already upvoted post
-                        && targetPost.upvote(this,
-                        oldVoteValue)) { // student has permission to vote
+            oldVoteValue != 1 // student hasn't already upvoted post
+                && targetPost.upvote(this,
+                oldVoteValue)) { // student has permission to vote
 
             // upvote post
             votedPosts.put(targetPost.getId(), 1);
@@ -211,9 +211,9 @@ public class Student extends User implements Serializable {
         int oldVoteValue = getPostVote(targetPost);
 
         if (
-                oldVoteValue != -1 // student hasn't already downvoted post
-                        && targetPost.downvote(this,
-                        oldVoteValue)) { // student has permission to vote
+            oldVoteValue != -1 // student hasn't already downvoted post
+                && targetPost.downvote(this,
+                oldVoteValue)) { // student has permission to vote
 
             // downvote post
             votedPosts.put(targetPost.getId(), -1);
@@ -233,8 +233,8 @@ public class Student extends User implements Serializable {
         int oldVoteValue = getPostVote(targetPost);
 
         if (
-                oldVoteValue != 0 // student has voted on targetPost
-                        && targetPost.removeVote(oldVoteValue)) {
+            oldVoteValue != 0 // student has voted on targetPost
+                && targetPost.removeVote(oldVoteValue)) {
 
             // remove vote on post
             votedPosts.remove(targetPost.getId());

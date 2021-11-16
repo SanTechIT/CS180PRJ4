@@ -436,7 +436,7 @@ public class TeacherRunner extends UserRunner {
         this.teacher.gradePost(targetPost, grade);
 
         System.out.println(
-                "Post " + targetPost.getId() + "has been assigned the grade: " + grade + "/" + targetPost.getMaxGrade());
+            "Post " + targetPost.getId() + "has been assigned the grade: " + grade + "/" + targetPost.getMaxGrade());
         return true;
     }
 

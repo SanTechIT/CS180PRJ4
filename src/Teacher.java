@@ -16,7 +16,7 @@ public class Teacher extends User implements Serializable {
      *
      * @param username username of Teacher
      * @param password password of Teacher
-     * @param name name of Teacher
+     * @param name     name of Teacher
      */
     public Teacher(String username, String password, String name) {
         super(username, password, name); // calls User's constructor
@@ -162,7 +162,7 @@ public class Teacher extends User implements Serializable {
     /**
      * Delete course
      *
-     * @param course   course to delete
+     * @param course course to delete
      * @return whether operation succeeds (no network errors, etc)
      */
     public boolean deleteCourse(Course course) {

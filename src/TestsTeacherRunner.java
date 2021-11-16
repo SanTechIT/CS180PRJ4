@@ -118,10 +118,10 @@ public class TestsTeacherRunner extends Tests {
     public void testDeletePost() {
         String commands =
             LOGIN_TEACHER +
-            NAVIGATE_TO_DISCUSSION +
-            "delete 0\n" +
-            "yes\n" +
-            EXIT_STRING;
+                NAVIGATE_TO_DISCUSSION +
+                "delete 0\n" +
+                "yes\n" +
+                EXIT_STRING;
 
         setIOStreams(commands);
         Main.main(new String[]{"test"});

@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Project 4 - Course
- *
+ * <p>
  * Represents a teacher-created Course which can
  * have Discussions.
  *
@@ -32,7 +32,7 @@ public class Course implements Serializable {
      * Course Constructor
      * (Not to be accessed outside createCourse method)
      *
-     * @param topic topic of course
+     * @param topic   topic of course
      * @param creator ID of user trying to create course
      */
     private Course(String topic, int creator) {
@@ -48,7 +48,7 @@ public class Course implements Serializable {
      * Creates and returns a new course object if the user has permission to.
      *
      * @param topic topic of course
-     * @param user User trying to create course
+     * @param user  User trying to create course
      * @return created course or null if it failed
      */
     public static Course createCourse(String topic, User user) {
@@ -81,7 +81,7 @@ public class Course implements Serializable {
      * Changes topic of course if user has permission
      *
      * @param topic new topic of course
-     * @param user user trying to change course topic
+     * @param user  user trying to change course topic
      * @return whether course topic is changed (whether user had permission)
      */
     public boolean setTopic(String topic, User user) {
@@ -113,7 +113,7 @@ public class Course implements Serializable {
     /**
      * Deletes the course with the given id if permissions allow
      *
-     * @param id id of course to be deleted
+     * @param id   id of course to be deleted
      * @param user user trying to delete course
      * @return deleted course or null if no deletion happened
      */
@@ -132,7 +132,7 @@ public class Course implements Serializable {
      */
     public String getDiscussionsString() {
         String str = "";
-        for(Integer discussionId: discussions){
+        for (Integer discussionId : discussions) {
             Discussion discussion = Discussion.DISCUSSION_LIST.get(discussionId);
             str += discussion.getId() + " - " + discussion.getTopic() + "\n";
         }

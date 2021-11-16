@@ -398,13 +398,6 @@ _______________
 
 #### Methods
 
-| Method      | Signature   | Parameters | Description |
-| ----------- | ----------- | ---------- | ----------- |
-| testLoginLogout | `public void` | `()`  | Test logging in and logging out |
-| testMainInvalidInput | `public void` | `()`  | Test that main loop handles invalid input |
-| testMainCreateAccountLogin | `public void` | `()`  | Test account creation and logging in with new account |
-| testMainInvalidUsername | `public void` | `()`  | Test account creation with username that's been used |
-
 ### TestsPost
 
 ### TestsStudentRunner
