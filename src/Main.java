@@ -48,7 +48,7 @@ public class Main {
             USESER = false;
             blank = true;
             // save blank data to different folder, so it doesn't ruin real data
-            path = "test_e" + pathSep;
+            path = "test" + pathSep;
         }
 
         System.out.println("PATH " + path);

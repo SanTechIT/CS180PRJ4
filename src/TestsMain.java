@@ -53,7 +53,7 @@ public class TestsMain extends Tests {
         setIOStreams(commands);
 
         // Run Program
-        Main.main(new String[]{"useser"});
+        Main.main(new String[]{"empty"});
     }
 
     /**
@@ -66,14 +66,14 @@ public class TestsMain extends Tests {
         commands += "exit\n";
 
         setIOStreams(commands);
-        Main.main(new String[]{"useser"});
+        Main.main(new String[]{"empty"});
 
         // actual contains expected
         String fileName = "testMainInvalidInput";
         String actual = getOut().toString();
         String expected = "Reading Data...\n" +
-                "Using test files...\n" +
-                "Creating new Db\n" +
+                "Using blank state...\n" +
+                "PATH test/\n" +
                 "Data has been read and loaded!\n" +
                 "\n" +
                 "Welcome to our program!\n" +
@@ -95,7 +95,7 @@ public class TestsMain extends Tests {
                 "Exit:\n" +
                 "Thank you for using our program. Goodbye!\n" +
                 "Saving Data...\n" +
-                "Data has been saved!";
+                "Data has been saved!\n";
         assertTrue(actual.contains(expected));
     }
 
@@ -116,14 +116,14 @@ public class TestsMain extends Tests {
                 "exit\n";
 
         setIOStreams(commands);
-        Main.main(new String[]{"useser"});
+        Main.main(new String[]{"empty"});
 
         // actual contains expected
         String fileName = "testMainCreateAccountLogin";
         String actual = getOut().toString();
         String expected = "Reading Data...\n" +
-                "Using test files...\n" +
-                "Creating new Db\n" +
+                "Using blank state...\n" +
+                "PATH test/\n" +
                 "Data has been read and loaded!\n" +
                 "\n" +
                 "Welcome to our program!\n" +
@@ -189,14 +189,14 @@ public class TestsMain extends Tests {
                 "exit\n";
 
         setIOStreams(commands);
-        Main.main(new String[]{"useser"});
+        Main.main(new String[]{"empty"});
 
         // actual contains expected
         String fileName = "testMainInvalidUsername";
         String actual = getOut().toString();
         String expected = "Reading Data...\n" +
-                "Using test files...\n" +
-                "Creating new Db\n" +
+                "Using blank state...\n" +
+                "PATH test/\n" +
                 "Data has been read and loaded!\n" +
                 "\n" +
                 "Welcome to our program!\n" +
