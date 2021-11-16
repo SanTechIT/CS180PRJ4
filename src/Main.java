@@ -16,7 +16,7 @@ public class Main {
     private static boolean useSer = true;
 
     // path separator (OS-dependent)
-    private static final String pathSep = File.separator;
+    private static final String PATH_SEP = File.separator;
 
     /**
      * @param args Command Line Arguments
@@ -27,7 +27,7 @@ public class Main {
 
         // Data storage path
         // Handles any args passed for testing
-        String path = "data" + pathSep;
+        String path = "data" + PATH_SEP;
         boolean blank = false;
 
         // if "test" passed as command line argument,
@@ -38,7 +38,7 @@ public class Main {
             System.out.println("Using test files...");
             useSer = false;
             // save test data to different folder, so it doesn't ruin real data
-            path = "test" + pathSep;
+            path = "test" + PATH_SEP;
 
             // if "empty" passed as command line argument,
             // serialized objects will not be loaded from data folder
@@ -48,12 +48,12 @@ public class Main {
             useSer = false;
             blank = true;
             // save blank data to different folder, so it doesn't ruin real data
-            path = "test" + pathSep;
+            path = "test" + PATH_SEP;
         }
 
         // if working directory is src, add .. to path
-        if (System.getProperty("user.dir").contains("CS180PRJ4" + pathSep + "src")) {
-            path = ".." + pathSep + path;
+        if (System.getProperty("user.dir").contains("CS180PRJ4" + PATH_SEP + "src")) {
+            path = ".." + PATH_SEP + path;
         }
 
         // Checks if file exists before using
