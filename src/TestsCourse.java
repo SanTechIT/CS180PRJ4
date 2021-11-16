@@ -156,7 +156,6 @@ public class TestsCourse extends Tests {
         Main.main(new String[]{"empty"});
 
         // Courses should exist since they are created in this order
-        String actual = getOut().toString();
         String expected1 = "Delete course 0:\n" +
                 "Deleted courses can't be recovered. Are you sure?\n" +
                 "Type yes to confirm.\n" +
@@ -165,7 +164,7 @@ public class TestsCourse extends Tests {
                 "Welcome name!\n" +
                 "Please type the number of a course to view:\n" +
                 "There are no courses.";
-        assertTrue(actual.contains(expected1));
+        checkOutputContainsExpected(expected1);
 
     }
 }

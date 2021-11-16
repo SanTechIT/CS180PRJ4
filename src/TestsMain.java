@@ -57,9 +57,7 @@ public class TestsMain extends Tests {
         // Run program
         Main.main(new String[0]);
 
-        String expected1 = "Reading Data...\n";
-        String expected2 = "Creating new Database\n";
-        String expected3 = "Data has been read and loaded!\n" +
+        String expected = "Data has been read and loaded!\n" +
                 "\n" +
                 "Welcome to our program!\n" +
                 "Please type one of these commands:\n" +
@@ -71,10 +69,8 @@ public class TestsMain extends Tests {
                 "Thank you for using our program. Goodbye!\n" +
                 "Saving Data...\n" +
                 "Data has been saved!\n";
-        String actual = getOut().toString();
-        assertThat(actual, allOf(containsString(expected1), containsString(expected2), containsString(expected3)));
+        checkOutputContainsExpected(expected);
     }
-
 
     /**
      * Test logging in.

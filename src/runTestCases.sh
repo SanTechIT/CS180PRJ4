@@ -2,7 +2,10 @@ javac -cp .:../junit4.jar:../hamcrest-2.2.jar Tests*.java
 
 # for each compiled Tests file in the src directory, run the tests
 for f in ./Tests*.class; do
-    java -cp .:../junit4.jar:../hamcrest-2.2.jar org.junit.runner.JUnitCore $(basename $f .class)
+    if [[ $f != "./Tests.class" ]]; then
+        echo "FILENAME " + $f
+        java -cp .:../junit4.jar:../hamcrest-2.2.jar org.junit.runner.JUnitCore $(basename $f .class)
+    fi
 done
 
 # These can be individaully commented and uncommented to test individual classes

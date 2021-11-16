@@ -51,7 +51,11 @@ public class Main {
             path = "test" + pathSep;
         }
 
-        System.out.println("PATH " + path);
+        // if working directory is src, add .. to path
+        if (System.getProperty("user.dir").contains("CS180PRJ4" + pathSep + "src")) {
+            path = ".." + pathSep + path;
+        }
+
         // Checks if file exists before using
         boolean filesExist = new File(path + "UserList").exists() && new File(
                 path + "CourseList").exists() && new File(
@@ -72,16 +76,17 @@ public class Main {
             Course.COURSE_LIST = new ArrayList<>();
             Discussion.DISCUSSION_LIST = new ArrayList<>();
             Post.POST_LIST = new ArrayList<>();
-        } else { // test
+
+        } else if (path.contains("test")) { // test
             // If running tests, delete internal database and replace with default database
             // Internal Database Deleted
-            System.out.println("Creating new Database");
+            System.out.println("Creating Test Database");
             User.USER_LIST = new ArrayList<>();
             Course.COURSE_LIST = new ArrayList<>();
             Discussion.DISCUSSION_LIST = new ArrayList<>();
             Post.POST_LIST = new ArrayList<>();
 
-            System.out.println("Using Initial Dataset");
+            System.out.println("Using Test Dataset");
             User.USER_LIST = new ArrayList<>();
             Teacher john = new Teacher("teacher", "password", "John");
             Student alice = new Student("student", "password", "Alice");
@@ -119,7 +124,16 @@ public class Main {
             alice.downvotePost(post2);
 
             john.gradePost(post2, 33);
+        } else {
+            // use serialization, but no initial files, so must start from nothing
+
+            System.out.println("Creating new database");
+            User.USER_LIST = new ArrayList<>();
+            Course.COURSE_LIST = new ArrayList<>();
+            Discussion.DISCUSSION_LIST = new ArrayList<>();
+            Post.POST_LIST = new ArrayList<>();
         }
+
         System.out.println("Data has been read and loaded!");
 
         String input;
@@ -148,17 +162,15 @@ public class Main {
 
         System.out.println("Saving Data...");
         // ON Exit Save Data
-        if (!blank) {
-            try {
-                writeData(User.USER_LIST, path + "UserList");
-                writeData(Course.COURSE_LIST, path + "CourseList");
-                writeData(Discussion.DISCUSSION_LIST, path + "DiscussionList");
-                writeData(Post.POST_LIST, path + "/PostList");
-            } catch (IOException e) {
-                System.out.println(
-                        "An error has occured while trying to save the data: " + e.getMessage());
-            }
+        try {
+            writeData(User.USER_LIST, path + "UserList");
+            writeData(Course.COURSE_LIST, path + "CourseList");
+            writeData(Discussion.DISCUSSION_LIST, path + "DiscussionList");
+            writeData(Post.POST_LIST, path + "PostList");
             System.out.println("Data has been saved!");
+        } catch (IOException e) {
+            System.out.println(
+                    "An error has occured while trying to save the data: " + e.getMessage());
         }
     }
 
