@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Main {
     // whether serialization is used
-    private static boolean USESER = true;
+    private static boolean useSer = true;
 
     // path separator (OS-dependent)
     private static final String pathSep = File.separator;
@@ -36,7 +36,7 @@ public class Main {
         // contained in test folder (used for testing)
         if (args.length > 0 && args[0].equals("test")) {
             System.out.println("Using test files...");
-            USESER = false;
+            useSer = false;
             // save test data to different folder, so it doesn't ruin real data
             path = "test" + pathSep;
 
@@ -45,7 +45,7 @@ public class Main {
             // starts program with no default courses/users
         } else if (args.length > 0 && args[0].equals("empty")) {
             System.out.println("Using blank state...");
-            USESER = false;
+            useSer = false;
             blank = true;
             // save blank data to different folder, so it doesn't ruin real data
             path = "test" + pathSep;
@@ -61,59 +61,59 @@ public class Main {
             path + "CourseList").exists() && new File(
             path + "DiscussionList").exists() && new File(path + "PostList").exists();
 
-        if (USESER && filesExist && !blank) {
+        if (useSer && filesExist && !blank) {
             System.out.println("Using Saved Data");
             try {
-                User.USER_LIST = (List<User>) readData(path + "UserList");
-                Course.COURSE_LIST = (List<Course>) readData(path + "CourseList");
-                Discussion.DISCUSSION_LIST = (List<Discussion>) readData(path + "DiscussionList");
-                Post.POST_LIST = (List<Post>) readData(path + "PostList");
+                User.userList = (List<User>) readData(path + "UserList");
+                Course.courseList = (List<Course>) readData(path + "CourseList");
+                Discussion.discussionList = (List<Discussion>) readData(path + "DiscussionList");
+                Post.postList = (List<Post>) readData(path + "PostList");
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println("An Error while loading data has occurred: " + e.getMessage());
             }
         } else if (blank) {
-            User.USER_LIST = new ArrayList<>();
-            Course.COURSE_LIST = new ArrayList<>();
-            Discussion.DISCUSSION_LIST = new ArrayList<>();
-            Post.POST_LIST = new ArrayList<>();
+            User.userList = new ArrayList<>();
+            Course.courseList = new ArrayList<>();
+            Discussion.discussionList = new ArrayList<>();
+            Post.postList = new ArrayList<>();
 
         } else if (path.contains("test")) { // test
             // If running tests, delete internal database and replace with default database
             // Internal Database Deleted
             System.out.println("Creating Test Database");
-            User.USER_LIST = new ArrayList<>();
-            Course.COURSE_LIST = new ArrayList<>();
-            Discussion.DISCUSSION_LIST = new ArrayList<>();
-            Post.POST_LIST = new ArrayList<>();
+            User.userList = new ArrayList<>();
+            Course.courseList = new ArrayList<>();
+            Discussion.discussionList = new ArrayList<>();
+            Post.postList = new ArrayList<>();
 
             System.out.println("Using Test Dataset");
-            User.USER_LIST = new ArrayList<>();
+            User.userList = new ArrayList<>();
             Teacher john = new Teacher("teacher", "password", "John");
             Student alice = new Student("student", "password", "Alice");
             Student s = new Student("s", "s", "s");
             Teacher t = new Teacher("t", "t", "t");
 
-            // Add default courses to COURSE_LIST
-            Course.COURSE_LIST = new ArrayList<>();
-            Course.createCourse("MA165", User.USER_LIST.get(0));
-            Course.createCourse("CS180", User.USER_LIST.get(0));
-            Course.createCourse("EAPS106", User.USER_LIST.get(0));
+            // Add default courses to courseList
+            Course.courseList = new ArrayList<>();
+            Course.createCourse("MA165", User.userList.get(0));
+            Course.createCourse("CS180", User.userList.get(0));
+            Course.createCourse("EAPS106", User.userList.get(0));
 
             // make new User object, set static vars
-            Discussion.DISCUSSION_LIST = new ArrayList<>();
-            Discussion.createDiscussion(Course.COURSE_LIST.get(0), "default discussion",
-                User.USER_LIST.get(0));
+            Discussion.discussionList = new ArrayList<>();
+            Discussion.createDiscussion(Course.courseList.get(0), "default discussion",
+                User.userList.get(0));
 
-            Post.POST_LIST = new ArrayList<>();
+            Post.postList = new ArrayList<>();
             Post post0 = s.makeDiscussionReply("test post 0", Discussion
-                .DISCUSSION_LIST.get(0));
-            Post post1 = s.makePostReply(Post.POST_LIST.get(0), "test post 1",
-                Discussion.DISCUSSION_LIST.get(0));
+                .discussionList.get(0));
+            Post post1 = s.makePostReply(Post.postList.get(0), "test post 1",
+                Discussion.discussionList.get(0));
             Post post2 = s.makePostReply(post0, "test post 2", Discussion
-                .DISCUSSION_LIST.get(0));
-            s.makePostReply(post1, "test post 3", Discussion.DISCUSSION_LIST.get(0));
-            s.makePostReply(post2, "test post 4", Discussion.DISCUSSION_LIST.get(0));
-            s.makeDiscussionReply("test post 5", Discussion.DISCUSSION_LIST.get(0));
+                .discussionList.get(0));
+            s.makePostReply(post1, "test post 3", Discussion.discussionList.get(0));
+            s.makePostReply(post2, "test post 4", Discussion.discussionList.get(0));
+            s.makeDiscussionReply("test post 5", Discussion.discussionList.get(0));
 
             s.upvotePost(post0);
             s.downvotePost(post1);
@@ -128,10 +128,10 @@ public class Main {
             // use serialization, but no initial files, so must start from nothing
 
             System.out.println("Creating new database");
-            User.USER_LIST = new ArrayList<>();
-            Course.COURSE_LIST = new ArrayList<>();
-            Discussion.DISCUSSION_LIST = new ArrayList<>();
-            Post.POST_LIST = new ArrayList<>();
+            User.userList = new ArrayList<>();
+            Course.courseList = new ArrayList<>();
+            Discussion.discussionList = new ArrayList<>();
+            Post.postList = new ArrayList<>();
         }
 
         System.out.println("Data has been read and loaded!");
@@ -163,10 +163,10 @@ public class Main {
         System.out.println("Saving Data...");
         // ON Exit Save Data
         try {
-            writeData(User.USER_LIST, path + "UserList");
-            writeData(Course.COURSE_LIST, path + "CourseList");
-            writeData(Discussion.DISCUSSION_LIST, path + "DiscussionList");
-            writeData(Post.POST_LIST, path + "PostList");
+            writeData(User.userList, path + "UserList");
+            writeData(Course.courseList, path + "CourseList");
+            writeData(Discussion.discussionList, path + "DiscussionList");
+            writeData(Post.postList, path + "PostList");
             System.out.println("Data has been saved!");
         } catch (IOException e) {
             System.out.println(

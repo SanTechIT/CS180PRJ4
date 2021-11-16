@@ -19,7 +19,7 @@ public abstract class User implements Serializable {
     // questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 01L;
 
-    public static List<User> USER_LIST;
+    public static List<User> userList;
     private int id;
     private String username;
     private String password;
@@ -38,8 +38,8 @@ public abstract class User implements Serializable {
         this.password = password;
         this.name = name;
         // TOD: NOT CONCURRENT SAFE : )
-        id = USER_LIST.size();
-        USER_LIST.add(this);
+        id = userList.size();
+        userList.add(this);
 
         posts = new ArrayList<>();
     }
@@ -151,7 +151,7 @@ public abstract class User implements Serializable {
      * @return User with username, null if no User has that username
      */
     private static User getUser(String username) {
-        for (User user : USER_LIST) {
+        for (User user : userList) {
             if (username.equals(user.getUsername())) {
                 return user;
             }
@@ -216,7 +216,7 @@ public abstract class User implements Serializable {
         String deleteConfirm = in.nextLine();
 
         if (deleteConfirm.equalsIgnoreCase("yes")) {
-            USER_LIST.remove(this);
+            userList.remove(this);
             System.out.println(
                 "Your account has been deleted. Welcome to the Learning Management Discussion" +
                     " Board!");
@@ -269,7 +269,7 @@ public abstract class User implements Serializable {
     public int getVoteCount() {
         int voteCount = 0;
         for (int post : getPosts()) {
-            Post p = Post.POST_LIST.get(post);
+            Post p = Post.postList.get(post);
             voteCount += p.getUpvotes();
             voteCount -= p.getDownvotes();
         }

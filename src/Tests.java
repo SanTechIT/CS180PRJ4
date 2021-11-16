@@ -1,14 +1,4 @@
-import org.junit.Test;
 import org.junit.After;
-
-import java.lang.reflect.Field;
-
-import org.junit.Assert;
-import org.junit.Before;
-
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 
 import java.io.*;
 
@@ -29,7 +19,7 @@ import static org.junit.Assert.*;
  */
 public class Tests {
     // terminal output PrintStream for printing to console
-    private static final PrintStream ts = System.out;
+    private static final PrintStream OUT_STREAM = System.out;
     // for setting output stream to program output
     private ByteArrayOutputStream out = new ByteArrayOutputStream();
 
@@ -118,7 +108,7 @@ public class Tests {
     @After
     public void setIOStreamsAfter() {
         // Restore output, print output
-        System.setOut(ts);
+        System.setOut(OUT_STREAM);
         System.out.println(getOut());
     }
 

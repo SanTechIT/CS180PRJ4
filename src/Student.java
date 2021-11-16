@@ -1,6 +1,4 @@
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap; // for tracking voted posts
 import java.util.Scanner;
 
@@ -155,7 +153,7 @@ public class Student extends User implements Serializable {
     public String getPostsString() {
         String str = "";
         for (int postId : getPosts()) {
-            Post p = Post.POST_LIST.get(postId);
+            Post p = Post.postList.get(postId);
             if (p != null) { // post hasn't been deleted
                 str += p.toString();
             }

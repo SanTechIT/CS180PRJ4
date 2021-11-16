@@ -1,8 +1,5 @@
 import java.util.Scanner;
 
-import java.util.List;
-import java.util.ArrayList;
-
 /**
  * Project 4 - Teacher Runner
  * <p>
@@ -106,8 +103,8 @@ public class TeacherRunner extends UserRunner {
 
                         User selectedUser = null;
                         // checks if id is valid / exists in list
-                        if (userId < User.USER_LIST.size() && userId >= 0) {
-                            selectedUser = User.USER_LIST.get(userId);
+                        if (userId < User.userList.size() && userId >= 0) {
+                            selectedUser = User.userList.get(userId);
                         }
                         // Check if user exists and is a student
                         if (!(selectedUser instanceof Student)) {
@@ -343,8 +340,8 @@ public class TeacherRunner extends UserRunner {
 
         // check if post number corresponds to existing post
         Post targetPost = null;
-        if (postId < Post.POST_LIST.size() && postId >= 0) {
-            targetPost = Post.POST_LIST.get(postId);
+        if (postId < Post.postList.size() && postId >= 0) {
+            targetPost = Post.postList.get(postId);
         }
 
         if (targetPost == null) {

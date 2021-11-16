@@ -1,6 +1,5 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class Post implements Serializable {
     // questions/10378855/java-io-invalidclassexception-local-class-incompatible
     private static final long serialVersionUID = 01L;
 
-    public static List<Post> POST_LIST;
+    public static List<Post> postList;
 
     private int id;
     private int grade;
@@ -52,14 +51,14 @@ public class Post implements Serializable {
         this.creatorId = creatorId;
         this.maxGrade = 100;
         this.timestamp = new Date();
-        id = POST_LIST.size();
+        id = postList.size();
         if (parent == null) {
             discussion.getPosts().add(id);
         } else {
             parent.getPosts().add(id);
         }
         posts = new ArrayList<>();
-        POST_LIST.add(this);
+        postList.add(this);
     }
 
     /**
@@ -213,15 +212,15 @@ public class Post implements Serializable {
      */
     public Post deletePost(User user) {
         if (user.canModifyPost()) {
-            Discussion.DISCUSSION_LIST.get(discussion).getPosts().remove(Integer.valueOf(id));
+            Discussion.discussionList.get(discussion).getPosts().remove(Integer.valueOf(id));
             if (parent != -1) {
-                Post.POST_LIST.get(parent).getPosts().remove(Integer.valueOf(id));
+                Post.postList.get(parent).getPosts().remove(Integer.valueOf(id));
             }
-            User.USER_LIST.get(creatorId).getPosts().remove(Integer.valueOf(id));
+            User.userList.get(creatorId).getPosts().remove(Integer.valueOf(id));
             for (int i = 0; i < posts.size(); i++) {
-                Post.POST_LIST.get(posts.get(i)).deletePost(user);
+                Post.postList.get(posts.get(i)).deletePost(user);
             }
-            return POST_LIST.set(id, null);
+            return postList.set(id, null);
         }
         return null;
     }
@@ -230,14 +229,14 @@ public class Post implements Serializable {
      * Grades the post if the user has permission
      *
      * @param user  user trying to grade post
-     * @param grade grade to assign to post (always between 1 and 100 inclusive)
+     * @param assignedGrade grade to assign to post (always between 1 and 100 inclusive)
      * @return operation success
      */
-    public boolean grade(User user, int grade) {
+    public boolean grade(User user, int assignedGrade) {
         if (!user.canGrade()) {
             return false;
         }
-        this.grade = grade;
+        this.grade = assignedGrade;
         return true;
     }
 
@@ -251,7 +250,7 @@ public class Post implements Serializable {
         List<Integer> returnList = new ArrayList<>();
         returnList.add(getId());
         for (int postId : getPosts()) {
-            Post p = Post.POST_LIST.get(postId);
+            Post p = Post.postList.get(postId);
             returnList.addAll(p.getPostAndReplies());
         }
 

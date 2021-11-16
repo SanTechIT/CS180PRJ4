@@ -18,7 +18,7 @@ public class Course implements Serializable {
     @Serial
     private static final long serialVersionUID = 01L;
 
-    public static List<Course> COURSE_LIST;
+    public static List<Course> courseList;
     private int id;
     private String topic;
     private int creator;
@@ -39,9 +39,9 @@ public class Course implements Serializable {
         this.creator = creator;
         this.topic = topic;
         // TOD: Note to self, bad concurrency
-        id = COURSE_LIST.size();
+        id = courseList.size();
         discussions = new ArrayList<>();
-        COURSE_LIST.add(this);
+        courseList.add(this);
     }
 
     /**
@@ -80,15 +80,15 @@ public class Course implements Serializable {
     /**
      * Changes topic of course if user has permission
      *
-     * @param topic new topic of course
+     * @param newTopic new topic of course
      * @param user  user trying to change course topic
      * @return whether course topic is changed (whether user had permission)
      */
-    public boolean setTopic(String topic, User user) {
+    public boolean setTopic(String newTopic, User user) {
         if (!user.canModifyCourse()) {
             return false;
         }
-        this.topic = topic;
+        this.topic = newTopic;
         return true;
     }
 
@@ -121,7 +121,7 @@ public class Course implements Serializable {
         if (!user.canModifyCourse()) {
             return null;
         }
-        Course deleted = COURSE_LIST.set(id, null);
+        Course deleted = courseList.set(id, null);
         return deleted;
     }
 
@@ -133,7 +133,7 @@ public class Course implements Serializable {
     public String getDiscussionsString() {
         String str = "";
         for (Integer discussionId : discussions) {
-            Discussion discussion = Discussion.DISCUSSION_LIST.get(discussionId);
+            Discussion discussion = Discussion.discussionList.get(discussionId);
             str += discussion.getId() + " - " + discussion.getTopic() + "\n";
         }
         return str;
@@ -146,9 +146,9 @@ public class Course implements Serializable {
      */
     public static String getCoursesString() {
         String str = "";
-        for (int i = 0; i < COURSE_LIST.size(); i++) {
-            if (COURSE_LIST.get(i) != null) {
-                str += i + " - " + COURSE_LIST.get(i).getTopic() + "\n";
+        for (int i = 0; i < courseList.size(); i++) {
+            if (courseList.get(i) != null) {
+                str += i + " - " + courseList.get(i).getTopic() + "\n";
             }
         }
         return str;

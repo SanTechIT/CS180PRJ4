@@ -115,8 +115,8 @@ public abstract class UserRunner {
                         try {
                             int courseId = Integer.parseInt(input);
                             // Checks if course id exists
-                            if (courseId < Course.COURSE_LIST.size() && courseId >= 0) {
-                                currentCourse = Course.COURSE_LIST.get(courseId);
+                            if (courseId < Course.courseList.size() && courseId >= 0) {
+                                currentCourse = Course.courseList.get(courseId);
                             }
                             // Checks if course is deleted / exists
                             if (currentCourse == null) {
@@ -202,8 +202,8 @@ public abstract class UserRunner {
                             int discussionId = Integer.parseInt(input);
 
                             // Checks if index is in bounds
-                            if (discussionId < Discussion.DISCUSSION_LIST.size() && discussionId >= 0) {
-                                currentDiscussion = Discussion.DISCUSSION_LIST.get(discussionId);
+                            if (discussionId < Discussion.discussionList.size() && discussionId >= 0) {
+                                currentDiscussion = Discussion.discussionList.get(discussionId);
                             }
                             // Checks if Discussion is part of the current course
                             if (!currentCourse.getDiscussions().contains(discussionId)) {
@@ -289,8 +289,8 @@ public abstract class UserRunner {
 
         // check if post number corresponds to existing post
         Post targetPost = null;
-        if (postId < Post.POST_LIST.size() && postId >= 0) {
-            targetPost = Post.POST_LIST.get(postId);
+        if (postId < Post.postList.size() && postId >= 0) {
+            targetPost = Post.postList.get(postId);
         }
         if (targetPost == null) {
             // Post is deleted / does not exist

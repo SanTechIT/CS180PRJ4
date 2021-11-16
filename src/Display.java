@@ -1,7 +1,5 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 // for sorting Discussion posts by votes
 // in displayViewVoteboard
 
@@ -183,7 +181,7 @@ public class Display {
     private static String getDiscussionString(Discussion discussion, User user) {
         String discussionString = "";
         for (Integer postId : discussion.getPosts()) {
-            Post post = Post.POST_LIST.get(postId);
+            Post post = Post.postList.get(postId);
             discussionString += getPostStrings(post, 0, user);
         }
         return discussionString;
@@ -204,7 +202,7 @@ public class Display {
         }
         postString += getPostString(postin, indent, user);
         for (int postId : postin.getPosts()) {
-            Post post = Post.POST_LIST.get(postId);
+            Post post = Post.postList.get(postId);
             postString += getPostStrings(post, indent + 1, user);
         }
         return postString;
@@ -235,7 +233,7 @@ public class Display {
             postString += " (reply to " + postin.getParent() + ")";
         }
         postString += "\n";
-        User puser = User.USER_LIST.get(postin.getCreatorId());
+        User puser = User.userList.get(postin.getCreatorId());
         postString += indentStr + puser.getUsername() + " | " + puser.getName() + " " + "(ID " + puser.getId() + ") " +
             "posted";
         postString += " at time " + postin.getTimestamp().toString() + "\n";
@@ -453,7 +451,7 @@ public class Display {
         String str = "\n";
 
         for (Integer pid : posts) {
-            Post p = Post.POST_LIST.get(pid);
+            Post p = Post.postList.get(pid);
             str += getPostString(p, 0, user);
         }
 
@@ -484,24 +482,24 @@ public class Display {
             switch (currentSort) {
                 case "best":
                     posts.sort((p1id, p2id) -> {
-                        Post p1 = Post.POST_LIST.get(p1id);
-                        Post p2 = Post.POST_LIST.get(p2id);
+                        Post p1 = Post.postList.get(p1id);
+                        Post p2 = Post.postList.get(p2id);
                         return p2.getVotes() - p1.getVotes();
                     });
                     break;
 
                 case "worst":
                     posts.sort((p1id, p2id) -> {
-                        Post p1 = Post.POST_LIST.get(p1id);
-                        Post p2 = Post.POST_LIST.get(p2id);
+                        Post p1 = Post.postList.get(p1id);
+                        Post p2 = Post.postList.get(p2id);
                         return -(p2.getVotes() - p1.getVotes());
                     });
                     break;
 
                 case "controversial":
                     posts.sort((p1id, p2id) -> {
-                        Post p1 = Post.POST_LIST.get(p1id);
-                        Post p2 = Post.POST_LIST.get(p2id);
+                        Post p1 = Post.postList.get(p1id);
+                        Post p2 = Post.postList.get(p2id);
                         return -(p2.getControversy() - p1.getControversy());
                     });
                     break;
@@ -529,7 +527,7 @@ public class Display {
         List<Integer> posts2 = new ArrayList<>();
         for (int i = 0; i < posts.size(); i++) {
             int postId = posts.get(i);
-            int creatorId = Post.POST_LIST.get(posts.get(i)).getCreatorId();
+            int creatorId = Post.postList.get(posts.get(i)).getCreatorId();
             if (creatorId == currentStudent.getId()) {
                 posts2.add(postId);
             }
@@ -556,7 +554,7 @@ public class Display {
         String str = "\n";
 
         for (Integer pid : posts) {
-            Post postin = Post.POST_LIST.get(pid);
+            Post postin = Post.postList.get(pid);
             String postString = "";
             if (postin != null) {
                 postString = toStringGrades(postin);

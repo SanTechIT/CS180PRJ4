@@ -1,7 +1,6 @@
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class Discussion implements Serializable {
     @Serial
     private static final long serialVersionUID = 01L;
 
-    public static List<Discussion> DISCUSSION_LIST;
+    public static List<Discussion> discussionList;
 
     private int id;
     private String topic;
@@ -46,10 +45,10 @@ public class Discussion implements Serializable {
         this.topic = topic;
         this.creator = creator;
         this.course = course.getId();
-        id = DISCUSSION_LIST.size();
+        id = discussionList.size();
         course.getDiscussions().add(id);
         posts = new ArrayList<>();
-        DISCUSSION_LIST.add(this);
+        discussionList.add(this);
     }
 
 
@@ -107,8 +106,8 @@ public class Discussion implements Serializable {
         if (!user.canModifyDiscussion()) {
             return null;
         }
-        Discussion deleted = DISCUSSION_LIST.set(id, null);
-        Course.COURSE_LIST.get(deleted.course).getDiscussions().remove(deleted.getId());
+        Discussion deleted = discussionList.set(id, null);
+        Course.courseList.get(deleted.course).getDiscussions().remove(deleted.getId());
         return deleted;
     }
 
@@ -120,7 +119,7 @@ public class Discussion implements Serializable {
     public List<Integer> getAllPosts() {
         List<Integer> returnList = new ArrayList<>();
         for (int postId : posts) {
-            Post p = Post.POST_LIST.get(postId);
+            Post p = Post.postList.get(postId);
             returnList.addAll(p.getPostAndReplies());
         }
 
@@ -131,11 +130,13 @@ public class Discussion implements Serializable {
      * Checks the user's permissions and tries
      * to set the topic of discussion accordingly
      *
+     * @param user user renaming the discussion
+     * @param newTopic new topic of discussion
      * @return operation success boolean
      */
-    public boolean setTopic(String topic, User user) {
+    public boolean setTopic(String newTopic, User user) {
         if (user.canModifyDiscussion()) {
-            this.topic = topic;
+            this.topic = newTopic;
             return true;
         }
         return false;
