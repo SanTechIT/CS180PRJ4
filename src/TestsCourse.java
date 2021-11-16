@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * <p>
  * Contains JUnit tests for testing Main class.
  *
- * @author Richard Chang, Sara Xiao
+ * @author Richard Chang
  * @version 2021-11-16
  */
 public class TestsCourse extends Tests {
@@ -136,7 +136,7 @@ public class TestsCourse extends Tests {
     }
 
     /**
-     * Checks if teacher can delete create courses
+     * Checks if teacher can delete courses
      */
     @Test
     public void testDeleteCourseTeacher() {

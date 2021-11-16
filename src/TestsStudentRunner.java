@@ -1,4 +1,7 @@
 import org.junit.Test;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.junit.Assert.assertEquals;
@@ -13,6 +16,23 @@ import static org.junit.Assert.assertThat;
  * @version 2021-11-15
  */
 public class TestsStudentRunner extends Tests {
+
+    /**
+     * Borrowed from RunLocal
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Result result = JUnitCore.runClasses(TestsPost.class);
+        if (result.wasSuccessful()) {
+            System.out.println("Excellent - Test ran successfully");
+        } else {
+            for (Failure failure : result.getFailures()) {
+                System.out.println(failure.toString());
+            }
+        }
+    }
+
     /**
      * Tests view grades feature
      */

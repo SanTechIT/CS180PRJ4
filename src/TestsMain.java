@@ -73,7 +73,7 @@ public class TestsMain extends Tests {
     }
 
     /**
-     * Test logging in.
+     * Test logging in and out
      */
     @Test
     public void testLoginLogout() {

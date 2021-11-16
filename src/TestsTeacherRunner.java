@@ -5,6 +5,9 @@ import java.lang.reflect.Field;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -19,6 +22,22 @@ import static org.junit.Assert.*;
  * @version 2021-11-15
  */
 public class TestsTeacherRunner extends Tests {
+
+    /**
+     * Borrowed from RunLocal
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Result result = JUnitCore.runClasses(TestsPost.class);
+        if (result.wasSuccessful()) {
+            System.out.println("Excellent - Test ran successfully");
+        } else {
+            for (Failure failure : result.getFailures()) {
+                System.out.println(failure.toString());
+            }
+        }
+    }
 
     /**
      * Tests basic menu navigation to a discussion forum

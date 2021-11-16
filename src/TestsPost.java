@@ -154,7 +154,7 @@ public class TestsPost extends Tests {
     }
 
     /**
-     * Tests if students cant
+     * Tests if students can't grade
      */
     @Test
     public void testGradeStudent() {

@@ -91,17 +91,6 @@ public class Tests {
     }
 
     /**
-     * Check that program output equals an expected string
-     * Used by derived classes
-     *
-     * @param expected string expected to equal output
-     */
-    public void checkOutputEqualsExpected(String expected) {
-        String actual = getOut().toString();
-        assertEquals(expected, actual);
-    }
-
-    /**
      * After each test is finished, set system output to console/terminal
      * So program output can be seen in test cases
      */
@@ -110,42 +99,5 @@ public class Tests {
         // Restore output, print output
         System.setOut(OUT_STREAM);
         System.out.println(getOut());
-    }
-
-    /**
-     * Get string containing contents of file (newline separated)
-     *
-     * @param fileName name of file
-     * @return contents of file
-     */
-    public static String getOutputFromFile(String fileName) {
-        try (BufferedReader br = new BufferedReader(
-            new FileReader(fileName)
-        )) {
-            String output = "";
-            String line = br.readLine();
-            while (line != null) {
-                output += line + "\n";
-                line = br.readLine();
-            }
-
-            // shave off last \n
-            return output.substring(0, output.length() - 1);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "FILE ERROR";
-        }
-    }
-
-    /**
-     * Removes all spaces, newlines from string.
-     * For comparison testing (JUnit) that ignores whitespace.
-     * Currently unused.
-     *
-     * @param str string to strip whitespace from
-     * @return stripped string
-     */
-    public static String removeWhitespace(String str) {
-        return str.replace(" ", "").replace("\n", "");
     }
 }

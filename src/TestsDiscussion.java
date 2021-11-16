@@ -198,7 +198,7 @@ public class TestsDiscussion extends Tests {
     }
 
     /**
-     * Check students cant delete discussions
+     * Check students can't delete discussions
      */
     @Test
     public void testDeleteDiscussionStudent() {

@@ -32,7 +32,7 @@ _______________
 
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
-| USESER     | `private static boolean` | whether serialization is used |  |
+| useSer     | `private static boolean` | whether serialization is used |  |
 | pathSep    | `private static final String` | OS-dependent path separator for file handling |  |
 
 | Method      | Signature   | Parameters | Description |
@@ -48,7 +48,7 @@ _______________
 | Field       | Signature   | Description | Getter/Setter |
 | ----------- | ----------- | ----------- | ------------- |
 | posts       | `private List<Integer> posts` | ID of every post the User has made | G |
-| USER_LIST   | `public static List<User>` | Lists all users |  |
+| userList    | `public static List<User>` | Lists all users |  |
 | id          | `private int` | Id is same as index in list | G |
 | username    | `private String`  | None | G  |
 | password    | `private String`  | NaN | |
@@ -250,7 +250,7 @@ None that aren't inherited.
 | Field      | Signature   | Description |
 | ---------- | ----------- | ----------- |
 | serialVersionUID | `private static final long` | Required for serialization | |
-| COURSE_LIST    | `public static List<Course>` | Lists all courses | |
+| courseList    | `public static List<Course>` | Lists all courses | |
 | discussions | `private List<Integer>` | IDs of all `Discussion`s of course| G |
 | id | `private int` | Id is same as index in list | G |
 | topic | `private String` | Course name, can only be changed by a `Teacher` | G/S |
@@ -271,6 +271,7 @@ None that aren't inherited.
 | deleteCourse | `public static Course ` | `(int id, User user)` | Deletes the course with the given id if permissions allow
 | getDiscussionsString | `public String ` | `()` | Returns list of all discussions with id + discussion topic (see Console Example) |
 | getCoursesString | `public static String` | `()`  |  Returns list of all courses with id + course name (see Console Example) |
+| setTopic | `public boolean` | `(String newTopic, User user)` | Changes topic of course if permission allows |
 
 ### Discussion Class (Serializable)
 
@@ -279,7 +280,7 @@ None that aren't inherited.
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
 | serialVersionUID | `private static final long` | Required for serialization | |
-| DISCUSSION_LIST   | `public static List<Discussion>` | Lists all `Discussion`s |  |
+| discussionList   | `public static List<Discussion>` | Lists all `Discussion`s |  |
 | id | `private int` | Id is same as index in list | G |
 | topic | `private String` | Discussion Topic | G/S |
 | posts | `private List<Integer>` | IDs of all posts related to this `Discussion` | G |
@@ -301,7 +302,7 @@ None that aren't inherited.
 | createDiscussion | `public static Discussion` | `(Course course, String topic, User user)` |  Creates and returns a new Discussion object if the user has permission to |
 | deleteDiscussion | `public static Discussion` | `(int id, User user)` |  Deletes the discussion with the given id |
 | getAllPosts | `public List<Integer>` | `()` | Returns ID of every post in the discussion |
-| setTopic | `public boolean` | `(String topic, User user)` | Changes topic of discussion if permission allows |
+| setTopic | `public boolean` | `(String newTopic, User user)` | Changes topic of discussion if permission allows |
 
 ### Post Class (Serializable)
 
@@ -312,7 +313,7 @@ Note: posts can be under both discussions and other posts
 | Field      | Signature   | Description | Getter/Setter |
 | ---------- | ----------- | ----------- | ------------- |
 | serialVersionUID | `private static final long` | Required for serialization | |
-| POST_LIST  | `public static List<Post>` | Lists all `Post`s |  |
+| postList  | `public static List<Post>` | Lists all `Post`s |  |
 | id | `private int` | `id` is same as index in list | G |
 | posts | `private List<Integer>` | IDs of all posts related to this `Post` | G |
 | timestamp | `private Date` | Keeps track of when the `Post` was created | G/S |
@@ -336,8 +337,8 @@ Note: posts can be under both discussions and other posts
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
 | createPost | `public static`   | `(String content, Discussion discussion, Post parent, User user)` | Returns a new post if the user has permission to post |
-| editPost | `public boolean`   | `(String newContent, User user)` | Replaces post content with newContent if permission allows
-| deletePost | `public Post`   | `(User user)` | Deletes post if permission allows
+| editPost | `public boolean`   | `(String newContent, User user)` | Replaces post content with newContent if permission allows |
+| deletePost | `public Post`   | `(User user)` | Deletes post if permission allows |
 | grade | `public boolean`   | `(User user, int grade)` | Grades the post if the user has permission |
 | getPostAndReplies | `public List<Integer>` | `()` | Returns list with ID of post and all its replies |
 | getControversy | `public int`   | `()` | Returns an int representing controversy |
@@ -382,7 +383,7 @@ Note: posts can be under both discussions and other posts
 | displayViewVoteboard | `public static void` | `(Discussion currentDiscussion, String currentSort, User user)` | Displays voteboard, which shows all posts in a forum ranked by votes with sorting options. |
 | displayViewGrades | `public static void` | `(Discussion currentDiscussion, Student currentStudent)` | Displays grades for all of 1 student's posts in 1 forum |
 | displayPostsGrades | `public static void` | `(List<Integer> posts, User user)` | Given a list of posts, prints them all in order with 0 depth AND INCLUDES ONLY GRADE INFO for displayViewGrades |
-| toStringGrades | `public static String`   | `(Post postin)` | Returns post as formatted string (used when student is viewing grades)
+| toStringGrades | `public static String`   | `(Post postin)` | Returns post as formatted string (used when student is viewing grades) |
 
 _______________
 
@@ -390,19 +391,92 @@ _______________
 
 ### Tests
 
+#### Fields
+| Field      | Signature   | Description | Getter/Setter |
+| ---------- | ----------- | ----------- | ------------- |
+| OUT_STREAM | `private static final PrintStream` | For changing IO streams during testing | |
+| out  | `private ByteArrayOutputStream` | For setting output stream to program output | G/S  |
+| CREATE_TEACHER  | `public static final String` | For easily executing a set of commands during testing |  |
+| CREATE_STUDENT  | `public static final String` | For easily executing a set of commands during testing |  |
+| LOGIN_TEACHER  | `public static final String` | For easily executing a set of commands during testing |  |
+| LOGIN_STUDENT_ALICE  | `public static final String` | For easily executing a set of commands during testing |  |
+| LOGIN_STUDENT_S  | `public static final String` | For easily executing a set of commands during testing |  |
+| CREATE_DEFAULT_CLASSES  | `public static final String` | For easily executing a set of commands during testing |  |
+| CREATE_DISCUSSION  | `public static final String` | For easily executing a set of commands during testing |  |
+| CREATE_SINGLE_CLASS  | `public static final String` | For easily executing a set of commands during testing |  |
+| CREATE_DEFAULT_DISCUSSIONS  | `public static final String` | For easily executing a set of commands during testing |  |
+| NAVIGATE_TO_DISCUSSION  | `public static final String` | For easily executing a set of commands during testing |  |
+| EXIT_STRING  | `public static final String` | For easily executing a set of commands during testing |  |
+
+#### Methods
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| setIOStreams | `public void` | `(String commands)`  | Changes I/O streams to pipe a passed-in String to the program |
+| checkOutputContainsExpected | `public void` | `(String expected)`  | Asserts that program output contains expected String |
+| setIOStreamsAfter | `public void` | `()`  | Changes I/O streams after a test is over so program output can be seen |
+
 ### TestsCourse
 
+#### Methods
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| main | `public static void` | `(String[] args)`  | executes JUnit tests |
+| testCreateCourseTeacher | `public void` | `()`  | Tests if teacher can create courses |
+| testCreateCourseStudent | `public void` | `()`  | Tests if a student can create courses (should not) |
+| testAccessCourseStudent | `public void` | `()`  | Tests if user can see courses and if invalid course id crashes |
+| testDeleteCourseTeacher | `public void` | `()`  | Tests if teacher can delete courses |
+
 ### TestsDiscussion
+
+#### Methods
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| main | `public static void` | `(String[] args)`  | executes JUnit tests |
+| testCreateDiscussionTeacher | `public void` | `()`  | Tests if teachers can create discussions |
+| testCreateDiscussionStudent | `public void` | `()`  | Checks students can't create discussions |
+| testDeleteDiscussionTeacher | `public void` | `()`  | Checks teachers can delete discussions |
+| testDeleteDiscussionStudent | `public void` | `()`  | Checks students can't delete discussions |
 
 ### TestsMain
 
 #### Methods
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| main | `public static void` | `(String[] args)`  | executes JUnit tests |
+| testBasic | `public void` | `()`  | Tests running the program |
+| testLoginLogout | `public void` | `()`  | Tests logging in and out |
+| testInvalidInput | `public void` | `()`  | Tests handling invalid input |
+| testCreateAccountLogin | `public void` | `()`  | Tests account creation and logging in with new account |
+| testInvalidUsername | `public void` | `()`  | Tests account creation with username that's already been used |
 
 ### TestsPost
 
+#### Methods
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| main | `public static void` | `(String[] args)`  | executes JUnit tests |
+| testReplyTeacherStudent | `public void` | `()`  | Tests if students can reply to posts |
+| testVote | `public void` | `()`  | Tests if voting works properly |
+| testGradeTeacher | `public void` | `()`  | Tests if teachers can grade properly |
+| testGradeStudent | `public void` | `()`  | Tests if students can't grade (they shouldn't) |
+
 ### TestsStudentRunner
 
+#### Methods
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| main | `public static void` | `(String[] args)`  | executes JUnit tests |
+| testViewGrades | `public void` | `()`  | Tests if students can use "view grades" feature properly |
+
 ### TestsTeacherRunner
+
+#### Methods
+| Method      | Signature   | Parameters | Description |
+| ----------- | ----------- | ---------- | ----------- |
+| main | `public static void` | `(String[] args)`  | executes JUnit tests |
+| testNavigation | `public void` | `()`  | Tests basic menu nav to a discussion forum |
+| testViewStudent | `public void` | `()`  | Tests view student feature |
+| testDeletePost | `public void` | `()`  | Tests teacher can delete post |
 
 _______________
 
