@@ -35,6 +35,8 @@ _______________
 | useSer     | `private static boolean` | whether serialization is used |  |
 | pathSep    | `private static final String` | OS-dependent path separator for file handling |  |
 
+#### Methods
+
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ----------- | ---------- |
 | main | `public static void` | `(String[] args)` | Main Method |
@@ -72,9 +74,9 @@ _______________
 | modifyPassword | `public void` | `(Scanner in)` | Modifies password, can only be done to self   |
 | deleteAccount  | `public void` | `(Scanner in)` |  Deletes the user account and sets its index in list to null |
 | makePostReply  | `public Post` | `(Post parentPost, String newContent, Discussion parentDiscussion)` | Reply to a reply to a discussion form |
-| editPost       | `public boolean`   | `(Post targetPost, String newContent)` | Calls post's editPost method to edit post
-| deletePost     | `public boolean`   | `(Post targetPost)` | Calls post's deletePost method to delete post
-| getVoteCount   | `public int`   | `()` | Sums all upvotes and downvotes user's posts have received for a total "vote count"
+| editPost       | `public boolean`   | `(Post targetPost, String newContent)` | Calls post's editPost method to edit post |
+| deletePost     | `public boolean`   | `(Post targetPost)` | Calls post's deletePost method to delete post |
+| getVoteCount   | `public int`   | `()` | Sums all upvotes and downvotes user's posts have received for a total "vote count" |
 | loop           | `public abstract void` | `(Scanner in)` | Primary Loop Handler |
 | canVote        | `public abstract boolean` | `()` |  Whether the user has permission to vote |
 | canGrade       | `public abstract boolean` | `()` |  Whether the user has permission to grade |
@@ -216,9 +218,9 @@ None that aren't inherited.
 | makeDiscussionReply | `public Post` | `(String newContent, Discussion parentDiscussion)` | Reply directly to a discussion form |
 | getPostsString | `public String` | `()` | Gets the Posts String |
 | getPostVote | `public int` | `(Post targetPost)` | returns whether votedPost has been upvoted or downvoted by user |
-| upvotePost | `public boolean` | `(Post targetPost)` | Upvote post if possible
-| downvotePost | `public boolean` | `(Post targetPost)` | Downvote post if possible
-| noVotePost | `public boolean` | `(Post targetPost)` | Remove student's vote on post
+| upvotePost | `public boolean` | `(Post targetPost)` | Upvote post if possible |
+| downvotePost | `public boolean` | `(Post targetPost)` | Downvote post if possible |
+| noVotePost | `public boolean` | `(Post targetPost)` | Remove student's vote on post |
 
 ### StudentRunner Class (extends `UserRunner`)
 
@@ -268,7 +270,7 @@ None that aren't inherited.
 | Method      | Signature   | Parameters | Description |
 | ----------- | ----------- | ---------- | ----------- |
 | createCourse | `public static Course ` | `(String topic, User user)` | Creates and returns a new course  object if the user has permission to |
-| deleteCourse | `public static Course ` | `(int id, User user)` | Deletes the course with the given id if permissions allow
+| deleteCourse | `public static Course ` | `(int id, User user)` | Deletes the course with the given id if permissions allow |
 | getDiscussionsString | `public String ` | `()` | Returns list of all discussions with id + discussion topic (see Console Example) |
 | getCoursesString | `public static String` | `()`  |  Returns list of all courses with id + course name (see Console Example) |
 | setTopic | `public boolean` | `(String newTopic, User user)` | Changes topic of course if permission allows |
